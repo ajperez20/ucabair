@@ -261,18 +261,113 @@ VALUES
 ('+58', '4163456836', NULL, NULL, 47, NULL),
 ('+58', '4263456837', NULL, NULL, 48, NULL);
 
-
--- ==============================================
--- Inserción de datos: Cliente Correo Electrónico
--- ==============================================
+-- =============================================================
+-- Inserción de datos: Correos Electrónicos Clientes Naturales
+-- =============================================================
 INSERT INTO CORREO_ELECTRONICO (cor_dir_correo, fk_per_id, fk_com_id, fk_cjd_id, fk_ctn_id)
-VALUES ('pedro.garcia@example.com', NULL, NULL, NULL, 1),      -- Pedro García
-       ('ana.torres@example.com', NULL, NULL, NULL, 2),        -- Ana Torres
-       ('martin.lopez@example.com', NULL, NULL, NULL, 3),      -- Martín López
-       ('laura.ruiz@example.com', NULL, NULL, NULL, 4),        -- Laura Ruiz
-       ('miguel.sanchez@example.com', NULL, NULL, NULL, 5),    -- Miguel Sánchez
-       ('contact@aerolineascaracas.com', NULL, NULL, 1, NULL), -- Aerolíneas Caracas C.A.
-       ('info@aerolineasapure.com', NULL, NULL, 2, NULL);      -- Aerolíneas Apure C.A.
+VALUES
+('juanperez@example.com', NULL, NULL, NULL, 1),
+('mariagomez@example.com', NULL, NULL, NULL, 2),
+('luisrodriguez@example.com', NULL, NULL, NULL, 3),
+('anamartinez@example.com', NULL, NULL, NULL, 4),
+('pedrolopez@example.com', NULL, NULL, NULL, 5),
+('sofiahernandez@example.com', NULL, NULL, NULL, 6),
+('carlosgonzalez@example.com', NULL, NULL, NULL, 7),
+('luisadiaz@example.com', NULL, NULL, NULL, 8),
+('miguelramirez@example.com', NULL, NULL, NULL, 9),
+('isabeltorres@example.com', NULL, NULL, NULL, 10),
+('josefernandez@example.com', NULL, NULL, NULL, 11),
+('lauramorales@example.com', NULL, NULL, NULL, 12),
+('fernandojimenez@example.com', NULL, NULL, NULL, 13),
+('andreacastro@example.com', NULL, NULL, NULL, 14),
+('rauloortiz@example.com', NULL, NULL, NULL, 15),
+('patriciaromero@example.com', NULL, NULL, NULL, 16),
+('jorgemartinez@example.com', NULL, NULL, NULL, 17),
+('luciafernandez@example.com', NULL, NULL, NULL, 18),
+('ricardolopez@example.com', NULL, NULL, NULL, 19),
+('martacastro@example.com', NULL, NULL, NULL, 20),
+('joseperez@example.com', NULL, NULL, NULL, 21),
+('saralopez@example.com', NULL, NULL, NULL, 22),
+('robertohernandez@example.com', NULL, NULL, NULL, 23),
+('angelamartinez@example.com', NULL, NULL, NULL, 24),
+('carlosgomez@example.com', NULL, NULL, NULL, 25),
+('juanadominguez@example.com', NULL, NULL, NULL, 26),
+('diegolopez@example.com', NULL, NULL, NULL, 27),
+('sandrafernandez@example.com', NULL, NULL, NULL, 28),
+('juanruiz@example.com', NULL, NULL, NULL, 29),
+('mariarodriguez@example.com', NULL, NULL, NULL, 30),
+('pedromartinez@example.com', NULL, NULL, NULL, 31),
+('analuna@example.com', NULL, NULL, NULL, 32),
+('robertolopez@example.com', NULL, NULL, NULL, 33),
+('susanagomez@example.com', NULL, NULL, NULL, 34),
+('ricardorodriguez@example.com', NULL, NULL, NULL, 35),
+('mariaperez@example.com', NULL, NULL, NULL, 36),
+('andresmartinez@example.com', NULL, NULL, NULL, 37),
+('lauragomez@example.com', NULL, NULL, NULL, 38),
+('josegarcia@example.com', NULL, NULL, NULL, 39),
+('fernandadiaz@example.com', NULL, NULL, NULL, 40),
+('susanafernandez@example.com', NULL, NULL, NULL, 41),
+('pablohernandez@example.com', NULL, NULL, NULL, 42),
+('alejandrolopez@example.com', NULL, NULL, NULL, 43),
+('monicagomez@example.com', NULL, NULL, NULL, 44),
+('juancarlos@example.com', NULL, NULL, NULL, 45),
+('marialopez@example.com', NULL, NULL, NULL, 46),
+('pedrofernandez@example.com', NULL, NULL, NULL, 47),
+('anamartinez@example.com', NULL, NULL, NULL, 48);
+
+-- =============================================================
+-- Inserción de datos: Correos Electrónicos Clientes Jurídicos
+-- =============================================================
+INSERT INTO CORREO_ELECTRONICO (cor_dir_correo, fk_per_id, fk_com_id, fk_cjd_id, fk_ctn_id)
+VALUES
+('ultrafly@example.com', NULL, NULL, 1, NULL),
+('horizonair@example.com', NULL, NULL, 2, NULL),
+('starwings@example.com', NULL, NULL, 3, NULL),
+('aeroconnect@example.com', NULL, NULL, 4, NULL),
+('airplanet@example.com', NULL, NULL, 5, NULL),
+('skylimit@example.com', NULL, NULL, 6, NULL),
+('aerodream@example.com', NULL, NULL, 7, NULL),
+('spaceconnect@example.com', NULL, NULL, 8, NULL),
+('volareair@example.com', NULL, NULL, 9, NULL),
+('surairlines@example.com', NULL, NULL, 10, NULL),
+('aeromaster@example.com', NULL, NULL, 11, NULL),
+('skyconnect@example.com', NULL, NULL, 12, NULL),
+('globalfly@example.com', NULL, NULL, 13, NULL),
+('royalwings@example.com', NULL, NULL, 14, NULL),
+('cloudjets@example.com', NULL, NULL, 15, NULL),
+('eagleairways@example.com', NULL, NULL, 16, NULL),
+('freedomair@example.com', NULL, NULL, 17, NULL),
+('sunrisejets@example.com', NULL, NULL, 18, NULL),
+('expressflights@example.com', NULL, NULL, 19, NULL),
+('galaxyairlines@example.com', NULL, NULL, 20, NULL),
+('starconnect@example.com', NULL, NULL, 21, NULL),
+('aerostar@example.com', NULL, NULL, 22, NULL),
+('bluewings@example.com', NULL, NULL, 23, NULL),
+('jetstream@example.com', NULL, NULL, 24, NULL),
+('flyhigh@example.com', NULL, NULL, 25, NULL),
+('silverair@example.com', NULL, NULL, 26, NULL),
+('swiftairways@example.com', NULL, NULL, 27, NULL),
+('unitedjets@example.com', NULL, NULL, 28, NULL),
+('southwings@example.com', NULL, NULL, 29, NULL),
+('oceanicair@example.com', NULL, NULL, 30, NULL),
+('orbitair@example.com', NULL, NULL, 31, NULL),
+('skylinejets@example.com', NULL, NULL, 32, NULL),
+('flydream@example.com', NULL, NULL, 33, NULL),
+('pacificair@example.com', NULL, NULL, 34, NULL),
+('northairlines@example.com', NULL, NULL, 35, NULL),
+('starline@example.com', NULL, NULL, 36, NULL),
+('windjets@example.com', NULL, NULL, 37, NULL),
+('sundownair@example.com', NULL, NULL, 38, NULL),
+('jupiterair@example.com', NULL, NULL, 39, NULL),
+('skybridge@example.com', NULL, NULL, 40, NULL),
+('galaxyjets@example.com', NULL, NULL, 41, NULL),
+('starfly@example.com', NULL, NULL, 42, NULL),
+('jetsetter@example.com', NULL, NULL, 43, NULL),
+('altitudeair@example.com', NULL, NULL, 44, NULL),
+('skytours@example.com', NULL, NULL, 45, NULL),
+('nimbusair@example.com', NULL, NULL, 46, NULL),
+('celestialjets@example.com', NULL, NULL, 47, NULL),
+('venusexpress@example.com', NULL, NULL, 48, NULL);
 
 -- ==============================================
 -- Inserción de datos: Cliente Red Social
