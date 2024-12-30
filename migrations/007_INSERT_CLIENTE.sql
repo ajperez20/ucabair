@@ -369,15 +369,112 @@ VALUES
 ('celestialjets@example.com', NULL, NULL, 47, NULL),
 ('venusexpress@example.com', NULL, NULL, 48, NULL);
 
--- ==============================================
--- Inserción de datos: Cliente Red Social
--- ==============================================
+-- ========================================================
+-- Inserción de datos: Red Social Clientes Naturales
+-- ========================================================
 INSERT INTO RED_SOCIAL (res_usuario, fk_per_id, fk_com_id, fk_cjd_id, fk_ctn_id)
-VALUES ('pedro_garcia', NULL, NULL, NULL, 1),       -- Pedro
-       ('ana_torres', NULL, NULL, NULL, 2),         -- Ana
-       ('martin_lopez', NULL, NULL, NULL, 3),       -- Martín
-       ('laura_ruiz', NULL, NULL, NULL, 4),         -- Laura
-       ('miguel_sanchez', NULL, NULL, NULL, 5),     -- Miguel
-       ('aerolineas_caracas', NULL, NULL, 1, NULL), -- Aerolíneas Caracas C.A.
-       ('aerolineas_apure', NULL, NULL, 2, NULL); -- Aerolíneas Apure C.A.
+VALUES
+('@juanperez', NULL, NULL, NULL, 1),
+('@mariagomez', NULL, NULL, NULL, 2),
+('@luisrodriguez', NULL, NULL, NULL, 3),
+('@anamartinez', NULL, NULL, NULL, 4),
+('@pedrolopez', NULL, NULL, NULL, 5),
+('@sofiahernandez', NULL, NULL, NULL, 6),
+('@carlosgonzalez', NULL, NULL, NULL, 7),
+('@luisadiaz', NULL, NULL, NULL, 8),
+('@miguelramirez', NULL, NULL, NULL, 9),
+('@isabeltorres', NULL, NULL, NULL, 10),
+('@josefernandez', NULL, NULL, NULL, 11),
+('@lauramorales', NULL, NULL, NULL, 12),
+('@fernandojimenez', NULL, NULL, NULL, 13),
+('@andreacastro', NULL, NULL, NULL, 14),
+('@rauloortiz', NULL, NULL, NULL, 15),
+('@patriciaromero', NULL, NULL, NULL, 16),
+('@jorgemartinez', NULL, NULL, NULL, 17),
+('@luciafernandez', NULL, NULL, NULL, 18),
+('@ricardolopez', NULL, NULL, NULL, 19),
+('@martacastro', NULL, NULL, NULL, 20),
+('@joseperez', NULL, NULL, NULL, 21),
+('@saralopez', NULL, NULL, NULL, 22),
+('@robertohernandez', NULL, NULL, NULL, 23),
+('@angelamartinez', NULL, NULL, NULL, 24),
+('@carlosgomez', NULL, NULL, NULL, 25),
+('@juanadominguez', NULL, NULL, NULL, 26),
+('@diegolopez', NULL, NULL, NULL, 27),
+('@sandrafernandez', NULL, NULL, NULL, 28),
+('@juanruiz', NULL, NULL, NULL, 29),
+('@mariarodriguez', NULL, NULL, NULL, 30),
+('@pedromartinez', NULL, NULL, NULL, 31),
+('@analuna', NULL, NULL, NULL, 32),
+('@robertolopez', NULL, NULL, NULL, 33),
+('@susanagomez', NULL, NULL, NULL, 34),
+('@ricardorodriguez', NULL, NULL, NULL, 35),
+('@mariaperez', NULL, NULL, NULL, 36),
+('@andresmartinez', NULL, NULL, NULL, 37),
+('@lauragomez', NULL, NULL, NULL, 38),
+('@josegarcia', NULL, NULL, NULL, 39),
+('@fernandadiaz', NULL, NULL, NULL, 40),
+('@susanafernandez', NULL, NULL, NULL, 41),
+('@pablohernandez', NULL, NULL, NULL, 42),
+('@alejandrolopez', NULL, NULL, NULL, 43),
+('@monicagomez', NULL, NULL, NULL, 44),
+('@juancarlos', NULL, NULL, NULL, 45),
+('@marialopez', NULL, NULL, NULL, 46),
+('@pedrofernandez', NULL, NULL, NULL, 47),
+('@anamartinez', NULL, NULL, NULL, 48);
+
+-- ========================================================
+-- Inserción de datos: Red Social Clientes Jurídicos
+-- ========================================================
+INSERT INTO RED_SOCIAL (res_usuario, fk_per_id, fk_com_id, fk_cjd_id, fk_ctn_id)
+VALUES
+('@UltraFly', NULL, NULL, 1, NULL),
+('@HorizonAir', NULL, NULL, 2, NULL),
+('@StarWings', NULL, NULL, 3, NULL),
+('@AeroConnect', NULL, NULL, 4, NULL),
+('@AirPlanet', NULL, NULL, 5, NULL),
+('@SkyLimit', NULL, NULL, 6, NULL),
+('@AeroDream', NULL, NULL, 7, NULL),
+('@SpaceConnect', NULL, NULL, 8, NULL),
+('@VolareAir', NULL, NULL, 9, NULL),
+('@SurAirlines', NULL, NULL, 10, NULL),
+('@AeroMaster', NULL, NULL, 11, NULL),
+('@SkyConnect', NULL, NULL, 12, NULL),
+('@GlobalFly', NULL, NULL, 13, NULL),
+('@RoyalWings', NULL, NULL, 14, NULL),
+('@CloudJets', NULL, NULL, 15, NULL),
+('@EagleAirways', NULL, NULL, 16, NULL),
+('@FreedomAir', NULL, NULL, 17, NULL),
+('@SunriseJets', NULL, NULL, 18, NULL),
+('@ExpressFlights', NULL, NULL, 19, NULL),
+('@GalaxyAirlines', NULL, NULL, 20, NULL),
+('@StarConnect', NULL, NULL, 21, NULL),
+('@AeroStar', NULL, NULL, 22, NULL),
+('@BlueWings', NULL, NULL, 23, NULL),
+('@JetStream', NULL, NULL, 24, NULL),
+('@FlyHigh', NULL, NULL, 25, NULL),
+('@SilverAir', NULL, NULL, 26, NULL),
+('@SwiftAirways', NULL, NULL, 27, NULL),
+('@UnitedJets', NULL, NULL, 28, NULL),
+('@SouthWings', NULL, NULL, 29, NULL),
+('@OceanicAir', NULL, NULL, 30, NULL),
+('@OrbitAir', NULL, NULL, 31, NULL),
+('@SkylineJets', NULL, NULL, 32, NULL),
+('@FlyDream', NULL, NULL, 33, NULL),
+('@PacificAir', NULL, NULL, 34, NULL),
+('@NorthAirlines', NULL, NULL, 35, NULL),
+('@StarLine', NULL, NULL, 36, NULL),
+('@WindJets', NULL, NULL, 37, NULL),
+('@SundownAir', NULL, NULL, 38, NULL),
+('@JupiterAir', NULL, NULL, 39, NULL),
+('@SkyBridge', NULL, NULL, 40, NULL),
+('@GalaxyJets', NULL, NULL, 41, NULL),
+('@StarFly', NULL, NULL, 42, NULL),
+('@JetSetter', NULL, NULL, 43, NULL),
+('@AltitudeAir', NULL, NULL, 44, NULL),
+('@SkyTours', NULL, NULL, 45, NULL),
+('@NimbusAir', NULL, NULL, 46, NULL),
+('@CelestialJets', NULL, NULL, 47, NULL),
+('@VenusExpress', NULL, NULL, 48, NULL);
+
 
