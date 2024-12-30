@@ -78,36 +78,6 @@ VALUES
 ('Cortinas','Cubren las ventanillas para controlar la luz y la privacidad.',12);
 
 -- ==============================================
--- Inserción de datos: PROCESO_ENSAMBLE_PIEZA_CONF
--- ==============================================
-INSERT INTO PROCESO_ENSAMBLE_PIEZA_CONF (epc_nombre_proceso, epc_tiempo_estimado, epc_descripcion) 
-VALUES ('Corte', '4 hours', 'Corte de material base a la forma inicial.'),
-	   ('Mecanizado', '10 hours', 'Remoción de material para dar forma precisa a la pieza.'),
-	   ('Conformado', '6 hours', 'Procesos de doblado, plegado o estirado.'),
-	   ('Soldadura', '8 hours', 'Unión de componentes mediante soldadura.'),
-	   ('Tratamiento Térmico', '12 hours', 'Mejora de propiedades mecánicas con calor.'),
-	   ('Inspección END', '4 hours', 'Detección de defectos sin dañar la pieza.'),
-	   ('Acabado Superficial', '6 hours', 'Tratamientos protectores y estéticos.'),
-	   ('Pintura', '8 hours', 'Aplicación de pintura y recubrimientos.'),
-	   ('Ensamble', '10 hours', 'Unión de subcomponentes.'),
-	   ('Detallado/Acabado Manual', '4 hours', 'Ajustes finales y pulido.');
-
--- ===================================================
--- Inserción de datos: PROCESO_ENSAMBLE_PIEZA_CONF
--- ===================================================
-INSERT INTO FASE_ENSAMBLE_PIEZA_CONF (fk_epc_id, fk_mec_id)
-VALUES (1, 1),
-	   (7, 2),
-	   (2, 4),
-	   (9, 3),
-	   (6, 5),
-	   (3, 7),
-	   (5, 8),
-	   (1, 15),
-	   (2, 6),
-	   (2, 3);
-
--- ==============================================
 -- Inserción de datos: MATERIAL_PIEZA_CONF
 -- ==============================================
 INSERT INTO MATERIAL_PIEZA_CONF (mac_nombre_material, mac_descripcion)
@@ -128,22 +98,7 @@ VALUES ('Acero A36', 'Aleación de acero común para estructuras.'),
 	   ('Caucho de silicona', 'Resistente a altas temperaturas, para sellos.'),
 	   ('Níquel', 'Anticorrosivo, para motores a reacción.'),
 	   ('Madera de balsa', 'Ligera, para aviones ligeros y modelos.'); 
-
--- ===================================================
--- Inserción de datos: MATERIAL_FASE
--- ===================================================
-INSERT INTO MATERIAL_FASE (mtf_unidad_medida, mtf_cantidad_material, fk_mac_id, fk_epc_id, fk_mec_id)
-VALUES ('kg', 50, 1, 1, 1),
-	   ('kg', 25, 2, 7, 2),
-	   ('kg', 100, 3, 2, 4),
-	   ('kg', 15, 4, 9, 3),
-	   ('m²', 10, 5, 6, 5),
-	   ('kg', 20, 6, 3, 7),
-	   ('m', 50, 7, 5, 8),
-	   ('kg', 30, 8, 1, 15),
-	   ('kg', 5, 9, 2, 6),
-	   ('kg', 40, 10, 2, 3);
-
+	   
 -- ==============================================
 -- Inserción de datos: CARACTERISTICA_PIEZA_CONF
 -- ==============================================
@@ -218,6 +173,3 @@ VALUES
 ('grados', 2, 7, 5);
 
 -- ==============================================
-
-
-
