@@ -14,7 +14,7 @@ VALUES ('Alas', 'Cuerpo aerodinámico principal que genera sustentación.'),
        ('Tren de Aterrizaje', 'Sistema que permite rodar en tierra y absorber impactos de aterrizaje.'),
        ('Instrumentos de Control', 'Conjunto de aparatos para informar al piloto sobre los parámetros de vuelo.'),
        ('Elementos internos de cabina', 'Asientos, equipaje de mano, alfombras y otros acabados interiores.');
-	   
+
 INSERT INTO TIPO_PIEZA_CONF_COMPOSICION (cpn_cantidad, fk_compuesta, fk_compone)
 VALUES
 -- "Alas" se componen de:
@@ -82,18 +82,29 @@ VALUES
 -- ==============================================
 INSERT INTO MATERIAL_PIEZA_CONF (mac_nombre_material, mac_descripcion)
 VALUES ('Acero A36', 'Aleación de acero común para estructuras.'),
-       ('Aluminio 7075', 'Aleación ligera, alta resistencia.'),
-       ('Fibra de Carbono', 'Material ultraligero, muy resistente.'),
        ('Titanio Grado 5', 'Excelente resistencia y ligereza.'),
-       ('Compuesto Kevlar', 'Material sintético muy resistente al impacto.');
-
+       ('Compuesto Kevlar', 'Material sintético muy resistente al impacto.'),
+	   ('Aleación de aluminio 2024', 'Resistente, trabajable, para fuselajes y alas.'),
+	   ('Aleación de aluminio 7075', 'Muy resistente, para partes estructurales críticas.'),
+	   ('Acero aleado 4340', 'Alta resistencia a tracción, para trenes y ejes.'),
+	   ('Titanio Ti-6Al-4V', 'Resistente, ligero, anticorrosivo, para turbinas.'),
+	   ('Fibra de carbono', 'Ligero, muy resistente, para alas y fuselaje.'),
+	   ('Fibra de vidrio', 'Económico, para componentes y revestimientos.'),
+	   ('Acero inoxidable 304', 'Anticorrosivo, para escapes y expuestos.'),
+	   ('Magnesio', 'Ligero, para componentes no estructurales.'),
+	   ('Polímeros reforzados (FRP)', 'Resistente y ligero, para partes estructurales.'),
+	   ('Resinas epoxi', 'Matriz en compuestos, une las fibras.'),
+	   ('Poliuretano', 'Para sellos, juntas y aislamiento.'),
+	   ('Caucho de silicona', 'Resistente a altas temperaturas, para sellos.'),
+	   ('Níquel', 'Anticorrosivo, para motores a reacción.'),
+	   ('Madera de balsa', 'Ligera, para aviones ligeros y modelos.');   
+	   
 -- ==============================================
 -- Inserción de datos: CARACTERISTICA_PIEZA_CONF
 -- ==============================================
 INSERT INTO CARACTERISTICA_PIEZA_CONF (pcc_nombre_caracteristica)
 VALUES ('Longitud'),
        ('Peso'),
-       ('Material'),
        ('Resistencia'),
        ('Color'),
        ('Espesor'),
@@ -111,59 +122,57 @@ VALUES
 -- ===================================================
 ('m', 20, 1, 1),
 ('kg', 1000, 2, 1),
-('MATERIAL', 1, 3, 1),
-('MPa', 300, 4, 1),
-('COLOR', 65280, 5, 1),    -- #00FF00 (verde)
-('mm', 10, 6, 1),
-('kg', 10000, 7, 1),
-('cm', 0, 8, 1),
+('MPa', 300, 3, 1),
+('COLOR', 65280, 4, 1),    -- #00FF00 (verde)
+('mm', 10, 5, 1),
+('kg', 10000, 6, 1),
+('grados', 3, 7, 1),
 
 -- ===================================================
 -- mec_id = 2 (Ala Trapezoidal)
 -- ===================================================
 ('m', 25, 1, 2),
 ('kg', 1200, 2, 2),
-('MATERIAL', 2, 3, 2),
-('MPa', 350, 4, 2),
-('COLOR', 16776960, 5, 2), -- #FFD700 (amarillo)
-('mm', 12, 6, 2),
-('kg', 12000, 7, 2),
-('cm', 0, 8, 2),
+('MPa', 350, 3, 2),
+('COLOR', 16776960, 4, 2), -- #FFD700 (amarillo)
+('mm', 12, 5, 2),
+('kg', 12000, 6, 2),
+('grados', 4, 7, 2),
 
 -- ===================================================
 -- mec_id = 3 (Ala Delta)
 -- ===================================================
 ('m', 30, 1, 3),
 ('kg', 1500, 2, 3),
-('MATERIAL', 3, 3, 3),
-('MPa', 400, 4, 3),
-('COLOR', 255, 5, 3),      -- #FF0000 (rojo)
-('mm', 15, 6, 3),
-('kg', 15000, 7, 3),
-('cm', 0, 8, 3),
+('MPa', 400, 3, 3),
+('COLOR', 255, 4, 3),      -- #FF0000 (rojo)
+('mm', 15, 5, 3),
+('kg', 15000, 6, 3),
+('grados', 1, 7, 3),
 
 -- ===================================================
 -- mec_id = 4 (Ala en Flecha)
 -- ===================================================
 ('m', 35, 1, 4),
 ('kg', 1800, 2, 4),
-('MATERIAL', 4, 3, 4),
-('MPa', 450, 4, 4),
-('COLOR', 255, 5, 4),      -- #FF0000 (rojo)
-('mm', 18, 6, 4),
-('kg', 18000, 7, 4),
-('cm', 0, 8, 4),
+('MPa', 450, 3, 4),
+('COLOR', 255, 4, 4),      -- #FF0000 (rojo)
+('mm', 18, 5, 4),
+('kg', 18000, 6, 4),
+('grados', 2, 7, 4),
 
 -- ===================================================
 -- mec_id = 5 (Ala en Flecha Inversa)
 -- ===================================================
 ('m', 40, 1, 5),
 ('kg', 2000, 2, 5),
-('MATERIAL', 5, 3, 5),
-('MPa', 500, 4, 5),
-('COLOR', 255, 5, 5),      -- #FF0000 (rojo)
-('mm', 20, 6, 5),
-('kg', 20000, 7, 5),
-('cm', 0, 8, 5);
+('MPa', 500, 3, 5),
+('COLOR', 255, 4, 5),      -- #FF0000 (rojo)
+('mm', 20, 5, 5),
+('kg', 20000, 6, 5),
+('grados', 2, 7, 5);
 
 -- ==============================================
+
+
+
