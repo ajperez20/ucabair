@@ -109,6 +109,6 @@ INSERT INTO AVION_COMPONENTE (ctm_cantidad_piezas, fk_epv_id, fk_mda_id, fk_mec_
 (1, 6, 9, 24),   -- 1 ILS
 (1, 6, 9, 26);   -- 1 Sistema de Gestión de Vuelo
 
-
+-- ======================================
 
 
