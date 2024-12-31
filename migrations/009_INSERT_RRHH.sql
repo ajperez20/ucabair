@@ -2,31 +2,121 @@
 -- Inserción de datos: Cargos
 -- ==============================================
 INSERT INTO CARGO (car_nombre, car_descripcion)
-VALUES ('Ingeniero Aeronáutico', 'Diseño y mejoras estructurales de aeronaves'),
-       ('Técnico de Motores', 'Mantenimiento y reparación de motores'),
-       ('Inspector de Calidad', 'Verifica y certifica la calidad de piezas y procesos'),
-       ('Supervisor de Ensamble', 'Coordina y supervisa el ensamblaje en planta'),
-       ('Analista de Logística', 'Gestiona el flujo de materiales y piezas');
+VALUES 
+('Ingeniero Aeronáutico', 'Diseño y desarrollo de aeronaves.'),
+('Técnico en Electrónica Aeronáutica', 'Mantenimiento de sistemas electrónicos en aviones.'),
+('Inspector de Calidad', 'Asegura la calidad de componentes aeronáuticos.'),
+('Supervisor de Producción', 'Supervisa líneas de producción en la fábrica.'),
+('Mecánico de Aviones', 'Mantenimiento y reparación de aeronaves.'),
+('Técnico de Mantenimiento', 'Mantenimiento preventivo y correctivo de equipos.'),
+('Diseñador Aeronáutico', 'Diseño de estructuras de aeronaves.'),
+('Programador de Sistemas', 'Desarrollo y mantenimiento de sistemas de software.'),
+('Técnico en Materiales Compuestos', 'Trabajo con materiales avanzados en aviones.'),
+('Especialista en Motores', 'Reparación y mantenimiento de motores aeronáuticos.'),
+('Inspector de Seguridad', 'Cumplimiento de normas de seguridad.'),
+('Operador de Máquina CNC', 'Manejo de máquinas CNC para fabricar piezas.'),
+('Ensamblador de Estructuras', 'Ensamblaje de estructuras de aviones.'),
+('Técnico en Hidráulica y Neumática', 'Mantenimiento de sistemas hidráulicos y neumáticos.'),
+('Ingeniero de Pruebas', 'Pruebas y validación de componentes aeronáuticos.'),
+('Coordinador de Logística', 'Gestión de cadena de suministro y distribución.'),
+('Técnico en Aviónica', 'Especialista en la electrónica de las aeronaves.'),
+('Planificador de Producción', 'Planificación de actividades de producción.'),
+('Especialista en Control de Calidad', 'Supervisión de sistemas de calidad.'),
+('Técnico en Instrumentación', 'Mantenimiento de instrumentos de medición en aviones.');
 
 -- ==============================================
 -- Inserción de datos: Empleados
 -- ==============================================
 INSERT INTO EMPLEADO (per_dni, per_nombre, per_apellido, per_direccion, per_experiencia, per_profesion, fk_lug_id)
-VALUES (12345678, 'Juan', 'Pérez', 'Av. Principal, Maracay', 5, 'Ingeniero', 1),
-       (87654321, 'María', 'García', 'Calle Bolívar, La Guaira', 10, 'Técnico Superior', 2),
-       (45671238, 'Carlos', 'López', 'Zona Industrial, Valencia', 3, 'Inspector', 3),
-       (10293847, 'Elena', 'Rodríguez', 'Urb. Centro, Maracay', 8, 'Supervisor', 1),
-       (11223344, 'José', 'Martínez', 'Av. Principal, Colón (Zulia)', 12, 'Ingeniero', 4);
+VALUES 
+('V12345678', 'Juan', 'Pérez', 'Calle 123', 5, 'Ingeniero Aeronáutico', 1),
+('V23456789', 'María', 'Gómez', 'Avenida 45', 8, 'Mecánica de Aviones', 2),
+('V34567890', 'Pedro', 'Martínez', 'Calle 67', 3, 'Técnico en Electrónica Aeronáutica', 3),
+('V45678901', 'Luisa', 'Fernández', 'Calle 89', 10, 'Inspector de Calidad', 4),
+('V56789012', 'Carlos', 'Rodríguez', 'Boulevard 101', 7, 'Programador de Sistemas', 5),
+('V67890123', 'Ana', 'Morales', 'Carrera 23', 12, 'Supervisora de Producción', 6),
+('V78901234', 'José', 'Hernández', 'Calle 56', 4, 'Diseñador Aeronáutico', 7),
+('V89012345', 'Marta', 'López', 'Avenida 78', 9, 'Mecánica de Aviones', 8),
+('V90123456', 'Luis', 'García', 'Calle 910', 6, 'Técnico de Mantenimiento', 9),
+('V12345679', 'Sara', 'Vega', 'Calle 1112', 2, 'Técnico en Materiales Compuestos', 10),
+('V23456780', 'David', 'Ramos', 'Avenida 1314', 11, 'Especialista en Motores', 11),
+('V34567891', 'Laura', 'Torres', 'Carrera 1516', 5, 'Inspector de Seguridad', 12),
+('V45678902', 'Andrés', 'Ruiz', 'Calle 1718', 3, 'Operador de Máquina CNC', 13),
+('V56789013', 'Carmen', 'Díaz', 'Boulevard 1920', 4, 'Ensamblador de Estructuras', 14),
+('V67890124', 'Manuel', 'Mejía', 'Calle 2122', 7, 'Técnico en Hidráulica y Neumática', 15),
+('V78901235', 'Gloria', 'Ortiz', 'Avenida 2324', 6, 'Ingeniera de Pruebas', 16),
+('V89012346', 'Rafael', 'Navarro', 'Calle 2526', 10, 'Coordinador de Logística', 17),
+('V90123457', 'Sofía', 'Pineda', 'Carrera 2728', 8, 'Técnico en Aviónica', 18),
+('V12345680', 'Fabio', 'Serrano', 'Boulevard 2930', 3, 'Planificador de Producción', 19),
+('V23456781', 'Diana', 'Castillo', 'Calle 3132', 5, 'Especialista en Control de Calidad', 20),
+('V34567892', 'Jorge', 'Suárez', 'Avenida 3334', 6, 'Técnico en Instrumentación', 21),
+('V45678903', 'Elena', 'Espinosa', 'Calle 3536', 4, 'Ingeniera Aeronáutica', 22),
+('V56789014', 'Camilo', 'Correa', 'Boulevard 3738', 2, 'Técnico en Electrónica Aeronáutica', 23),
+('V67890125', 'Estela', 'Guzmán', 'Calle 3940', 12, 'Inspector de Calidad', 24),
+('V78901236', 'Víctor', 'Santana', 'Avenida 4142', 9, 'Programador de Sistemas', 1),
+('V89012347', 'Olga', 'Álvarez', 'Calle 4344', 11, 'Técnico de Mantenimiento', 2),
+('V90123458', 'Gustavo', 'Montoya', 'Boulevard 4546', 7, 'Supervisor de Producción', 3),
+('V12345681', 'Verónica', 'Palacios', 'Calle 4748', 4, 'Diseñador Aeronáutico', 4),
+('V23456782', 'Sebastián', 'Blanco', 'Carrera 4950', 3, 'Técnico en Materiales Compuestos', 5),
+('V34567893', 'Adriana', 'Bermúdez', 'Calle 5152', 6, 'Especialista en Motores', 6),
+('V45678904', 'Enrique', 'Cabrera', 'Avenida 5354', 5, 'Inspector de Seguridad', 7),
+('V56789015', 'Mariela', 'Zambrano', 'Calle 5556', 7, 'Operador de Máquina CNC', 8),
+('V67890126', 'Fernando', 'Jiménez', 'Boulevard 5758', 8, 'Ensamblador de Estructuras', 9),
+('V78901237', 'Patricia', 'Acosta', 'Calle 5960', 10, 'Técnico en Hidráulica y Neumática', 10),
+('V89012348', 'Héctor', 'Mendoza', 'Carrera 6162', 12, 'Ingeniero de Pruebas', 11),
+('V90123459', 'Claudia', 'Peña', 'Calle 6364', 9, 'Coordinadora de Logística', 12),
+('V12345682', 'Eduardo', 'Ibarra', 'Avenida 6566', 6, 'Técnico en Aviónica', 13),
+('V23456783', 'Lucía', 'Arce', 'Calle 6768', 4, 'Planificadora de Producción', 14),
+('V34567894', 'Tomás', 'Barrera', 'Carrera 6970', 8, 'Especialista en Control de Calidad', 15);
 
 -- ==============================================
 -- Inserción de datos: Empleado Cargo
 -- ==============================================
-INSERT INTO EMPLEADO_CARGO (emc_id, emc_fecha_inicio, emc_fecha_fin, fk_car_id, fk_per_id)
-VALUES (1, '2020-01-10', NULL, 1, 1),         -- Juan (per_id=1) + Ingeniero Aeronáutico (car_id=1)
-       (2, '2019-05-01', NULL, 2, 2),         -- María (per_id=2) + Técnico de Motores (car_id=2)
-       (3, '2021-07-20', NULL, 3, 3),         -- Carlos (per_id=3) + Inspector de Calidad (car_id=3)
-       (4, '2022-03-15', NULL, 4, 4),         -- Elena (per_id=4) + Supervisor de Ensamble (car_id=4)
-       (5, '2018-09-01', NULL, 5, 5);         -- José (per_id=5) + Ingeniero Aeronáutico (car_id=5)
+INSERT INTO EMPLEADO_CARGO (emc_fecha_inicio, emc_fecha_fin, fk_car_id, fk_per_id)
+VALUES 
+('2022-01-15', NULL, 1, 1),  -- Ingeniero Aeronáutico
+('2023-03-21', NULL, 5, 2),  -- Mecánica de Aviones
+('2021-06-10', NULL, 2, 3),  -- Técnico en Electrónica Aeronáutica
+('2020-09-30', NULL, 3, 4),  -- Inspector de Calidad
+('2022-02-05', NULL, 8, 5),  -- Programador de Sistemas
+('2021-11-25', NULL, 4, 6),  -- Supervisora de Producción
+('2022-07-14', NULL, 7, 7),  -- Diseñador Aeronáutico
+('2023-04-18', NULL, 5, 8),  -- Mecánica de Aviones
+('2020-12-09', NULL, 6, 9),  -- Técnico de Mantenimiento
+('2022-08-22', NULL, 9, 10), -- Técnico en Materiales Compuestos
+('2021-05-17', NULL, 10, 11),-- Especialista en Motores
+('2023-01-28', NULL, 11, 12),-- Inspector de Seguridad
+('2022-06-11', NULL, 12, 13),-- Operador de Máquina CNC
+('2020-10-05', NULL, 13, 14),-- Ensamblador de Estructuras
+('2021-09-12', NULL, 14, 15),-- Técnico en Hidráulica y Neumática
+('2022-03-29', NULL, 15, 16),-- Ingeniera de Pruebas
+('2023-02-07', NULL, 16, 17),-- Coordinador de Logística
+('2021-07-03', NULL, 17, 18),-- Técnico en Aviónica
+('2022-04-27', NULL, 18, 19),-- Planificador de Producción
+('2020-08-15', NULL, 19, 20),-- Especialista en Control de Calidad
+('2023-05-19', NULL, 20, 21),-- Técnico en Instrumentación
+('2021-11-01', NULL, 1, 22), -- Ingeniera Aeronáutica
+('2022-09-26', NULL, 2, 23), -- Técnico en Electrónica Aeronáutica
+('2023-03-12', NULL, 3, 24), -- Inspector de Calidad
+('2020-12-24', NULL, 8, 25), -- Programador de Sistemas
+('2021-06-05', NULL, 6, 26), -- Técnico de Mantenimiento
+('2022-10-30', NULL, 4, 27), -- Supervisor de Producción
+('2023-04-07', NULL, 7, 28), -- Diseñador Aeronáutico
+('2021-05-21', NULL, 9, 29), -- Técnico en Materiales Compuestos
+('2022-08-11', NULL, 10, 30),-- Especialista en Motores
+('2023-01-16', NULL, 11, 31),-- Inspector de Seguridad
+('2020-11-05', NULL, 12, 32),-- Operador de Máquina CNC
+('2021-07-30', NULL, 13, 33),-- Ensamblador de Estructuras
+('2022-04-02', NULL, 14, 34),-- Técnico en Hidráulica y Neumática
+('2023-02-25', NULL, 15, 35),-- Ingeniero de Pruebas
+('2021-09-09', NULL, 16, 36),-- Coordinadora de Logística
+('2022-03-19', NULL, 17, 37),-- Técnico en Aviónica
+('2020-07-12', NULL, 18, 38),-- Planificadora de Producción
+('2021-08-05', NULL, 19, 39),-- Especialista en Control de Calidad
+('2023-05-03', NULL, 20, 40);-- Técnico en Instrumentación
+
+
+
 
 -- ==============================================
 -- Inserción de datos: Título

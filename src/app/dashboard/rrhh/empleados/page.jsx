@@ -129,7 +129,7 @@ export default function EmpleadosPage() {
             };
           }
           return field;
-        })
+        }),
       );
     } catch (error) {
       console.error("Error:", error);

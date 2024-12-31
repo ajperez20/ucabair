@@ -820,18 +820,19 @@ CREATE TABLE AVION_CREADO
 CREATE TABLE EMPLEADO
 (
     per_id                 SERIAL PRIMARY KEY,
-    per_dni                NUMERIC(8, 0) NOT NULL UNIQUE,
+    per_dni                VARCHAR(50) NOT NULL UNIQUE,
     per_nombre             VARCHAR(30)   NOT NULL,
     per_apellido           VARCHAR(30)   NOT NULL,
     per_direccion          VARCHAR(70)   NOT NULL,
     per_experiencia        INT           NOT NULL,
     per_fecha_contratacion DATE          NOT NULL DEFAULT CURRENT_DATE,
-    per_profesion          VARCHAR(30)   NOT NULL,
+    per_profesion          VARCHAR(70)   NOT NULL,
     fk_lug_id              INT           NOT NULL,
     CONSTRAINT fk_lug_id
         FOREIGN KEY (fk_lug_id)
-            REFERENCES LUGAR (lug_id)
-            ON DELETE CASCADE
+            REFERENCES LUGAR (lug_id),
+	CONSTRAINT ck_per_dni
+        CHECK (per_dni ~ '^[VEJP]{1}[0-9]{7,10}$')
 );
 
 -- 4.2 Equipo Encargado
@@ -950,7 +951,7 @@ CREATE TABLE CLIENTE_NATURAL
         FOREIGN KEY (fk_lug_id)
             REFERENCES LUGAR (lug_id),
     CONSTRAINT ck_ctn_dni
-        CHECK (ctn_dni ~ '^[VEJP]{1}[0-9]{9,10}$')
+        CHECK (ctn_dni ~ '^[VEJP]{1}[0-9]{7,10}$')
 );
 
 -- 5.2 Cliente Jurídico
