@@ -97,9 +97,9 @@ VALUES
 ('ZuliaTitanium', 'Dirección 2 Zulia', 'www.zuliatitanium.com', 14, 24);           -- Zulia
 
 
--- ==============================================
+-- =================================================
 -- Inserción de datos: Redes Sociales de Proveedor
--- ==============================================
+-- =================================================
 INSERT INTO RED_SOCIAL (res_usuario, fk_per_id, fk_com_id, fk_cjd_id, fk_ctn_id)
 VALUES 
 ('@MetalesGalácticos', NULL, 1, NULL, NULL),  -- MetalesGalácticos
@@ -207,9 +207,9 @@ VALUES
 ('+58', '4140123456', NULL, 47, NULL, NULL), -- TitanioZulia
 ('+58', '4160123456', NULL, 48, NULL, NULL); -- ZuliaTitanium
 
--- ==============================================
+-- =======================================================
 -- Inserción de datos: Correos Electrónicos de Proveedor
--- ==============================================
+-- =======================================================
 INSERT INTO CORREO_ELECTRONICO (cor_dir_correo, fk_per_id, fk_com_id, fk_cjd_id, fk_ctn_id)
 VALUES 
 ('metalesgalacticos@example.com', NULL, 1, NULL, NULL),  -- MetalesGalácticos
@@ -261,4 +261,4 @@ VALUES
 ('titaniozulia@example.com', NULL, 47, NULL, NULL),      -- TitanioZulia
 ('zuliatitanium@example.com', NULL, 48, NULL, NULL);     -- ZuliaTitanium
 
-
+====================================================================================
