@@ -478,3 +478,7 @@ VALUES
 ('@VenusExpress', NULL, NULL, 48, NULL);
 
 
+-- ==============================================
+-- Inserción de datos: SOLICITUD_CLIENTE
+-- ==============================================
+

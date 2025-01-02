@@ -802,14 +802,7 @@ CREATE TABLE AVION_CREADO
 (
     avi_id             SERIAL PRIMARY KEY,
     avi_num_serie      VARCHAR(50) NOT NULL UNIQUE,
-    avi_fecha_creacion DATE        NOT NULL DEFAULT CURRENT_DATE,
-    fk_eav_id          INT         NOT NULL UNIQUE,
-    fk_mda_id          INT         NOT NULL UNIQUE,
-    fk_zon_id          INT         NOT NULL UNIQUE,
-    CONSTRAINT fk_fln
-        FOREIGN KEY (fk_eav_id, fk_mda_id, fk_zon_id)
-            REFERENCES FASE_ENSAMBLE_AVION (fk_eav_id, fk_mda_id, fk_zon_id)
-            ON DELETE CASCADE
+    avi_fecha_creacion DATE        NOT NULL DEFAULT CURRENT_DATE
 );
 
 --------------------------------------------------------------------------------
@@ -982,7 +975,6 @@ CREATE TABLE SOLICITUD_CLIENTE
     sct_id          SERIAL PRIMARY KEY,
     sct_fecha       DATE NOT NULL DEFAULT CURRENT_DATE,
     sct_total       INT  NOT NULL,
-    sct_cantidad    INT  NOT NULL,
     sct_observacion VARCHAR(255),
     fk_avi_id       INT  NOT NULL,
     fk_cjd_id       INT,
@@ -994,14 +986,29 @@ CREATE TABLE SOLICITUD_CLIENTE
     CONSTRAINT fk_ctn_id
         FOREIGN KEY (fk_ctn_id)
             REFERENCES CLIENTE_NATURAL (ctn_id)
-            ON DELETE CASCADE,
-    CONSTRAINT fk_avi_id
-        FOREIGN KEY (fk_avi_id)
-            REFERENCES AVION_CREADO (avi_id)
             ON DELETE CASCADE
 );
 
--- 5.4 Estatus SCAV
+-- 5.4 Detalle Solicitud Cliente
+CREATE TABLE DETALLE_SLD_CLIENTE (
+    ddc_cantidad_aviones INT NOT NULL,
+    ddc_descripcion VARCHAR(255),
+    fk_sct_id INT NOT NULL,
+    fk_mda_id INT NOT NULL,
+
+    CONSTRAINT pk_detallesldcliente 
+        PRIMARY KEY (fk_sct_id, fk_mda_id),
+    CONSTRAINT fk_sct_id 
+        FOREIGN KEY (fk_sct_id) 
+            REFERENCES SOLICITUD_CLIENTE(sct_id)
+            ON DELETE CASCADE,
+    CONSTRAINT fk_mda_id 
+        FOREIGN KEY (fk_mda_id) 
+            REFERENCES MODELO_AVION_CONF(mda_id)
+            ON DELETE CASCADE
+);
+
+-- 5.5 Estatus SCAV
 CREATE TABLE ESTATUS_SCAV
 (
     scv_fecha_inicio DATE NOT NULL DEFAULT CURRENT_DATE,
