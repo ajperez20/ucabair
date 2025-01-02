@@ -365,5 +365,63 @@ VALUES
 (130, 'L', 14, 49),  -- Poliuretano para solicitud 49
 (450, 'kg', 11, 50); -- Magnesio para solicitud 50
 
+-- =========================================
+-- Inserción de datos: PIEZA_STOCK
+-- ==========================================
+INSERT INTO PIEZA_STOCK (pie_numero_serial, pie_nombre, pie_fecha_fabricacion, pie_cantidad_disponible, fk_sed_id)
+VALUES 
+-- Piezas fabricadas en Maracay (alas, estabilizadores, flaps, slats, spoilers)
+('MAR-ALA-001', 'Ala Recta', '2023-01-02', 10, 1),
+('MAR-ALA-002', 'Ala Trapezoidal', '2023-01-02', 15, 1),
+('MAR-ALA-003', 'Ala Delta', '2023-01-02', 5, 1),
+('MAR-ALA-004', 'Ala en Flecha', '2023-01-02', 12, 1),
+('MAR-ALA-005', 'Ala en Flecha Inversa', '2023-01-02', 7, 1),
+('MAR-EST-001', 'Forma Estándar', '2023-01-02', 8, 1),
+('MAR-EST-002', 'Forma en T', '2023-01-02', 6, 1),
+('MAR-EST-003', 'Forma en Cruz', '2023-01-02', 5, 1),
+('MAR-EST-004', 'Forma 2 Verticales', '2023-01-02', 4, 1),
+('MAR-EST-005', 'Forma 3 Verticales', '2023-01-02', 3, 1),
+('MAR-EST-006', 'Forma en V', '2023-01-02', 6, 1),
+('MAR-FLP-001', 'Flaps', '2023-01-02', 15, 1),
+('MAR-SLT-001', 'Slats', '2023-01-02', 10, 1),
+('MAR-SPO-001', 'Spoilers', '2023-01-02', 8, 1),
+('MAR-SPS-001', 'Superficie de Sustentación', '2023-01-02', 8, 1),
+
+-- Piezas fabricadas en Colón (fuselaje y trenes de aterrizaje)
+('COL-FUS-001', 'Fuselaje', '2023-01-02', 12, 2),
+('COL-TREN-001', 'Tren Fijo', '2023-01-02', 7, 2),
+('COL-TREN-002', 'Tren Retráctil', '2023-01-02', 9, 2),
+
+-- Piezas fabricadas en La Guaira (motores)
+('GUA-MOT-001', 'Motor', '2023-01-02', 6, 3),
+
+-- Piezas fabricadas en Guatire (todos los sistemas de control)
+('GUA-CTRL-001', 'Anemómetro', '2023-01-02', 25, 4),
+('GUA-CTRL-002', 'Altímetro', '2023-01-02', 20, 4),
+('GUA-CTRL-003', 'Variómetro', '2023-01-02', 18, 4),
+('GUA-CTRL-004', 'Inclinómetro', '2023-01-02', 15, 4),
+('GUA-CTRL-005', 'Horizonte Artificial', '2023-01-02', 10, 4),
+('GUA-CTRL-006', 'Brújula', '2023-01-02', 22, 4),
+('GUA-CTRL-007', 'Indicador de Rumbos', '2023-01-02', 17, 4),
+('GUA-CTRL-008', 'ADF', '2023-01-02', 19, 4),
+('GUA-CTRL-009', 'DME', '2023-01-02', 16, 4),
+('GUA-CTRL-010', 'CDI', '2023-01-02', 18, 4),
+('GUA-CTRL-011', 'ILS', '2023-01-02', 12, 4),
+('GUA-CTRL-012', 'Piloto Automático', '2023-01-02', 20, 4),
+('GUA-CTRL-013', 'Sistema de Gestión de Vuelo', '2023-01-02', 14, 4),
+('GUA-CTRL-014', 'Manómetro', '2023-01-02', 23, 4),
+('GUA-CTRL-015', 'Termómetro de Aceite', '2023-01-02', 18, 4),
+('GUA-CTRL-016', 'Caudal de Combustible', '2023-01-02', 16, 4),
+('GUA-CTRL-017', 'Temperatura de Culatas', '2023-01-02', 10, 4),
+('GUA-CTRL-018', 'Nivel de Combustible', '2023-01-02', 14, 4),
+
+-- Piezas fabricadas en Valencia (componentes internos)
+('VAL-INT-001', 'Asientos', '2023-01-02', 50, 5),
+('VAL-INT-002', 'Porta Equipajes', '2023-01-02', 30, 5),
+('VAL-INT-003', 'Ventanillas', '2023-01-02', 40, 5),
+('VAL-INT-004', 'Alfombrado', '2023-01-02', 35, 5),
+('VAL-INT-005', 'Piezas Sanitarias', '2023-01-02', 20, 5),
+('VAL-INT-006', 'Cortinas', '2023-01-02', 25, 5);
+
 -- ===========================================================================
 
