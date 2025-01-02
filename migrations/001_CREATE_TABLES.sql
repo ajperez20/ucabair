@@ -976,7 +976,6 @@ CREATE TABLE SOLICITUD_CLIENTE
     sct_fecha       DATE NOT NULL DEFAULT CURRENT_DATE,
     sct_total       INT  NOT NULL,
     sct_observacion VARCHAR(255),
-    fk_avi_id       INT  NOT NULL,
     fk_cjd_id       INT,
     fk_ctn_id       INT,
     CONSTRAINT fk_cjd_id

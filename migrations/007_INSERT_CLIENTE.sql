@@ -477,8 +477,38 @@ VALUES
 ('@CelestialJets', NULL, NULL, 47, NULL),
 ('@VenusExpress', NULL, NULL, 48, NULL);
 
-
 -- ==============================================
 -- Inserción de datos: SOLICITUD_CLIENTE
 -- ==============================================
+INSERT INTO SOLICITUD_CLIENTE (sct_fecha, sct_total, sct_observacion, fk_ctn_id)
+VALUES
+-- Solicitudes de Clientes Naturales
+('2023-01-15', 5000, 'Solicitud de Juan Pérez', 1),  
+('2023-02-10', 7500, 'Solicitud de María Gómez', 2), 
+('2023-03-25', 12000, 'Solicitud de Luis Rodríguez', 3),  
+('2023-04-05', 8900, 'Solicitud de Ana Martínez', 4);
 
+INSERT INTO SOLICITUD_CLIENTE (sct_fecha, sct_total, sct_observacion, fk_cjd_id)
+VALUES
+-- Solicitudes de Clientes Jurídicos
+('2023-05-18', 15000, 'Solicitud de UltraFly', 1),  
+('2023-06-20', 25000, 'Solicitud de Horizon Air', 2),  
+('2023-07-12', 18000, 'Solicitud de StarWings', 3),  
+('2023-08-22', 21000, 'Solicitud de AeroConnect', 4);  
+
+-- ==============================================
+-- Inserción de datos: DETALLE_SLD_CLIENTE
+-- ==============================================
+INSERT INTO DETALLE_SLD_CLIENTE (ddc_cantidad_aviones, ddc_descripcion, fk_sct_id, fk_mda_id)
+VALUES
+-- Solicitudes de Clientes Naturales
+(2, 'Compra de dos AU-80 para rutas largas.', 1, 1),  
+(1, 'Adquisición de un AU-801 para rutas cortas.', 2, 2),  
+(3, 'Pedido de tres AU-802A para rutas intermedias.', 3, 6),  
+(1, 'Un AU-747Plus para rutas transcontinentales.', 4, 4),
+
+-- Solicitudes de Clientes Jurídicos
+(2, 'Compra de dos AU-802F para optimizar rutas.', 5, 11),  
+(3, 'Adquisición de tres AU-747Gold para vuelos de larga distancia.', 6, 13),  
+(1, 'Pedido de un AU-87ABusiness para transporte empresarial.', 7, 16),  
+(2, 'Compra de dos AU-802E para rutas medianas.', 8, 10);

@@ -85,3 +85,7 @@ VALUES
 ('2023-09-15', '2023-09-20', 50, 5); -- Solicitud de Magnesio, Completado
 
 
+-- =====================================
+-- Inserción de datos: ESTATUS_SCAV
+-- ======================================
+
