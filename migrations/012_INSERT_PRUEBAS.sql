@@ -208,6 +208,9 @@ VALUES
 -- ======================================
 
 
+-- =====================================
+-- Inserción de datos: PRUEBA
+-- ======================================
 INSERT INTO PRUEBA (pru_nombre, pru_tiempo_estimado, pru_descripcion)
 VALUES 
 -- Pruebas para Modelos de Ala
