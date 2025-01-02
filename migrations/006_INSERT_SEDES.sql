@@ -27,7 +27,7 @@ INSERT INTO AREA (are_nombre, are_descripcion, fk_sed_id)
 VALUES ('Ensamble', 'Área para ensamblar alas, estabilizadores y alerones.', 1);
 
 INSERT INTO AREA (are_nombre, are_descripcion, fk_sed_id)
-VALUES ('Pruebas de calidad', 'Verificación de materiales y piezas ensambladas.', 1);
+VALUES ('Pruebas', 'Verificación de materiales y piezas ensambladas.', 1);
 
 INSERT INTO AREA (are_nombre, are_descripcion, fk_sed_id)
 VALUES ('Despacho', 'Zona destinada al embalaje y envío de componentes.', 1);
@@ -40,14 +40,14 @@ INSERT INTO AREA (are_nombre, are_descripcion, fk_sed_id)
 VALUES ('Producción', 'Construcción de fuselajes y trenes de aterrizaje.', 2);
 
 INSERT INTO AREA (are_nombre, are_descripcion, fk_sed_id)
-VALUES ('Pruebas de resistencia', 'Evaluación de la calidad estructural y resistencia.', 2);
+VALUES ('Pruebas', 'Evaluación de la calidad estructural y resistencia.', 2);
 
 -- Áreas para la sede La Guaira
 INSERT INTO AREA (are_nombre, are_descripcion, fk_sed_id)
 VALUES ('Recepción de materiales', 'Almacenamiento e inspección de materiales.', 3);
 
 INSERT INTO AREA (are_nombre, are_descripcion, fk_sed_id)
-VALUES ('Pruebas de calidad', 'Evaluación térmica y mecánica de materiales.', 3);
+VALUES ('Pruebas', 'Evaluación térmica y mecánica de materiales.', 3);
 
 INSERT INTO AREA (are_nombre, are_descripcion, fk_sed_id)
 VALUES ('Producción de motores', 'Ensamble y calibración de sistemas motopropulsores.', 3);
@@ -60,7 +60,7 @@ INSERT INTO AREA (are_nombre, are_descripcion, fk_sed_id)
 VALUES ('Ensamble', 'Integración y montaje de instrumentos de control.', 4);
 
 INSERT INTO AREA (are_nombre, are_descripcion, fk_sed_id)
-VALUES ('Pruebas funcionales', 'Simulación y calibración de instrumentos.', 4);
+VALUES ('Pruebas', 'Simulación y calibración de instrumentos.', 4);
 
 -- Áreas para la sede Valencia
 INSERT INTO AREA (are_nombre, are_descripcion, fk_sed_id)
@@ -75,6 +75,10 @@ VALUES ('Acabado y personalización', 'Pintura y montaje final de los interiores
 -- Áreas para la sede Colón
 INSERT INTO AREA (are_nombre, are_descripcion, fk_sed_id)
 VALUES ('Ensamblaje', 'Ensamblaje final de las piezas al avion', 2);
+
+-- Áreas para la sede Valencia
+INSERT INTO AREA (are_nombre, are_descripcion, fk_sed_id)
+VALUES ('Pruebas', 'Pruebas de interiores', 5);
 
 -- =====================================
 -- Inserción de datos: Zonas
@@ -95,7 +99,7 @@ INSERT INTO ZONA (zon_nombre, zon_descripcion, fk_are_id)
 VALUES ('Zona de recepción de materiales', 'Verificación de calidad tras el traslado.', 2);
 
 INSERT INTO ZONA (zon_nombre, zon_descripcion, fk_are_id)
-VALUES ('Zona de pruebas aerodinámicas', 'Evaluación del rendimiento de piezas ensambladas.', 2);
+VALUES ('Zona de Pruebas', 'Evaluación del rendimiento de piezas ensambladas.', 2);
 
 -- Zonas para el área "Despacho" en Maracay
 INSERT INTO ZONA (zon_nombre, zon_descripcion, fk_are_id)
@@ -108,9 +112,6 @@ VALUES ('Zona de envío', 'Despacho de componentes a otras plantas.', 3);
 INSERT INTO ZONA (zon_nombre, zon_descripcion, fk_are_id)
 VALUES ('Zona de planos de fuselaje', 'Creación de planos y diseños estructurales.', 4);
 
-INSERT INTO ZONA (zon_nombre, zon_descripcion, fk_are_id)
-VALUES ('Zona de simulaciones', 'Pruebas virtuales de resistencia estructural.', 4);
-
 -- Zonas para el área "Producción" en Colón
 INSERT INTO ZONA (zon_nombre, zon_descripcion, fk_are_id)
 VALUES ('Zona de trenes de aterrizaje', 'Producción y ensamblaje de trenes de aterrizaje.', 5);
@@ -120,10 +121,7 @@ VALUES ('Zona de fuselajes', 'Producción de fuselajes completos.', 5);
 
 -- Zonas para el área "Pruebas de resistencia" en Colón
 INSERT INTO ZONA (zon_nombre, zon_descripcion, fk_are_id)
-VALUES ('Zona de carga estructural', 'Pruebas de carga máxima de fuselajes.', 6);
-
-INSERT INTO ZONA (zon_nombre, zon_descripcion, fk_are_id)
-VALUES ('Zona de impacto', 'Simulación de impactos para evaluar la resistencia.', 6);
+VALUES ('Zona de Pruebas', 'Pruebas de resistencia', 6);
 
 -- Zonas para el área "Recepción de materiales" en La Guaira
 INSERT INTO ZONA (zon_nombre, zon_descripcion, fk_are_id)
@@ -134,10 +132,7 @@ VALUES ('Zona de inspección inicial', 'Inspección preliminar de materiales rec
 
 -- Zonas para el área "Pruebas de calidad" en La Guaira
 INSERT INTO ZONA (zon_nombre, zon_descripcion, fk_are_id)
-VALUES ('Zona de pruebas térmicas', 'Evaluación térmica de materiales y componentes.', 8);
-
-INSERT INTO ZONA (zon_nombre, zon_descripcion, fk_are_id)
-VALUES ('Zona de pruebas mecánicas', 'Pruebas de resistencia mecánica de materiales.', 8);
+VALUES ('Zona de Pruebas', 'Evaluación térmica de materiales y componentes.', 8);
 
 -- Zonas para el área "Producción de motores" en La Guaira
 INSERT INTO ZONA (zon_nombre, zon_descripcion, fk_are_id)
@@ -162,7 +157,7 @@ VALUES ('Zona de soldadura', 'Soldadura y ensamblaje de componentes electrónico
 
 -- Zonas para el área "Pruebas funcionales" en Guatire
 INSERT INTO ZONA (zon_nombre, zon_descripcion, fk_are_id)
-VALUES ('Zona de simulación de vuelo', 'Pruebas de instrumentos en entornos simulados.', 12);
+VALUES ('Zona de Pruebas', 'Pruebas de instrumentos en entornos simulados.', 12);
 
 INSERT INTO ZONA (zon_nombre, zon_descripcion, fk_are_id)
 VALUES ('Zona de calibración', 'Ajuste de precisión en instrumentos electrónicos.', 12);
@@ -187,6 +182,11 @@ VALUES ('Zona de pintura', 'Aplicación de pintura y personalización de piezas.
 
 INSERT INTO ZONA (zon_nombre, zon_descripcion, fk_are_id)
 VALUES ('Zona de montaje final', 'Montaje y ensamblaje final de los interiores.', 15);
+
+-- Zonas para el área "Pruebas" en Valencia
+INSERT INTO ZONA (zon_nombre, zon_descripcion, fk_are_id)
+VALUES ('Zona de Pruebas', 'Pruebas a piezas de interiores', 17);
+
 
 -- Zonas para el área "Ensamble" en Colón
 INSERT INTO ZONA (zon_nombre, zon_descripcion, fk_are_id)

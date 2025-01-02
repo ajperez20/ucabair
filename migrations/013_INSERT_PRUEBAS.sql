@@ -201,13 +201,6 @@ VALUES
 (16, 80); -- Prueba de carga de AU-87ABusiness
 
 --  EJECUCIÓN PRUEBAS
-
-
--- =====================================
--- Inserción de datos: PRUEBA
--- ======================================
-
-
 -- =====================================
 -- Inserción de datos: PRUEBA
 -- ======================================
@@ -298,5 +291,64 @@ VALUES
 ('Prueba de carga de AU-747SilverB', '5 hours', 'Evaluación de la capacidad de carga del modelo AU-747SilverB.'),
 ('Prueba de vuelo de AU-87ABusiness', '6 hours', 'Pruebas de vuelo completas para el modelo AU-87ABusiness.'),
 ('Prueba de carga de AU-87ABusiness', '5 hours', 'Evaluación de la capacidad de carga del modelo AU-87ABusiness.');
+
+
+-- ===========================================
+-- Inserción de datos: PRUEBA_PIEZA_SEDE
+-- ============================================
+INSERT INTO PRUEBA_PIEZA_SEDE (psz_fecha_inicio, psz_fecha_fin, psz_resultado, fk_pie_id, fk_zon_id, fk_pru_id)
+VALUES
+-- Piezas probadas en Maracay (zona 5)
+('2023-01-15', '2023-01-20', 'Aprobada', 1, 5, 1), -- Ala Recta
+('2023-01-16', '2023-01-21', 'Aprobada', 2, 5, 2), -- Ala Trapezoidal
+('2023-01-17', '2023-01-22', 'Aprobada', 3, 5, 3), -- Ala Delta
+('2023-01-18', '2023-01-23', 'Aprobada', 4, 5, 4), -- Ala en Flecha
+('2023-01-19', '2023-01-24', 'Aprobada', 5, 5, 5), -- Ala en Flecha Inversa
+('2023-01-20', '2023-01-25', 'Aprobada', 6, 5, 6), -- Forma Estándar
+('2023-01-21', '2023-01-26', 'Aprobada', 7, 5, 7), -- Forma en T
+('2023-01-22', '2023-01-27', 'Aprobada', 8, 5, 8), -- Forma en Cruz
+('2023-01-23', '2023-01-28', 'Aprobada', 9, 5, 9), -- Forma 2 Verticales
+('2023-01-24', '2023-01-29', 'Aprobada', 10, 5, 10), -- Forma 3 Verticales
+('2023-01-25', '2023-01-30', 'Aprobada', 11, 5, 11), -- Forma en V
+('2023-01-26', '2023-01-31', 'Aprobada', 12, 5, 12), -- Flaps
+('2023-01-27', '2023-02-01', 'Aprobada', 13, 5, 13), -- Slats
+('2023-01-28', '2023-02-02', 'Aprobada', 14, 5, 14), -- Spoilers
+
+-- Piezas probadas en Colón (zona 11)
+('2023-02-01', '2023-02-10', 'Aprobada', 15, 11, 15), -- Fuselaje
+('2023-02-02', '2023-02-11', 'Aprobada', 16, 11, 16), -- Tren Fijo
+('2023-02-03', '2023-02-12', 'Aprobada', 17, 11, 17), -- Tren Retráctil
+
+-- Piezas probadas en La Guaira (zona 14)
+('2023-03-01', '2023-03-10', 'Aprobada', 18, 14, 18), -- Motor
+
+-- Piezas probadas en Guatire (zona 21, sistemas de control)
+('2023-04-01', '2023-04-05', 'Aprobada', 19, 21, 19), -- Anemómetro
+('2023-04-02', '2023-04-06', 'Aprobada', 20, 21, 20), -- Altímetro
+('2023-04-03', '2023-04-07', 'Aprobada', 21, 21, 21), -- Variómetro
+('2023-04-04', '2023-04-08', 'Aprobada', 22, 21, 22), -- Inclinómetro
+('2023-04-05', '2023-04-09', 'Aprobada', 23, 21, 23), -- Horizonte Artificial
+('2023-04-06', '2023-04-10', 'Aprobada', 24, 21, 24), -- Brújula
+('2023-04-07', '2023-04-11', 'Aprobada', 25, 21, 25), -- Indicador de Rumbos
+('2023-04-08', '2023-04-12', 'Aprobada', 26, 21, 26), -- ADF
+('2023-04-09', '2023-04-13', 'Aprobada', 27, 21, 27), -- DME
+('2023-04-10', '2023-04-14', 'Aprobada', 28, 21, 28), -- CDI
+('2023-04-11', '2023-04-15', 'Aprobada', 29, 21, 29), -- ILS
+('2023-04-12', '2023-04-16', 'Aprobada', 30, 21, 30), -- Piloto Automático
+('2023-04-13', '2023-04-17', 'Aprobada', 31, 21, 31), -- Sistema de Gestión de Vuelo
+('2023-04-14', '2023-04-18', 'Aprobada', 32, 21, 32), -- Manómetro
+('2023-04-15', '2023-04-19', 'Aprobada', 33, 21, 33), -- Termómetro de Aceite
+('2023-04-16', '2023-04-20', 'Aprobada', 34, 21, 34), -- Caudal de Combustible
+('2023-04-17', '2023-04-21', 'Aprobada', 35, 21, 35), -- Temperatura de Culatas
+('2023-04-18', '2023-04-22', 'Aprobada', 36, 21, 36), -- Nivel de Combustible
+
+-- Piezas probadas en Valencia (zona 29, componentes internos)
+('2023-05-01', '2023-05-05', 'Aprobada', 37, 29, 37), -- Asientos
+('2023-05-02', '2023-05-06', 'Aprobada', 38, 29, 38), -- Porta Equipajes
+('2023-05-03', '2023-05-07', 'Aprobada', 39, 29, 39), -- Ventanillas
+('2023-05-04', '2023-05-08', 'Aprobada', 40, 29, 40), -- Alfombrado
+('2023-05-05', '2023-05-09', 'Aprobada', 41, 29, 41), -- Piezas Sanitarias
+('2023-05-06', '2023-05-10', 'Aprobada', 42, 29, 42); -- Cortinas
+
 
 
