@@ -206,6 +206,8 @@ VALUES
 -- =====================================
 -- Inserción de datos: PRUEBA
 -- ======================================
+
+
 INSERT INTO PRUEBA (pru_nombre, pru_tiempo_estimado, pru_descripcion)
 VALUES 
 -- Pruebas para Modelos de Ala
@@ -293,3 +295,5 @@ VALUES
 ('Prueba de carga de AU-747SilverB', '5 hours', 'Evaluación de la capacidad de carga del modelo AU-747SilverB.'),
 ('Prueba de vuelo de AU-87ABusiness', '6 hours', 'Pruebas de vuelo completas para el modelo AU-87ABusiness.'),
 ('Prueba de carga de AU-87ABusiness', '5 hours', 'Evaluación de la capacidad de carga del modelo AU-87ABusiness.');
+
+
