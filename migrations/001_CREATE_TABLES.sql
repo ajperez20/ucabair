@@ -546,15 +546,9 @@ CREATE TABLE PIEZA_STOCK
     pie_fecha_fabricacion   DATE         NOT NULL DEFAULT CURRENT_DATE,
     pie_cantidad_disponible INT          NOT NULL,
     fk_sed_id               INT          NOT NULL,
-    fk_esp_id               INT          NOT NULL UNIQUE,
-    fk_zon_id               INT          NOT NULL UNIQUE,
     CONSTRAINT fk_sed_id
         FOREIGN KEY (fk_sed_id)
             REFERENCES SEDE_PLANTA (sed_id)
-            ON DELETE CASCADE,
-    CONSTRAINT fk_eez
-        FOREIGN KEY (fk_esp_id, fk_zon_id)
-            REFERENCES FASE_ENSAMBLE_PIEZA (fk_esp_id, fk_zon_id)
             ON DELETE CASCADE
 );
 
@@ -608,6 +602,7 @@ CREATE TABLE ESTATUS_PPS
 CREATE TABLE PROCESO_ENSAMBLE_AVION_EJEC
 (
     eav_id              SERIAL PRIMARY KEY,
+    eav_nombre_proceso VARCHAR(255) NOT NULL,
     eav_tiempo_estimado INTERVAL     NOT NULL,
     eav_descripcion     VARCHAR(255) NOT NULL
 );

@@ -113,7 +113,29 @@ INSERT INTO AVION_COMPONENTE (ctm_cantidad_piezas, fk_epv_id, fk_mda_id, fk_mec_
 -- ==========================================================
 -- Inserción de datos: PROCESO_ENSAMBLE_AVION_EJEC
 -- ==========================================================
+INSERT INTO PROCESO_ENSAMBLE_AVION_EJEC (eav_nombre_proceso, eav_tiempo_estimado, eav_descripcion)
+VALUES 
+('Fabricación de Componentes', '1 month', 'Fabricación de partes: alas, fuselaje, estabilizadores, etc.'),
+('Ensamblaje del Fuselaje', '2 weeks', 'Unión de secciones y montaje de la estructura principal.'),
+('Ensamblaje de las Alas', '1 week', 'Unión de partes y fijación al fuselaje.'),
+('Instalación del Empenaje', '3 days', 'Montaje del estabilizador vertical y horizontal (cola).'),
+('Instalación del Tren de Aterrizaje', '4 days', 'Montaje del sistema de aterrizaje.'),
+('Instalación de Sistemas', '3 weeks', 'Instalación de sistemas: eléctricos, hidráulicos, combustible, control y aviónica.'),
+('Instalación de Motores', '1 week', 'Montaje de los motores.'),
+('Instalación del Cableado', '2 weeks', 'Instalación del cableado eléctrico y de sistemas.'),
+('Ajustes Finales y Calibración', '1 week', 'Ajuste y calibración de sistemas y componentes.'),
+('Pintura', '1 week', 'Aplicación de pintura y acabados.'),
+('Acondicionamiento Interior', '2 weeks', 'Instalación de interiores'),
+('Retoques finales', '1 week', 'Revisión de detalles antes de la entrega');
 
+-- ==========================================================
+-- Inserción de datos: FASE_ENSAMBLE_AVIÓN
+-- ==========================================================
+
+-- INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id)
+-- VALUES 
+-- -- Ensamble de un AU-80 para Juan Perez
+-- ('2023-01-01', NULL, , , ),
 
 
 -- ======================================

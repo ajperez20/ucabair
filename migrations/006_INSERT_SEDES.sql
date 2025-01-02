@@ -72,6 +72,10 @@ VALUES ('Producción', 'Fabricación de porta equipajes y piezas sanitarias.', 5
 INSERT INTO AREA (are_nombre, are_descripcion, fk_sed_id)
 VALUES ('Acabado y personalización', 'Pintura y montaje final de los interiores.', 5);
 
+-- Áreas para la sede Colón
+INSERT INTO AREA (are_nombre, are_descripcion, fk_sed_id)
+VALUES ('Ensamblaje', 'Ensamblaje final de las piezas al avion', 2);
+
 -- =====================================
 -- Inserción de datos: Zonas
 -- ======================================
@@ -183,6 +187,11 @@ VALUES ('Zona de pintura', 'Aplicación de pintura y personalización de piezas.
 
 INSERT INTO ZONA (zon_nombre, zon_descripcion, fk_are_id)
 VALUES ('Zona de montaje final', 'Montaje y ensamblaje final de los interiores.', 15);
+
+-- Zonas para el área "Ensamble" en Colón
+INSERT INTO ZONA (zon_nombre, zon_descripcion, fk_are_id)
+VALUES ('Zona de montaje final', 'Montaje y ensamblaje final del avión.', 16);
+
 
 -- =========================================
 -- Inserción de datos: MATERIA_PRIMA_STOCK
