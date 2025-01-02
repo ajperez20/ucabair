@@ -89,3 +89,41 @@ VALUES
 -- Inserción de datos: ESTATUS_SCAV
 -- ======================================
 
+-- Estados asociados a las solicitudes de clientes naturales
+INSERT INTO ESTATUS_SCAV (scv_fecha_inicio, scv_fecha_fin, fk_sct_id, fk_est_id)
+VALUES
+-- Solicitud de Juan Pérez
+('2023-01-15', '2023-01-20', 1, 3), -- Pendiente
+('2023-01-21', NULL, 1, 6),         -- En proceso
+
+-- Solicitud de María Gómez
+('2023-02-10', '2023-02-12', 2, 3), -- Pendiente
+('2023-02-13', NULL, 2, 6), -- En proceso
+
+-- Solicitud de Luis Rodríguez
+('2023-03-25', '2023-03-30', 3, 3), -- Pendiente
+('2023-03-31', NULL, 3, 4), -- Cancelado
+
+-- Solicitud de Ana Martínez
+('2023-04-05', '2023-04-07', 4, 3), -- Pendiente
+('2023-04-08', '2024-04-08', 4, 6), -- En proceso
+('2024-04-09', NULL, 4, 5), -- Completado
+
+-- Estados asociados a las solicitudes de clientes jurídicos
+-- Solicitud de UltraFly
+('2023-05-18', '2023-05-20', 5, 3), -- Pendiente
+('2023-05-21', NULL, 5, 6), -- En proceso
+
+-- Solicitud de Horizon Air
+('2023-06-20', '2023-06-22', 6, 3), -- Pendiente
+('2023-06-23', NULL, 6, 6), -- En proceso
+
+-- Solicitud de StarWings
+('2023-07-12', '2023-07-14', 7, 3), -- Pendiente
+('2023-07-15', '2023-07-20', 7, 6), -- En proceso
+('2023-07-21', NULL, 7, 4),         -- Cancelado
+
+-- Solicitud de AeroConnect
+('2023-08-22', '2023-08-24', 8, 3), -- Pendiente
+('2023-08-25', '2024-08-30', 8, 6), -- En proceso
+('2024-08-31', NULL, 8, 5);         -- Completado
