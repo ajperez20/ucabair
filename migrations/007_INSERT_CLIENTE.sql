@@ -512,3 +512,18 @@ VALUES
 (3, 'Adquisición de tres AU-747Gold para vuelos de larga distancia.', 6, 13),  
 (1, 'Pedido de un AU-87ABusiness para transporte empresarial.', 7, 16),  
 (2, 'Compra de dos AU-802E para rutas medianas.', 8, 10);
+
+
+-- ==============================================
+-- Inserción de datos: AVION_CREADO
+-- ==============================================
+INSERT INTO AVION_CREADO (avi_num_serie, avi_fecha_creacion, fk_sct_id)
+VALUES 
+--Aviones creados para clientes naturales 
+('AU-747PLUS-001', '2024-04-09', 4),
+
+--Aviones creados para clientes jurídicos 
+('AU-802E-001', '2024-08-31', 8),
+('AU-802E-002', '2024-08-31', 8);
+
+

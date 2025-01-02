@@ -797,14 +797,6 @@ CREATE TABLE ESTATUS_SOL_PIEZA
             ON DELETE CASCADE
 );
 
--- 3.29 Avión Creado
-CREATE TABLE AVION_CREADO
-(
-    avi_id             SERIAL PRIMARY KEY,
-    avi_num_serie      VARCHAR(50) NOT NULL UNIQUE,
-    avi_fecha_creacion DATE        NOT NULL DEFAULT CURRENT_DATE
-);
-
 --------------------------------------------------------------------------------
 -- 4. USUARIOS (PARTE DE EMPLEADOS)
 --------------------------------------------------------------------------------
@@ -1007,7 +999,21 @@ CREATE TABLE DETALLE_SLD_CLIENTE (
             ON DELETE CASCADE
 );
 
--- 5.5 Estatus SCAV
+-- 5.5 Avión Creado
+CREATE TABLE AVION_CREADO
+(
+    avi_id             SERIAL PRIMARY KEY,
+    avi_num_serie      VARCHAR(50) NOT NULL UNIQUE,
+    avi_fecha_creacion DATE        NOT NULL DEFAULT CURRENT_DATE,
+    fk_sct_id INT NOT NULL,
+
+    CONSTRAINT fk_sct_id
+        FOREIGN KEY (fk_sct_id)
+            REFERENCES SOLICITUD_CLIENTE(sct_id)
+            ON DELETE CASCADE
+);
+
+-- 5.6 Estatus SCAV
 CREATE TABLE ESTATUS_SCAV
 (
     scv_fecha_inicio DATE NOT NULL DEFAULT CURRENT_DATE,
