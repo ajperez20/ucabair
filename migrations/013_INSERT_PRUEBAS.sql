@@ -249,6 +249,12 @@ VALUES
 ('Prueba de precisión de CDI', '2 hours', 'Validación de precisión en desviación de curso.'),
 ('Prueba de precisión de ILS', '2 hours', 'Pruebas de precisión en sistemas ILS.'),
 ('Prueba de funcionamiento de Piloto Automático', '4 hours', 'Evaluación del funcionamiento de pilotos automáticos.'),
+('Prueba de Sistema de Gestión de Vuelo', '9 hours', 'Pruebas de precisión del Sistema de Gestión de Vuelo.'),
+('Prueba de Manómetro', '2 hours', 'Validación de precisión del Manómetro.'),
+('Prueba de Termómetro de Aceite', '2 hours', 'Validación de precisión del Termómetro de Aceite.'),
+('Prueba de Caudal de Combustible', '2 hours', 'Pruebas del medidor de gasto de combustible.'),
+('Prueba de Temperatura de Culatas', '2 hours', 'Validación de precisión'),
+('Prueba de Nivel de Combustible', '2 hours', 'Pruebas de precisión en el medidor de combustible'),
 
 -- Pruebas para Tipos de Elementos Internos
 ('Prueba de comodidad de Asientos', '2 hours', 'Evaluación de la ergonomía y comodidad de los asientos.'),
@@ -257,6 +263,21 @@ VALUES
 ('Prueba de funcionamiento de Piezas Sanitarias', '2 hours', 'Verificación del correcto funcionamiento de las piezas sanitarias.'),
 ('Prueba de visibilidad de Ventanillas', '2 hours', 'Evaluación de la claridad y resistencia de las ventanillas.'),
 ('Prueba de durabilidad de Cortinas', '2 hours', 'Validación de la durabilidad y resistencia de las cortinas.'),
+
+-- Pruebas para Motores
+('Prueba de potencia de Motor', '3 hours', 'Validación de la potencia generada por el motor en diferentes condiciones.'),
+('Prueba de eficiencia de Motor', '4 hours', 'Evaluación de la eficiencia del motor en consumo de combustible.'),
+('Prueba de resistencia de Motor', '5 hours', 'Pruebas de resistencia y durabilidad del motor en condiciones extremas.'),
+('Prueba de seguridad de Motor', '3 hours', 'Verificación de los sistemas de seguridad y fallas del motor.'),
+
+-- Pruebas para Flaps, Slats, Spoilers, Superficie de sustentación
+('Prueba de resistencia de Flaps', '2 hours', 'Evaluación de resistencia de los flaps en diferentes configuraciones.'),
+('Prueba de resistencia de Slats', '2 hours', 'Evaluación estructural de los slats en condiciones de vuelo.'),
+('Prueba de funcionamiento de Spoilers', '3 hours', 'Validación de la operatividad de los spoilers en vuelo.'),
+('Prueba de durabilidad de Superficie de Sustentación', '4 hours', 'Validación de durabilidad en condiciones extremas.'),
+
+-- Pruebas para Fuselaje
+('Prueba de Fuselaje', '9 hours', 'Evaluación del fuselaje'),
 
 -- Pruebas para Modelos de Avión
 ('Prueba de vuelo de AU-80', '5 hours', 'Pruebas de vuelo completas para el modelo AU-80.'),
@@ -292,7 +313,6 @@ VALUES
 ('Prueba de vuelo de AU-87ABusiness', '6 hours', 'Pruebas de vuelo completas para el modelo AU-87ABusiness.'),
 ('Prueba de carga de AU-87ABusiness', '5 hours', 'Evaluación de la capacidad de carga del modelo AU-87ABusiness.');
 
-
 -- ===========================================
 -- Inserción de datos: PRUEBA_PIEZA_SEDE
 -- ============================================
@@ -300,55 +320,56 @@ INSERT INTO PRUEBA_PIEZA_SEDE (psz_fecha_inicio, psz_fecha_fin, psz_resultado, f
 VALUES
 -- Piezas probadas en Maracay (zona 5)
 ('2023-01-15', '2023-01-20', 'Aprobada', 1, 5, 1), -- Ala Recta
-('2023-01-16', '2023-01-21', 'Aprobada', 2, 5, 2), -- Ala Trapezoidal
-('2023-01-17', '2023-01-22', 'Aprobada', 3, 5, 3), -- Ala Delta
-('2023-01-18', '2023-01-23', 'Aprobada', 4, 5, 4), -- Ala en Flecha
-('2023-01-19', '2023-01-24', 'Aprobada', 5, 5, 5), -- Ala en Flecha Inversa
-('2023-01-20', '2023-01-25', 'Aprobada', 6, 5, 6), -- Forma Estándar
-('2023-01-21', '2023-01-26', 'Aprobada', 7, 5, 7), -- Forma en T
-('2023-01-22', '2023-01-27', 'Aprobada', 8, 5, 8), -- Forma en Cruz
-('2023-01-23', '2023-01-28', 'Aprobada', 9, 5, 9), -- Forma 2 Verticales
-('2023-01-24', '2023-01-29', 'Aprobada', 10, 5, 10), -- Forma 3 Verticales
-('2023-01-25', '2023-01-30', 'Aprobada', 11, 5, 11), -- Forma en V
-('2023-01-26', '2023-01-31', 'Aprobada', 12, 5, 12), -- Flaps
-('2023-01-27', '2023-02-01', 'Aprobada', 13, 5, 13), -- Slats
-('2023-01-28', '2023-02-02', 'Aprobada', 14, 5, 14), -- Spoilers
+('2023-01-16', '2023-01-21', 'Aprobada', 2, 5, 3), -- Ala Trapezoidal
+('2023-01-17', '2023-01-22', 'Aprobada', 3, 5, 5), -- Ala Delta
+('2023-01-18', '2023-01-23', 'Aprobada', 4, 5, 7), -- Ala en Flecha
+('2023-01-19', '2023-01-24', 'Aprobada', 5, 5, 9), -- Ala en Flecha Inversa
+('2023-01-20', '2023-01-25', 'Aprobada', 6, 5, 11), -- Forma Estándar
+('2023-01-21', '2023-01-26', 'Aprobada', 7, 5, 13), -- Forma en T
+('2023-01-22', '2023-01-27', 'Aprobada', 8, 5, 15), -- Forma en Cruz
+('2023-01-23', '2023-01-28', 'Aprobada', 9, 5, 17), -- Forma 2 Verticales
+('2023-01-24', '2023-01-29', 'Aprobada', 10, 5, 19), -- Forma 3 Verticales
+('2023-01-25', '2023-01-30', 'Aprobada', 11, 5, 21), -- Forma en V
+('2023-01-26', '2023-01-31', 'Aprobada', 12, 5, 53), -- Flaps
+('2023-01-27', '2023-02-01', 'Aprobada', 13, 5, 54), -- Slats
+('2023-01-28', '2023-02-02', 'Aprobada', 14, 5, 55), -- Spoilers
+('2023-01-29', '2023-02-02', 'Aprobada', 15, 5, 56), -- Superficie de sustentación
 
 -- Piezas probadas en Colón (zona 11)
-('2023-02-01', '2023-02-10', 'Aprobada', 15, 11, 15), -- Fuselaje
-('2023-02-02', '2023-02-11', 'Aprobada', 16, 11, 16), -- Tren Fijo
-('2023-02-03', '2023-02-12', 'Aprobada', 17, 11, 17), -- Tren Retráctil
+('2023-02-01', '2023-02-10', 'Aprobada', 16, 11, 57), -- Fuselaje
+('2023-02-02', '2023-02-11', 'Aprobada', 17, 11, 23), -- Tren Fijo
+('2023-02-03', '2023-02-12', 'Aprobada', 18, 11, 24), -- Tren Retráctil
 
 -- Piezas probadas en La Guaira (zona 14)
-('2023-03-01', '2023-03-10', 'Aprobada', 18, 14, 18), -- Motor
+('2023-03-01', '2023-03-10', 'Aprobada', 19, 14, 49), -- Motor
 
 -- Piezas probadas en Guatire (zona 21, sistemas de control)
-('2023-04-01', '2023-04-05', 'Aprobada', 19, 21, 19), -- Anemómetro
-('2023-04-02', '2023-04-06', 'Aprobada', 20, 21, 20), -- Altímetro
-('2023-04-03', '2023-04-07', 'Aprobada', 21, 21, 21), -- Variómetro
-('2023-04-04', '2023-04-08', 'Aprobada', 22, 21, 22), -- Inclinómetro
-('2023-04-05', '2023-04-09', 'Aprobada', 23, 21, 23), -- Horizonte Artificial
-('2023-04-06', '2023-04-10', 'Aprobada', 24, 21, 24), -- Brújula
-('2023-04-07', '2023-04-11', 'Aprobada', 25, 21, 25), -- Indicador de Rumbos
-('2023-04-08', '2023-04-12', 'Aprobada', 26, 21, 26), -- ADF
-('2023-04-09', '2023-04-13', 'Aprobada', 27, 21, 27), -- DME
-('2023-04-10', '2023-04-14', 'Aprobada', 28, 21, 28), -- CDI
-('2023-04-11', '2023-04-15', 'Aprobada', 29, 21, 29), -- ILS
-('2023-04-12', '2023-04-16', 'Aprobada', 30, 21, 30), -- Piloto Automático
-('2023-04-13', '2023-04-17', 'Aprobada', 31, 21, 31), -- Sistema de Gestión de Vuelo
-('2023-04-14', '2023-04-18', 'Aprobada', 32, 21, 32), -- Manómetro
-('2023-04-15', '2023-04-19', 'Aprobada', 33, 21, 33), -- Termómetro de Aceite
-('2023-04-16', '2023-04-20', 'Aprobada', 34, 21, 34), -- Caudal de Combustible
-('2023-04-17', '2023-04-21', 'Aprobada', 35, 21, 35), -- Temperatura de Culatas
-('2023-04-18', '2023-04-22', 'Aprobada', 36, 21, 36), -- Nivel de Combustible
+('2023-04-01', '2023-04-05', 'Aprobada', 20, 21, 25), -- Anemómetro
+('2023-04-02', '2023-04-06', 'Aprobada', 21, 21, 26), -- Altímetro
+('2023-04-03', '2023-04-07', 'Aprobada', 22, 21, 27), -- Variómetro
+('2023-04-04', '2023-04-08', 'Aprobada', 23, 21, 28), -- Inclinómetro
+('2023-04-05', '2023-04-09', 'Aprobada', 24, 21, 29), -- Horizonte Artificial
+('2023-04-06', '2023-04-10', 'Aprobada', 25, 21, 30), -- Brújula
+('2023-04-07', '2023-04-11', 'Aprobada', 26, 21, 31), -- Indicador de Rumbos
+('2023-04-08', '2023-04-12', 'Aprobada', 27, 21, 32), -- ADF
+('2023-04-09', '2023-04-13', 'Aprobada', 28, 21, 33), -- DME
+('2023-04-10', '2023-04-14', 'Aprobada', 29, 21, 34), -- CDI
+('2023-04-11', '2023-04-15', 'Aprobada', 30, 21, 35), -- ILS
+('2023-04-12', '2023-04-16', 'Aprobada', 31, 21, 36), -- Piloto Automático
+('2023-04-13', '2023-04-17', 'Aprobada', 32, 21, 37), -- Sistema de Gestión de Vuelo
+('2023-04-14', '2023-04-18', 'Aprobada', 33, 21, 38), -- Manómetro
+('2023-04-15', '2023-04-19', 'Aprobada', 34, 21, 39), -- Termómetro de Aceite
+('2023-04-16', '2023-04-20', 'Aprobada', 35, 21, 40), -- Caudal de Combustible
+('2023-04-17', '2023-04-21', 'Aprobada', 36, 21, 41), -- Temperatura de Culatas
+('2023-04-18', '2023-04-22', 'Aprobada', 37, 21, 42), -- Nivel de Combustible
 
 -- Piezas probadas en Valencia (zona 29, componentes internos)
-('2023-05-01', '2023-05-05', 'Aprobada', 37, 29, 37), -- Asientos
-('2023-05-02', '2023-05-06', 'Aprobada', 38, 29, 38), -- Porta Equipajes
-('2023-05-03', '2023-05-07', 'Aprobada', 39, 29, 39), -- Ventanillas
-('2023-05-04', '2023-05-08', 'Aprobada', 40, 29, 40), -- Alfombrado
-('2023-05-05', '2023-05-09', 'Aprobada', 41, 29, 41), -- Piezas Sanitarias
-('2023-05-06', '2023-05-10', 'Aprobada', 42, 29, 42); -- Cortinas
+('2023-05-01', '2023-05-05', 'Aprobada', 38, 29, 43), -- Asientos
+('2023-05-02', '2023-05-06', 'Aprobada', 39, 29, 44), -- Porta Equipajes
+('2023-05-03', '2023-05-07', 'Aprobada', 40, 29, 47), -- Ventanillas
+('2023-05-04', '2023-05-08', 'Aprobada', 41, 29, 45), -- Alfombrado
+('2023-05-05', '2023-05-09', 'Aprobada', 42, 29, 46), -- Piezas Sanitarias
+('2023-05-06', '2023-05-10', 'Aprobada', 43, 29, 48); -- Cortinas
 
 
 
