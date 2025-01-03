@@ -319,3 +319,114 @@ VALUES
 ('2023-05-06', '2023-05-07', 43, 29, 48, 3), -- Pendiente (Cortinas)
 ('2023-05-07', '2023-05-09', 43, 29, 48, 6), -- En proceso
 ('2023-05-09', '2023-05-10', 43, 29, 48, 5); -- Completado
+
+
+-- =====================================
+-- Inserción de datos: ESTATUS_PMS
+-- ======================================
+
+-- Historial de estatus para las pruebas realizadas en Maracay
+INSERT INTO ESTATUS_PMS (sms_fecha_inicio, sms_fecha_fin, fk_est_id, fk_zon_id, fk_sed_id, fk_rpm_id, fk_mps_id, fk_pru_id)
+VALUES
+-- Acero A36
+('2023-01-15', '2023-01-16', 3, 5, 1, 1, 1, 90), -- Pendiente
+('2023-01-16', '2023-01-19', 6, 5, 1, 1, 1, 90), -- En proceso
+('2023-01-19', '2023-01-20', 5, 5, 1, 1, 1, 90), -- Completado
+
+-- Aleación de aluminio 2024
+('2023-01-16', '2023-01-17', 3, 5, 1, 4, 2, 93), -- Pendiente
+('2023-01-17', '2023-01-20', 6, 5, 1, 4, 2, 93), -- En proceso
+('2023-01-20', '2023-01-21', 5, 5, 1, 4, 2, 93), -- Completado
+
+-- Fibra de carbono
+('2023-01-17', '2023-01-18', 3, 5, 1, 8, 3, 97), -- Pendiente
+('2023-01-18', '2023-01-21', 6, 5, 1, 8, 3, 97), -- En proceso
+('2023-01-21', '2023-01-22', 5, 5, 1, 8, 3, 97), -- Completado
+
+-- Resinas epoxi
+('2023-01-18', '2023-01-19', 3, 5, 1, 13, 4, 102), -- Pendiente
+('2023-01-19', '2023-01-22', 6, 5, 1, 13, 4, 102), -- En proceso
+('2023-01-22', '2023-01-23', 5, 5, 1, 13, 4, 102); -- Completado
+
+
+-- Historial de estatus para las pruebas realizadas en Colón
+INSERT INTO ESTATUS_PMS (sms_fecha_inicio, sms_fecha_fin, fk_est_id, fk_zon_id, fk_sed_id, fk_rpm_id, fk_mps_id, fk_pru_id)
+VALUES
+-- Aleación de aluminio 7075
+('2023-02-01', '2023-02-02', 3, 11, 2, 5, 5, 94), -- Pendiente
+('2023-02-02', '2023-02-09', 6, 11, 2, 5, 5, 94), -- En proceso
+('2023-02-09', '2023-02-10', 5, 11, 2, 5, 5, 94), -- Completado
+
+-- Acero aleado 4340
+('2023-02-02', '2023-02-03', 3, 11, 2, 6, 6, 95), -- Pendiente
+('2023-02-03', '2023-02-10', 6, 11, 2, 6, 6, 95), -- En proceso
+('2023-02-10', '2023-02-11', 5, 11, 2, 6, 6, 95), -- Completado
+
+-- Fibra de vidrio
+('2023-02-03', '2023-02-04', 3, 11, 2, 9, 7, 98), -- Pendiente
+('2023-02-04', '2023-02-11', 6, 11, 2, 9, 7, 98), -- En proceso
+('2023-02-11', '2023-02-12', 5, 11, 2, 9, 7, 98), -- Completado
+
+-- Resinas epoxi
+('2023-02-04', '2023-02-05', 3, 11, 2, 13, 8, 102), -- Pendiente
+('2023-02-05', '2023-02-12', 6, 11, 2, 13, 8, 102), -- En proceso
+('2023-02-12', '2023-02-13', 5, 11, 2, 13, 8, 102); -- Completado
+
+-- Historial de estatus para las pruebas realizadas en La Guaira
+INSERT INTO ESTATUS_PMS (sms_fecha_inicio, sms_fecha_fin, fk_est_id, fk_zon_id, fk_sed_id, fk_rpm_id, fk_mps_id, fk_pru_id)
+VALUES
+-- Titanio Grado 5
+('2023-03-01', '2023-03-02', 3, 14, 3, 2, 9, 91), -- Pendiente
+('2023-03-02', '2023-03-09', 6, 14, 3, 2, 9, 91), -- En proceso
+('2023-03-09', '2023-03-10', 5, 14, 3, 2, 9, 91), -- Completado
+
+-- Titanio Ti-6Al-4V
+('2023-03-02', '2023-03-03', 3, 14, 3, 7, 10, 96), -- Pendiente
+('2023-03-03', '2023-03-10', 6, 14, 3, 7, 10, 96), -- En proceso
+('2023-03-10', '2023-03-11', 5, 14, 3, 7, 10, 96), -- Completado
+
+-- Acero inoxidable 304
+('2023-03-03', '2023-03-04', 3, 14, 3, 10, 11, 99), -- Pendiente
+('2023-03-04', '2023-03-12', 6, 14, 3, 10, 11, 99), -- En proceso
+('2023-03-12', '2023-03-13', 5, 14, 3, 10, 11, 99), -- Completado
+
+-- Níquel
+('2023-03-04', '2023-03-05', 3, 14, 3, 16, 12, 105), -- Pendiente
+('2023-03-05', '2023-03-12', 6, 14, 3, 16, 12, 105), -- En proceso
+('2023-03-12', '2023-03-13', 5, 14, 3, 16, 12, 105); -- Completado
+
+-- Historial de estatus para las pruebas realizadas en Guatire
+INSERT INTO ESTATUS_PMS (sms_fecha_inicio, sms_fecha_fin, fk_est_id, fk_zon_id, fk_sed_id, fk_rpm_id, fk_mps_id, fk_pru_id)
+VALUES
+-- Compuesto Kevlar
+('2023-04-01', '2023-04-02', 3, 21, 4, 3, 13, 92), -- Pendiente
+('2023-04-02', '2023-04-04', 6, 21, 4, 3, 13, 92), -- En proceso
+('2023-04-04', '2023-04-05', 5, 21, 4, 3, 13, 92), -- Completado
+
+-- Polímeros reforzados (FRP)
+('2023-04-02', '2023-04-03', 3, 21, 4, 12, 14, 101), -- Pendiente
+('2023-04-03', '2023-04-05', 6, 21, 4, 12, 14, 101), -- En proceso
+('2023-04-05', '2023-04-06', 5, 21, 4, 12, 14, 101), -- Completado
+
+-- Caucho de silicona
+('2023-04-03', '2023-04-04', 3, 21, 4, 15, 15, 104), -- Pendiente
+('2023-04-04', '2023-04-06', 6, 21, 4, 15, 15, 104), -- En proceso
+('2023-04-06', '2023-04-07', 5, 21, 4, 15, 15, 104); -- Completado
+
+-- Historial de estatus para las pruebas realizadas en Valencia
+INSERT INTO ESTATUS_PMS (sms_fecha_inicio, sms_fecha_fin, fk_est_id, fk_zon_id, fk_sed_id, fk_rpm_id, fk_mps_id, fk_pru_id)
+VALUES
+-- Magnesio
+('2023-05-01', '2023-05-02', 3, 29, 5, 11, 16, 100), -- Pendiente
+('2023-05-02', '2023-05-04', 6, 29, 5, 11, 16, 100), -- En proceso
+('2023-05-04', '2023-05-05', 5, 29, 5, 11, 16, 100), -- Completado
+
+-- Madera de balsa
+('2023-05-02', '2023-05-03', 3, 29, 5, 17, 17, 106), -- Pendiente
+('2023-05-03', '2023-05-05', 6, 29, 5, 17, 17, 106), -- En proceso
+('2023-05-05', '2023-05-06', 5, 29, 5, 17, 17, 106), -- Completado
+
+-- Caucho de silicona
+('2023-05-03', '2023-05-04', 3, 29, 5, 14, 18, 104), -- Pendiente
+('2023-05-04', '2023-05-06', 6, 29, 5, 14, 18, 104), -- En proceso
+('2023-05-06', '2023-05-07', 5, 29, 5, 14, 18, 104); -- Completado
