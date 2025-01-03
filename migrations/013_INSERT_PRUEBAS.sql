@@ -311,7 +311,26 @@ VALUES
 ('Prueba de vuelo de AU-747SilverB', '6 hours', 'Pruebas de vuelo completas para el modelo AU-747SilverB.'),
 ('Prueba de carga de AU-747SilverB', '5 hours', 'Evaluación de la capacidad de carga del modelo AU-747SilverB.'),
 ('Prueba de vuelo de AU-87ABusiness', '6 hours', 'Pruebas de vuelo completas para el modelo AU-87ABusiness.'),
-('Prueba de carga de AU-87ABusiness', '5 hours', 'Evaluación de la capacidad de carga del modelo AU-87ABusiness.');
+('Prueba de carga de AU-87ABusiness', '5 hours', 'Evaluación de la capacidad de carga del modelo AU-87ABusiness.'),
+
+-- Pruebas para Materias Primas
+('Prueba de resistencia a la tracción de Acero A36', '3 hours', 'Evaluación de la resistencia a la tracción del Acero A36.'),
+('Prueba de resistencia a la corrosión de Titanio Grado 5', '4 hours', 'Validación de la resistencia a la corrosión del Titanio Grado 5.'),
+('Prueba de impacto en Compuesto Kevlar', '2 hours', 'Evaluación de la resistencia al impacto del Compuesto Kevlar.'),
+('Prueba de elasticidad de Aleación de aluminio 2024', '3 hours', 'Medición de la elasticidad de la Aleación de aluminio 2024.'),
+('Prueba de fatiga de Aleación de aluminio 7075', '4 hours', 'Evaluación de la resistencia a ciclos de carga en Aleación de aluminio 7075.'),
+('Prueba de dureza de Acero aleado 4340', '2 hours', 'Medición de la dureza del Acero aleado 4340.'),
+('Prueba de resistencia a altas temperaturas de Titanio Ti-6Al-4V', '5 hours', 'Evaluación del comportamiento del Titanio Ti-6Al-4V a altas temperaturas.'),
+('Prueba de resistencia al impacto de Fibra de carbono', '3 hours', 'Evaluación de la resistencia al impacto de la Fibra de carbono.'),
+('Prueba de resistencia al impacto de Fibra de vidrio', '2 hours', 'Validación de la resistencia al impacto de la Fibra de vidrio.'),
+('Prueba de resistencia a la corrosión de Acero inoxidable 304', '3 hours', 'Evaluación de la resistencia a la corrosión del Acero inoxidable 304.'),
+('Prueba de inflamabilidad de Magnesio', '2 hours', 'Validación del comportamiento del Magnesio ante fuego.'),
+('Prueba de envejecimiento acelerado de Polímeros reforzados (FRP)', '6 hours', 'Evaluación de la durabilidad de los Polímeros reforzados (FRP) con el tiempo.'),
+('Prueba de curado de Resinas epoxi', '3 hours', 'Evaluación de la calidad del curado de las Resinas epoxi.'),
+('Prueba de elasticidad de Poliuretano', '2 hours', 'Medición de la elasticidad del Poliuretano para aplicaciones de sellado.'),
+('Prueba de resistencia térmica de Caucho de silicona', '3 hours', 'Evaluación de la resistencia térmica del Caucho de silicona a altas temperaturas.'),
+('Prueba de resistencia a la oxidación de Níquel', '4 hours', 'Evaluación de la resistencia a la oxidación del Níquel en condiciones extremas.'),
+('Prueba de resistencia a la compresión de Madera de balsa', '2 hours', 'Evaluación de la resistencia a la compresión de la Madera de balsa.');
 
 -- ===========================================
 -- Inserción de datos: PRUEBA_PIEZA_SEDE
@@ -371,5 +390,38 @@ VALUES
 ('2023-05-05', '2023-05-09', 'Aprobada', 42, 29, 46), -- Piezas Sanitarias
 ('2023-05-06', '2023-05-10', 'Aprobada', 43, 29, 48); -- Cortinas
 
+-- ===========================================
+-- Inserción de datos: SEDE_MATERIAL_PRUEBA
+-- ============================================
+
+INSERT INTO SEDE_MATERIAL_PRUEBA (pbm_fecha_inicio, pbm_fecha_fin, pbm_resultado_prueba, fk_zon_id, fk_sed_id, fk_rpm_id, fk_mps_id, fk_pru_id)
+VALUES
+-- Material probado en Maracay
+('2023-01-15', '2023-01-20', 'Aprobada', 5, 1, 1, 1, 90), 
+('2023-01-16', '2023-01-21', 'Aprobada', 5, 1, 4, 2, 93), 
+('2023-01-17', '2023-01-22', 'Aprobada', 5, 1, 8, 3, 97),
+('2023-01-18', '2023-01-23', 'Aprobada', 5, 1, 13, 4, 102),
+
+-- Material probado en Colón
+('2023-02-01', '2023-02-10', 'Aprobada', 11, 2, 5, 5, 94),
+('2023-02-02', '2023-02-11', 'Aprobada', 11, 2, 6, 6, 95), 
+('2023-02-03', '2023-02-12', 'Aprobada', 11, 2, 9, 7, 98),
+('2023-02-04', '2023-02-13', 'Aprobada', 11, 2, 13, 8, 102), 
+
+-- Material probado en La Guaira
+('2023-03-01', '2023-03-10', 'Aprobada', 14, 3, 2, 9, 91),
+('2023-03-02', '2023-03-11', 'Aprobada', 14, 3, 7, 10, 96), 
+('2023-03-03', '2023-03-12', 'Aprobada', 14, 3, 10, 11, 99), 
+('2023-03-04', '2023-03-13', 'Aprobada', 14, 3, 16, 12, 105), 
+
+-- Material probado en Guatire
+('2023-04-01', '2023-04-05', 'Aprobada', 21, 4, 3, 13, 92), 
+('2023-04-02', '2023-04-06', 'Aprobada', 21, 4, 12, 14, 101),
+('2023-04-03', '2023-04-07', 'Aprobada', 21, 4, 15, 15, 104), 
+
+-- Material probado en Valencia
+('2023-05-01', '2023-05-05', 'Aprobada', 29, 5, 11, 16, 100),
+('2023-05-02', '2023-05-06', 'Aprobada', 29, 5, 17, 17, 106), 
+('2023-05-03', '2023-05-07', 'Aprobada', 29, 5, 14, 18, 104); 
 
 

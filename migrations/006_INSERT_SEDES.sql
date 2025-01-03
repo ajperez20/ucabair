@@ -17,7 +17,6 @@ VALUES ('Guatire', 'Guatire', 'Producción de instrumentos de control y sistemas
 INSERT INTO SEDE_PLANTA (sed_nombre, sed_direccion, sed_descripcion, fk_lug_id)
 VALUES ('Valencia', 'Valencia', 'Fabricación de interiores de cabina, asientos y ventanillas.', 7);
 
-
 -- =====================================
 -- Inserción de datos: Areas
 -- ======================================
