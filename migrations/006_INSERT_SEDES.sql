@@ -85,13 +85,13 @@ VALUES ('Pruebas', 'Pruebas de interiores', 5);
 
 -- Zonas para el área "Ensamble" en Maracay
 INSERT INTO ZONA (zon_nombre, zon_descripcion, fk_are_id)
-VALUES ('Zona de alas', 'Ensamblaje y ajuste de alas.', 1);
+VALUES ('Zona de ensamblaje alas', 'Ensamblaje y ajuste de alas.', 1);
 
 INSERT INTO ZONA (zon_nombre, zon_descripcion, fk_are_id)
-VALUES ('Zona de estabilizadores', 'Ensamblaje de estabilizadores horizontales y verticales.', 1);
+VALUES ('Zona de ensamblaje estabilizadores', 'Ensamblaje de estabilizadores horizontales y verticales.', 1);
 
 INSERT INTO ZONA (zon_nombre, zon_descripcion, fk_are_id)
-VALUES ('Zona de alerones y flaps', 'Producción y montaje de alerones y flaps.', 1);
+VALUES ('Zona de ensamblaje alerones y flaps', 'Producción y montaje de alerones y flaps.', 1);
 
 -- Zonas para el área "Pruebas de calidad" en Maracay
 INSERT INTO ZONA (zon_nombre, zon_descripcion, fk_are_id)
@@ -113,10 +113,10 @@ VALUES ('Zona de planos de fuselaje', 'Creación de planos y diseños estructura
 
 -- Zonas para el área "Producción" en Colón
 INSERT INTO ZONA (zon_nombre, zon_descripcion, fk_are_id)
-VALUES ('Zona de trenes de aterrizaje', 'Producción y ensamblaje de trenes de aterrizaje.', 5);
+VALUES ('Zona de ensamblaje trenes de aterrizaje', 'Producción y ensamblaje de trenes de aterrizaje.', 5);
 
 INSERT INTO ZONA (zon_nombre, zon_descripcion, fk_are_id)
-VALUES ('Zona de fuselajes', 'Producción de fuselajes completos.', 5);
+VALUES ('Zona de ensamblaje fuselajes', 'Producción de fuselajes completos.', 5);
 
 -- Zonas para el área "Pruebas de resistencia" en Colón
 INSERT INTO ZONA (zon_nombre, zon_descripcion, fk_are_id)
@@ -135,7 +135,7 @@ VALUES ('Zona de Pruebas', 'Evaluación térmica de materiales y componentes.', 
 
 -- Zonas para el área "Producción de motores" en La Guaira
 INSERT INTO ZONA (zon_nombre, zon_descripcion, fk_are_id)
-VALUES ('Zona de ensamblaje', 'Montaje de motores y sistemas motopropulsores.', 9);
+VALUES ('Zona de ensamblaje motores', 'Montaje de motores y sistemas motopropulsores.', 9);
 
 INSERT INTO ZONA (zon_nombre, zon_descripcion, fk_are_id)
 VALUES ('Zona de calibración', 'Ajuste y verificación de sistemas motopropulsores.', 9);
@@ -149,10 +149,10 @@ VALUES ('Zona de circuitos electrónicos', 'Producción y diseño de circuitos e
 
 -- Zonas para el área "Ensamble" en Guatire
 INSERT INTO ZONA (zon_nombre, zon_descripcion, fk_are_id)
-VALUES ('Zona de integración', 'Montaje de instrumentos de control.', 11);
+VALUES ('Zona de ensamblaje instrumentos', 'Montaje de instrumentos de control.', 11);
 
 INSERT INTO ZONA (zon_nombre, zon_descripcion, fk_are_id)
-VALUES ('Zona de soldadura', 'Soldadura y ensamblaje de componentes electrónicos.', 11);
+VALUES ('Zona de soldadura de circuitos', 'Soldadura y ensamblaje de componentes electrónicos.', 11);
 
 -- Zonas para el área "Pruebas funcionales" en Guatire
 INSERT INTO ZONA (zon_nombre, zon_descripcion, fk_are_id)
@@ -170,10 +170,10 @@ VALUES ('Zona de ventanillas y alfombrados', 'Producción de ventanillas y alfom
 
 -- Zonas para el área "Producción" en Valencia
 INSERT INTO ZONA (zon_nombre, zon_descripcion, fk_are_id)
-VALUES ('Zona de porta equipajes', 'Fabricación de compartimentos de equipaje.', 14);
+VALUES ('Zona de ensamblaje porta equipajes', 'Fabricación de compartimentos de equipaje.', 14);
 
 INSERT INTO ZONA (zon_nombre, zon_descripcion, fk_are_id)
-VALUES ('Zona de piezas sanitarias', 'Producción de piezas sanitarias para cabinas.', 14);
+VALUES ('Zona de ensamblaje piezas sanitarias', 'Producción de piezas sanitarias para cabinas.', 14);
 
 -- Zonas para el área "Acabado y personalización" en Valencia
 INSERT INTO ZONA (zon_nombre, zon_descripcion, fk_are_id)

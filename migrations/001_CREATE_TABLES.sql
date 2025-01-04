@@ -399,6 +399,7 @@ CREATE TABLE ESTATUS_PMS
 CREATE TABLE PROCESO_ENSAMBLE_PIEZA_EJEC
 (
     esp_id              SERIAL PRIMARY KEY,
+    esp_nombre_proceso VARCHAR(255) NOT NULL,
     esp_tiempo_estimado INTERVAL     NOT NULL,
     esp_descripcion     VARCHAR(255) NOT NULL
 );
