@@ -12,7 +12,6 @@ import {
   TruckIcon,
   ClipboardDocumentListIcon,
   UserIcon,
-  DocumentChartBarIcon,
   ChevronDownIcon,
 } from "@heroicons/react/24/outline";
 
@@ -31,17 +30,19 @@ const navigationConfig = {
         {
           name: "Empleados",
           href: "/dashboard/rrhh/empleados",
+          submenu: [
+            {
+              name: "Cargos",
+              href: "/dashboard/rrhh/cargos",
+            },
+            {
+              name: "Horarios",
+              href: "/dashboard/rrhh/horarios",
+            },
+          ],
         },
         {
-          name: "Cargos",
-          href: "/dashboard/rrhh/cargos",
-        },
-        {
-          name: "Horarios",
-          href: "/dashboard/rrhh/horarios",
-        },
-        {
-          name: "Nominas",
+          name: "Nóminas",
           href: "/dashboard/rrhh/nominas",
         },
       ],
@@ -70,14 +71,6 @@ const navigationConfig = {
           name: "Jurídicos",
           href: "/dashboard/clientes/juridicos",
         },
-        {
-          name: "Solicitudes",
-          href: "/dashboard/clientes/solicitudes",
-        },
-        {
-          name: "Seguimiento",
-          href: "/dashboard/clientes/seguimiento",
-        },
       ],
     },
     {
@@ -99,12 +92,8 @@ const navigationConfig = {
           href: "/dashboard/configuracion/modelos-avion",
         },
         {
-          name: "Piezas y Componentes",
+          name: "Piezas",
           href: "/dashboard/configuracion/piezas",
-        },
-        {
-          name: "Procesos de Ensamblaje",
-          href: "/dashboard/configuracion/procesos",
         },
       ],
     },
@@ -114,20 +103,12 @@ const navigationConfig = {
       icon: CubeIcon,
       submenu: [
         {
-          name: "Sedes y Plantas",
+          name: "Sedes",
           href: "/dashboard/produccion/sedes",
         },
         {
           name: "Áreas y Zonas",
-          href: "/dashboard/produccion/areas",
-        },
-        {
-          name: "Ensamblaje de Aviones",
-          href: "/dashboard/produccion/ensamblaje",
-        },
-        {
-          name: "Control de Calidad y Pruebas",
-          href: "/dashboard/produccion/control-calidad",
+          href: "/dashboard/produccion/areas-zonas",
         },
       ],
     },
@@ -141,23 +122,10 @@ const navigationConfig = {
           href: "/dashboard/inventario/materia-prima",
         },
         {
-          name: "Piezas",
-          href: "/dashboard/inventario/piezas",
-        },
-        {
           name: "Stock",
           href: "/dashboard/inventario/stock",
         },
-        {
-          name: "Solicitudes entre Sedes",
-          href: "/dashboard/inventario/solicitudes",
-        },
       ],
-    },
-    {
-      name: "Reportes",
-      href: "/dashboard/reportes",
-      icon: DocumentChartBarIcon,
     },
   ],
   EMPLEADO: [
@@ -174,33 +142,33 @@ const navigationConfig = {
   ],
   PROVEEDOR: [
     {
+      name: "Dashboard",
+      href: "/dashboard",
+      icon: HomeIcon,
+    },
+    {
       name: "Mis Pedidos",
       href: "/dashboard/pedidos",
       icon: ClipboardDocumentListIcon,
-    },
-    {
-      name: "Entregas",
-      href: "/dashboard/entregas",
-      icon: TruckIcon,
     },
   ],
   CLIENTE: [
     {
+      name: "Dashboard",
+      href: "/dashboard",
+      icon: HomeIcon,
+    },
+    {
       name: "Mis Pedidos",
       href: "/dashboard/pedidos",
       icon: ClipboardDocumentListIcon,
-    },
-    {
-      name: "Seguimiento",
-      href: "/dashboard/seguimiento",
-      icon: DocumentChartBarIcon,
     },
   ],
 };
 
 export default function Sidebar() {
   const pathname = usePathname();
-  const [openSubmenu, setOpenSubmenu] = useState("");
+  const [openMenus, setOpenMenus] = useState({});
   const [navigation, setNavigation] = useState([]);
   const [user, setUser] = useState(null);
 
@@ -214,25 +182,88 @@ export default function Sidebar() {
   }, []);
 
   const toggleSubmenu = (name) => {
-    setOpenSubmenu(openSubmenu === name ? "" : name);
+    setOpenMenus((prev) => ({
+      ...prev,
+      [name]: !prev[name],
+    }));
   };
 
   const isPathActive = (href, submenu = null) => {
-    // Si es un elemento con submenu, verifica si la ruta actual coincide con el href principal
-    // o con alguna de las subrutas
     if (submenu) {
       return (
         pathname === href ||
-        submenu.some((item) => pathname.startsWith(item.href)) ||
+        submenu.some((item) => {
+          if (item.submenu) {
+            return (
+              pathname === item.href ||
+              item.submenu.some((nestedItem) => pathname === nestedItem.href)
+            );
+          }
+          return pathname === item.href;
+        }) ||
         pathname.startsWith(href)
       );
     }
-    // Para elementos sin submenu, verifica exactamente la ruta
     return pathname === href;
   };
 
-  const isExactPathActive = (href) => {
-    return pathname === href;
+  const renderMenuItem = (item, level = 0) => {
+    const isActive = isPathActive(item.href, item.submenu);
+    const isOpen = openMenus[item.name];
+    const hasSubmenu = item.submenu && item.submenu.length > 0;
+
+    return (
+      <div key={item.name} className={`${level > 0 ? "ml-4" : ""}`}>
+        <div className="flex items-center">
+          <Link
+            href={item.href}
+            className={`
+              flex-1 flex items-center px-4 py-2 text-sm rounded-md transition-all duration-200
+              ${level === 0 ? "my-1" : "my-0.5"}
+              ${
+                isActive
+                  ? "text-blue-600 bg-blue-50 font-medium"
+                  : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+              }
+            `}
+          >
+            {level === 0 && (
+              <item.icon
+                className={`h-5 w-5 mr-3 ${
+                  isActive ? "text-blue-600" : "text-gray-400"
+                }`}
+              />
+            )}
+            <span className={`${level > 0 ? "text-sm" : ""}`}>{item.name}</span>
+          </Link>
+          {hasSubmenu && (
+            <button
+              onClick={() => toggleSubmenu(item.name)}
+              className={`
+                p-2 rounded-md mr-2 hover:bg-gray-100
+                ${isActive ? "text-blue-600" : "text-gray-400"}
+              `}
+            >
+              <ChevronDownIcon
+                className={`h-4 w-4 transform transition-transform duration-200
+                  ${isOpen ? "rotate-180" : ""}`}
+              />
+            </button>
+          )}
+        </div>
+
+        {hasSubmenu && isOpen && (
+          <div
+            className={`
+            mt-1 space-y-1 
+            ${level === 0 ? "border-l border-gray-200 ml-4 pl-4" : "pl-4"}
+          `}
+          >
+            {item.submenu.map((subItem) => renderMenuItem(subItem, level + 1))}
+          </div>
+        )}
+      </div>
+    );
   };
 
   return (
@@ -252,89 +283,10 @@ export default function Sidebar() {
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 overflow-y-auto py-4">
-          {navigation.map((item) => {
-            const isActive = isPathActive(item.href, item.submenu);
-            const isOpen = openSubmenu === item.name;
-
-            return (
-              <div key={item.name}>
-                {item.submenu ? (
-                  <div className="flex items-center">
-                    <Link
-                      href={item.href}
-                      className={`
-                        flex-1 flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100
-                        ${isActive ? "bg-blue-50 text-blue-600 border-r-4 border-blue-600" : ""}
-                      `}
-                    >
-                      <item.icon
-                        className={`h-5 w-5 mr-3 ${
-                          isActive ? "text-blue-600" : "text-gray-400"
-                        }`}
-                      />
-                      <span className="text-sm font-medium">{item.name}</span>
-                    </Link>
-                    <button
-                      onClick={() => toggleSubmenu(item.name)}
-                      className={`
-                        px-4 h-full flex items-center justify-center hover:bg-gray-100
-                        ${isActive ? "bg-blue-50 text-blue-600" : "text-gray-400"}
-                      `}
-                    >
-                      <ChevronDownIcon
-                        className={`h-4 w-4 transform transition-transform duration-200 ${
-                          isOpen ? "rotate-180" : ""
-                        }`}
-                      />
-                    </button>
-                  </div>
-                ) : (
-                  <Link
-                    href={item.href}
-                    className={`
-                      flex items-center px-6 py-3 text-gray-700 hover:bg-gray-100
-                      ${isExactPathActive(item.href) ? "bg-blue-50 text-blue-600 border-r-4 border-blue-600" : ""}
-                    `}
-                  >
-                    <item.icon
-                      className={`h-5 w-5 mr-3 ${
-                        isExactPathActive(item.href)
-                          ? "text-blue-600"
-                          : "text-gray-400"
-                      }`}
-                    />
-                    <span className="text-sm font-medium">{item.name}</span>
-                  </Link>
-                )}
-
-                {/* Submenu */}
-                {item.submenu && isOpen && (
-                  <div className="bg-gray-50">
-                    {item.submenu.map((subitem) => {
-                      const isSubActive = isExactPathActive(subitem.href);
-                      return (
-                        <Link
-                          key={subitem.name}
-                          href={subitem.href}
-                          className={`
-                            flex items-center py-2 px-12 text-sm transition-colors duration-150
-                            ${
-                              isSubActive
-                                ? "text-blue-600 font-medium bg-blue-50"
-                                : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
-                            }
-                          `}
-                        >
-                          <span>{subitem.name}</span>
-                        </Link>
-                      );
-                    })}
-                  </div>
-                )}
-              </div>
-            );
-          })}
+        <nav className="flex-1 overflow-y-auto p-4">
+          <div className="space-y-1">
+            {navigation.map((item) => renderMenuItem(item))}
+          </div>
         </nav>
       </div>
     </div>

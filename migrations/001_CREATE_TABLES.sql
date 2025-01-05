@@ -1152,8 +1152,12 @@ CREATE TABLE EMPLEADO_CARGO
             REFERENCES EMPLEADO (per_id)
             ON DELETE CASCADE,
     CONSTRAINT ck_fecha_fin
-        CHECK (emc_fecha_inicio > emc_fecha_fin)
+        CHECK (emc_fecha_fin IS NULL OR emc_fecha_fin >= emc_fecha_inicio)
 );
+
+CREATE UNIQUE INDEX idx_unique_active_cargo
+    ON EMPLEADO_CARGO (fk_per_id)
+    WHERE emc_fecha_fin IS NULL;
 
 -- 7.3 Horario
 CREATE TABLE HORARIO

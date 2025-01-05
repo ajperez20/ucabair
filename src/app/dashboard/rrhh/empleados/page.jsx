@@ -4,6 +4,9 @@ import { useState, useEffect } from "react";
 import DataList from "@/components/DataList";
 import EditModal from "@/components/EditModal";
 import EmpleadoDetalles from "@/components/empleados/EmpleadoDetalles";
+import EmpleadoCargoHorario from "@/components/empleados/EmpleadoCargoHorario";
+import { locationUtils } from "@/utils/locationUtils";
+import { EyeIcon, ClockIcon } from "@heroicons/react/24/outline";
 
 const columns = [
   { key: "per_dni", label: "DNI" },
@@ -24,6 +27,10 @@ const columns = [
   {
     key: "lugar_completo",
     label: "Lugar",
+  },
+  {
+    key: "cargo_actual",
+    label: "Cargo Actual",
   },
 ];
 
@@ -87,10 +94,10 @@ export default function EmpleadosPage() {
   const [empleados, setEmpleados] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
+  const [showCargoHorario, setShowCargoHorario] = useState(false);
   const [selectedEmpleado, setSelectedEmpleado] = useState(null);
   const [formFields, setFormFields] = useState(initialFormFields);
-  const [showDetails, setShowDetails] = useState(false);
-  const [selectedEmpleadoDetails, setSelectedEmpleadoDetails] = useState(null);
 
   useEffect(() => {
     fetchEmpleados();
@@ -112,24 +119,9 @@ export default function EmpleadosPage() {
 
   const fetchLugares = async () => {
     try {
-      const response = await fetch("/api/lugares");
-      if (!response.ok) throw new Error("Error al cargar lugares");
-      const data = await response.json();
-
-      setFormFields((currentFields) =>
-        currentFields.map((field) => {
-          if (field.name === "fk_lug_id") {
-            return {
-              ...field,
-              options: data.map((lugar) => ({
-                value: lugar.lug_id,
-                label: lugar.lugar_completo,
-                level: lugar.level,
-              })),
-            };
-          }
-          return field;
-        }),
+      const lugares = await locationUtils.fetchLugares();
+      setFormFields((fields) =>
+        locationUtils.updateFormFieldsWithLocations(fields, lugares),
       );
     } catch (error) {
       console.error("Error:", error);
@@ -138,7 +130,6 @@ export default function EmpleadosPage() {
 
   const handleEdit = (empleado) => {
     if (empleado) {
-      // Mapear los datos del empleado al formato del formulario
       const formattedEmpleado = {
         per_id: empleado.per_id,
         per_dni: empleado.per_dni,
@@ -157,8 +148,17 @@ export default function EmpleadosPage() {
   };
 
   const handleView = (empleado) => {
-    setSelectedEmpleadoDetails(empleado);
+    setSelectedEmpleado(empleado);
     setShowDetails(true);
+  };
+
+  const handleCargoHorario = (empleado) => {
+    if (!empleado) {
+      console.error("No hay empleado seleccionado");
+      return;
+    }
+    setSelectedEmpleado(empleado);
+    setShowCargoHorario(true);
   };
 
   const handleDelete = async (empleado) => {
@@ -210,6 +210,19 @@ export default function EmpleadosPage() {
     }
   };
 
+  const actions = [
+    {
+      label: "Ver detalles",
+      onClick: handleView,
+      icon: EyeIcon,
+    },
+    {
+      label: "Cargo y Horario",
+      onClick: handleCargoHorario,
+      icon: ClockIcon,
+    },
+  ];
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
@@ -225,10 +238,11 @@ export default function EmpleadosPage() {
         columns={columns}
         onEdit={handleEdit}
         onDelete={handleDelete}
-        onView={handleView} // Agregar esta prop
+        actions={actions}
         title="Gestión de Empleados"
       />
 
+      {/* Modal de Edición/Creación */}
       <EditModal
         isOpen={showModal}
         onClose={() => {
@@ -238,19 +252,54 @@ export default function EmpleadosPage() {
         onSave={handleSave}
         data={selectedEmpleado}
         fields={formFields}
-        title="Empleado"
+        title={selectedEmpleado ? "Editar Empleado" : "Nuevo Empleado"}
       />
 
-      {showDetails && (
+      {/* Modal de Detalles */}
+      <EditModal
+        isOpen={showDetails}
+        onClose={() => {
+          setShowDetails(false);
+          setSelectedEmpleado(null);
+        }}
+        title={`Detalles del Empleado: ${selectedEmpleado?.per_nombre} ${selectedEmpleado?.per_apellido}`}
+        size="2xl"
+        hideButtons
+      >
         <EmpleadoDetalles
-          isOpen={showDetails}
+          empleado={selectedEmpleado}
           onClose={() => {
             setShowDetails(false);
-            setSelectedEmpleadoDetails(null);
+            setSelectedEmpleado(null);
           }}
-          empleado={selectedEmpleadoDetails}
         />
-      )}
+      </EditModal>
+
+      {/* Modal de Cargo y Horario */}
+      <EditModal
+        isOpen={showCargoHorario}
+        onClose={() => {
+          setShowCargoHorario(false);
+          setSelectedEmpleado(null);
+        }}
+        title="Gestionar Cargo y Horario"
+        hideButtons
+      >
+        {selectedEmpleado && (
+          <EmpleadoCargoHorario
+            empleado={selectedEmpleado}
+            onClose={() => {
+              setShowCargoHorario(false);
+              setSelectedEmpleado(null);
+            }}
+            onSave={() => {
+              setShowCargoHorario(false);
+              setSelectedEmpleado(null);
+              fetchEmpleados();
+            }}
+          />
+        )}
+      </EditModal>
     </div>
   );
 }

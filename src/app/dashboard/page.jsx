@@ -14,8 +14,8 @@ import {
   ChartBarIcon,
   ArrowTrendingUpIcon,
 } from "@heroicons/react/24/outline";
-import Link from "next/link";
 import { XCircleIcon } from "@heroicons/react/16/solid";
+import Link from "next/link";
 
 export default function DashboardPage() {
   const empleadosStats = useEmpleadosStats();
@@ -54,8 +54,8 @@ export default function DashboardPage() {
     },
     {
       title: "Aviones",
-      total: parseInt(avionesStats.total) || 0,
-      nuevos: parseInt(avionesStats.completados) || 0,
+      total: avionesStats.total || 0,
+      nuevos: avionesStats.completados || 0,
       icon: PaperAirplaneIcon,
       color: "green",
       href: "/dashboard/produccion/aviones",
@@ -63,13 +63,26 @@ export default function DashboardPage() {
       details: [
         {
           label: "En Proceso",
-          value: parseInt(avionesStats.en_proceso) || 0,
+          value: avionesStats.enProceso || 0,
         },
         {
           label: "En Pruebas",
-          value: avionesStats.pruebas?.en_proceso || 0,
+          value: avionesStats.pruebas?.enProceso || 0,
+        },
+        {
+          label: "Pruebas Completadas",
+          value: avionesStats.pruebas?.completadas || 0,
+        },
+        {
+          label: "Pruebas Pendientes",
+          value: avionesStats.pruebas?.pendientes || 0,
         },
       ],
+      modelStats:
+        avionesStats.porModelo?.map((modelo) => ({
+          label: modelo.modelo,
+          value: modelo.cantidad,
+        })) || [],
     },
     {
       title: "Piezas",
@@ -122,6 +135,27 @@ export default function DashboardPage() {
     },
   ];
 
+  // Manejo de estado de carga
+  if (
+    avionesStats.isLoading ||
+    empleadosStats.isLoading ||
+    clientesStats.isLoading ||
+    piezasStats.isLoading
+  ) {
+    return (
+      <div className="p-6">
+        <div className="animate-pulse">
+          <div className="h-4 bg-gray-200 rounded w-1/4"></div>
+          <div className="space-y-3 mt-4">
+            <div className="h-8 bg-gray-200 rounded"></div>
+            <div className="h-8 bg-gray-200 rounded"></div>
+            <div className="h-8 bg-gray-200 rounded"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6 p-6">
       <div className="border-b border-gray-200 pb-4">
@@ -149,25 +183,21 @@ export default function DashboardPage() {
                   </h2>
                 </div>
               </div>
+
               <div className="mt-4">
-                {stat.loading ? (
-                  <div className="animate-pulse h-9 bg-gray-200 rounded" />
-                ) : (
-                  <>
-                    <div className="text-3xl font-semibold text-gray-900">
-                      {stat.total}
-                    </div>
-                    {stat.nuevos && (
-                      <div className="flex items-center mt-2">
-                        <ArrowTrendingUpIcon className="h-4 w-4 text-green-500 mr-1" />
-                        <span className="text-sm text-green-600">
-                          {stat.nuevos} nuevos
-                        </span>
-                      </div>
-                    )}
-                  </>
+                <div className="text-3xl font-semibold text-gray-900">
+                  {stat.total}
+                </div>
+                {stat.nuevos !== undefined && (
+                  <div className="flex items-center mt-2">
+                    <ArrowTrendingUpIcon className="h-4 w-4 text-green-500 mr-1" />
+                    <span className="text-sm text-green-600">
+                      {stat.nuevos} nuevos
+                    </span>
+                  </div>
                 )}
               </div>
+
               {stat.details && (
                 <div className="mt-4 pt-4 border-t border-gray-100">
                   {stat.details.map((detail) => (
@@ -180,6 +210,27 @@ export default function DashboardPage() {
                       </span>
                       <span className="text-sm font-medium text-gray-900">
                         {detail.value}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {stat.modelStats && stat.modelStats.length > 0 && (
+                <div className="mt-4 pt-4 border-t border-gray-100">
+                  <h3 className="text-sm font-medium text-gray-900 mb-2">
+                    Por Modelo
+                  </h3>
+                  {stat.modelStats.map((model) => (
+                    <div
+                      key={model.label}
+                      className="flex justify-between items-center mt-2"
+                    >
+                      <span className="text-sm text-gray-500">
+                        {model.label}
+                      </span>
+                      <span className="text-sm font-medium text-gray-900">
+                        {model.value}
                       </span>
                     </div>
                   ))}
@@ -219,6 +270,7 @@ export default function DashboardPage() {
         </div>
       </div>
 
+      {/* Manejo de errores */}
       {[empleadosStats, clientesStats, piezasStats, avionesStats].map(
         (stats, index) => {
           if (stats.error) {
@@ -228,12 +280,10 @@ export default function DashboardPage() {
                 className="bg-red-50 border border-red-200 rounded-md p-4"
               >
                 <div className="flex">
-                  <div className="flex-shrink-0">
-                    <XCircleIcon
-                      className="h-5 w-5 text-red-400"
-                      aria-hidden="true"
-                    />
-                  </div>
+                  <XCircleIcon
+                    className="h-5 w-5 text-red-400"
+                    aria-hidden="true"
+                  />
                   <div className="ml-3">
                     <h3 className="text-sm font-medium text-red-800">
                       Error al cargar estadísticas
