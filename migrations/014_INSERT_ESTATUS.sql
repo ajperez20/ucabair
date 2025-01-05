@@ -511,8 +511,8 @@ VALUES
 -- Zona de piezas sanitarias
 INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 2, 1, 26, 3),  -- Pendiente
-('2024-02-01', NULL, 2, 1, 26, 6);  -- En proceso
+('2024-02-01', NULL, 1, 1, 26, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 1, 26, 6);  -- En proceso
 
 -- ==========================================================
 -- Inserción de datos: ESTATUS_FEA para AU-801
@@ -591,8 +591,8 @@ VALUES
 -- Zona de piezas sanitarias
 INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 2, 2, 26, 3),  -- Pendiente
-('2024-02-01', NULL, 2, 2, 26, 6);  -- En proceso
+('2024-02-01', NULL, 1, 2, 26, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 2, 26, 6);  -- En proceso
 
 -- ==========================================================
 -- Inserción de datos: ESTATUS_FEA para AU-802A
@@ -671,8 +671,8 @@ VALUES
 -- Zona de piezas sanitarias
 INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 2, 6, 26, 3),  -- Pendiente
-('2024-02-01', NULL, 2, 6, 26, 6);  -- En proceso
+('2024-02-01', NULL, 1, 6, 26, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 6, 26, 6);  -- En proceso
 
 -- ==========================================================
 -- Inserción de datos: ESTATUS_FEA para AU-747PLUS
@@ -751,8 +751,8 @@ VALUES
 -- Zona de piezas sanitarias
 INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 2, 4, 26, 3),  -- Pendiente
-('2024-02-01', NULL, 2, 4, 26, 6);  -- En proceso
+('2024-02-01', NULL, 1, 4, 26, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 4, 26, 6);  -- En proceso
 
 
 -- ESTATUS_FEA A PARTIR DE SOLICITUD DE CLIENTES JURÍDICOS
@@ -834,8 +834,8 @@ VALUES
 -- Zona de piezas sanitarias
 INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 2, 11, 26, 3),  -- Pendiente
-('2024-02-01', NULL, 2, 11, 26, 6);  -- En proceso
+('2024-02-01', NULL, 1, 11, 26, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 11, 26, 6);  -- En proceso
 
 -- ==========================================================
 -- Inserción de datos: ESTATUS_FEA para AU-747GOLD
@@ -914,8 +914,8 @@ VALUES
 -- Zona de piezas sanitarias
 INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 2, 13, 26, 3),  -- Pendiente
-('2024-02-01', NULL, 2, 13, 26, 6);  -- En proceso
+('2024-02-01', NULL, 1, 13, 26, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 13, 26, 6);  -- En proceso
 
 -- ==========================================================
 -- Inserción de datos: ESTATUS_FEA para AU-87ABusiness
@@ -994,8 +994,8 @@ VALUES
 -- Zona de piezas sanitarias
 INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 2, 16, 26, 3),  -- Pendiente
-('2024-02-01', NULL, 2, 16, 26, 6);  -- En proceso
+('2024-02-01', NULL, 1, 16, 26, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 16, 26, 6);  -- En proceso
 
 -- ==========================================================
 -- Inserción de datos: ESTATUS_FEA para AU-802E
@@ -1074,7 +1074,7 @@ VALUES
 -- Zona de piezas sanitarias
 INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 2, 10, 26, 3),  -- Pendiente
-('2024-02-01', NULL, 2, 10, 26, 6);  -- En proceso
+('2024-02-01', NULL, 1, 10, 26, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 10, 26, 6);  -- En proceso
 
 -- =========================================================

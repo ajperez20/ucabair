@@ -189,7 +189,7 @@ VALUES
 -- Zona de porta equipajes 
 ('2024-01-01', NULL, 1, 1, 25, 1),
 -- Zona de piezas sanitarias
-('2024-02-01', NULL, 2, 1, 26, 1);
+('2024-02-01', NULL, 1, 1, 26, 1);
 
 -- ==========================================================
 -- Inserción de datos: FASE_ENSAMBLE_AVION  AU-801
@@ -235,7 +235,7 @@ VALUES
 -- Zona de porta equipajes 
 ('2024-01-01', NULL, 1, 2, 25, 2),
 -- Zona de piezas sanitarias
-('2024-02-01', NULL, 2, 2, 26, 2);
+('2024-02-01', NULL, 1, 2, 26, 2);
 
 -- ==========================================================
 -- Inserción de datos: FASE_ENSAMBLE_AVION  AU-802A 
@@ -281,7 +281,7 @@ VALUES
 -- Zona de porta equipajes 
 ('2024-01-01', NULL, 1, 6, 25, 3),
 -- Zona de piezas sanitarias
-('2024-02-01', NULL, 2, 6, 26, 3);
+('2024-02-01', NULL, 1, 6, 26, 3);
 
 -- ==========================================================
 -- Inserción de datos: FASE_ENSAMBLE_AVION  AU-747PLUS
@@ -327,7 +327,7 @@ VALUES
 -- Zona de porta equipajes 
 ('2024-01-01', NULL, 1, 4, 25, 4),
 -- Zona de piezas sanitarias
-('2024-02-01', NULL, 2, 4, 26, 4);
+('2024-02-01', NULL, 1, 4, 26, 4);
 
 
 
@@ -377,7 +377,7 @@ VALUES
 -- Zona de porta equipajes 
 ('2024-01-01', NULL, 1, 11, 25, 5),
 -- Zona de piezas sanitarias
-('2024-02-01', NULL, 2, 11, 26, 5);
+('2024-02-01', NULL, 1, 11, 26, 5);
 
 -- ==========================================================
 -- Inserción de datos: FASE_ENSAMBLE_AVION  AU-747Gold
@@ -423,7 +423,7 @@ VALUES
 -- Zona de porta equipajes 
 ('2024-01-01', NULL, 1, 13, 25, 6),
 -- Zona de piezas sanitarias
-('2024-02-01', NULL, 2, 13, 26, 6);
+('2024-02-01', NULL, 1, 13, 26, 6);
 
 -- ==========================================================
 -- Inserción de datos: FASE_ENSAMBLE_AVION  AU-87ABusiness
@@ -469,7 +469,7 @@ VALUES
 -- Zona de porta equipajes 
 ('2024-01-01', NULL, 1, 16, 25, 7),
 -- Zona de piezas sanitarias
-('2024-02-01', NULL, 2, 16, 26, 7);
+('2024-02-01', NULL, 1, 16, 26, 7);
 
 -- ==========================================================
 -- Inserción de datos: FASE_ENSAMBLE_AVION  AU-802E
@@ -515,7 +515,7 @@ VALUES
 -- Zona de porta equipajes 
 ('2024-01-01', NULL, 1, 10, 25, 8),
 -- Zona de piezas sanitarias
-('2024-02-01', NULL, 2, 10, 26, 8);
+('2024-02-01', NULL, 1, 10, 26, 8);
 
 -- ==========================================================
 -- Inserción de datos: 
