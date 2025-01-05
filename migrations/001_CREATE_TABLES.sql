@@ -265,10 +265,103 @@ CREATE TABLE MATERIA_PRIMA
 );
 
 --------------------------------------------------------------------------------
--- 3. EJECUCIÓN DEL PROYECTO
+-- 3. CLIENTES
 --------------------------------------------------------------------------------
 
--- 3.1 Sede Planta
+-- 3.1 Cliente Natural
+CREATE TABLE CLIENTE_NATURAL
+(
+    ctn_id                    SERIAL PRIMARY KEY,
+    ctn_direccion             VARCHAR(255) NOT NULL,
+    ctn_url_pagina            VARCHAR(255) NOT NULL,
+    ctn_fecha_ini_operaciones DATE         NOT NULL DEFAULT CURRENT_DATE,
+    ctn_dni                   VARCHAR(50)  NOT NULL UNIQUE,
+    ctn_nombre                VARCHAR(50)  NOT NULL,
+    ctn_apellido              VARCHAR(50)  NOT NULL,
+    fk_lug_id                 INT          NOT NULL,
+    CONSTRAINT fk_lug_id
+        FOREIGN KEY (fk_lug_id)
+            REFERENCES LUGAR (lug_id),
+    CONSTRAINT ck_ctn_dni
+        CHECK (ctn_dni ~ '^[VEJP]{1}[0-9]{7,10}$')
+);
+
+-- 3.2 Cliente Jurídico
+CREATE TABLE CLIENTE_JURIDICO
+(
+    cjd_id                    SERIAL PRIMARY KEY,
+    cjd_direccion             VARCHAR(255) NOT NULL,
+    cjd_url_pagina            VARCHAR(255) NOT NULL,
+    cjd_fecha_ini_operaciones DATE         NOT NULL DEFAULT CURRENT_DATE,
+    cjd_rif                   VARCHAR(70)  NOT NULL UNIQUE,
+    cjd_nombre                VARCHAR(50)  NOT NULL,
+    cjd_descripcion           VARCHAR(70)  NOT NULL,
+    fk_lug_id                 INT          NOT NULL,
+    CONSTRAINT cjd_rif
+        CHECK (cjd_rif ~ '^[J]{1}[0-9]{9,10}$' ),
+    CONSTRAINT fk_lug_id
+        FOREIGN KEY (fk_lug_id)
+            REFERENCES LUGAR (lug_id)
+
+);
+
+-- 3.3 Solicitud Cliente
+CREATE TABLE SOLICITUD_CLIENTE
+(
+    sct_id          SERIAL PRIMARY KEY,
+    sct_fecha       DATE NOT NULL DEFAULT CURRENT_DATE,
+    sct_total       INT  NOT NULL,
+    sct_observacion VARCHAR(255),
+    fk_cjd_id       INT,
+    fk_ctn_id       INT,
+    CONSTRAINT fk_cjd_id
+        FOREIGN KEY (fk_cjd_id)
+            REFERENCES CLIENTE_JURIDICO (cjd_id)
+            ON DELETE CASCADE,
+    CONSTRAINT fk_ctn_id
+        FOREIGN KEY (fk_ctn_id)
+            REFERENCES CLIENTE_NATURAL (ctn_id)
+            ON DELETE CASCADE
+);
+
+-- 3.4 Detalle Solicitud Cliente
+CREATE TABLE DETALLE_SLD_CLIENTE (
+    ddc_cantidad_aviones INT NOT NULL,
+    ddc_descripcion VARCHAR(255),
+    fk_sct_id INT NOT NULL,
+    fk_mda_id INT NOT NULL,
+
+    CONSTRAINT pk_detallesldcliente 
+        PRIMARY KEY (fk_sct_id, fk_mda_id),
+    CONSTRAINT fk_sct_id 
+        FOREIGN KEY (fk_sct_id) 
+            REFERENCES SOLICITUD_CLIENTE(sct_id)
+            ON DELETE CASCADE,
+    CONSTRAINT fk_mda_id 
+        FOREIGN KEY (fk_mda_id) 
+            REFERENCES MODELO_AVION_CONF(mda_id)
+            ON DELETE CASCADE
+);
+
+-- 3.5 Avión Creado
+CREATE TABLE AVION_CREADO
+(
+    avi_id             SERIAL PRIMARY KEY,
+    avi_num_serie      VARCHAR(50) NOT NULL UNIQUE,
+    avi_fecha_creacion DATE        NOT NULL DEFAULT CURRENT_DATE,
+    fk_sct_id INT NOT NULL,
+
+    CONSTRAINT fk_sct_id
+        FOREIGN KEY (fk_sct_id)
+            REFERENCES SOLICITUD_CLIENTE(sct_id)
+            ON DELETE CASCADE
+);
+
+--------------------------------------------------------------------------------
+-- 4. EJECUCIÓN DEL PROYECTO
+--------------------------------------------------------------------------------
+
+-- 4.1 Sede Planta
 CREATE TABLE SEDE_PLANTA
 (
     sed_id          SERIAL PRIMARY KEY,
@@ -282,7 +375,7 @@ CREATE TABLE SEDE_PLANTA
             ON DELETE CASCADE
 );
 
--- 3.2 Área
+-- 4.2 Área
 CREATE TABLE AREA
 (
     are_id          SERIAL PRIMARY KEY,
@@ -295,7 +388,7 @@ CREATE TABLE AREA
             ON DELETE CASCADE
 );
 
--- 3.3 Zona
+-- 4.3 Zona
 CREATE TABLE ZONA
 (
     zon_id          SERIAL PRIMARY KEY,
@@ -308,7 +401,7 @@ CREATE TABLE ZONA
             ON DELETE CASCADE
 );
 
--- 3.4 Estatus
+-- 4.4 Estatus
 CREATE TABLE ESTATUS
 (
     est_id           SERIAL PRIMARY KEY,
@@ -316,7 +409,7 @@ CREATE TABLE ESTATUS
     est_descripcion  VARCHAR(255) NOT NULL
 );
 
--- 3.5 Prueba
+-- 4.5 Prueba
 CREATE TABLE PRUEBA
 (
     pru_id              SERIAL PRIMARY KEY,
@@ -325,7 +418,7 @@ CREATE TABLE PRUEBA
     pru_descripcion     VARCHAR(255) NOT NULL
 );
 
--- 3.6 Materia Prima Stock
+-- 4.6 Materia Prima Stock
 CREATE TABLE MATERIA_PRIMA_STOCK
 (
     mps_id                  SERIAL      NOT NULL,
@@ -345,7 +438,7 @@ CREATE TABLE MATERIA_PRIMA_STOCK
             ON DELETE CASCADE
 );
 
--- 3.7 Sede Material Prueba
+-- 4.7 Sede Material Prueba
 CREATE TABLE SEDE_MATERIAL_PRUEBA
 (
     pbm_fecha_inicio     DATE         NOT NULL DEFAULT CURRENT_DATE,
@@ -372,7 +465,7 @@ CREATE TABLE SEDE_MATERIAL_PRUEBA
             ON DELETE CASCADE
 );
 
--- 3.8 Estatus PMS
+-- 4.8 Estatus PMS
 CREATE TABLE ESTATUS_PMS
 (
     sms_fecha_inicio DATE NOT NULL DEFAULT CURRENT_DATE,
@@ -395,7 +488,7 @@ CREATE TABLE ESTATUS_PMS
             ON DELETE CASCADE
 );
 
--- 3.9 Proceso Ensamble Pieza (Ejecución)
+-- 4.9 Proceso Ensamble Pieza (Ejecución)
 CREATE TABLE PROCESO_ENSAMBLE_PIEZA_EJEC
 (
     esp_id              SERIAL PRIMARY KEY,
@@ -404,7 +497,7 @@ CREATE TABLE PROCESO_ENSAMBLE_PIEZA_EJEC
     esp_descripcion     VARCHAR(255) NOT NULL
 );
 
--- 3.10 Fase Ensamble Pieza (Ejecución)
+-- 4.10 Fase Ensamble Pieza (Ejecución)
 CREATE TABLE FASE_ENSAMBLE_PIEZA
 (
     eez_fecha_inicio DATE NOT NULL DEFAULT CURRENT_DATE,
@@ -428,7 +521,7 @@ CREATE TABLE FASE_ENSAMBLE_PIEZA
             ON DELETE CASCADE
 );
 
--- 3.11 Estatus FEP
+-- 4.11 Estatus FEP
 CREATE TABLE ESTATUS_FEP
 (
     sfe_fecha_inicio DATE NOT NULL DEFAULT CURRENT_DATE,
@@ -448,7 +541,7 @@ CREATE TABLE ESTATUS_FEP
             ON DELETE CASCADE
 );
 
--- 3.12 Ensamble Solicitud Materia
+-- 4.12 Ensamble Solicitud Materia
 CREATE TABLE ENSAMBLE_SOLICITUD_MATERIA
 (
     elm_id            SERIAL,
@@ -471,7 +564,7 @@ CREATE TABLE ENSAMBLE_SOLICITUD_MATERIA
             ON DELETE CASCADE
 );
 
--- 3.13 Estatus SME
+-- 4.13 Estatus SME
 CREATE TABLE ESTATUS_SME
 (
     sme_fecha_inicio DATE NOT NULL DEFAULT CURRENT_DATE,
@@ -492,7 +585,7 @@ CREATE TABLE ESTATUS_SME
             ON DELETE CASCADE
 );
 
--- 3.14 Ensamble Material Prueba
+-- 4.14 Ensamble Material Prueba
 CREATE TABLE ENSAMBLE_MATERIAL_PRUEBA
 (
     epr_fecha_inicio     DATE         NOT NULL DEFAULT CURRENT_DATE,
@@ -519,7 +612,7 @@ CREATE TABLE ENSAMBLE_MATERIAL_PRUEBA
             ON DELETE CASCADE
 );
 
--- 3.15 Estatus PPEM
+-- 4.15 Estatus PPEM
 CREATE TABLE ESTATUS_PPEM
 (
     ppm_fecha_inicio DATE NOT NULL DEFAULT CURRENT_DATE,
@@ -538,7 +631,7 @@ CREATE TABLE ESTATUS_PPEM
             REFERENCES ESTATUS (est_id)
 );
 
--- 3.16 Pieza Stock
+-- 4.16 Pieza Stock
 CREATE TABLE PIEZA_STOCK
 (
     pie_id                  SERIAL PRIMARY KEY,
@@ -553,7 +646,7 @@ CREATE TABLE PIEZA_STOCK
             ON DELETE CASCADE
 );
 
--- 3.17 Prueba Pieza Sede
+-- 4.17 Prueba Pieza Sede
 CREATE TABLE PRUEBA_PIEZA_SEDE
 (
     psz_fecha_inicio DATE         NOT NULL DEFAULT CURRENT_DATE,
@@ -578,7 +671,7 @@ CREATE TABLE PRUEBA_PIEZA_SEDE
             ON DELETE CASCADE
 );
 
--- 3.18 Estatus PPS
+-- 4.18 Estatus PPS
 CREATE TABLE ESTATUS_PPS
 (
     ssp_fecha_inicio DATE NOT NULL DEFAULT CURRENT_DATE,
@@ -599,7 +692,7 @@ CREATE TABLE ESTATUS_PPS
             ON DELETE CASCADE
 );
 
--- 3.19 Proceso Ensamble Avión (Ejecución)
+-- 4.19 Proceso Ensamble Avión (Ejecución)
 CREATE TABLE PROCESO_ENSAMBLE_AVION_EJEC
 (
     eav_id              SERIAL PRIMARY KEY,
@@ -608,7 +701,7 @@ CREATE TABLE PROCESO_ENSAMBLE_AVION_EJEC
     eav_descripcion     VARCHAR(255) NOT NULL
 );
 
--- 3.20 Fase Ensamble Avión
+-- 4.20 Fase Ensamble Avión
 CREATE TABLE FASE_ENSAMBLE_AVION
 (
     fln_fecha_inicio DATE NOT NULL DEFAULT CURRENT_DATE,
@@ -616,6 +709,7 @@ CREATE TABLE FASE_ENSAMBLE_AVION
     fk_eav_id        INT  NOT NULL,
     fk_mda_id        INT  NOT NULL,
     fk_zon_id        INT  NOT NULL,
+    fk_sct_id        INT  NOT NULL,
     CONSTRAINT pk_fln
         PRIMARY KEY (fk_eav_id, fk_mda_id, fk_zon_id),
     CONSTRAINT fk_proceso_avion
@@ -629,10 +723,14 @@ CREATE TABLE FASE_ENSAMBLE_AVION
     CONSTRAINT fk_zona
         FOREIGN KEY (fk_zon_id)
             REFERENCES ZONA (zon_id)
+            ON DELETE CASCADE,
+    CONSTRAINT fk_sct_id
+        FOREIGN KEY (fk_sct_id)
+            REFERENCES SOLICITUD_CLIENTE (sct_id)
             ON DELETE CASCADE
 );
 
--- 3.21 Estatus FEA
+-- 4.21 Estatus FEA
 CREATE TABLE ESTATUS_FEA
 (
     efa_fecha_inicio DATE NOT NULL DEFAULT CURRENT_DATE,
@@ -653,7 +751,7 @@ CREATE TABLE ESTATUS_FEA
             ON DELETE CASCADE
 );
 
--- 3.22 Ensamble Solicitud Pieza
+-- 4.22 Ensamble Solicitud Pieza
 CREATE TABLE ENSAMBLE_SOLICITUD_PIEZA
 (
     edz_id              SERIAL PRIMARY KEY,
@@ -672,7 +770,7 @@ CREATE TABLE ENSAMBLE_SOLICITUD_PIEZA
             ON DELETE CASCADE
 );
 
--- 3.23 Estatus ESP
+-- 4.23 Estatus ESP
 CREATE TABLE ESTATUS_ESP
 (
     ets_fecha_inicio DATE NOT NULL DEFAULT CURRENT_DATE,
@@ -691,7 +789,7 @@ CREATE TABLE ESTATUS_ESP
             ON DELETE CASCADE
 );
 
--- 3.24 Prueba Pieza Solicitud
+-- 4.24 Prueba Pieza Solicitud
 CREATE TABLE PRUEBA_PIEZA_SOLICITUD
 (
     pzb_fecha_inicio     DATE         NOT NULL DEFAULT CURRENT_DATE,
@@ -716,7 +814,7 @@ CREATE TABLE PRUEBA_PIEZA_SOLICITUD
             ON DELETE CASCADE
 );
 
--- 3.25 Estatus PP Solicitud
+-- 4.25 Estatus PP Solicitud
 CREATE TABLE ESTATUS_PP_SOLICITUD
 (
     api_fecha_inicio DATE NOT NULL DEFAULT CURRENT_DATE,
@@ -737,7 +835,7 @@ CREATE TABLE ESTATUS_PP_SOLICITUD
             ON DELETE CASCADE
 );
 
--- 3.26 Solicitud Sede
+-- 4.26 Solicitud Sede
 CREATE TABLE SOLICITUD_SEDE
 (
     sse_id          SERIAL PRIMARY KEY,
@@ -755,7 +853,7 @@ CREATE TABLE SOLICITUD_SEDE
             ON DELETE CASCADE
 );
 
--- 3.27 Detalle Solicitud de Sede
+-- 4.27 Detalle Solicitud de Sede
 CREATE TABLE DETALLE_SLD_SEDE
 (
     dss_cantidad    INT NOT NULL,
@@ -774,7 +872,7 @@ CREATE TABLE DETALLE_SLD_SEDE
             ON DELETE CASCADE
 );
 
--- 3.28 Estatus Solicitud Pieza
+-- 4.28 Estatus Solicitud Pieza
 CREATE TABLE ESTATUS_SOL_PIEZA
 (
     slz_fecha_inicio DATE NOT NULL DEFAULT CURRENT_DATE,
@@ -793,11 +891,30 @@ CREATE TABLE ESTATUS_SOL_PIEZA
             ON DELETE CASCADE
 );
 
+-- 4.29 Estatus SCAV
+CREATE TABLE ESTATUS_SCAV
+(
+    scv_fecha_inicio DATE NOT NULL DEFAULT CURRENT_DATE,
+    scv_fecha_fin    DATE,
+    fk_sct_id        INT  NOT NULL,
+    fk_est_id        INT  NOT NULL,
+    CONSTRAINT pk_scv
+        PRIMARY KEY (fk_sct_id, fk_est_id),
+    CONSTRAINT fk_sct_id
+        FOREIGN KEY (fk_sct_id)
+            REFERENCES SOLICITUD_CLIENTE (sct_id)
+            ON DELETE CASCADE,
+    CONSTRAINT fk_est_id
+        FOREIGN KEY (fk_est_id)
+            REFERENCES ESTATUS (est_id)
+            ON DELETE CASCADE
+);
+
 --------------------------------------------------------------------------------
--- 4. USUARIOS (PARTE DE EMPLEADOS)
+-- 5. USUARIOS (PARTE DE EMPLEADOS)
 --------------------------------------------------------------------------------
 
--- 4.1 Empleado
+-- 5.1 Empleado
 CREATE TABLE EMPLEADO
 (
     per_id                 SERIAL PRIMARY KEY,
@@ -816,7 +933,7 @@ CREATE TABLE EMPLEADO
         CHECK (per_dni ~ '^[VEJP]{1}[0-9]{7,10}$')
 );
 
--- 4.2 Equipo Encargado
+-- 5.2 Equipo Encargado
 CREATE TABLE EQUIPO_ENCARGADO
 (
     eqc_id          SERIAL       NOT NULL,
@@ -835,7 +952,7 @@ CREATE TABLE EQUIPO_ENCARGADO
             ON DELETE CASCADE
 );
 
--- 4.3 Experiencia
+-- 5.3 Experiencia
 CREATE TABLE EXPERIENCIA
 (
     exp_id             SERIAL PRIMARY KEY,
@@ -851,7 +968,7 @@ CREATE TABLE EXPERIENCIA
         CHECK (exp_fecha_fin > exp_fecha_inicio)
 );
 
--- 4.4 Beneficiario
+-- 5.4 Beneficiario
 CREATE TABLE BENEFICIARIO
 (
     ben_id        SERIAL PRIMARY KEY,
@@ -867,7 +984,7 @@ CREATE TABLE BENEFICIARIO
         CHECK (ben_dni ~ '^[VEJP]{1}[0-9]{7,10}$')
 );
 
--- 4.5 Relación Persona-Beneficiario
+-- 5.5 Relación Persona-Beneficiario
 CREATE TABLE PER_BEN
 (
     prb_parentezco VARCHAR(30) NOT NULL,
@@ -887,7 +1004,7 @@ CREATE TABLE PER_BEN
         CHECK (UPPER(prb_parentezco) in ('HERMAN@', 'PADRE', 'MADRE', 'OTRO'))
 );
 
--- 4.6 Título
+-- 5.6 Título
 CREATE TABLE TITULO
 (
     tit_id          SERIAL PRIMARY KEY,
@@ -895,7 +1012,7 @@ CREATE TABLE TITULO
     tit_descripcion VARCHAR(70) NOT NULL
 );
 
--- 4.7 Empleado - Título
+-- 5.7 Empleado - Título
 CREATE TABLE EMPLEADO_TITULO
 (
     edt_fecha_obtencion    DATE        NOT NULL,
@@ -912,119 +1029,6 @@ CREATE TABLE EMPLEADO_TITULO
     CONSTRAINT fk_tit_id
         FOREIGN KEY (fk_tit_id)
             REFERENCES TITULO (tit_id)
-            ON DELETE CASCADE
-);
-
-
---------------------------------------------------------------------------------
--- 5. CLIENTES
---------------------------------------------------------------------------------
-
--- 5.1 Cliente Natural
-CREATE TABLE CLIENTE_NATURAL
-(
-    ctn_id                    SERIAL PRIMARY KEY,
-    ctn_direccion             VARCHAR(255) NOT NULL,
-    ctn_url_pagina            VARCHAR(255) NOT NULL,
-    ctn_fecha_ini_operaciones DATE         NOT NULL DEFAULT CURRENT_DATE,
-    ctn_dni                   VARCHAR(50)  NOT NULL UNIQUE,
-    ctn_nombre                VARCHAR(50)  NOT NULL,
-    ctn_apellido              VARCHAR(50)  NOT NULL,
-    fk_lug_id                 INT          NOT NULL,
-    CONSTRAINT fk_lug_id
-        FOREIGN KEY (fk_lug_id)
-            REFERENCES LUGAR (lug_id),
-    CONSTRAINT ck_ctn_dni
-        CHECK (ctn_dni ~ '^[VEJP]{1}[0-9]{7,10}$')
-);
-
--- 5.2 Cliente Jurídico
-CREATE TABLE CLIENTE_JURIDICO
-(
-    cjd_id                    SERIAL PRIMARY KEY,
-    cjd_direccion             VARCHAR(255) NOT NULL,
-    cjd_url_pagina            VARCHAR(255) NOT NULL,
-    cjd_fecha_ini_operaciones DATE         NOT NULL DEFAULT CURRENT_DATE,
-    cjd_rif                   VARCHAR(70)  NOT NULL UNIQUE,
-    cjd_nombre                VARCHAR(50)  NOT NULL,
-    cjd_descripcion           VARCHAR(70)  NOT NULL,
-    fk_lug_id                 INT          NOT NULL,
-    CONSTRAINT cjd_rif
-        CHECK (cjd_rif ~ '^[J]{1}[0-9]{9,10}$' ),
-    CONSTRAINT fk_lug_id
-        FOREIGN KEY (fk_lug_id)
-            REFERENCES LUGAR (lug_id)
-
-);
-
--- 5.3 Solicitud Cliente
-CREATE TABLE SOLICITUD_CLIENTE
-(
-    sct_id          SERIAL PRIMARY KEY,
-    sct_fecha       DATE NOT NULL DEFAULT CURRENT_DATE,
-    sct_total       INT  NOT NULL,
-    sct_observacion VARCHAR(255),
-    fk_cjd_id       INT,
-    fk_ctn_id       INT,
-    CONSTRAINT fk_cjd_id
-        FOREIGN KEY (fk_cjd_id)
-            REFERENCES CLIENTE_JURIDICO (cjd_id)
-            ON DELETE CASCADE,
-    CONSTRAINT fk_ctn_id
-        FOREIGN KEY (fk_ctn_id)
-            REFERENCES CLIENTE_NATURAL (ctn_id)
-            ON DELETE CASCADE
-);
-
--- 5.4 Detalle Solicitud Cliente
-CREATE TABLE DETALLE_SLD_CLIENTE (
-    ddc_cantidad_aviones INT NOT NULL,
-    ddc_descripcion VARCHAR(255),
-    fk_sct_id INT NOT NULL,
-    fk_mda_id INT NOT NULL,
-
-    CONSTRAINT pk_detallesldcliente 
-        PRIMARY KEY (fk_sct_id, fk_mda_id),
-    CONSTRAINT fk_sct_id 
-        FOREIGN KEY (fk_sct_id) 
-            REFERENCES SOLICITUD_CLIENTE(sct_id)
-            ON DELETE CASCADE,
-    CONSTRAINT fk_mda_id 
-        FOREIGN KEY (fk_mda_id) 
-            REFERENCES MODELO_AVION_CONF(mda_id)
-            ON DELETE CASCADE
-);
-
--- 5.5 Avión Creado
-CREATE TABLE AVION_CREADO
-(
-    avi_id             SERIAL PRIMARY KEY,
-    avi_num_serie      VARCHAR(50) NOT NULL UNIQUE,
-    avi_fecha_creacion DATE        NOT NULL DEFAULT CURRENT_DATE,
-    fk_sct_id INT NOT NULL,
-
-    CONSTRAINT fk_sct_id
-        FOREIGN KEY (fk_sct_id)
-            REFERENCES SOLICITUD_CLIENTE(sct_id)
-            ON DELETE CASCADE
-);
-
--- 5.6 Estatus SCAV
-CREATE TABLE ESTATUS_SCAV
-(
-    scv_fecha_inicio DATE NOT NULL DEFAULT CURRENT_DATE,
-    scv_fecha_fin    DATE,
-    fk_sct_id        INT  NOT NULL,
-    fk_est_id        INT  NOT NULL,
-    CONSTRAINT pk_scv
-        PRIMARY KEY (fk_sct_id, fk_est_id),
-    CONSTRAINT fk_sct_id
-        FOREIGN KEY (fk_sct_id)
-            REFERENCES SOLICITUD_CLIENTE (sct_id)
-            ON DELETE CASCADE,
-    CONSTRAINT fk_est_id
-        FOREIGN KEY (fk_est_id)
-            REFERENCES ESTATUS (est_id)
             ON DELETE CASCADE
 );
 

@@ -150,184 +150,184 @@ VALUES ('Corte', '4 hours', 'Corte de material base a la forma inicial.'),
 -- ==========================================================
 
 -- Maracay
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
 VALUES 
 -- Zona de alas
-('2024-01-01', NULL, 1, 1, 1),
+('2024-01-01', NULL, 1, 1, 1, 1),
 -- Zona de estabilizadores
-('2024-02-01', NULL, 1, 1, 2),
+('2024-02-01', NULL, 1, 1, 2, 1),
 -- Zona de alerones y flaps
-('2024-03-01', NULL, 1, 1, 3);
+('2024-03-01', NULL, 1, 1, 3, 1);
 
 -- Colón
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
-VALUES 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
+VALUES  
 -- Zona de trenes de aterrizaje
-('2024-01-01', NULL, 1, 1, 9),
+('2024-01-01', NULL, 1, 1, 9, 1),
 -- Zona de fuselajes
-('2024-02-01', NULL, 1, 1, 10);
+('2024-02-01', NULL, 1, 1, 10, 1);
 
 -- Guaira
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
 VALUES 
 -- Zona de ensamblaje 
-('2024-01-01', NULL, 1, 1, 15),
+('2024-01-01', NULL, 1, 1, 15, 1),
 -- Zona de calibración 
-('2024-02-01', NULL, 1, 1, 16);
+('2024-02-01', NULL, 1, 1, 16, 1);
 
 -- Guatire
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
 VALUES 
 -- Zona de integración 
-('2024-01-01', NULL, 1, 1, 19),
+('2024-01-01', NULL, 1, 1, 19, 1),
 -- Zona de soldadura 
-('2024-02-01', NULL, 1, 1, 20);
+('2024-02-01', NULL, 1, 1, 20, 1);
 
 --Valencia
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
 VALUES 
 -- Zona de porta equipajes 
-('2024-01-01', NULL, 1, 1, 25),
+('2024-01-01', NULL, 1, 1, 25, 1),
 -- Zona de piezas sanitarias
-('2024-02-01', NULL, 2, 1, 26);
+('2024-02-01', NULL, 2, 1, 26, 1);
 
 -- ==========================================================
 -- Inserción de datos: FASE_ENSAMBLE_AVION  AU-801
 -- ==========================================================
 
 -- Maracay
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
 VALUES 
 -- Zona de alas
-('2024-01-01', NULL, 1, 2, 1),
+('2024-01-01', NULL, 1, 2, 1, 2),
 -- Zona de estabilizadores
-('2024-02-01', NULL, 1, 2, 2),
+('2024-02-01', NULL, 1, 2, 2, 2),
 -- Zona de alerones y flaps
-('2024-03-01', NULL, 1, 2, 3);
+('2024-03-01', NULL, 1, 2, 3, 2);
 
 -- Colón
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
 VALUES 
 -- Zona de trenes de aterrizaje
-('2024-01-01', NULL, 1, 2, 9),
+('2024-01-01', NULL, 1, 2, 9, 2),
 -- Zona de fuselajes
-('2024-02-01', NULL, 1, 2, 10);
+('2024-02-01', NULL, 1, 2, 10, 2);
 
 -- Guaira
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
 VALUES 
 -- Zona de ensamblaje 
-('2024-01-01', NULL, 1, 2, 15),
+('2024-01-01', NULL, 1, 2, 15, 2),
 -- Zona de calibración 
-('2024-02-01', NULL, 1, 2, 16);
+('2024-02-01', NULL, 1, 2, 16, 2);
 
 -- Guatire
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
 VALUES 
 -- Zona de integración 
-('2024-01-01', NULL, 1, 2, 19),
+('2024-01-01', NULL, 1, 2, 19, 2),
 -- Zona de soldadura 
-('2024-02-01', NULL, 1, 2, 20);
+('2024-02-01', NULL, 1, 2, 20, 2);
 
 --Valencia
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
 VALUES 
 -- Zona de porta equipajes 
-('2024-01-01', NULL, 1, 2, 25),
+('2024-01-01', NULL, 1, 2, 25, 2),
 -- Zona de piezas sanitarias
-('2024-02-01', NULL, 2, 2, 26);
+('2024-02-01', NULL, 2, 2, 26, 2);
 
 -- ==========================================================
 -- Inserción de datos: FASE_ENSAMBLE_AVION  AU-802A 
 -- ==========================================================
 
 -- Maracay
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
 VALUES 
 -- Zona de alas
-('2024-01-01', NULL, 1, 6, 1),
+('2024-01-01', NULL, 1, 6, 1, 3),
 -- Zona de estabilizadores
-('2024-02-01', NULL, 1, 6, 2),
+('2024-02-01', NULL, 1, 6, 2, 3),
 -- Zona de alerones y flaps
-('2024-03-01', NULL, 1, 6, 3);
+('2024-03-01', NULL, 1, 6, 3, 3);
 
 -- Colón
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
 VALUES 
 -- Zona de trenes de aterrizaje
-('2024-01-01', NULL, 1, 6, 9),
+('2024-01-01', NULL, 1, 6, 9, 3),
 -- Zona de fuselajes
-('2024-02-01', NULL, 1, 6, 10);
+('2024-02-01', NULL, 1, 6, 10, 3);
 
 -- Guaira
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
 VALUES 
 -- Zona de ensamblaje 
-('2024-01-01', NULL, 1, 6, 15),
+('2024-01-01', NULL, 1, 6, 15, 3),
 -- Zona de calibración 
-('2024-02-01', NULL, 1, 6, 16);
+('2024-02-01', NULL, 1, 6, 16, 3);
 
 -- Guatire
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
 VALUES 
 -- Zona de integración 
-('2024-01-01', NULL, 1, 6, 19),
+('2024-01-01', NULL, 1, 6, 19, 3),
 -- Zona de soldadura 
-('2024-02-01', NULL, 1, 6, 20);
+('2024-02-01', NULL, 1, 6, 20, 3);
 
 --Valencia
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
-VALUES 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
+VALUES  
 -- Zona de porta equipajes 
-('2024-01-01', NULL, 1, 6, 25),
+('2024-01-01', NULL, 1, 6, 25, 3),
 -- Zona de piezas sanitarias
-('2024-02-01', NULL, 2, 6, 26);
+('2024-02-01', NULL, 2, 6, 26, 3);
 
 -- ==========================================================
 -- Inserción de datos: FASE_ENSAMBLE_AVION  AU-747PLUS
 -- ==========================================================
 
 -- Maracay
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
-VALUES 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
+VALUES  
 -- Zona de alas
-('2024-01-01', NULL, 1, 4, 1),
+('2024-01-01', NULL, 1, 4, 1, 4),
 -- Zona de estabilizadores
-('2024-02-01', NULL, 1, 4, 2),
+('2024-02-01', NULL, 1, 4, 2, 4),
 -- Zona de alerones y flaps
-('2024-03-01', NULL, 1, 4, 3);
+('2024-03-01', NULL, 1, 4, 3, 4);
 
 -- Colón
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
 VALUES 
 -- Zona de trenes de aterrizaje
-('2024-01-01', NULL, 1, 4, 9),
+('2024-01-01', NULL, 1, 4, 9, 4),
 -- Zona de fuselajes
-('2024-02-01', NULL, 1, 4, 10);
+('2024-02-01', NULL, 1, 4, 10, 4);
 
 -- Guaira
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
 VALUES 
 -- Zona de ensamblaje 
-('2024-01-01', NULL, 1, 4, 15),
+('2024-01-01', NULL, 1, 4, 15, 4),
 -- Zona de calibración 
-('2024-02-01', NULL, 1, 4, 16);
+('2024-02-01', NULL, 1, 4, 16, 4);
 
 -- Guatire
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
 VALUES 
 -- Zona de integración 
-('2024-01-01', NULL, 1, 4, 19),
+('2024-01-01', NULL, 1, 4, 19, 4),
 -- Zona de soldadura 
-('2024-02-01', NULL, 1, 4, 20);
+('2024-02-01', NULL, 1, 4, 20, 4);
 
 --Valencia
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
 VALUES 
 -- Zona de porta equipajes 
-('2024-01-01', NULL, 1, 4, 25),
+('2024-01-01', NULL, 1, 4, 25, 4),
 -- Zona de piezas sanitarias
-('2024-02-01', NULL, 2, 4, 26);
+('2024-02-01', NULL, 2, 4, 26, 4);
 
 
 
@@ -338,184 +338,188 @@ VALUES
 -- ==========================================================
 
 -- Maracay
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
 VALUES 
 -- Zona de alas
-('2024-01-01', NULL, 1, 11, 1),
+('2024-01-01', NULL, 1, 11, 1, 5),
 -- Zona de estabilizadores
-('2024-02-01', NULL, 1, 11, 2),
+('2024-02-01', NULL, 1, 11, 2, 5),
 -- Zona de alerones y flaps
-('2024-03-01', NULL, 1, 11, 3);
+('2024-03-01', NULL, 1, 11, 3, 5);
 
 -- Colón
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
 VALUES 
 -- Zona de trenes de aterrizaje
-('2024-01-01', NULL, 1, 11, 9),
+('2024-01-01', NULL, 1, 11, 9, 5),
 -- Zona de fuselajes
-('2024-02-01', NULL, 1, 11, 10);
+('2024-02-01', NULL, 1, 11, 10, 5);
 
 -- Guaira
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
 VALUES 
 -- Zona de ensamblaje 
-('2024-01-01', NULL, 1, 11, 15),
+('2024-01-01', NULL, 1, 11, 15, 5),
 -- Zona de calibración 
-('2024-02-01', NULL, 1, 11, 16);
+('2024-02-01', NULL, 1, 11, 16, 5);
 
 -- Guatire
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
 VALUES 
 -- Zona de integración 
-('2024-01-01', NULL, 1, 11, 19),
+('2024-01-01', NULL, 1, 11, 19, 5),
 -- Zona de soldadura 
-('2024-02-01', NULL, 1, 11, 20);
+('2024-02-01', NULL, 1, 11, 20, 5);
 
 --Valencia
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
 VALUES 
 -- Zona de porta equipajes 
-('2024-01-01', NULL, 1, 11, 25),
+('2024-01-01', NULL, 1, 11, 25, 5),
 -- Zona de piezas sanitarias
-('2024-02-01', NULL, 2, 11, 26);
+('2024-02-01', NULL, 2, 11, 26, 5);
 
 -- ==========================================================
 -- Inserción de datos: FASE_ENSAMBLE_AVION  AU-747Gold
 -- ==========================================================
 
 -- Maracay
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
-VALUES 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
+VALUES  
 -- Zona de alas
-('2024-01-01', NULL, 1, 13, 1),
+('2024-01-01', NULL, 1, 13, 1, 6),
 -- Zona de estabilizadores
-('2024-02-01', NULL, 1, 13, 2),
+('2024-02-01', NULL, 1, 13, 2, 6),
 -- Zona de alerones y flaps
-('2024-03-01', NULL, 1, 13, 3);
+('2024-03-01', NULL, 1, 13, 3, 6);
 
 -- Colón
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
 VALUES 
 -- Zona de trenes de aterrizaje
-('2024-01-01', NULL, 1, 13, 9),
+('2024-01-01', NULL, 1, 13, 9, 6),
 -- Zona de fuselajes
-('2024-02-01', NULL, 1, 13, 10);
+('2024-02-01', NULL, 1, 13, 10, 6);
 
 -- Guaira
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
 VALUES 
 -- Zona de ensamblaje 
-('2024-01-01', NULL, 1, 13, 15),
+('2024-01-01', NULL, 1, 13, 15, 6),
 -- Zona de calibración 
-('2024-02-01', NULL, 1, 13, 16);
+('2024-02-01', NULL, 1, 13, 16, 6);
 
 -- Guatire
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
 VALUES 
 -- Zona de integración 
-('2024-01-01', NULL, 1, 13, 19),
+('2024-01-01', NULL, 1, 13, 19, 6),
 -- Zona de soldadura 
-('2024-02-01', NULL, 1, 13, 20);
+('2024-02-01', NULL, 1, 13, 20, 6);
 
 --Valencia
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
 VALUES 
 -- Zona de porta equipajes 
-('2024-01-01', NULL, 1, 13, 25),
+('2024-01-01', NULL, 1, 13, 25, 6),
 -- Zona de piezas sanitarias
-('2024-02-01', NULL, 2, 13, 26);
+('2024-02-01', NULL, 2, 13, 26, 6);
 
 -- ==========================================================
 -- Inserción de datos: FASE_ENSAMBLE_AVION  AU-87ABusiness
 -- ==========================================================
 
 -- Maracay
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
 VALUES 
 -- Zona de alas
-('2024-01-01', NULL, 1, 16, 1),
+('2024-01-01', NULL, 1, 16, 1, 7),
 -- Zona de estabilizadores
-('2024-02-01', NULL, 1, 16, 2),
+('2024-02-01', NULL, 1, 16, 2, 7),
 -- Zona de alerones y flaps
-('2024-03-01', NULL, 1, 16, 3);
+('2024-03-01', NULL, 1, 16, 3, 7);
 
 -- Colón
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
 VALUES 
 -- Zona de trenes de aterrizaje
-('2024-01-01', NULL, 1, 16, 9),
+('2024-01-01', NULL, 1, 16, 9, 7),
 -- Zona de fuselajes
-('2024-02-01', NULL, 1, 16, 10);
+('2024-02-01', NULL, 1, 16, 10, 7);
 
 -- Guaira
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
 VALUES 
 -- Zona de ensamblaje 
-('2024-01-01', NULL, 1, 16, 15),
+('2024-01-01', NULL, 1, 16, 15, 7),
 -- Zona de calibración 
-('2024-02-01', NULL, 1, 16, 16);
+('2024-02-01', NULL, 1, 16, 16, 7);
 
 -- Guatire
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
 VALUES 
 -- Zona de integración 
-('2024-01-01', NULL, 1, 16, 19),
+('2024-01-01', NULL, 1, 16, 19, 7),
 -- Zona de soldadura 
-('2024-02-01', NULL, 1, 16, 20);
+('2024-02-01', NULL, 1, 16, 20, 7);
 
 --Valencia
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
 VALUES 
 -- Zona de porta equipajes 
-('2024-01-01', NULL, 1, 16, 25),
+('2024-01-01', NULL, 1, 16, 25, 7),
 -- Zona de piezas sanitarias
-('2024-02-01', NULL, 2, 16, 26);
+('2024-02-01', NULL, 2, 16, 26, 7);
 
 -- ==========================================================
 -- Inserción de datos: FASE_ENSAMBLE_AVION  AU-802E
 -- ==========================================================
 
 -- Maracay
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
 VALUES 
 -- Zona de alas
-('2024-01-01', NULL, 1, 10, 1),
+('2024-01-01', NULL, 1, 10, 1, 8),
 -- Zona de estabilizadores
-('2024-02-01', NULL, 1, 10, 2),
+('2024-02-01', NULL, 1, 10, 2, 8),
 -- Zona de alerones y flaps
-('2024-03-01', NULL, 1, 10, 3);
+('2024-03-01', NULL, 1, 10, 3, 8);
 
 -- Colón
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
 VALUES 
 -- Zona de trenes de aterrizaje
-('2024-01-01', NULL, 1, 10, 9),
+('2024-01-01', NULL, 1, 10, 9, 8),
 -- Zona de fuselajes
-('2024-02-01', NULL, 1, 10, 10);
+('2024-02-01', NULL, 1, 10, 10, 8);
 
 -- Guaira
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
 VALUES 
 -- Zona de ensamblaje 
-('2024-01-01', NULL, 1, 10, 15),
+('2024-01-01', NULL, 1, 10, 15, 8),
 -- Zona de calibración 
-('2024-02-01', NULL, 1, 10, 16);
+('2024-02-01', NULL, 1, 10, 16, 8);
 
 -- Guatire
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
 VALUES 
 -- Zona de integración 
-('2024-01-01', NULL, 1, 10, 19),
+('2024-01-01', NULL, 1, 10, 19, 8),
 -- Zona de soldadura 
-('2024-02-01', NULL, 1, 10, 20);
+('2024-02-01', NULL, 1, 10, 20, 8);
 
 --Valencia
-INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id) 
+INSERT INTO FASE_ENSAMBLE_AVION (fln_fecha_inicio, fln_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id) 
 VALUES 
 -- Zona de porta equipajes 
-('2024-01-01', NULL, 1, 10, 25),
+('2024-01-01', NULL, 1, 10, 25, 8),
 -- Zona de piezas sanitarias
-('2024-02-01', NULL, 2, 10, 26);
+('2024-02-01', NULL, 2, 10, 26, 8);
+
+-- ==========================================================
+-- Inserción de datos: 
+-- ==========================================================
 
 -- ======================================
 
