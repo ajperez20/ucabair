@@ -1077,4 +1077,109 @@ VALUES
 ('2024-02-01', NULL, 1, 10, 26, 3),  -- Pendiente
 ('2024-02-01', NULL, 1, 10, 26, 6);  -- En proceso
 
+-- ==========================================================
+-- Inserción de datos: ESTATUS_ESP (Cliente Naturales)
+-- ==========================================================
+
+-- Solicitudes para el modelo AU-80
+INSERT INTO ESTATUS_ESP (ets_fecha_inicio, ets_fecha_fin, fk_est_id, fk_edz_id) VALUES
+('2024-01-01', '2024-02-01', 3, 1),  -- Pendiente, Maracay (Zona de alas)
+('2024-02-01', '2024-03-01', 6, 2),  -- Proceso, Maracay (Zona de estabilizadores)
+('2024-03-01', '2024-04-01', 5, 3),  -- Completado, Maracay (Zona de alerones y flaps)
+('2024-04-01', '2024-05-01', 3, 4),  -- Pendiente, Colón (Zona de trenes de aterrizaje)
+('2024-05-01', '2024-06-01', 6, 5),  -- Proceso, Colón (Zona de fuselajes)
+('2024-06-01', '2024-07-01', 5, 6),  -- Completado, La Guaira (Zona de ensamblaje y calibración)
+('2024-07-01', '2024-08-01', 3, 7),  -- Pendiente, Guatire (Zona de integración y soldadura)
+('2024-08-01', '2024-09-01', 6, 8),  -- Proceso, Valencia (Zona de porta equipajes)
+('2024-09-01', '2024-10-01', 5, 9);  -- Completado, Valencia (Zona de piezas sanitarias)
+
+-- Solicitudes para el modelo AU-801
+INSERT INTO ESTATUS_ESP (ets_fecha_inicio, ets_fecha_fin, fk_est_id, fk_edz_id) VALUES
+('2024-01-01', '2024-02-01', 3, 10), -- Pendiente, Maracay (Zona de alas)
+('2024-02-01', '2024-03-01', 6, 11), -- Proceso, Maracay (Zona de estabilizadores)
+('2024-03-01', '2024-04-01', 5, 12), -- Completado, Maracay (Zona de alerones y flaps)
+('2024-04-01', '2024-05-01', 3, 13), -- Pendiente, Colón (Zona de trenes de aterrizaje)
+('2024-05-01', '2024-06-01', 6, 14), -- Proceso, Colón (Zona de fuselajes)
+('2024-06-01', '2024-07-01', 5, 15), -- Completado, La Guaira (Zona de ensamblaje y calibración)
+('2024-07-01', '2024-08-01', 3, 16), -- Pendiente, Guatire (Zona de integración y soldadura)
+('2024-08-01', '2024-09-01', 6, 17), -- Proceso, Valencia (Zona de porta equipajes)
+('2024-09-01', '2024-10-01', 5, 18); -- Completado, Valencia (Zona de piezas sanitarias)
+
+-- Solicitudes para el modelo AU-802A
+INSERT INTO ESTATUS_ESP (ets_fecha_inicio, ets_fecha_fin, fk_est_id, fk_edz_id) VALUES
+('2024-01-01', '2024-02-01', 3, 19), -- Pendiente, Maracay (Zona de alas)
+('2024-02-01', '2024-03-01', 6, 20), -- Proceso, Maracay (Zona de estabilizadores)
+('2024-03-01', '2024-04-01', 5, 21), -- Completado, Maracay (Zona de alerones y flaps)
+('2024-04-01', '2024-05-01', 3, 22), -- Pendiente, Colón (Zona de trenes de aterrizaje)
+('2024-05-01', '2024-06-01', 6, 23), -- Proceso, Colón (Zona de fuselajes)
+('2024-06-01', '2024-07-01', 5, 24), -- Completado, La Guaira (Zona de ensamblaje y calibración)
+('2024-07-01', '2024-08-01', 3, 25), -- Pendiente, Guatire (Zona de integración y soldadura)
+('2024-08-01', '2024-09-01', 6, 26), -- Proceso, Valencia (Zona de porta equipajes)
+('2024-09-01', '2024-10-01', 5, 27); -- Completado, Valencia (Zona de piezas sanitarias)
+
+-- Solicitudes para el modelo AU-747PLUS
+INSERT INTO ESTATUS_ESP (ets_fecha_inicio, ets_fecha_fin, fk_est_id, fk_edz_id) VALUES
+('2024-01-01', '2024-02-01', 3, 28), -- Pendiente, Maracay (Zona de alas)
+('2024-02-01', '2024-03-01', 6, 29), -- Proceso, Maracay (Zona de estabilizadores)
+('2024-03-01', '2024-04-01', 5, 30), -- Completado, Maracay (Zona de alerones y flaps)
+('2024-04-01', '2024-05-01', 3, 31), -- Pendiente, Colón (Zona de trenes de aterrizaje)
+('2024-05-01', '2024-06-01', 6, 32), -- Proceso, Colón (Zona de fuselajes)
+('2024-06-01', '2024-07-01', 5, 33), -- Completado, La Guaira (Zona de ensamblaje y calibración)
+('2024-07-01', '2024-08-01', 3, 34), -- Pendiente, Guatire (Zona de integración y soldadura)
+('2024-08-01', '2024-09-01', 6, 35), -- Proceso, Valencia (Zona de porta equipajes)
+('2024-09-01', '2024-10-01', 5, 36); -- Completado, Valencia (Zona de piezas sanitarias)
+
+
+-- ==========================================================
+-- Inserción de datos: ESTATUS_ESP (Cliente Jurídicos)
+-- ==========================================================
+
+-- Solicitudes para el modelo AU-802F
+INSERT INTO ESTATUS_ESP (ets_fecha_inicio, ets_fecha_fin, fk_est_id, fk_edz_id) VALUES
+('2024-01-01', '2024-02-01', 3, 37), -- Pendiente, Maracay (Zona de alas)
+('2024-02-01', '2024-03-01', 6, 38), -- Proceso, Maracay (Zona de estabilizadores)
+('2024-03-01', '2024-04-01', 5, 39), -- Completado, Maracay (Zona de alerones y flaps)
+('2024-04-01', '2024-05-01', 3, 40), -- Pendiente, Colón (Zona de trenes de aterrizaje)
+('2024-05-01', '2024-06-01', 6, 41), -- Proceso, Colón (Zona de fuselajes)
+('2024-06-01', '2024-07-01', 5, 42), -- Completado, La Guaira (Zona de ensamblaje y calibración)
+('2024-07-01', '2024-08-01', 3, 43), -- Pendiente, Guatire (Zona de integración y soldadura)
+('2024-08-01', '2024-09-01', 6, 44), -- Proceso, Valencia (Zona de porta equipajes)
+('2024-09-01', '2024-10-01', 5, 45); -- Completado, Valencia (Zona de piezas sanitarias)
+
+-- Solicitudes para el modelo AU-747Gold
+INSERT INTO ESTATUS_ESP (ets_fecha_inicio, ets_fecha_fin, fk_est_id, fk_edz_id) VALUES
+('2024-01-01', '2024-02-01', 3, 46), -- Pendiente, Maracay (Zona de alas)
+('2024-02-01', '2024-03-01', 6, 47), -- Proceso, Maracay (Zona de estabilizadores)
+('2024-03-01', '2024-04-01', 5, 48), -- Completado, Maracay (Zona de alerones y flaps)
+('2024-04-01', '2024-05-01', 3, 49), -- Pendiente, Colón (Zona de trenes de aterrizaje)
+('2024-05-01', '2024-06-01', 6, 50), -- Proceso, Colón (Zona de fuselajes)
+('2024-06-01', '2024-07-01', 5, 51), -- Completado, La Guaira (Zona de ensamblaje y calibración)
+('2024-07-01', '2024-08-01', 3, 52), -- Pendiente, Guatire (Zona de integración y soldadura)
+('2024-08-01', '2024-09-01', 6, 53), -- Proceso, Valencia (Zona de porta equipajes)
+('2024-09-01', '2024-10-01', 5, 54); -- Completado, Valencia (Zona de piezas sanitarias)
+
+-- Solicitudes para el modelo AU-87ABusiness
+INSERT INTO ESTATUS_ESP (ets_fecha_inicio, ets_fecha_fin, fk_est_id, fk_edz_id) VALUES
+('2024-01-01', '2024-02-01', 3, 55), -- Pendiente, Maracay (Zona de alas)
+('2024-02-01', '2024-03-01', 6, 56), -- Proceso, Maracay (Zona de estabilizadores)
+('2024-03-01', '2024-04-01', 5, 57), -- Completado, Maracay (Zona de alerones y flaps)
+('2024-04-01', '2024-05-01', 3, 58), -- Pendiente, Colón (Zona de trenes de aterrizaje)
+('2024-05-01', '2024-06-01', 6, 59), -- Proceso, Colón (Zona de fuselajes)
+('2024-06-01', '2024-07-01', 5, 60), -- Completado, La Guaira (Zona de ensamblaje y calibración)
+('2024-07-01', '2024-08-01', 3, 61), -- Pendiente, Guatire (Zona de integración y soldadura)
+('2024-08-01', '2024-09-01', 6, 62), -- Proceso, Valencia (Zona de porta equipajes)
+('2024-09-01', '2024-10-01', 5, 63); -- Completado, Valencia (Zona de piezas sanitarias)
+
+-- Solicitudes para el modelo AU-802E
+INSERT INTO ESTATUS_ESP (ets_fecha_inicio, ets_fecha_fin, fk_est_id, fk_edz_id) VALUES
+('2024-01-01', '2024-02-01', 3, 64), -- Pendiente, Maracay (Zona de alas)
+('2024-02-01', '2024-03-01', 6, 65), -- Proceso, Maracay (Zona de estabilizadores)
+('2024-03-01', '2024-04-01', 5, 66), -- Completado, Maracay (Zona de alerones y flaps)
+('2024-04-01', '2024-05-01', 3, 67), -- Pendiente, Colón (Zona de trenes de aterrizaje)
+('2024-05-01', '2024-06-01', 6, 68), -- Proceso, Colón (Zona de fuselajes)
+('2024-06-01', '2024-07-01', 5, 69), -- Completado, La Guaira (Zona de ensamblaje y calibración)
+('2024-07-01', '2024-08-01', 3, 70), -- Pendiente, Guatire (Zona de integración y soldadura)
+('2024-08-01', '2024-09-01', 6, 71), -- Proceso, Valencia (Zona de porta equipajes)
+('2024-09-01', '2024-10-01', 5, 72); -- Completado, Valencia (Zona de piezas sanitarias)
+
 -- =========================================================
