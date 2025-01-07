@@ -425,3 +425,116 @@ VALUES
 ('2023-05-03', '2023-05-07', 'Aprobada', 29, 5, 14, 18, 104); 
 
 
+-- ================================================================
+-- Inserción de datos: PRUEBA_PIEZA_SOLICITUD Cliente Natural
+-- ================================================================
+
+-- Inserts para PRUEBA_PIEZA_SOLICITUD basados en las solicitudes de piezas del modelo AU-80
+
+-- Pruebas para las piezas del modelo AU-80
+INSERT INTO PRUEBA_PIEZA_SOLICITUD (pzb_fecha_inicio, pzb_fecha_fin, pzb_resultado_prueba, fk_zon_id, fk_edz_id, fk_pru_id) VALUES
+('2024-01-01', '2024-02-01', 'Aprobado', 5, 1, 1),
+('2024-02-01', '2024-03-01', 'Aprobado', 5, 2, 11),
+('2024-03-01', '2024-04-01', 'Aprobado', 5, 3, 53), 
+('2024-04-01', '2024-05-01', 'Aprobado', 11, 4, 23), 
+('2024-05-01', '2024-06-01', 'Aprobado', 11, 5, 57),
+('2024-06-01', '2024-07-01', 'Aprobado', 14, 6, 49),
+('2024-07-01', '2024-08-01', 'Aprobado', 21, 7, 25),
+('2024-08-01', '2024-09-01', 'Aprobado', 29, 8, 44),
+('2024-09-01', '2024-10-01', 'Aprobado', 29, 9, 46);
+
+-- Pruebas para las piezas del modelo AU-801
+
+INSERT INTO PRUEBA_PIEZA_SOLICITUD (pzb_fecha_inicio, pzb_fecha_fin, pzb_resultado_prueba, fk_zon_id, fk_edz_id, fk_pru_id) VALUES
+('2024-01-01', '2024-02-01', 'Aprobado', 5, 10, 3), 
+('2024-02-01', '2024-03-01', 'Aprobado', 5, 11, 15), 
+('2024-03-01', '2024-04-01', 'Aprobado', 5, 12, 53), 
+('2024-04-01', '2024-05-01', 'Aprobado', 11, 13, 24), 
+('2024-05-01', '2024-06-01', 'Aprobado', 11, 14, 57),
+('2024-06-01', '2024-07-01', 'Aprobado', 14, 15, 49),
+('2024-07-01', '2024-08-01', 'Aprobado', 21, 16, 25),
+('2024-08-01', '2024-09-01', 'Aprobado', 29, 17, 44),
+('2024-09-01', '2024-10-01', 'Aprobado', 29, 18, 46);
+
+-- Pruebas para las piezas del modelo AU-802A
+
+INSERT INTO PRUEBA_PIEZA_SOLICITUD (pzb_fecha_inicio, pzb_fecha_fin, pzb_resultado_prueba, fk_zon_id, fk_edz_id, fk_pru_id) VALUES
+('2024-01-01', '2024-02-01', 'Aprobado', 5, 19, 1),
+('2024-02-01', '2024-03-01', 'Aprobado', 5, 20, 11),
+('2024-03-01', '2024-04-01', 'Aprobado', 5, 21, 53),
+('2024-04-01', '2024-05-01', 'Aprobado', 11, 22, 24),
+('2024-05-01', '2024-06-01', 'Aprobado', 11, 23, 57),
+('2024-06-01', '2024-07-01', 'Aprobado', 14, 24, 49),
+('2024-07-01', '2024-08-01', 'Aprobado', 21, 25, 25),
+('2024-08-01', '2024-09-01', 'Aprobado', 29, 26, 44),
+('2024-09-01', '2024-10-01', 'Aprobado', 29, 27, 46);
+
+-- Pruebas para las piezas del modelo AU-747PLUS
+
+INSERT INTO PRUEBA_PIEZA_SOLICITUD (pzb_fecha_inicio, pzb_fecha_fin, pzb_resultado_prueba, fk_zon_id, fk_edz_id, fk_pru_id) VALUES
+('2024-01-01', '2024-02-01', 'Aprobado', 5, 28, 3),
+('2024-02-01', '2024-03-01', 'Aprobado', 5, 29, 15),
+('2024-03-01', '2024-04-01', 'Aprobado', 5, 30, 53),
+('2024-04-01', '2024-05-01', 'Aprobado', 11, 31, 23),
+('2024-05-01', '2024-06-01', 'Aprobado', 11, 32, 57),
+('2024-06-01', '2024-07-01', 'Aprobado', 14, 33, 49),
+('2024-07-01', '2024-08-01', 'Aprobado', 21, 34, 25),
+('2024-08-01', '2024-09-01', 'Aprobado', 29, 35, 44),
+('2024-09-01', '2024-10-01', 'Aprobado', 29, 36, 46);
+
+-- ================================================================
+-- Inserción de datos: PRUEBA_PIEZA_SOLICITUD Cliente Jurídico
+-- ================================================================
+
+-- Pruebas para las piezas del modelo AU-802F
+
+INSERT INTO PRUEBA_PIEZA_SOLICITUD (pzb_fecha_inicio, pzb_fecha_fin, pzb_resultado_prueba, fk_zon_id, fk_edz_id, fk_pru_id) VALUES
+('2024-01-01', '2024-02-01', 'Aprobado', 5, 37, 7),
+('2024-02-01', '2024-03-01', 'Aprobado', 5, 38, 19),
+('2024-03-01', '2024-04-01', 'Aprobado', 5, 39, 53),
+('2024-04-01', '2024-05-01', 'Aprobado', 11, 40, 24),
+('2024-05-01', '2024-06-01', 'Aprobado', 11, 41, 57),
+('2024-06-01', '2024-07-01', 'Aprobado', 14, 42, 49),
+('2024-07-01', '2024-08-01', 'Aprobado', 21, 43, 25),
+('2024-08-01', '2024-09-01', 'Aprobado', 29, 44, 44),
+('2024-09-01', '2024-10-01', 'Aprobado', 29, 45, 46);
+
+-- Pruebas para las piezas del modelo AU-747Gold
+
+INSERT INTO PRUEBA_PIEZA_SOLICITUD (pzb_fecha_inicio, pzb_fecha_fin, pzb_resultado_prueba, fk_zon_id, fk_edz_id, fk_pru_id) VALUES
+('2024-01-01', '2024-02-01', 'Aprobado', 5, 46, 5),
+('2024-02-01', '2024-03-01', 'Aprobado', 5, 47, 21),
+('2024-03-01', '2024-04-01', 'Aprobado', 5, 48, 53),
+('2024-04-01', '2024-05-01', 'Aprobado', 11, 49, 23),
+('2024-05-01', '2024-06-01', 'Aprobado', 11, 50, 57),
+('2024-06-01', '2024-07-01', 'Aprobado', 14, 51, 49),
+('2024-07-01', '2024-08-01', 'Aprobado', 21, 52, 25),
+('2024-08-01', '2024-09-01', 'Aprobado', 29, 53, 44),
+('2024-09-01', '2024-10-01', 'Aprobado', 29, 54, 46);
+
+-- Pruebas para las piezas del modelo AU-87ABusiness
+
+INSERT INTO PRUEBA_PIEZA_SOLICITUD (pzb_fecha_inicio, pzb_fecha_fin, pzb_resultado_prueba, fk_zon_id, fk_edz_id, fk_pru_id) VALUES
+('2024-01-01', '2024-02-01', 'Aprobado', 5, 55, 9),
+('2024-02-01', '2024-03-01', 'Aprobado', 5, 56, 13),
+('2024-03-01', '2024-04-01', 'Aprobado', 5, 57, 53),
+('2024-04-01', '2024-05-01', 'Aprobado', 11, 58, 23),
+('2024-05-01', '2024-06-01', 'Aprobado', 11, 59, 57),
+('2024-06-01', '2024-07-01', 'Aprobado', 14, 60, 49),
+('2024-07-01', '2024-08-01', 'Aprobado', 21, 61, 25),
+('2024-08-01', '2024-09-01', 'Aprobado', 29, 62, 44),
+('2024-09-01', '2024-10-01', 'Aprobado', 29, 63, 46);
+
+-- Pruebas para las piezas del modelo AU-802E
+
+INSERT INTO PRUEBA_PIEZA_SOLICITUD (pzb_fecha_inicio, pzb_fecha_fin, pzb_resultado_prueba, fk_zon_id, fk_edz_id, fk_pru_id) VALUES
+('2024-01-01', '2024-02-01', 'Aprobado', 5, 64, 3),
+('2024-02-01', '2024-03-01', 'Aprobado', 5, 65, 11),
+('2024-03-01', '2024-04-01', 'Aprobado', 5, 66, 53),
+('2024-04-01', '2024-05-01', 'Aprobado', 11, 67, 23),
+('2024-05-01', '2024-06-01', 'Aprobado', 11, 68, 57),
+('2024-06-01', '2024-07-01', 'Aprobado', 14, 69, 49),
+('2024-07-01', '2024-08-01', 'Aprobado', 21, 70, 25),
+('2024-08-01', '2024-09-01', 'Aprobado', 29, 71, 44),
+('2024-09-01', '2024-10-01', 'Aprobado', 29, 72, 46);
+

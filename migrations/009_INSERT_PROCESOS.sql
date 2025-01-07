@@ -607,7 +607,7 @@ VALUES
 (30, 1, 2, 25, 39),-- Porta Equipajes
 (3, 1, 2, 26, 42);-- Piezas Sanitarias
 
--- Solicitudes ajustadas para el modelo AU-802A con cantidades más lógicas
+-- Solicitudes para el modelo AU-802A 
 
 -- Maracay (Zona de alas)
 INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
@@ -650,7 +650,7 @@ VALUES
 (10, 1, 6, 25, 39),-- Porta Equipajes
 (3, 1, 6, 26, 42);-- Piezas Sanitarias
 
--- Solicitudes ajustadas para el modelo AU-747PLUS con variación de piezas
+-- Solicitudes para el modelo AU-747PLUS 
 
 -- Maracay (Zona de alas)
 INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
