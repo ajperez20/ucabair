@@ -118,10 +118,6 @@ const navigationConfig = {
       icon: ClipboardDocumentListIcon,
       submenu: [
         {
-          name: "Materia Prima",
-          href: "/dashboard/inventario/materia-prima",
-        },
-        {
           name: "Stock",
           href: "/dashboard/inventario/stock",
         },
@@ -130,11 +126,6 @@ const navigationConfig = {
   ],
   EMPLEADO: [
     {
-      name: "Dashboard",
-      href: "/dashboard",
-      icon: HomeIcon,
-    },
-    {
       name: "Producción",
       href: "/dashboard/produccion",
       icon: CubeIcon,
@@ -142,22 +133,12 @@ const navigationConfig = {
   ],
   PROVEEDOR: [
     {
-      name: "Dashboard",
-      href: "/dashboard",
-      icon: HomeIcon,
-    },
-    {
       name: "Mis Pedidos",
       href: "/dashboard/pedidos",
       icon: ClipboardDocumentListIcon,
     },
   ],
   CLIENTE: [
-    {
-      name: "Dashboard",
-      href: "/dashboard",
-      icon: HomeIcon,
-    },
     {
       name: "Mis Pedidos",
       href: "/dashboard/pedidos",

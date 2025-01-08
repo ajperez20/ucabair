@@ -40,9 +40,7 @@ export default function InventarioPage() {
               <CircleStackIcon className="h-6 w-6 text-blue-600" />
             </div>
             <div className="flex-1">
-              <h3 className="text-lg font-medium text-gray-900">
-                Materia Prima
-              </h3>
+              <h3 className="text-lg font-medium text-gray-900">Stock</h3>
               <div className="mt-1 flex items-baseline space-x-2">
                 <span className="text-2xl font-semibold text-gray-900">
                   {materiaPrima.total}
@@ -135,14 +133,6 @@ export default function InventarioPage() {
 
       {/* Enlaces Rápidos */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <Link
-          href="/dashboard/inventario/materia-prima"
-          className="flex items-center p-4 bg-white rounded-lg shadow hover:shadow-md transition-shadow"
-        >
-          <CircleStackIcon className="h-6 w-6 text-gray-400 mr-3" />
-          <span className="text-gray-700">Materia Prima</span>
-        </Link>
-
         <Link
           href="/dashboard/inventario/stock"
           className="flex items-center p-4 bg-white rounded-lg shadow hover:shadow-md transition-shadow"
