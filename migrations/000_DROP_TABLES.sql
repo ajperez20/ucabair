@@ -68,8 +68,10 @@ DROP TABLE IF EXISTS ZONA CASCADE;
 DROP TABLE IF EXISTS AREA CASCADE;
 DROP TABLE IF EXISTS SEDE_PLANTA CASCADE;
 DROP TABLE IF EXISTS ESTATUS CASCADE;
-
-
+DROP TRIGGER IF EXISTS cantidad_minima_stock ON MATERIA_PRIMA_STOCK;
+DROP FUNCTION IF EXISTS verificar_cantidad_stock();
+DROP TRIGGER IF EXISTS crear_solicitud_proveedor ON MATERIA_PRIMA_STOCK;
+DROP FUNCTION IF EXISTS enviar_solicitud_proveedor();
 -------------------------------------------------------------------------------
 -- 4. USUARIOS (PARTE DE EMPLEADOS)
 -------------------------------------------------------------------------------

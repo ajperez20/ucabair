@@ -435,7 +435,8 @@ CREATE TABLE MATERIA_PRIMA_STOCK
     CONSTRAINT fk_rpm_id
         FOREIGN KEY (fk_rpm_id)
             REFERENCES MATERIA_PRIMA (rpm_id)
-            ON DELETE CASCADE
+            ON DELETE CASCADE,
+    CONSTRAINT ck_cantidad CHECK (mps_cantidad_disponible >= 0)
 );
 
 -- 4.7 Sede Material Prueba

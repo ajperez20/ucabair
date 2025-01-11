@@ -198,32 +198,32 @@ VALUES ('Zona de montaje final', 'Montaje y ensamblaje final del avión.', 16);
 INSERT INTO MATERIA_PRIMA_STOCK (mps_unidad_medida, mps_cantidad_disponible, fk_sed_id, fk_rpm_id)
 VALUES 
 -- Stock de Materia Prima para la Sede Maracay
-('kg', 500, 1, 1),    -- Acero A36
-('kg', 300, 1, 4),    -- Aleación de aluminio 2024
-('kg', 200, 1, 8),    -- Fibra de carbono
-('L', 100, 1, 13),    -- Resinas epoxi
+('kg', 10000, 1, 1),    -- Acero A36
+('kg', 30000, 1, 4),    -- Aleación de aluminio 2024
+('kg', 20000, 1, 8),    -- Fibra de carbono
+('L', 10000, 1, 13),    -- Resinas epoxi
 
 -- Stock de Materia Prima para la Sede Colón
-('kg', 400, 2, 5),    -- Aleación de aluminio 7075
-('kg', 300, 2, 6),    -- Acero aleado 4340
-('kg', 250, 2, 9),    -- Fibra de vidrio
-('L', 150, 2, 13),    -- Resinas epoxi
+('kg', 40000, 2, 5),    -- Aleación de aluminio 7075
+('kg', 30000, 2, 6),    -- Acero aleado 4340
+('kg', 25000, 2, 9),    -- Fibra de vidrio
+('L', 15000, 2, 13),    -- Resinas epoxi
 
 -- Stock de Materia Prima para la Sede La Guaira
-('kg', 200, 3, 2),    -- Titanio Grado 5
-('kg', 300, 3, 7),    -- Titanio Ti-6Al-4V
-('kg', 150, 3, 10),   -- Acero inoxidable 304
-('kg', 100, 3, 16),   -- Níquel
+('kg', 20000, 3, 2),    -- Titanio Grado 5
+('kg', 30000, 3, 7),    -- Titanio Ti-6Al-4V
+('kg', 15000, 3, 10),   -- Acero inoxidable 304
+('kg', 10000, 3, 16),   -- Níquel
 
 -- Stock de Materia Prima para la Sede Guatire
-('kg', 100, 4, 3),    -- Compuesto Kevlar
-('kg', 200, 4, 12),   -- Polímeros reforzados (FRP)
-('kg', 50, 4, 15),    -- Caucho de silicona
+('kg', 10000, 4, 3),    -- Compuesto Kevlar
+('kg', 20000, 4, 12),   -- Polímeros reforzados (FRP)
+('kg', 5000, 4, 15),    -- Caucho de silicona
 
 -- Stock de Materia Prima para la Sede Valencia
-('kg', 300, 5, 11),   -- Magnesio
-('m³', 5, 5, 17),     -- Madera de balsa
-('L', 100, 5, 14);    -- Poliuretano
+('kg', 30000, 5, 11),   -- Magnesio
+('m³', 5000, 5, 17),     -- Madera de balsa
+('L', 10000, 5, 14);    -- Poliuretano
 
 -- =========================================
 -- Inserción de datos: SOLICITUD_PROVEEDOR
@@ -423,4 +423,19 @@ VALUES
 ('VAL-INT-006', 'Cortinas', '2023-01-02', 25, 5);
 
 -- ===========================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
