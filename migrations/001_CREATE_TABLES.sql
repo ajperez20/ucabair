@@ -1041,6 +1041,7 @@ CREATE TABLE EMPLEADO_TITULO
 CREATE TABLE PROVEEDOR_MP_STOCK
 (
     mtp_id                 SERIAL PRIMARY KEY,
+    mtp_precio             INT         NOT NULL,
     mtp_unidad_medida      VARCHAR(30) NOT NULL,
     mtp_cantida_disponible INT         NOT NULL,
     fk_rpm_id              INT         NOT NULL,
