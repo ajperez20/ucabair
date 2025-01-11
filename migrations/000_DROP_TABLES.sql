@@ -76,6 +76,8 @@ DROP TRIGGER IF EXISTS crear_solicitud_materia ON ENSAMBLE_SOLICITUD_MATERIA;
 DROP FUNCTION IF EXISTS verificar_cantidad_solicitada();
 DROP TRIGGER IF EXISTS enviar_solicitud_materia ON ENSAMBLE_SOLICITUD_MATERIA;
 DROP FUNCTION IF EXISTS actualizar_stock_materia();
+DROP TRIGGER IF EXISTS crear_detalle_solicitud_proveedor ON SOLICITUD_PROVEEDOR;
+DROP FUNCTION IF EXISTS detalle_solicitud_proveedor();
 -------------------------------------------------------------------------------
 -- 4. USUARIOS (PARTE DE EMPLEADOS)
 -------------------------------------------------------------------------------

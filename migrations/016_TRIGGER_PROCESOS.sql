@@ -31,6 +31,7 @@ EXECUTE FUNCTION verificar_cantidad_solicitada();
 CREATE OR REPLACE FUNCTION actualizar_stock_materia()
 RETURNS TRIGGER AS $$
 BEGIN
+    RAISE NOTICE 'RETIRANDO MATERIAL DEL STOCK';
     UPDATE MATERIA_PRIMA_STOCK 
     SET mps_cantidad_disponible = mps_cantidad_disponible - NEW.elm_cantidad
     WHERE mps_id = NEW.fk_mps_id;
