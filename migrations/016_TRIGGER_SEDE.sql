@@ -36,7 +36,7 @@ BEGIN
 		p.fk_mtp_id = ps.mtp_id
 		AND
 		ps.fk_rpm_id = NEW.fk_rpm_id;
-		
+
     IF NEW.mps_cantidad_disponible < 150 THEN
         RAISE NOTICE 'ENVIANDO SOLICITUD AL PROVEEDOR DE ID = % ', proveedor_id;
 		INSERT INTO SOLICITUD_PROVEEDOR 
@@ -61,6 +61,7 @@ BEGIN
 			NEW.fk_rpm_id
 		);
     END IF;
+
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
@@ -114,6 +115,7 @@ BEGIN
     WHERE
         spr_id = NEW.spr_id;
 
+    RAISE NOTICE 'GENERANDO ESTATUS SOLICITUD PROVEEDORES';
     INSERT INTO ESTATUS_SSP
     (
         ups_fecha_inicio, 
