@@ -1410,24 +1410,7 @@ CREATE TABLE USUARIO
 CREATE TABLE METODO_PAGO
 (
     met_id                SERIAL PRIMARY KEY,
-    efe_denominacion      VARCHAR(20),
-    trf_num_transferencia VARCHAR(18),
-    che_num_cheque        VARCHAR(7),
-    tdd_numero_tarjeta    VARCHAR(16),
-    tdd_vencimiento       DATE,
-    tdc_numero_tarjeta    VARCHAR(16),
-    tdc_vencimiento       DATE,
-    tipo_metodo           VARCHAR(60) NOT NULL,
-    CONSTRAINT ck_denominacion
-        CHECK (efe_denominacion ~ '^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$'),
-    CONSTRAINT ck_trf_num_transferencia
-        CHECK (trf_num_transferencia ~ '^[0-9]{18}$'),
-    CONSTRAINT ck_che_num_cheque
-        CHECK (che_num_cheque ~ '^[0-9]{7}$'),
-    CONSTRAINT ck_tdd_numero_tarjeta
-        CHECK (tdd_numero_tarjeta ~ '^[0-9]{16}$'),
-    CONSTRAINT ck_tdc_numero_tarjeta
-        CHECK (tdc_numero_tarjeta ~ '^[0-9]{16}$')
+    tipo_metodo           VARCHAR(60) NOT NULL
 );
 
 -- 10.2 Moneda
@@ -1443,6 +1426,7 @@ CREATE TABLE MONEDA
 -- 10.3 Pago
 CREATE TABLE PAGO
 (
+    pago_id SERIAL,
     pago_monto INT  NOT NULL,
     pago_fecha DATE NOT NULL DEFAULT CURRENT_DATE,
     fk_mon_id  INT  NOT NULL,
@@ -1451,7 +1435,7 @@ CREATE TABLE PAGO
     fk_spr_id  INT,
     fk_sct_id  INT,
     CONSTRAINT pk_pago
-        PRIMARY KEY (fk_mon_id, fk_met_id),
+        PRIMARY KEY (pago_id,fk_mon_id, fk_met_id),
     CONSTRAINT fk_met_id
         FOREIGN KEY (fk_met_id)
             REFERENCES METODO_PAGO (met_id)

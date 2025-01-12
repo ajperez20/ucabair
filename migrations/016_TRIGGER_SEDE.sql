@@ -129,6 +129,39 @@ BEGIN
         3
     );
 
+    RAISE NOTICE 'GENERANDO PAGO DE SOLICITUD PROVEEDORES';
+    INSERT INTO PAGO 
+    (
+        pago_monto, 
+        pago_fecha, 
+        fk_mon_id, 
+        fk_met_id, 
+        fk_spr_id 
+    )
+    VALUES 
+    (
+        (
+            SELECT sp.spr_total
+            FROM solicitud_proveedor sp
+            WHERE sp.spr_id = NEW.spr_id
+        ), 
+        CURRENT_DATE, 
+        (
+            SELECT m.mon_id
+            FROM moneda m
+            WHERE 
+                m.mon_tipo = '$'
+                AND
+                m.mon_fecha_fin IS NULL
+        ),
+        (
+            SELECT mp.met_id
+            FROM metodo_pago mp
+            WHERE mp.tipo_metodo = 'EFECTIVO'
+        ), 
+        NEW.spr_id
+    );
+
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
@@ -144,13 +177,13 @@ CREATE OR REPLACE FUNCTION actualizar_cantidad_stock()
 RETURNS TRIGGER AS $$
 BEGIN
     IF NEW.fk_est_id = 5 THEN
-        RAISE NOTICE 'ACTUALIZANDO ESTATUS';
+        RAISE NOTICE 'ACTUALIZANDO ESTATUS SOLICITUD PROVEEDORES';
 
         UPDATE ESTATUS_SSP
         SET ups_fecha_fin = CURRENT_DATE
         WHERE fk_est_id = 3;
 
-        RAISE NOTICE 'ACTUALIZANDO STOCK';
+        RAISE NOTICE 'ACTUALIZANDO STOCK MATERIALES';
         UPDATE materia_prima_stock ms
         SET mps_cantidad_disponible = (
             SELECT dp.dsp_cantidad
@@ -167,7 +200,6 @@ BEGIN
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
-
 
 CREATE OR REPLACE TRIGGER cambio_estatus_ssp
 AFTER INSERT ON ESTATUS_SSP

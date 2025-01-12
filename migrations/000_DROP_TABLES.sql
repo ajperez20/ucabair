@@ -80,6 +80,8 @@ DROP TRIGGER IF EXISTS crear_detalle_solicitud_proveedor ON SOLICITUD_PROVEEDOR;
 DROP FUNCTION IF EXISTS detalle_solicitud_proveedor();
 DROP TRIGGER IF EXISTS cambio_estatus_ssp ON ESTATUS_SSP;
 DROP FUNCTION IF EXISTS actualizar_cantidad_stock();
+DROP TRIGGER IF EXISTS pagos_solicitudes ON PAGO;
+DROP FUNCTION IF EXISTS registrar_pagos();
 -------------------------------------------------------------------------------
 -- 4. USUARIOS (PARTE DE EMPLEADOS)
 -------------------------------------------------------------------------------
