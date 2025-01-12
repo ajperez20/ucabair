@@ -78,6 +78,8 @@ DROP TRIGGER IF EXISTS enviar_solicitud_materia ON ENSAMBLE_SOLICITUD_MATERIA;
 DROP FUNCTION IF EXISTS actualizar_stock_materia();
 DROP TRIGGER IF EXISTS crear_detalle_solicitud_proveedor ON SOLICITUD_PROVEEDOR;
 DROP FUNCTION IF EXISTS detalle_solicitud_proveedor();
+DROP TRIGGER IF EXISTS cambio_estatus_ssp ON ESTATUS_SSP;
+DROP FUNCTION IF EXISTS actualizar_cantidad_stock();
 -------------------------------------------------------------------------------
 -- 4. USUARIOS (PARTE DE EMPLEADOS)
 -------------------------------------------------------------------------------

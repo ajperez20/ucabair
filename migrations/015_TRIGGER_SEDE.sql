@@ -114,6 +114,21 @@ BEGIN
     WHERE
         spr_id = NEW.spr_id;
 
+    INSERT INTO ESTATUS_SSP
+    (
+        ups_fecha_inicio, 
+        ups_fecha_fin, 
+        fk_spr_id, 
+        fk_est_id
+    )
+    VALUES
+    (
+        CURRENT_DATE, 
+        NULL,
+        NEW.spr_id, 
+        3
+    );
+
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
@@ -123,3 +138,38 @@ CREATE OR REPLACE TRIGGER crear_detalle_solicitud_proveedor
 AFTER INSERT ON SOLICITUD_PROVEEDOR
 FOR EACH ROW
 EXECUTE FUNCTION detalle_solicitud_proveedor();
+
+
+CREATE OR REPLACE FUNCTION actualizar_cantidad_stock()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.fk_est_id = 5 THEN
+        RAISE NOTICE 'ACTUALIZANDO ESTATUS';
+
+        UPDATE ESTATUS_SSP
+        SET ups_fecha_fin = CURRENT_DATE
+        WHERE fk_est_id = 3;
+
+        RAISE NOTICE 'ACTUALIZANDO STOCK';
+        UPDATE materia_prima_stock ms
+        SET mps_cantidad_disponible = (
+            SELECT dp.dsp_cantidad
+            FROM detalle_sld_proveedor dp
+            WHERE dp.fk_spr_id = NEW.fk_spr_id
+        )
+        WHERE ms.mps_id = (
+            SELECT sp.fk_mps_id
+            FROM solicitud_proveedor sp
+            WHERE sp.spr_id = NEW.fk_spr_id
+        );
+        RETURN NEW;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE TRIGGER cambio_estatus_ssp
+AFTER INSERT ON ESTATUS_SSP
+FOR EACH ROW
+EXECUTE FUNCTION actualizar_cantidad_stock();

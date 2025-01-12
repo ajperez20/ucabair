@@ -23,24 +23,24 @@ VALUES ('Acero A36', 'Aleación de acero común para estructuras.'),
 -- ==============================================
 -- Inserción de datos: Proveedor MP Stock
 -- ==============================================
-INSERT INTO PROVEEDOR_MP_STOCK (mtp_unidad_medida, mtp_precio, mtp_cantida_disponible, fk_rpm_id)
-VALUES ('kg', 1000, 500, 1),    -- Acero A36
-       ('kg', 500, 200, 2),     -- Titanio Grado 5
-       ('kg', 200, 300, 3),     -- Compuesto Kevlar
-       ('kg', 750, 700, 4),     -- Aleación de aluminio 2024
-       ('kg', 600, 400, 5),     -- Aleación de aluminio 7075
-       ('kg', 900, 800, 6),     -- Acero aleado 4340
-       ('kg', 400, 900, 7),     -- Titanio Ti-6Al-4V
-       ('kg', 300, 1000, 8),     -- Fibra de carbono
-       ('kg', 450, 500, 9),     -- Fibra de vidrio
-       ('kg', 800, 600, 10),    -- Acero inoxidable 304
-       ('kg', 550, 900, 11),    -- Magnesio
-       ('kg', 350, 200, 12),    -- Polímeros reforzados 
-       ('L', 200, 50, 13),     -- Resinas epoxi 
-       ('L', 150, 200, 14),     -- Poliuretano 
-       ('kg', 250, 100, 15),    -- Caucho de silicona
-       ('kg', 700, 900, 16),    -- Níquel
-       ('m³', 5, 900, 17);      -- Madera de balsa
+INSERT INTO PROVEEDOR_MP_STOCK (mtp_unidad_medida, mtp_precio, fk_rpm_id)
+VALUES ('kg', 1000, 1),    -- Acero A36
+       ('kg', 500,  2),     -- Titanio Grado 5
+       ('kg', 200,  3),     -- Compuesto Kevlar
+       ('kg', 750,  4),     -- Aleación de aluminio 2024
+       ('kg', 600,  5),     -- Aleación de aluminio 7075
+       ('kg', 900,  6),     -- Acero aleado 4340
+       ('kg', 400,  7),     -- Titanio Ti-6Al-4V
+       ('kg', 300,  8),     -- Fibra de carbono
+       ('kg', 450,  9),     -- Fibra de vidrio
+       ('kg', 800,  10),    -- Acero inoxidable 304
+       ('kg', 550,  11),    -- Magnesio
+       ('kg', 350,  12),    -- Polímeros reforzados 
+       ('L',  200,  13),     -- Resinas epoxi 
+       ('L',  150,  14),     -- Poliuretano 
+       ('kg', 250,  15),    -- Caucho de silicona
+       ('kg', 700,  16),    -- Níquel
+       ('m³', 5,    17);      -- Madera de balsa
 	   
 -- ==============================================
 -- Inserción de datos: Proveedor
