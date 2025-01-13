@@ -163,7 +163,7 @@ export default function RRHHPage() {
         </Link>
 
         <Link
-          href="/dashboard/rrhh/nomina"
+          href="/dashboard/rrhh/nominas"
           className="flex items-center p-4 bg-white rounded-lg shadow hover:shadow-md transition-shadow"
         >
           <UsersIcon className="h-6 w-6 text-gray-400 mr-3" />

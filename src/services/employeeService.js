@@ -317,4 +317,40 @@ export const employeeService = {
     const result = await pool.query(query, [empleadoId]);
     return result.rows;
   },
+
+  getHorariosDisponibles: async (id) => {
+    const query = `
+      SELECT 
+        ech.fk_per_id,
+        ech.fk_car_id,
+        ech.fk_emc_id,
+        ech.fk_hor_id,
+        c.car_nombre,
+        CURRENT_DATE as fecha,
+        h.hor_dia,
+        h.hor_hora_inicio,
+        h.hor_hora_fin
+      FROM EMPLEADO_CARGO ec
+      JOIN CARGO c ON ec.fk_car_id = c.car_id
+      JOIN EMP_CARGO_HORARIO ech ON ec.fk_per_id = ech.fk_per_id 
+        AND ec.fk_car_id = ech.fk_car_id
+        AND ec.emc_id = ech.fk_emc_id
+      JOIN HORARIO h ON ech.fk_hor_id = h.hor_id
+      WHERE ec.fk_per_id = $1 
+        AND (ec.emc_fecha_fin IS NULL OR ec.emc_fecha_fin > CURRENT_DATE)
+        AND NOT EXISTS (
+          SELECT 1 
+          FROM ASISTENCIA a 
+          WHERE a.fk_per_id = ech.fk_per_id
+            AND a.fk_car_id = ech.fk_car_id
+            AND a.fk_emc_id = ech.fk_emc_id
+            AND a.fk_hor_id = ech.fk_hor_id
+            AND a.asi_hora_inicio::date = CURRENT_DATE
+        )
+      ORDER BY h.hor_hora_inicio
+    `;
+
+    const result = await pool.query(query, [id]);
+    return result.rows;
+  },
 };

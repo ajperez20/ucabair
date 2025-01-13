@@ -42,19 +42,12 @@ const navigationConfig = {
           ],
         },
         {
+          name: "Asistencias",
+          href: "/dashboard/rrhh/asistencias",
+        },
+        {
           name: "Nóminas",
           href: "/dashboard/rrhh/nominas",
-        },
-      ],
-    },
-    {
-      name: "Usuarios",
-      href: "/dashboard/usuarios",
-      icon: UserGroupIcon,
-      submenu: [
-        {
-          name: "Roles",
-          href: "/dashboard/usuarios/roles",
         },
       ],
     },
@@ -77,6 +70,17 @@ const navigationConfig = {
       name: "Proveedores",
       href: "/dashboard/proveedores",
       icon: TruckIcon,
+    },
+    {
+      name: "Usuarios",
+      href: "/dashboard/usuarios",
+      icon: UserGroupIcon,
+      submenu: [
+        {
+          name: "Roles",
+          href: "/dashboard/usuarios/roles",
+        },
+      ],
     },
     {
       name: "Configuración",
@@ -122,6 +126,11 @@ const navigationConfig = {
           href: "/dashboard/inventario/stock",
         },
       ],
+    },
+    {
+      name: "Reportes",
+      href: "/dashboard/reportes",
+      icon: ClipboardDocumentListIcon,
     },
   ],
   EMPLEADO: [

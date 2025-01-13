@@ -158,8 +158,8 @@ export default function StockPage() {
   };
 
   const determinarEstado = (cantidad) => {
-    if (cantidad <= 5) return "CRÍTICO";
-    if (cantidad <= 10) return "BAJO";
+    if (cantidad <= 200) return "CRÍTICO";
+    if (cantidad <= 500) return "BAJO";
     return "NORMAL";
   };
 

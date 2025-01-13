@@ -283,7 +283,7 @@ CREATE TABLE CLIENTE_NATURAL
         FOREIGN KEY (fk_lug_id)
             REFERENCES LUGAR (lug_id),
     CONSTRAINT ck_ctn_dni
-        CHECK (ctn_dni ~ '^[VEJP]{1}[0-9]{7,10}$')
+        CHECK (ctn_dni ~ '^[VEJP][0-9]{1,10}$')
 );
 
 -- 3.2 Cliente Jurídico
@@ -298,7 +298,7 @@ CREATE TABLE CLIENTE_JURIDICO
     cjd_descripcion           VARCHAR(70)  NOT NULL,
     fk_lug_id                 INT          NOT NULL,
     CONSTRAINT cjd_rif
-        CHECK (cjd_rif ~ '^[J]{1}[0-9]{9,10}$' ),
+        CHECK (cjd_rif ~ '^[J][0-9]{1,10}$'),
     CONSTRAINT fk_lug_id
         FOREIGN KEY (fk_lug_id)
             REFERENCES LUGAR (lug_id)
@@ -331,14 +331,14 @@ CREATE TABLE DETALLE_SLD_CLIENTE (
     fk_sct_id INT NOT NULL,
     fk_mda_id INT NOT NULL,
 
-    CONSTRAINT pk_detallesldcliente 
+    CONSTRAINT pk_detallesldcliente
         PRIMARY KEY (fk_sct_id, fk_mda_id),
-    CONSTRAINT fk_sct_id 
-        FOREIGN KEY (fk_sct_id) 
+    CONSTRAINT fk_sct_id
+        FOREIGN KEY (fk_sct_id)
             REFERENCES SOLICITUD_CLIENTE(sct_id)
             ON DELETE CASCADE,
-    CONSTRAINT fk_mda_id 
-        FOREIGN KEY (fk_mda_id) 
+    CONSTRAINT fk_mda_id
+        FOREIGN KEY (fk_mda_id)
             REFERENCES MODELO_AVION_CONF(mda_id)
             ON DELETE CASCADE
 );
@@ -1350,7 +1350,8 @@ CREATE TABLE ROL
     rol_nombre      VARCHAR(30) NOT NULL,
     rol_descripcion VARCHAR(255),
     CONSTRAINT ck_rol_nombre
-        CHECK (UPPER(rol_nombre) in ('EMPLEADO', 'CLIENTE', 'PROVEEDOR', 'ADMINISTRADOR'))
+        CHECK (UPPER(rol_nombre) in ('EMPLEADO', 'CLIENTE', 'PROVEEDOR', 'ADMINISTRADOR') OR
+               UPPER(rol_nombre) ~ '^[A-Z]+$')
 );
 
 -- 9.3 Privilegio Rol (relación)

@@ -47,54 +47,54 @@ VALUES ('kg', 1000, 1),    -- Acero A36
 -- ==============================================
 INSERT INTO PROVEEDOR (com_nombre, com_direccion, com_url_pagina, fk_mtp_id, fk_lug_id)
 VALUES 
-('MetalesGalácticos', 'Dirección 1 Amazonas', 'www.metalesgalacticos.com', 1, 1),  -- Amazonas
-('AceroPlus', 'Dirección 2 Amazonas', 'www.aceroplus.com', 2, 1),                  -- Amazonas
-('TitanioFusión', 'Dirección 1 Anzoátegui', 'www.titaniofusion.com', 3, 2),        -- Anzoátegui
-('AleacionesElite', 'Dirección 2 Anzoátegui', 'www.aleacioneselite.com', 4, 2),    -- Anzoátegui
-('KevlarForce', 'Dirección 1 Apure', 'www.kevlarforce.com', 5, 3),                 -- Apure
-('CompositesXtremo', 'Dirección 2 Apure', 'www.compositesxtremo.com', 6, 3),       -- Apure
-('AluMatrix', 'Dirección 1 Aragua', 'www.alumatrix.com', 7, 4),                    -- Aragua
-('FusionAluminio', 'Dirección 2 Aragua', 'www.fusionaluminio.com', 8, 4),          -- Aragua
-('AcerosTop', 'Dirección 1 Barinas', 'www.acerostop.com', 9, 5),                   -- Barinas
-('SuperAceros', 'Dirección 2 Barinas', 'www.superaceros.com', 10, 5),              -- Barinas
-('FuerzaMetálica', 'Dirección 1 Bolívar', 'www.fuerzametalica.com', 11, 6),        -- Bolívar
-('MetalMaster', 'Dirección 2 Bolívar', 'www.metalmaster.com', 12, 6),              -- Bolívar
-('TitaniumPro', 'Dirección 1 Carabobo', 'www.titaniumpro.com', 13, 7),             -- Carabobo
-('ProMetals', 'Dirección 2 Carabobo', 'www.prometals.com', 14, 7),                 -- Carabobo
-('CarbonTech', 'Dirección 1 Cojedes', 'www.carbontech.com', 15, 8),                -- Cojedes
-('FiberMax', 'Dirección 2 Cojedes', 'www.fibermax.com', 16, 8),                    -- Cojedes
-('VidrioFortaleza', 'Dirección 1 Delta Amacuro', 'www.vidriofortaleza.com', 17, 9),-- Delta Amacuro
-('FibraViva', 'Dirección 2 Delta Amacuro', 'www.fibraviva.com', 1, 9),             -- Delta Amacuro
-('InoxidableSteel', 'Dirección 1 Distrito Capital', 'www.inoxidablesteel.com', 2, 10), -- Distrito Capital
-('SteelGuard', 'Dirección 2 Distrito Capital', 'www.steelguard.com', 3, 10),       -- Distrito Capital
-('MegaMagnesio', 'Dirección 1 Falcón', 'www.megamagnesio.com', 4, 11),             -- Falcón
-('MagnesioPlus', 'Dirección 2 Falcón', 'www.magnesioplus.com', 5, 11),             -- Falcón
-('ReforPoly', 'Dirección 1 Guárico', 'www.reforpoly.com', 6, 12),                  -- Guárico
-('PolyForce', 'Dirección 2 Guárico', 'www.polyforce.com', 7, 12),                  -- Guárico
-('EpoxiPower', 'Dirección 1 Lara', 'www.epoxipower.com', 8, 13),                   -- Lara
-('EpoxiStar', 'Dirección 2 Lara', 'www.epoxistar.com', 9, 13),                     -- Lara
-('SuperPoly', 'Dirección 1 La Guaira', 'www.superpoly.com', 10, 14),               -- La Guaira
-('PolyMax', 'Dirección 2 La Guaira', 'www.polymax.com', 11, 14),                   -- La Guaira
-('SiliconShield', 'Dirección 1 Mérida', 'www.siliconshield.com', 12, 15),          -- Mérida
-('SiliconForce', 'Dirección 2 Mérida', 'www.siliconforce.com', 13, 15),            -- Mérida
-('NickelPro', 'Dirección 1 Miranda', 'www.nickelpro.com', 14, 16),                 -- Miranda
-('NickelForce', 'Dirección 2 Miranda', 'www.nickelforce.com', 15, 16),             -- Miranda
-('BalsaWood', 'Dirección 1 Monagas', 'www.balsawood.com', 16, 17),                 -- Monagas
-('MaderaLigera', 'Dirección 2 Monagas', 'www.maderaligera.com', 17, 17),           -- Monagas
-('AcerosVerdes', 'Dirección 1 Nueva Esparta', 'www.acerosverdes.com', 1, 18),      -- Nueva Esparta
-('EcoAceros', 'Dirección 2 Nueva Esparta', 'www.ecoaceros.com', 2, 18),            -- Nueva Esparta
-('TitanioAndes', 'Dirección 1 Portuguesa', 'www.titanioandes.com', 3, 19),         -- Portuguesa
-('AndesTitanios', 'Dirección 2 Portuguesa', 'www.andestitanios.com', 4, 19),       -- Portuguesa
-('KevlarExtreme', 'Dirección 1 Sucre', 'www.kevlarextreme.com', 5, 20),            -- Sucre
-('XtremoKevlar', 'Dirección 2 Sucre', 'www.xtremokevlar.com', 6, 20),              -- Sucre
-('AluminiosTáchira', 'Dirección 1 Táchira', 'www.aluminiostachira.com', 7, 21),    -- Táchira
-('AlumMaster', 'Dirección 2 Táchira', 'www.alummaster.com', 8, 21),                -- Táchira
-('Aluminios7075Plus', 'Dirección 1 Trujillo', 'www.aluminios7075plus.com', 9, 22), -- Trujillo
-('PlusAluminio7075', 'Dirección 2 Trujillo', 'www.plusaluminio7075.com', 10, 22),  -- Trujillo
-('AleadosYaracuy', 'Dirección 1 Yaracuy', 'www.aleadosyaracuy.com', 11, 23),       -- Yaracuy
-('YaracuyAleaciones', 'Dirección 2 Yaracuy', 'www.yaracuyaleaciones.com', 12, 23), -- Yaracuy
-('TitanioZulia', 'Dirección 1 Zulia', 'www.titaniozulia.com', 13, 24),             -- Zulia
-('ZuliaTitanium', 'Dirección 2 Zulia', 'www.zuliatitanium.com', 14, 24);          
+('MetalesGalácticos', 'Dirección 1 Amazonas', 'https://www.metalesgalacticos.com', 1, 1),  -- Amazonas
+('AceroPlus', 'Dirección 2 Amazonas', 'https://www.aceroplus.com', 2, 1),                  -- Amazonas
+('TitanioFusión', 'Dirección 1 Anzoátegui', 'https://www.titaniofusion.com', 3, 2),        -- Anzoátegui
+('AleacionesElite', 'Dirección 2 Anzoátegui', 'https://www.aleacioneselite.com', 4, 2),    -- Anzoátegui
+('KevlarForce', 'Dirección 1 Apure', 'https://www.kevlarforce.com', 5, 3),                 -- Apure
+('CompositesXtremo', 'Dirección 2 Apure', 'https://www.compositesxtremo.com', 6, 3),       -- Apure
+('AluMatrix', 'Dirección 1 Aragua', 'https://www.alumatrix.com', 7, 4),                    -- Aragua
+('FusionAluminio', 'Dirección 2 Aragua', 'https://www.fusionaluminio.com', 8, 4),          -- Aragua
+('AcerosTop', 'Dirección 1 Barinas', 'https://www.acerostop.com', 9, 5),                   -- Barinas
+('SuperAceros', 'Dirección 2 Barinas', 'https://www.superaceros.com', 10, 5),              -- Barinas
+('FuerzaMetálica', 'Dirección 1 Bolívar', 'https://www.fuerzametalica.com', 11, 6),        -- Bolívar
+('MetalMaster', 'Dirección 2 Bolívar', 'https://www.metalmaster.com', 12, 6),              -- Bolívar
+('TitaniumPro', 'Dirección 1 Carabobo', 'https://www.titaniumpro.com', 13, 7),             -- Carabobo
+('ProMetals', 'Dirección 2 Carabobo', 'https://www.prometals.com', 14, 7),                 -- Carabobo
+('CarbonTech', 'Dirección 1 Cojedes', 'https://www.carbontech.com', 15, 8),                -- Cojedes
+('FiberMax', 'Dirección 2 Cojedes', 'https://www.fibermax.com', 16, 8),                    -- Cojedes
+('VidrioFortaleza', 'Dirección 1 Delta Amacuro', 'https://www.vidriofortaleza.com', 17, 9),-- Delta Amacuro
+('FibraViva', 'Dirección 2 Delta Amacuro', 'https://www.fibraviva.com', 1, 9),             -- Delta Amacuro
+('InoxidableSteel', 'Dirección 1 Distrito Capital', 'https://www.inoxidablesteel.com', 2, 10), -- Distrito Capital
+('SteelGuard', 'Dirección 2 Distrito Capital', 'https://www.steelguard.com', 3, 10),       -- Distrito Capital
+('MegaMagnesio', 'Dirección 1 Falcón', 'https://www.megamagnesio.com', 4, 11),             -- Falcón
+('MagnesioPlus', 'Dirección 2 Falcón', 'https://www.magnesioplus.com', 5, 11),             -- Falcón
+('ReforPoly', 'Dirección 1 Guárico', 'https://www.reforpoly.com', 6, 12),                  -- Guárico
+('PolyForce', 'Dirección 2 Guárico', 'https://www.polyforce.com', 7, 12),                  -- Guárico
+('EpoxiPower', 'Dirección 1 Lara', 'https://www.epoxipower.com', 8, 13),                   -- Lara
+('EpoxiStar', 'Dirección 2 Lara', 'https://www.epoxistar.com', 9, 13),                     -- Lara
+('SuperPoly', 'Dirección 1 La Guaira', 'https://www.superpoly.com', 10, 14),               -- La Guaira
+('PolyMax', 'Dirección 2 La Guaira', 'https://www.polymax.com', 11, 14),                   -- La Guaira
+('SiliconShield', 'Dirección 1 Mérida', 'https://www.siliconshield.com', 12, 15),          -- Mérida
+('SiliconForce', 'Dirección 2 Mérida', 'https://www.siliconforce.com', 13, 15),            -- Mérida
+('NickelPro', 'Dirección 1 Miranda', 'https://www.nickelpro.com', 14, 16),                 -- Miranda
+('NickelForce', 'Dirección 2 Miranda', 'https://www.nickelforce.com', 15, 16),             -- Miranda
+('BalsaWood', 'Dirección 1 Monagas', 'https://www.balsawood.com', 16, 17),                 -- Monagas
+('MaderaLigera', 'Dirección 2 Monagas', 'https://www.maderaligera.com', 17, 17),           -- Monagas
+('AcerosVerdes', 'Dirección 1 Nueva Esparta', 'https://www.acerosverdes.com', 1, 18),      -- Nueva Esparta
+('EcoAceros', 'Dirección 2 Nueva Esparta', 'https://www.ecoaceros.com', 2, 18),            -- Nueva Esparta
+('TitanioAndes', 'Dirección 1 Portuguesa', 'https://www.titanioandes.com', 3, 19),         -- Portuguesa
+('AndesTitanios', 'Dirección 2 Portuguesa', 'https://www.andestitanios.com', 4, 19),       -- Portuguesa
+('KevlarExtreme', 'Dirección 1 Sucre', 'https://www.kevlarextreme.com', 5, 20),            -- Sucre
+('XtremoKevlar', 'Dirección 2 Sucre', 'https://www.xtremokevlar.com', 6, 20),              -- Sucre
+('AluminiosTáchira', 'Dirección 1 Táchira', 'https://www.aluminiostachira.com', 7, 21),    -- Táchira
+('AlumMaster', 'Dirección 2 Táchira', 'https://www.alummaster.com', 8, 21),                -- Táchira
+('Aluminios7075Plus', 'Dirección 1 Trujillo', 'https://www.aluminios7075plus.com', 9, 22), -- Trujillo
+('PlusAluminio7075', 'Dirección 2 Trujillo', 'https://www.plusaluminio7075.com', 10, 22),  -- Trujillo
+('AleadosYaracuy', 'Dirección 1 Yaracuy', 'https://www.aleadosyaracuy.com', 11, 23),       -- Yaracuy
+('YaracuyAleaciones', 'Dirección 2 Yaracuy', 'https://www.yaracuyaleaciones.com', 12, 23), -- Yaracuy
+('TitanioZulia', 'Dirección 1 Zulia', 'https://www.titaniozulia.com', 13, 24),             -- Zulia
+('ZuliaTitanium', 'Dirección 2 Zulia', 'https://www.zuliatitanium.com', 14, 24);
 
 -- =================================================
 -- Inserción de datos: Redes Sociales de Proveedor

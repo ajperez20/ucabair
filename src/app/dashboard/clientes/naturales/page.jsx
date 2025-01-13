@@ -42,7 +42,7 @@ export default function ClientesNaturalesPage() {
       required: true,
       placeholder: "V12345678",
       description: "DNI del cliente (formato: V12345678)",
-      pattern: "^[VEJP][0-9]{9,10}$",
+      pattern: "^[VEJP][0-9]{1,10}$",
     },
     {
       name: "ctn_nombre",
@@ -171,7 +171,7 @@ export default function ClientesNaturalesPage() {
   const handleSave = async (formData) => {
     try {
       // Validar el formato del DNI
-      if (!formData.ctn_dni.match(/^[VEJP][0-9]{9,10}$/)) {
+      if (!formData.ctn_dni.match(/^[VEJP][0-9]{1,10}$/)) {
         throw new Error("Formato de DNI inválido");
       }
 

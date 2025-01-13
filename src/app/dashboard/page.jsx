@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useEmpleadosStats } from "@/hooks/useEmpleadosStats";
 import { useClientesStats } from "@/hooks/useClientesStats";
 import { usePiezasStats } from "@/hooks/usePiezasStats";
@@ -13,160 +14,374 @@ import {
   BuildingOfficeIcon,
   ChartBarIcon,
   ArrowTrendingUpIcon,
+  ClipboardDocumentListIcon,
+  DocumentCheckIcon,
+  ShoppingCartIcon,
+  TruckIcon,
 } from "@heroicons/react/24/outline";
 import { XCircleIcon } from "@heroicons/react/16/solid";
 import Link from "next/link";
 
 export default function DashboardPage() {
+  const [userRole, setUserRole] = useState(null);
   const empleadosStats = useEmpleadosStats();
   const clientesStats = useClientesStats();
   const piezasStats = usePiezasStats();
   const avionesStats = useAvionesStats();
 
-  const mainStats = [
-    {
-      title: "Empleados",
-      total: empleadosStats.general?.total || 0,
-      nuevos: empleadosStats.general?.nuevos || 0,
-      icon: UsersIcon,
-      color: "blue",
-      href: "/dashboard/rrhh/empleados",
-      loading: empleadosStats.isLoading,
-    },
-    {
-      title: "Clientes",
-      total: clientesStats.totalClientes || 0,
-      nuevos: clientesStats.nuevosClientes || 0,
-      icon: UserGroupIcon,
-      color: "indigo",
-      href: "/dashboard/clientes",
-      loading: clientesStats.isLoading,
-      details: [
-        {
-          label: "Naturales",
-          value: clientesStats.clientesNaturales || 0,
-        },
-        {
-          label: "Jurídicos",
-          value: clientesStats.clientesJuridicos || 0,
-        },
-      ],
-    },
-    {
-      title: "Aviones",
-      total: avionesStats.total || 0,
-      nuevos: avionesStats.completados || 0,
-      icon: PaperAirplaneIcon,
-      color: "green",
-      href: "/dashboard/produccion/aviones",
-      loading: avionesStats.isLoading,
-      details: [
-        {
-          label: "En Proceso",
-          value: avionesStats.enProceso || 0,
-        },
-        {
-          label: "En Pruebas",
-          value: avionesStats.pruebas?.enProceso || 0,
-        },
-        {
-          label: "Pruebas Completadas",
-          value: avionesStats.pruebas?.completadas || 0,
-        },
-        {
-          label: "Pruebas Pendientes",
-          value: avionesStats.pruebas?.pendientes || 0,
-        },
-      ],
-      modelStats:
-        avionesStats.porModelo?.map((modelo) => ({
-          label: modelo.modelo,
-          value: modelo.cantidad,
-        })) || [],
-    },
-    {
-      title: "Piezas",
-      total: piezasStats?.total || 0,
-      icon: CubeIcon,
-      color: "yellow",
-      href: "/dashboard/configuracion/piezas",
-      loading: piezasStats.isLoading,
-      details: [
-        {
-          label: "Con Materiales",
-          value: piezasStats?.con_materiales || 0,
-        },
-        {
-          label: "Con Procesos",
-          value: piezasStats?.con_procesos || 0,
-        },
-      ],
-    },
-  ];
+  useEffect(() => {
+    const userData = localStorage.getItem("user");
+    if (userData) {
+      const { role } = JSON.parse(userData);
+      setUserRole(role);
+    }
+  }, []);
 
-  const quickAccess = [
-    {
-      name: "Producción",
-      description: "Gestión de ensamblaje y pruebas",
-      href: "/dashboard/produccion",
-      icon: WrenchIcon,
-      color: "blue",
-    },
-    {
-      name: "Configuración",
-      description: "Configuración de modelos y piezas",
-      href: "/dashboard/configuracion",
-      icon: CubeIcon,
-      color: "indigo",
-    },
-    {
-      name: "Sedes",
-      description: "Gestión de plantas y áreas",
-      href: "/dashboard/produccion/sedes",
-      icon: BuildingOfficeIcon,
-      color: "purple",
-    },
-    {
-      name: "Reportes",
-      description: "Informes y estadísticas",
-      href: "/dashboard/reportes",
-      icon: ChartBarIcon,
-      color: "green",
-    },
-  ];
+  const statsConfig = {
+    ADMINISTRADOR: [
+      {
+        title: "Empleados",
+        total: empleadosStats.general?.total || 0,
+        nuevos: empleadosStats.general?.nuevos || 0,
+        icon: UsersIcon,
+        color: "blue",
+        href: "/dashboard/rrhh/empleados",
+        loading: empleadosStats.isLoading,
+      },
+      {
+        title: "Clientes",
+        total: clientesStats.totalClientes || 0,
+        nuevos: clientesStats.nuevosClientes || 0,
+        icon: UserGroupIcon,
+        color: "indigo",
+        href: "/dashboard/clientes",
+        loading: clientesStats.isLoading,
+        details: [
+          {
+            label: "Naturales",
+            value: clientesStats.clientesNaturales || 0,
+          },
+          {
+            label: "Jurídicos",
+            value: clientesStats.clientesJuridicos || 0,
+          },
+        ],
+      },
+      {
+        title: "Aviones",
+        total: avionesStats.total || 0,
+        nuevos: avionesStats.completados || 0,
+        icon: PaperAirplaneIcon,
+        color: "green",
+        href: "/dashboard/produccion/aviones",
+        loading: avionesStats.isLoading,
+        details: [
+          {
+            label: "En Proceso",
+            value: avionesStats.enProceso || 0,
+          },
+          {
+            label: "En Pruebas",
+            value: avionesStats.pruebas?.enProceso || 0,
+          },
+          {
+            label: "Pruebas Completadas",
+            value: avionesStats.pruebas?.completadas || 0,
+          },
+          {
+            label: "Pruebas Pendientes",
+            value: avionesStats.pruebas?.pendientes || 0,
+          },
+        ],
+        modelStats:
+          avionesStats.porModelo?.map((modelo) => ({
+            label: modelo.modelo,
+            value: modelo.cantidad,
+          })) || [],
+      },
+      {
+        title: "Piezas",
+        total: piezasStats?.total || 0,
+        icon: CubeIcon,
+        color: "yellow",
+        href: "/dashboard/configuracion/piezas",
+        loading: piezasStats.isLoading,
+        details: [
+          {
+            label: "Con Materiales",
+            value: piezasStats?.con_materiales || 0,
+          },
+          {
+            label: "Con Procesos",
+            value: piezasStats?.con_procesos || 0,
+          },
+        ],
+      },
+    ],
+    EMPLEADO: [
+      {
+        title: "Mis Tareas",
+        total: empleadosStats.misTareas?.total || 0,
+        icon: ClipboardDocumentListIcon,
+        color: "blue",
+        href: "/dashboard/tareas",
+        loading: empleadosStats.isLoading,
+        details: [
+          {
+            label: "Pendientes",
+            value: empleadosStats.misTareas?.pendientes || 0,
+          },
+          {
+            label: "En Proceso",
+            value: empleadosStats.misTareas?.enProceso || 0,
+          },
+          {
+            label: "Completadas",
+            value: empleadosStats.misTareas?.completadas || 0,
+          },
+        ],
+      },
+      {
+        title: "Aviones Asignados",
+        total: avionesStats.misAviones?.total || 0,
+        icon: PaperAirplaneIcon,
+        color: "green",
+        href: "/dashboard/produccion",
+        loading: avionesStats.isLoading,
+        details: [
+          {
+            label: "En Ensamblaje",
+            value: avionesStats.misAviones?.enEnsamblaje || 0,
+          },
+          {
+            label: "En Pruebas",
+            value: avionesStats.misAviones?.enPruebas || 0,
+          },
+        ],
+      },
+    ],
+    CLIENTE: [
+      {
+        title: "Mis Pedidos",
+        total: clientesStats.misPedidos?.total || 0,
+        icon: ShoppingCartIcon,
+        color: "blue",
+        href: "/dashboard/pedidos",
+        loading: clientesStats.isLoading,
+        details: [
+          {
+            label: "En Proceso",
+            value: clientesStats.misPedidos?.enProceso || 0,
+          },
+          {
+            label: "Completados",
+            value: clientesStats.misPedidos?.completados || 0,
+          },
+          {
+            label: "Pendientes de Pago",
+            value: clientesStats.misPedidos?.pendientesPago || 0,
+          },
+        ],
+      },
+      {
+        title: "Mis Aviones",
+        total: avionesStats.avionesCliente?.total || 0,
+        icon: PaperAirplaneIcon,
+        color: "green",
+        href: "/dashboard/mis-aviones",
+        loading: avionesStats.isLoading,
+        details: [
+          {
+            label: "En Producción",
+            value: avionesStats.avionesCliente?.enProduccion || 0,
+          },
+          {
+            label: "Entregados",
+            value: avionesStats.avionesCliente?.entregados || 0,
+          },
+        ],
+      },
+    ],
+    PROVEEDOR: [
+      {
+        title: "Solicitudes",
+        total: piezasStats?.solicitudes?.total || 0,
+        icon: TruckIcon,
+        color: "blue",
+        href: "/dashboard/solicitudes",
+        loading: piezasStats.isLoading,
+        details: [
+          {
+            label: "Pendientes",
+            value: piezasStats?.solicitudes?.pendientes || 0,
+          },
+          {
+            label: "En Proceso",
+            value: piezasStats?.solicitudes?.enProceso || 0,
+          },
+          {
+            label: "Completadas",
+            value: piezasStats?.solicitudes?.completadas || 0,
+          },
+        ],
+      },
+      {
+        title: "Entregas",
+        total: piezasStats?.entregas?.total || 0,
+        icon: DocumentCheckIcon,
+        color: "green",
+        href: "/dashboard/entregas",
+        loading: piezasStats.isLoading,
+        details: [
+          {
+            label: "Este Mes",
+            value: piezasStats?.entregas?.esteMes || 0,
+          },
+          {
+            label: "En Tránsito",
+            value: piezasStats?.entregas?.enTransito || 0,
+          },
+        ],
+      },
+    ],
+  };
 
-  // Manejo de estado de carga
+  const quickAccessConfig = {
+    ADMINISTRADOR: [
+      {
+        name: "Producción",
+        description: "Gestión de ensamblaje y pruebas",
+        href: "/dashboard/produccion",
+        icon: WrenchIcon,
+        color: "blue",
+      },
+      {
+        name: "Configuración",
+        description: "Configuración de modelos y piezas",
+        href: "/dashboard/configuracion",
+        icon: CubeIcon,
+        color: "indigo",
+      },
+      {
+        name: "Sedes",
+        description: "Gestión de plantas y áreas",
+        href: "/dashboard/produccion/sedes",
+        icon: BuildingOfficeIcon,
+        color: "purple",
+      },
+      {
+        name: "Reportes",
+        description: "Informes y estadísticas",
+        href: "/dashboard/reportes",
+        icon: ChartBarIcon,
+        color: "green",
+      },
+    ],
+    EMPLEADO: [
+      {
+        name: "Mis Tareas",
+        description: "Ver tareas asignadas",
+        href: "/dashboard/tareas",
+        icon: ClipboardDocumentListIcon,
+        color: "blue",
+      },
+      {
+        name: "Producción",
+        description: "Gestión de ensamblaje",
+        href: "/dashboard/produccion",
+        icon: WrenchIcon,
+        color: "indigo",
+      },
+      {
+        name: "Reportes Diarios",
+        description: "Registro de actividades",
+        href: "/dashboard/reportes/diarios",
+        icon: DocumentCheckIcon,
+        color: "green",
+      },
+    ],
+    CLIENTE: [
+      {
+        name: "Nuevo Pedido",
+        description: "Solicitar nuevo avión",
+        href: "/dashboard/pedidos/nuevo",
+        icon: ShoppingCartIcon,
+        color: "blue",
+      },
+      {
+        name: "Mis Aviones",
+        description: "Estado de mis aviones",
+        href: "/dashboard/mis-aviones",
+        icon: PaperAirplaneIcon,
+        color: "indigo",
+      },
+      {
+        name: "Pagos",
+        description: "Gestión de pagos",
+        href: "/dashboard/pagos",
+        icon: DocumentCheckIcon,
+        color: "green",
+      },
+    ],
+    PROVEEDOR: [
+      {
+        name: "Solicitudes Pendientes",
+        description: "Ver nuevas solicitudes",
+        href: "/dashboard/solicitudes",
+        icon: ClipboardDocumentListIcon,
+        color: "blue",
+      },
+      {
+        name: "Entregas",
+        description: "Gestionar entregas",
+        href: "/dashboard/entregas",
+        icon: TruckIcon,
+        color: "indigo",
+      },
+      {
+        name: "Facturación",
+        description: "Gestión de cobros",
+        href: "/dashboard/facturacion",
+        icon: DocumentCheckIcon,
+        color: "green",
+      },
+    ],
+  };
+
   if (
-    avionesStats.isLoading ||
+    !userRole ||
     empleadosStats.isLoading ||
     clientesStats.isLoading ||
-    piezasStats.isLoading
+    piezasStats.isLoading ||
+    avionesStats.isLoading
   ) {
     return (
-      <div className="p-6">
-        <div className="animate-pulse">
-          <div className="h-4 bg-gray-200 rounded w-1/4"></div>
-          <div className="space-y-3 mt-4">
-            <div className="h-8 bg-gray-200 rounded"></div>
-            <div className="h-8 bg-gray-200 rounded"></div>
-            <div className="h-8 bg-gray-200 rounded"></div>
-          </div>
-        </div>
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
       </div>
     );
   }
+
+  const currentStats = statsConfig[userRole] || [];
+  const currentQuickAccess = quickAccessConfig[userRole] || [];
 
   return (
     <div className="space-y-6 p-6">
       <div className="border-b border-gray-200 pb-4">
         <h1 className="text-2xl font-semibold text-gray-900">Dashboard</h1>
         <p className="mt-2 text-sm text-gray-600">
-          Vista general del sistema de producción
+          {userRole === "ADMINISTRADOR"
+            ? "Vista general del sistema de producción"
+            : userRole === "EMPLEADO"
+              ? "Panel de control de producción"
+              : userRole === "CLIENTE"
+                ? "Estado de mis pedidos"
+                : "Gestión de solicitudes"}
         </p>
       </div>
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {mainStats.map((stat) => (
+        {currentStats.map((stat) => (
           <Link
             key={stat.title}
             href={stat.href}
@@ -246,7 +461,7 @@ export default function DashboardPage() {
           Acceso Rápido
         </h2>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {quickAccess.map((item) => (
+          {currentQuickAccess.map((item) => (
             <Link
               key={item.name}
               href={item.href}
@@ -270,7 +485,6 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* Manejo de errores */}
       {[empleadosStats, clientesStats, piezasStats, avionesStats].map(
         (stats, index) => {
           if (stats.error) {

@@ -15,6 +15,7 @@ export default function EditModal({
   hideButtons = false,
   children,
   size = "md",
+  onFieldChange, // Agregar esta prop
 }) {
   const [formData, setFormData] = useState(data || {});
   const [isLoading, setIsLoading] = useState(false);
@@ -53,6 +54,11 @@ export default function EditModal({
       ...prev,
       [name]: type === "number" ? (value === "" ? "" : Number(value)) : value,
     }));
+
+    // Llamar a onFieldChange si existe
+    if (onFieldChange) {
+      onFieldChange(name, value);
+    }
   };
 
   const renderField = (field) => {
