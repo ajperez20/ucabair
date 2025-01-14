@@ -50,4 +50,4 @@ BEGIN
         ORDER BY total_compras DESC, cantidad_compras DESC
         LIMIT 10;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql; 
