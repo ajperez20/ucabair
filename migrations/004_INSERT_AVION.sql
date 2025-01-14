@@ -11,39 +11,39 @@ VALUES ('AU-80', 'Modelo diseñado para rutas transcontinentales, equipado con 4
 -- ==============================================
 -- Inserción de datos: Modelo de Avión
 -- ==============================================
-INSERT INTO MODELO_AVION_CONF (mda_nombre, mda_descripcion, fk_tiv_id)
-VALUES ('AU-80', 'Rutas largas con capacidad de 179 pasajeros.', 1),
-       ('AU-801', 'Rutas cortas a medianas con capacidad de 189 pasajeros.', 2),
-       ('AU-802', 'Modelo optimizado para rutas cortas a medianas con variantes adaptadas.', 3),
-       ('AU-747Plus', 'Transcontinental con capacidad para 524 pasajeros en dos clases.', 4),
-       ('AU-87A', 'Avión de pasajeros más vendido en la aviación civil.', 5);
+INSERT INTO MODELO_AVION_CONF (mda_nombre, mda_precio, mda_descripcion, fk_tiv_id)
+VALUES ('AU-80', 120000 ,'Rutas largas con capacidad de 179 pasajeros.', 1),
+       ('AU-801', 140000,'Rutas cortas a medianas con capacidad de 189 pasajeros.', 2),
+       ('AU-802', 170000,'Modelo optimizado para rutas cortas a medianas con variantes adaptadas.', 3),
+       ('AU-747Plus', 180000,'Transcontinental con capacidad para 524 pasajeros en dos clases.', 4),
+       ('AU-87A', 190000,'Avión de pasajeros más vendido en la aviación civil.', 5);
 
 
 -- ==============================================
 -- Inserción de datos: Variantes del AU-802
 -- ==============================================
-INSERT INTO MODELO_AVION_CONF (mda_nombre, mda_descripcion, fk_tiv_id)
-VALUES ('AU-802A', 'Variante de menor capacidad con 168 pasajeros (1 clase densa).', 3),
-       ('AU-802B', 'Variante con capacidad intermedia para rutas cortas, 132 pasajeros.', 3),
-       ('AU-802C', 'Variante con capacidad de 132 pasajeros, diseñada para mayor alcance.', 3),
-       ('AU-802D', 'Modelo adaptado con capacidad de 149 pasajeros (alta densidad).', 3),
-       ('AU-802E', 'Modelo optimizado con un alcance mejorado y capacidad de 189 pasajeros.', 3),
-       ('AU-802F', 'Variante modernizada con capacidad para 215 pasajeros (1 clase densa).', 3);
+INSERT INTO MODELO_AVION_CONF (mda_nombre, mda_precio, mda_descripcion, fk_tiv_id)
+VALUES ('AU-802A', 110000,'Variante de menor capacidad con 168 pasajeros (1 clase densa).', 3),
+       ('AU-802B', 140000,'Variante con capacidad intermedia para rutas cortas, 132 pasajeros.', 3),
+       ('AU-802C', 150000,'Variante con capacidad de 132 pasajeros, diseñada para mayor alcance.', 3),
+       ('AU-802D', 160000,'Modelo adaptado con capacidad de 149 pasajeros (alta densidad).', 3),
+       ('AU-802E', 200000,'Modelo optimizado con un alcance mejorado y capacidad de 189 pasajeros.', 3),
+       ('AU-802F', 130000,'Variante modernizada con capacidad para 215 pasajeros (1 clase densa).', 3);
 
 -- ==============================================
 -- Inserción de datos: Variantes del AU-747Plus
 -- ==============================================
-INSERT INTO MODELO_AVION_CONF (mda_nombre, mda_descripcion, fk_tiv_id)
-VALUES ('AU-747Platinium', 'Avión de pasillo único para recorridos medios.', 4),
-       ('AU-747Gold', 'Cabina ancha, bimotor, diseñado para rutas medias y largas.', 4),
-       ('AU-747Silver', 'Modelo con capacidad de 390 pasajeros y autonomía mejorada.', 4),
-       ('AU-747SilverB', 'Variante con mayor capacidad de pasajeros y optimización estructural.', 4);
+INSERT INTO MODELO_AVION_CONF (mda_nombre, mda_precio, mda_descripcion, fk_tiv_id)
+VALUES ('AU-747Platinium', 300000,'Avión de pasillo único para recorridos medios.', 4),
+       ('AU-747Gold', 400000,'Cabina ancha, bimotor, diseñado para rutas medias y largas.', 4),
+       ('AU-747Silver', 120000,'Modelo con capacidad de 390 pasajeros y autonomía mejorada.', 4),
+       ('AU-747SilverB', 130000,'Variante con mayor capacidad de pasajeros y optimización estructural.', 4);
 
 -- ==============================================
 -- Inserción de datos: Variantes del AU-87A
 -- ==============================================
-INSERT INTO MODELO_AVION_CONF (mda_nombre, mda_descripcion, fk_tiv_id)
-VALUES ('AU-87ABusiness', 'Variante del AU-87A diseñada para uso empresarial.', 5);
+INSERT INTO MODELO_AVION_CONF (mda_nombre, mda_precio, mda_descripcion, fk_tiv_id)
+VALUES ('AU-87ABusiness', 800000,'Variante del AU-87A diseñada para uso empresarial.', 5);
 
 
 -- ==============================================
