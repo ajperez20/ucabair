@@ -88,8 +88,65 @@ BEGIN
     );
 
     -- Establecer el mensaje de retorno
-    RETURN QUERY SELECT 
-        solicitud_pieza_id, 
-        'Solicitud creada exitosamente'::VARCHAR AS mensaje;
+    RETURN QUERY SELECT solicitud_pieza_id, 'Solicitud creada exitosamente'::VARCHAR AS mensaje;
 END;
 $$ LANGUAGE plpgsql;
+
+-- =================================================================
+-- Procedimiento almacenado para generar PRUEBA_PIEZA_SOLICITUD
+-- =================================================================
+
+DROP FUNCTION IF EXISTS registrar_prueba_solicitud_pieza(INT, INT, INT);
+
+CREATE OR REPLACE FUNCTION registrar_prueba_solicitud_pieza(
+    prueba_id INT,
+    solicitud_pieza_id INT,
+    zona_id INT
+)
+RETURNS TABLE (
+    zona INT,
+    prueba INT,
+    solicitud_pieza INT,
+    mensaje VARCHAR
+) AS $$
+BEGIN
+    -- Inserción en la tabla PRUEBA_PIEZA_SOLICITUD
+    INSERT INTO PRUEBA_PIEZA_SOLICITUD (
+        pzb_fecha_inicio,
+        pzb_fecha_fin,
+        pzb_resultado_prueba,
+        fk_zon_id,
+        fk_edz_id,
+        fk_pru_id
+    ) VALUES (
+        CURRENT_DATE,       -- pzb_fecha_inicio
+        NULL,               -- pzb_fecha_fin
+        'En proceso', -- pzb_resultado_prueba
+        zona_id,            -- fk_zon_id
+        solicitud_pieza_id, -- fk_edz_id
+        prueba_id           -- fk_pru_id
+    );
+
+    -- Inserción en la tabla ESTATUS_PP_SOLICITUD
+    INSERT INTO ESTATUS_PP_SOLICITUD (
+        api_fecha_inicio,
+        api_fecha_fin,
+        fk_zon_id,
+        fk_edz_id,
+        fk_pru_id,
+        fk_est_id
+    ) VALUES (
+        CURRENT_DATE,       -- api_fecha_inicio
+        NULL,               -- api_fecha_fin
+        zona_id,            -- fk_zon_id
+        solicitud_pieza_id, -- fk_edz_id
+        prueba_id,          -- fk_pru_id
+        3                   -- fk_est_id
+    );
+
+    -- Retornar los valores solicitados
+    RETURN QUERY
+    SELECT zona_id, prueba_id, solicitud_pieza_id, 'prueba creada exitosamente'::VARCHAR AS mensaje;
+END;
+$$ LANGUAGE plpgsql;
+
