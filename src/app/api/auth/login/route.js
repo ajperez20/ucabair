@@ -7,7 +7,7 @@ export async function POST(request) {
     const user = await authService.login(email, password);
 
     if (user) {
-      // Formatear la respuesta
+      // Formatear la respuesta incluyendo la información del cliente
       const userData = {
         id: user.usu_id,
         username: user.usu_nombre_usuario,
@@ -16,6 +16,10 @@ export async function POST(request) {
         roleDescription: user.rol_descripcion,
         privileges: user.privilegios,
         displayName: user.nombre_completo,
+        // Agregar información del cliente
+        clienteJuridicoId: user.cliente_juridico_id,
+        clienteNaturalId: user.cliente_natural_id,
+        tipoCliente: user.tipo_cliente,
       };
 
       return NextResponse.json({

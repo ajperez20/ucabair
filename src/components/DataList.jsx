@@ -12,8 +12,9 @@ export default function DataList({
   columns,
   onEdit,
   onDelete,
-  actions = [], // Nuevo prop para acciones personalizadas
+  actions = [],
   title,
+  deleteAction,
 }) {
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -65,9 +66,11 @@ export default function DataList({
                   {column.label}
                 </th>
               ))}
-              <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Acciones
-              </th>
+              {!deleteAction && (
+                <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Acciones
+                </th>
+              )}
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
@@ -83,41 +86,43 @@ export default function DataList({
                       : item[column.key]}
                   </td>
                 ))}
-                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <div className="flex justify-end space-x-2">
-                    {/* Acciones personalizadas */}
-                    {actions.map((action, index) => (
-                      <button
-                        key={index}
-                        onClick={() => action.onClick(item)}
-                        className="text-gray-600 hover:text-gray-900 inline-flex items-center"
-                        title={action.label}
-                      >
-                        <action.icon className="h-5 w-5" />
-                      </button>
-                    ))}
+                {!deleteAction && (
+                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                    <div className="flex justify-end space-x-2">
+                      {/* Acciones personalizadas */}
+                      {actions.map((action, index) => (
+                        <button
+                          key={index}
+                          onClick={() => action.onClick(item)}
+                          className="text-gray-600 hover:text-gray-900 inline-flex items-center"
+                          title={action.label}
+                        >
+                          <action.icon className="h-5 w-5" />
+                        </button>
+                      ))}
 
-                    {/* Acciones por defecto */}
-                    {onEdit && (
-                      <button
-                        onClick={() => onEdit(item)}
-                        className="text-blue-600 hover:text-blue-900 inline-flex items-center"
-                        title="Editar"
-                      >
-                        <PencilIcon className="h-5 w-5" />
-                      </button>
-                    )}
-                    {onDelete && (
-                      <button
-                        onClick={() => onDelete(item)}
-                        className="text-red-600 hover:text-red-900 inline-flex items-center"
-                        title="Eliminar"
-                      >
-                        <TrashIcon className="h-5 w-5" />
-                      </button>
-                    )}
-                  </div>
-                </td>
+                      {/* Acciones por defecto */}
+                      {onEdit && (
+                        <button
+                          onClick={() => onEdit(item)}
+                          className="text-blue-600 hover:text-blue-900 inline-flex items-center"
+                          title="Editar"
+                        >
+                          <PencilIcon className="h-5 w-5" />
+                        </button>
+                      )}
+                      {onDelete && (
+                        <button
+                          onClick={() => onDelete(item)}
+                          className="text-red-600 hover:text-red-900 inline-flex items-center"
+                          title="Eliminar"
+                        >
+                          <TrashIcon className="h-5 w-5" />
+                        </button>
+                      )}
+                    </div>
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>

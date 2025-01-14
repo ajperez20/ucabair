@@ -13,7 +13,7 @@ export default function AboutPage() {
             <div className="flex items-center justify-between mb-6">
               <h1 className="text-4xl font-bold text-white">Sobre Nosotros</h1>
               <Link
-                href="/login"
+                href="/auth/login"
                 className="text-blue-100 hover:text-white hover:underline transition-colors text-sm"
               >
                 ← Volver al login

@@ -49,7 +49,7 @@ export default function LoginPage() {
             Sistema de Gestión de Producción de Aviones
           </p>
           <Link
-            href="/login/about"
+            href="/auth/login/about"
             className="inline-block mt-4 text-blue-100 hover:text-white hover:underline transition-colors"
           >
             Conoce más sobre nosotros →
@@ -60,8 +60,6 @@ export default function LoginPage() {
       {/* Panel derecho - Formulario */}
       <div className="flex-1 flex items-center justify-center p-8 bg-gray-50">
         <div className="max-w-md w-full">
-          {/* ... otros elementos sin cambios ... */}
-
           <div className="bg-white p-8 rounded-xl shadow-lg space-y-6">
             <div className="space-y-2 text-center">
               <h2 className="text-3xl font-bold tracking-tight text-gray-900">
@@ -177,12 +175,6 @@ export default function LoginPage() {
             <p className="text-sm text-gray-500">
               © 2024 UcabAir. Todos los derechos reservados.
             </p>
-            <Link
-              href="/login/about"
-              className="text-sm text-blue-600 hover:text-blue-700 md:hidden"
-            >
-              Conoce más sobre nosotros →
-            </Link>
           </div>
         </div>
       </div>

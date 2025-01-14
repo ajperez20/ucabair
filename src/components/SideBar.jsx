@@ -114,6 +114,10 @@ const navigationConfig = {
           name: "Áreas y Zonas",
           href: "/dashboard/produccion/areas-zonas",
         },
+        {
+          name: "Solicitudes",
+          href: "/dashboard/produccion/solicitudes",
+        },
       ],
     },
     {
@@ -149,7 +153,7 @@ const navigationConfig = {
   ],
   CLIENTE: [
     {
-      name: "Mis Pedidos",
+      name: "Pedidos",
       href: "/dashboard/pedidos",
       icon: ClipboardDocumentListIcon,
     },
