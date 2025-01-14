@@ -441,78 +441,78 @@ VALUES
 -- Para Maracay
 
 -- Zona de alas
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id ,fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 1, 1, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 1, 1, 6);  -- En proceso
+('2024-01-01', NULL, 1, 1, 1, 1, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 1, 1, 1, 6);  -- En proceso
 
 -- Zona de estabilizadores
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id ,fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 1, 2, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 1, 2, 6);  -- En proceso
+('2024-02-01', NULL, 1, 1, 2, 1, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 1, 2, 1, 6);  -- En proceso
 
 -- Zona de alerones y flaps
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id ,fk_est_id)
 VALUES 
-('2024-03-01', NULL, 1, 1, 3, 3),  -- Pendiente
-('2024-03-01', NULL, 1, 1, 3, 6);  -- En proceso
+('2024-03-01', NULL, 1, 1, 3, 1, 3),  -- Pendiente
+('2024-03-01', NULL, 1, 1, 3, 1, 6);  -- En proceso
 
 -- Para Colón
 
 -- Zona de trenes de aterrizaje
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id ,fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 1, 9, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 1, 9, 6);  -- En proceso
+('2024-01-01', NULL, 1, 1, 9, 1, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 1, 9, 1, 6);  -- En proceso
 
 -- Zona de fuselajes
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
-VALUES 
-('2024-02-01', NULL, 1, 1, 10, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 1, 10, 6);  -- En proceso
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
+VALUES
+('2024-02-01', NULL, 1, 1, 10, 1, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 1, 10, 1, 6);  -- En proceso
 
 -- Para Guaira
 
 -- Zona de ensamblaje
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id ,fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 1, 15, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 1, 15, 6);  -- En proceso
+('2024-01-01', NULL, 1, 1, 15, 1, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 1, 15, 1, 6);  -- En proceso
 
 -- Zona de calibración
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id ,fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 1, 16, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 1, 16, 6);  -- En proceso
+('2024-02-01', NULL, 1, 1, 16, 1, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 1, 16, 1, 6);  -- En proceso
 
 -- Para Guatire
 
 -- Zona de integración
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id ,fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 1, 19, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 1, 19, 6);  -- En proceso
+('2024-01-01', NULL, 1, 1, 19, 1, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 1, 19, 1, 6);  -- En proceso
 
 -- Zona de soldadura
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id ,fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 1, 20, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 1, 20, 6);  -- En proceso
+('2024-02-01', NULL, 1, 1, 20, 1, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 1, 20, 1, 6);  -- En proceso
 
 -- Para Valencia
 
 -- Zona de porta equipajes
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id ,fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 1, 25, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 1, 25, 6);  -- En proceso
+('2024-01-01', NULL, 1, 1, 25, 1, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 1, 25, 1, 6);  -- En proceso
 
 -- Zona de piezas sanitarias
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 1, 26, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 1, 26, 6);  -- En proceso
+('2024-02-01', NULL, 1, 1, 26, 1, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 1, 26, 1, 6);  -- En proceso
 
 -- ==========================================================
 -- Inserción de datos: ESTATUS_FEA para AU-801
@@ -521,78 +521,78 @@ VALUES
 -- Para Maracay
 
 -- Zona de alas
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 2, 1, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 2, 1, 6);  -- En proceso
+('2024-01-01', NULL, 1, 2, 1, 2, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 2, 1, 2, 6);  -- En proceso
 
 -- Zona de estabilizadores
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 2, 2, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 2, 2, 6);  -- En proceso
+('2024-02-01', NULL, 1, 2, 2, 2, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 2, 2, 2, 6);  -- En proceso
 
 -- Zona de alerones y flaps
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-03-01', NULL, 1, 2, 3, 3),  -- Pendiente
-('2024-03-01', NULL, 1, 2, 3, 6);  -- En proceso
+('2024-03-01', NULL, 1, 2, 3, 2, 3),  -- Pendiente
+('2024-03-01', NULL, 1, 2, 3, 2, 6);  -- En proceso
 
 -- Para Colón
 
 -- Zona de trenes de aterrizaje
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 2, 9, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 2, 9, 6);  -- En proceso
+('2024-01-01', NULL, 1, 2, 9, 2, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 2, 9, 2, 6);  -- En proceso
 
 -- Zona de fuselajes
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 2, 10, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 2, 10, 6);  -- En proceso
+('2024-02-01', NULL, 1, 2, 10, 2, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 2, 10, 2, 6);  -- En proceso
 
 -- Para Guaira
 
 -- Zona de ensamblaje
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 2, 15, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 2, 15, 6);  -- En proceso
+('2024-01-01', NULL, 1, 2, 15, 2, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 2, 15, 2, 6);  -- En proceso
 
 -- Zona de calibración
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 2, 16, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 2, 16, 6);  -- En proceso
+('2024-02-01', NULL, 1, 2, 16, 2, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 2, 16, 2, 6);  -- En proceso
 
 -- Para Guatire
 
 -- Zona de integración
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 2, 19, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 2, 19, 6);  -- En proceso
+('2024-01-01', NULL, 1, 2, 19, 2, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 2, 19, 2, 6);  -- En proceso
 
 -- Zona de soldadura
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 2, 20, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 2, 20, 6);  -- En proceso
+('2024-02-01', NULL, 1, 2, 20, 2, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 2, 20, 2, 6);  -- En proceso
 
 -- Para Valencia
 
 -- Zona de porta equipajes
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 2, 25, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 2, 25, 6);  -- En proceso
+('2024-01-01', NULL, 1, 2, 25, 2, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 2, 25, 2, 6);  -- En proceso
 
 -- Zona de piezas sanitarias
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 2, 26, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 2, 26, 6);  -- En proceso
+('2024-02-01', NULL, 1, 2, 26, 2, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 2, 26, 2, 6);  -- En proceso
 
 -- ==========================================================
 -- Inserción de datos: ESTATUS_FEA para AU-802A
@@ -601,78 +601,78 @@ VALUES
 -- Para Maracay
 
 -- Zona de alas
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 6, 1, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 6, 1, 6);  -- En proceso
+('2024-01-01', NULL, 1, 6, 1, 3, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 6, 1, 3, 6);  -- En proceso
 
 -- Zona de estabilizadores
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 6, 2, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 6, 2, 6);  -- En proceso
+('2024-02-01', NULL, 1, 6, 2, 3, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 6, 2, 3, 6);  -- En proceso
 
 -- Zona de alerones y flaps
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-03-01', NULL, 1, 6, 3, 3),  -- Pendiente
-('2024-03-01', NULL, 1, 6, 3, 6);  -- En proceso
+('2024-03-01', NULL, 1, 6, 3, 3, 3),  -- Pendiente
+('2024-03-01', NULL, 1, 6, 3, 3, 6);  -- En proceso
 
 -- Para Colón
 
 -- Zona de trenes de aterrizaje
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 6, 9, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 6, 9, 6);  -- En proceso
+('2024-01-01', NULL, 1, 6, 9, 3, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 6, 9, 3, 6);  -- En proceso
 
 -- Zona de fuselajes
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 6, 10, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 6, 10, 6);  -- En proceso
+('2024-02-01', NULL, 1, 6, 10, 3, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 6, 10, 3, 6);  -- En proceso
 
 -- Para Guaira
 
 -- Zona de ensamblaje
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 6, 15, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 6, 15, 6);  -- En proceso
+('2024-01-01', NULL, 1, 6, 15, 3, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 6, 15, 3, 6);  -- En proceso
 
 -- Zona de calibración
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 6, 16, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 6, 16, 6);  -- En proceso
+('2024-02-01', NULL, 1, 6, 16, 3, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 6, 16, 3, 6);  -- En proceso
 
 -- Para Guatire
 
 -- Zona de integración
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 6, 19, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 6, 19, 6);  -- En proceso
+('2024-01-01', NULL, 1, 6, 19, 3, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 6, 19, 3, 6);  -- En proceso
 
 -- Zona de soldadura
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 6, 20, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 6, 20, 6);  -- En proceso
+('2024-02-01', NULL, 1, 6, 20, 3, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 6, 20, 3, 6);  -- En proceso
 
 -- Para Valencia
 
 -- Zona de porta equipajes
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 6, 25, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 6, 25, 6);  -- En proceso
+('2024-01-01', NULL, 1, 6, 25, 3, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 6, 25, 3, 6);  -- En proceso
 
 -- Zona de piezas sanitarias
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 6, 26, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 6, 26, 6);  -- En proceso
+('2024-02-01', NULL, 1, 6, 26, 3, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 6, 26, 3, 6);  -- En proceso
 
 -- ==========================================================
 -- Inserción de datos: ESTATUS_FEA para AU-747PLUS
@@ -681,78 +681,78 @@ VALUES
 -- Para Maracay
 
 -- Zona de alas
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 4, 1, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 4, 1, 6);  -- En proceso
+('2024-01-01', NULL, 1, 4, 1, 4, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 4, 1, 4, 6);  -- En proceso
 
 -- Zona de estabilizadores
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 4, 2, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 4, 2, 6);  -- En proceso
+('2024-02-01', NULL, 1, 4, 2, 4, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 4, 2, 4, 6);  -- En proceso
 
 -- Zona de alerones y flaps
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-03-01', NULL, 1, 4, 3, 3),  -- Pendiente
-('2024-03-01', NULL, 1, 4, 3, 6);  -- En proceso
+('2024-03-01', NULL, 1, 4, 3, 4, 3),  -- Pendiente
+('2024-03-01', NULL, 1, 4, 3, 4, 6);  -- En proceso
 
 -- Para Colón
 
 -- Zona de trenes de aterrizaje
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 4, 9, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 4, 9, 6);  -- En proceso
+('2024-01-01', NULL, 1, 4, 9, 4, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 4, 9, 4, 6);  -- En proceso
 
 -- Zona de fuselajes
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 4, 10, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 4, 10, 6);  -- En proceso
+('2024-02-01', NULL, 1, 4, 10, 4, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 4, 10, 4, 6);  -- En proceso
 
 -- Para Guaira
 
 -- Zona de ensamblaje
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 4, 15, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 4, 15, 6);  -- En proceso
+('2024-01-01', NULL, 1, 4, 15, 4, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 4, 15, 4, 6);  -- En proceso
 
 -- Zona de calibración
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 4, 16, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 4, 16, 6);  -- En proceso
+('2024-02-01', NULL, 1, 4, 16, 4, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 4, 16, 4, 6);  -- En proceso
 
 -- Para Guatire
 
 -- Zona de integración
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 4, 19, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 4, 19, 6);  -- En proceso
+('2024-01-01', NULL, 1, 4, 19, 4, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 4, 19, 4, 6);  -- En proceso
 
 -- Zona de soldadura
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 4, 20, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 4, 20, 6);  -- En proceso
+('2024-02-01', NULL, 1, 4, 20, 4, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 4, 20, 4, 6);  -- En proceso
 
 -- Para Valencia
 
 -- Zona de porta equipajes
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 4, 25, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 4, 25, 6);  -- En proceso
+('2024-01-01', NULL, 1, 4, 25, 4, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 4, 25, 4, 6);  -- En proceso
 
 -- Zona de piezas sanitarias
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 4, 26, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 4, 26, 6);  -- En proceso
+('2024-02-01', NULL, 1, 4, 26, 4, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 4, 26, 4, 6);  -- En proceso
 
 
 -- ESTATUS_FEA A PARTIR DE SOLICITUD DE CLIENTES JURÍDICOS
@@ -764,78 +764,78 @@ VALUES
 -- Para Maracay
 
 -- Zona de alas
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 11, 1, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 11, 1, 6);  -- En proceso
+('2024-01-01', NULL, 1, 11, 1, 5, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 11, 1, 5, 6);  -- En proceso
 
 -- Zona de estabilizadores
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 11, 2, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 11, 2, 6);  -- En proceso
+('2024-02-01', NULL, 1, 11, 2, 5, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 11, 2, 5, 6);  -- En proceso
 
 -- Zona de alerones y flaps
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-03-01', NULL, 1, 11, 3, 3),  -- Pendiente
-('2024-03-01', NULL, 1, 11, 3, 6);  -- En proceso
+('2024-03-01', NULL, 1, 11, 3, 5, 3),  -- Pendiente
+('2024-03-01', NULL, 1, 11, 3, 5, 6);  -- En proceso
 
 -- Para Colón
 
 -- Zona de trenes de aterrizaje
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 11, 9, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 11, 9, 6);  -- En proceso
+('2024-01-01', NULL, 1, 11, 9, 5, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 11, 9, 5, 6);  -- En proceso
 
 -- Zona de fuselajes
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 11, 10, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 11, 10, 6);  -- En proceso
+('2024-02-01', NULL, 1, 11, 10, 5, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 11, 10, 5, 6);  -- En proceso
 
 -- Para Guaira
 
 -- Zona de ensamblaje
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 11, 15, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 11, 15, 6);  -- En proceso
+('2024-01-01', NULL, 1, 11, 15, 5, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 11, 15, 5, 6);  -- En proceso
 
 -- Zona de calibración
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 11, 16, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 11, 16, 6);  -- En proceso
+('2024-02-01', NULL, 1, 11, 16, 5, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 11, 16, 5, 6);  -- En proceso
 
 -- Para Guatire
 
 -- Zona de integración
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 11, 19, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 11, 19, 6);  -- En proceso
+('2024-01-01', NULL, 1, 11, 19, 5, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 11, 19, 5, 6);  -- En proceso
 
 -- Zona de soldadura
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 11, 20, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 11, 20, 6);  -- En proceso
+('2024-02-01', NULL, 1, 11, 20, 5, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 11, 20, 5, 6);  -- En proceso
 
 -- Para Valencia
 
 -- Zona de porta equipajes
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 11, 25, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 11, 25, 6);  -- En proceso
+('2024-01-01', NULL, 1, 11, 25, 5, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 11, 25, 5, 6);  -- En proceso
 
 -- Zona de piezas sanitarias
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 11, 26, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 11, 26, 6);  -- En proceso
+('2024-02-01', NULL, 1, 11, 26, 5, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 11, 26, 5, 6);  -- En proceso
 
 -- ==========================================================
 -- Inserción de datos: ESTATUS_FEA para AU-747GOLD
@@ -844,78 +844,78 @@ VALUES
 -- Para Maracay
 
 -- Zona de alas
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 13, 1, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 13, 1, 6);  -- En proceso
+('2024-01-01', NULL, 1, 13, 1, 6, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 13, 1, 6, 6);  -- En proceso
 
 -- Zona de estabilizadores
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 13, 2, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 13, 2, 6);  -- En proceso
+('2024-02-01', NULL, 1, 13, 2, 6, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 13, 2, 6, 6);  -- En proceso
 
 -- Zona de alerones y flaps
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-03-01', NULL, 1, 13, 3, 3),  -- Pendiente
-('2024-03-01', NULL, 1, 13, 3, 6);  -- En proceso
+('2024-03-01', NULL, 1, 13, 3, 6, 3),  -- Pendiente
+('2024-03-01', NULL, 1, 13, 3, 6, 6);  -- En proceso
 
 -- Para Colón
 
 -- Zona de trenes de aterrizaje
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 13, 9, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 13, 9, 6);  -- En proceso
+('2024-01-01', NULL, 1, 13, 9, 6, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 13, 9, 6, 6);  -- En proceso
 
 -- Zona de fuselajes
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 13, 10, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 13, 10, 6);  -- En proceso
+('2024-02-01', NULL, 1, 13, 10, 6, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 13, 10, 6, 6);  -- En proceso
 
 -- Para Guaira
 
 -- Zona de ensamblaje
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 13, 15, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 13, 15, 6);  -- En proceso
+('2024-01-01', NULL, 1, 13, 15, 6, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 13, 15, 6, 6);  -- En proceso
 
 -- Zona de calibración
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 13, 16, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 13, 16, 6);  -- En proceso
+('2024-02-01', NULL, 1, 13, 16, 6, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 13, 16, 6, 6);  -- En proceso
 
 -- Para Guatire
 
 -- Zona de integración
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 13, 19, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 13, 19, 6);  -- En proceso
+('2024-01-01', NULL, 1, 13, 19, 6, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 13, 19, 6, 6);  -- En proceso
 
 -- Zona de soldadura
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 13, 20, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 13, 20, 6);  -- En proceso
+('2024-02-01', NULL, 1, 13, 20, 6, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 13, 20, 6, 6);  -- En proceso
 
 -- Para Valencia
 
 -- Zona de porta equipajes
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 13, 25, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 13, 25, 6);  -- En proceso
+('2024-01-01', NULL, 1, 13, 25, 6, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 13, 25, 6, 6);  -- En proceso
 
 -- Zona de piezas sanitarias
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 13, 26, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 13, 26, 6);  -- En proceso
+('2024-02-01', NULL, 1, 13, 26, 6, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 13, 26, 6, 6);  -- En proceso
 
 -- ==========================================================
 -- Inserción de datos: ESTATUS_FEA para AU-87ABusiness
@@ -924,78 +924,78 @@ VALUES
 -- Para Maracay
 
 -- Zona de alas
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 16, 1, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 16, 1, 6);  -- En proceso
+('2024-01-01', NULL, 1, 16, 1, 7, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 16, 1, 7, 6);  -- En proceso
 
 -- Zona de estabilizadores
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 16, 2, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 16, 2, 6);  -- En proceso
+('2024-02-01', NULL, 1, 16, 2, 7, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 16, 2, 7, 6);  -- En proceso
 
 -- Zona de alerones y flaps
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-03-01', NULL, 1, 16, 3, 3),  -- Pendiente
-('2024-03-01', NULL, 1, 16, 3, 6);  -- En proceso
+('2024-03-01', NULL, 1, 16, 3, 7, 3),  -- Pendiente
+('2024-03-01', NULL, 1, 16, 3, 7, 6);  -- En proceso
 
 -- Para Colón
 
 -- Zona de trenes de aterrizaje
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 16, 9, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 16, 9, 6);  -- En proceso
+('2024-01-01', NULL, 1, 16, 9, 7, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 16, 9, 7, 6);  -- En proceso
 
 -- Zona de fuselajes
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 16, 10, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 16, 10, 6);  -- En proceso
+('2024-02-01', NULL, 1, 16, 10, 7, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 16, 10, 7, 6);  -- En proceso
 
 -- Para Guaira
 
 -- Zona de ensamblaje
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 16, 15, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 16, 15, 6);  -- En proceso
+('2024-01-01', NULL, 1, 16, 15, 7, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 16, 15, 7, 6);  -- En proceso
 
 -- Zona de calibración
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 16, 16, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 16, 16, 6);  -- En proceso
+('2024-02-01', NULL, 1, 16, 16, 7, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 16, 16, 7, 6);  -- En proceso
 
 -- Para Guatire
 
 -- Zona de integración
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 16, 19, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 16, 19, 6);  -- En proceso
+('2024-01-01', NULL, 1, 16, 19, 7, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 16, 19, 7, 6);  -- En proceso
 
 -- Zona de soldadura
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 16, 20, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 16, 20, 6);  -- En proceso
+('2024-02-01', NULL, 1, 16, 20, 7, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 16, 20, 7, 6);  -- En proceso
 
 -- Para Valencia
 
 -- Zona de porta equipajes
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 16, 25, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 16, 25, 6);  -- En proceso
+('2024-01-01', NULL, 1, 16, 25, 7, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 16, 25, 7, 6);  -- En proceso
 
 -- Zona de piezas sanitarias
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 16, 26, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 16, 26, 6);  -- En proceso
+('2024-02-01', NULL, 1, 16, 26, 7, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 16, 26, 7, 6);  -- En proceso
 
 -- ==========================================================
 -- Inserción de datos: ESTATUS_FEA para AU-802E
@@ -1004,78 +1004,78 @@ VALUES
 -- Para Maracay
 
 -- Zona de alas
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 10, 1, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 10, 1, 6);  -- En proceso
+('2024-01-01', NULL, 1, 10, 1, 8, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 10, 1, 8, 6);  -- En proceso
 
 -- Zona de estabilizadores
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 10, 2, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 10, 2, 6);  -- En proceso
+('2024-02-01', NULL, 1, 10, 2, 8, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 10, 2, 8, 6);  -- En proceso
 
 -- Zona de alerones y flaps
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-03-01', NULL, 1, 10, 3, 3),  -- Pendiente
-('2024-03-01', NULL, 1, 10, 3, 6);  -- En proceso
+('2024-03-01', NULL, 1, 10, 3, 8, 3),  -- Pendiente
+('2024-03-01', NULL, 1, 10, 3, 8, 6);  -- En proceso
 
 -- Para Colón
 
 -- Zona de trenes de aterrizaje
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 10, 9, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 10, 9, 6);  -- En proceso
+('2024-01-01', NULL, 1, 10, 9, 8, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 10, 9, 8, 6);  -- En proceso
 
 -- Zona de fuselajes
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 10, 10, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 10, 10, 6);  -- En proceso
+('2024-02-01', NULL, 1, 10, 10, 8, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 10, 10, 8, 6);  -- En proceso
 
 -- Para Guaira
 
 -- Zona de ensamblaje
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 10, 15, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 10, 15, 6);  -- En proceso
+('2024-01-01', NULL, 1, 10, 15, 8, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 10, 15, 8, 6);  -- En proceso
 
 -- Zona de calibración
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 10, 16, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 10, 16, 6);  -- En proceso
+('2024-02-01', NULL, 1, 10, 16, 8, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 10, 16, 8, 6);  -- En proceso
 
 -- Para Guatire
 
 -- Zona de integración
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 10, 19, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 10, 19, 6);  -- En proceso
+('2024-01-01', NULL, 1, 10, 19, 8, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 10, 19, 8, 6);  -- En proceso
 
 -- Zona de soldadura
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 10, 20, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 10, 20, 6);  -- En proceso
+('2024-02-01', NULL, 1, 10, 20, 8, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 10, 20, 8, 6);  -- En proceso
 
 -- Para Valencia
 
 -- Zona de porta equipajes
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-01-01', NULL, 1, 10, 25, 3),  -- Pendiente
-('2024-01-01', NULL, 1, 10, 25, 6);  -- En proceso
+('2024-01-01', NULL, 1, 10, 25, 8, 3),  -- Pendiente
+('2024-01-01', NULL, 1, 10, 25, 8, 6);  -- En proceso
 
 -- Zona de piezas sanitarias
-INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id)
+INSERT INTO ESTATUS_FEA (efa_fecha_inicio, efa_fecha_fin, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id)
 VALUES 
-('2024-02-01', NULL, 1, 10, 26, 3),  -- Pendiente
-('2024-02-01', NULL, 1, 10, 26, 6);  -- En proceso
+('2024-02-01', NULL, 1, 10, 26, 8, 3),  -- Pendiente
+('2024-02-01', NULL, 1, 10, 26, 8, 6);  -- En proceso
 
 -- ==========================================================
 -- Inserción de datos: ESTATUS_ESP (Cliente Naturales)

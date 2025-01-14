@@ -524,174 +524,174 @@ VALUES
 -- Solicitudes para el modelo AU-80
 
 -- Maracay (Zona de alas)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(2, 1, 1, 1, 1);  -- Ala Recta
+(2, 1, 1, 1, 1, 1);  -- Ala Recta
 
 -- Maracay (Zona de estabilizadores)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(3, 1, 1, 2, 6);   -- Forma Estándar
+(3, 1, 1, 2, 1, 6);   -- Forma Estándar
 
 -- Maracay (Zona de alerones y flaps)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(4, 1, 1, 3, 12); -- Flaps
+(4, 1, 1, 3, 1, 12); -- Flaps
 
 -- Colón (Zona de trenes de aterrizaje)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(3, 1, 1, 9, 17);  -- Tren Fijo
+(3, 1, 1, 9, 1, 17);  -- Tren Fijo
 
 -- Colón (Zona de fuselajes)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(1, 1, 1, 10, 16);-- Fuselaje
+(1, 1, 1, 10, 1, 16);-- Fuselaje
 
 -- La Guaira (Zona de ensamblaje y calibración)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(4, 1, 1, 15, 19); -- Motor
+(4, 1, 1, 15, 1, 19); -- Motor
 
 -- Guatire (Zona de integración y soldadura)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(3, 1, 1, 19, 20);-- Anemómetro
+(3, 1, 1, 19, 1, 20);-- Anemómetro
 
 -- Valencia (Zona de porta equipajes y piezas sanitarias)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(30, 1, 1, 25, 39),-- Porta Equipajes
-(3, 1, 1, 26, 42);-- Piezas Sanitarias
+(30, 1, 1, 25, 1, 39),-- Porta Equipajes
+(3, 1, 1, 26, 1, 42);-- Piezas Sanitarias
 
 -- Solicitudes ajustadas para el modelo AU-801
 
 -- Maracay (Zona de alas)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(2, 1, 2, 1, 2);  -- Ala Trapezoidal
+(2, 1, 2, 1, 2, 2);  -- Ala Trapezoidal
 
 -- Maracay (Zona de estabilizadores)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(4, 1, 2, 2, 8);   -- Forma en Cruz
+(4, 1, 2, 2, 2, 8);   -- Forma en Cruz
 
 -- Maracay (Zona de alerones y flaps)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(4, 1, 2, 3, 12); -- Flaps
+(4, 1, 2, 3, 2, 12); -- Flaps
 
 -- Colón (Zona de trenes de aterrizaje)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(3, 1, 2, 9, 18);  -- Tren Retráctil
+(3, 1, 2, 9, 2, 18);  -- Tren Retráctil
 
 -- Colón (Zona de fuselajes)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(1, 1, 2, 10, 16);-- Fuselaje
+(1, 1, 2, 10, 2, 16);-- Fuselaje
 
 -- La Guaira (Zona de ensamblaje y calibración)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(3, 1, 2, 15, 19); -- Motor
+(3, 1, 2, 15, 2, 19); -- Motor
 
 -- Guatire (Zona de integración y soldadura)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(1, 1, 2, 19, 20);-- Anemómetro
+(1, 1, 2, 19, 2, 20);-- Anemómetro
 
 -- Valencia (Zona de porta equipajes y piezas sanitarias)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(30, 1, 2, 25, 39),-- Porta Equipajes
-(3, 1, 2, 26, 42);-- Piezas Sanitarias
+(30, 1, 2, 25, 2, 39),-- Porta Equipajes
+(3, 1, 2, 26, 2, 42);-- Piezas Sanitarias
 
 -- Solicitudes para el modelo AU-802A 
 
 -- Maracay (Zona de alas)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(2, 1, 6, 1, 1);  -- Ala Recta
+(2, 1, 6, 1, 3, 1);  -- Ala Recta
 
 -- Maracay (Zona de estabilizadores)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(2, 1, 6, 2, 6);   -- Forma Estándar
+(2, 1, 6, 2, 3, 6);   -- Forma Estándar
 
 -- Maracay (Zona de alerones y flaps)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(4, 1, 6, 3, 12); -- Flaps
+(4, 1, 6, 3, 3, 12); -- Flaps
 
 -- Colón (Zona de trenes de aterrizaje)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(3, 1, 6, 9, 18);  -- Tren Retráctil
+(3, 1, 6, 9, 3, 18);  -- Tren Retráctil
 
 -- Colón (Zona de fuselajes)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(1, 1, 6, 10, 16);-- Fuselaje
+(1, 1, 6, 10, 3, 16);-- Fuselaje
 
 -- La Guaira (Zona de ensamblaje y calibración)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(2, 1, 6, 15, 19); -- Motor
+(2, 1, 6, 15, 3, 19); -- Motor
 
 -- Guatire (Zona de integración y soldadura)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(5, 1, 6, 19, 20);-- Anemómetro
+(5, 1, 6, 19, 3, 20);-- Anemómetro
 
 -- Valencia (Zona de porta equipajes y piezas sanitarias)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(10, 1, 6, 25, 39),-- Porta Equipajes
-(3, 1, 6, 26, 42);-- Piezas Sanitarias
+(10, 1, 6, 25, 3, 39),-- Porta Equipajes
+(3, 1, 6, 26, 3, 42);-- Piezas Sanitarias
 
 -- Solicitudes para el modelo AU-747PLUS 
 
 -- Maracay (Zona de alas)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(2, 1, 4, 1, 2);  -- Ala Trapezoidal
+(2, 1, 4, 1, 4, 2);  -- Ala Trapezoidal
 
 -- Maracay (Zona de estabilizadores)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(2, 1, 4, 2, 8);   -- Forma en Cruz
+(2, 1, 4, 2, 4, 8);   -- Forma en Cruz
 
 -- Maracay (Zona de alerones y flaps)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(4, 1, 4, 3, 12); -- Flaps
+(4, 1, 4, 3, 4, 12); -- Flaps
 
 -- Colón (Zona de trenes de aterrizaje)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(3, 1, 4, 9, 17);  -- Tren Fijo
+(3, 1, 4, 9, 4, 17);  -- Tren Fijo
 
 -- Colón (Zona de fuselajes)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(1, 1, 4, 10, 16);-- Fuselaje
+(1, 1, 4, 10, 4, 16);-- Fuselaje
 
 -- La Guaira (Zona de ensamblaje y calibración)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(2, 1, 4, 15, 19); -- Motor
+(2, 1, 4, 15, 4, 19); -- Motor
 
 -- Guatire (Zona de integración y soldadura)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(5, 1, 4, 19, 20);-- Anemómetro
+(5, 1, 4, 19, 4, 20);-- Anemómetro
 
 -- Valencia (Zona de porta equipajes y piezas sanitarias)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(10, 1, 4, 25, 39),-- Porta Equipajes
-(3, 1, 4, 26, 42);-- Piezas Sanitarias
+(10, 1, 4, 25, 4, 39),-- Porta Equipajes
+(3, 1, 4, 26, 4, 42);-- Piezas Sanitarias
 
 -- ===================================================================
 -- Inserción de datos: ENSAMBLE_SOLICITUD_PIEZA (Clientes Jurídicos)
@@ -699,174 +699,174 @@ VALUES
 -- Solicitudes para el modelo AU-802F
 
 -- Maracay (Zona de alas)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(2, 1, 11, 1, 4);  -- Ala en Flecha
+(2, 1, 11, 1, 5, 4);  -- Ala en Flecha
 
 -- Maracay (Zona de estabilizadores)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(2, 1, 11, 2, 10); -- Forma 3 Verticales
+(2, 1, 11, 2, 5, 10); -- Forma 3 Verticales
 
 -- Maracay (Zona de alerones y flaps)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(4, 1, 11, 3, 12); -- Flaps
+(4, 1, 11, 3, 5, 12); -- Flaps
 
 -- Colón (Zona de trenes de aterrizaje)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(3, 1, 11, 9, 18);  -- Tren Retráctil
+(3, 1, 11, 9, 5, 18);  -- Tren Retráctil
 
 -- Colón (Zona de fuselajes)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(1, 1, 11, 10, 16);-- Fuselaje
+(1, 1, 11, 10, 5, 16);-- Fuselaje
 
 -- La Guaira (Zona de ensamblaje y calibración)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(2, 1, 11, 15, 19); -- Motor
+(2, 1, 11, 15, 5, 19); -- Motor
 
 -- Guatire (Zona de integración y soldadura)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(5, 1, 11, 19, 20);-- Anemómetro
+(5, 1, 11, 19, 5, 20);-- Anemómetro
 
 -- Valencia (Zona de porta equipajes y piezas sanitarias)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(10, 1, 11, 25, 39),-- Porta Equipajes
-(3, 1, 11, 26, 42);-- Piezas Sanitarias
+(10, 1, 11, 25, 5, 39),-- Porta Equipajes
+(3, 1, 11, 26, 5, 42);-- Piezas Sanitarias
 
 -- Solicitudes para el modelo AU-747Gold
 
 -- Maracay (Zona de alas)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(2, 1, 13, 1, 3);  -- Ala Delta
+(2, 1, 13, 1, 6, 3);  -- Ala Delta
 
 -- Maracay (Zona de estabilizadores)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(2, 1, 13, 2, 11); -- Forma en V
+(2, 1, 13, 2, 6, 11); -- Forma en V
 
 -- Maracay (Zona de alerones y flaps)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(4, 1, 13, 3, 12); -- Flaps
+(4, 1, 13, 3, 6, 12); -- Flaps
 
 -- Colón (Zona de trenes de aterrizaje)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(3, 1, 13, 9, 17);  -- Tren Fijo
+(3, 1, 13, 9, 6, 17);  -- Tren Fijo
 
 -- Colón (Zona de fuselajes)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(1, 1, 13, 10, 16);-- Fuselaje
+(1, 1, 13, 10, 6, 16);-- Fuselaje
 
 -- La Guaira (Zona de ensamblaje y calibración)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(2, 1, 13, 15, 19); -- Motor
+(2, 1, 13, 15, 6, 19); -- Motor
 
 -- Guatire (Zona de integración y soldadura)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(5, 1, 13, 19, 20);-- Anemómetro
+(5, 1, 13, 19, 6, 20);-- Anemómetro
 
 -- Valencia (Zona de porta equipajes y piezas sanitarias)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(10, 1, 13, 25, 39),-- Porta Equipajes
-(3, 1, 13, 26, 42);-- Piezas Sanitarias
+(10, 1, 13, 25, 6, 39),-- Porta Equipajes
+(3, 1, 13, 26, 6, 42);-- Piezas Sanitarias
 
 -- Solicitudes para el modelo AU-87ABusiness
 
 -- Maracay (Zona de alas)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(2, 1, 16, 1, 5);  -- Ala en Flecha Inversa
+(2, 1, 16, 1, 7, 5);  -- Ala en Flecha Inversa
 
 -- Maracay (Zona de estabilizadores)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(2, 1, 16, 2, 7);  -- Forma en T
+(2, 1, 16, 2, 7, 7);  -- Forma en T
 
 -- Maracay (Zona de alerones y flaps)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(4, 1, 16, 3, 12); -- Flaps
+(4, 1, 16, 3, 7, 12); -- Flaps
 
 -- Colón (Zona de trenes de aterrizaje)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(3, 1, 16, 9, 17);  -- Tren Fijo
+(3, 1, 16, 9, 7, 17);  -- Tren Fijo
 
 -- Colón (Zona de fuselajes)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(1, 1, 16, 10, 16);-- Fuselaje
+(1, 1, 16, 10, 7, 16);-- Fuselaje
 
 -- La Guaira (Zona de ensamblaje y calibración)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(2, 1, 16, 15, 19); -- Motor
+(2, 1, 16, 15, 7, 19); -- Motor
 
 -- Guatire (Zona de integración y soldadura)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(5, 1, 16, 19, 20);-- Anemómetro
+(5, 1, 16, 19, 7, 20);-- Anemómetro
 
 -- Valencia (Zona de porta equipajes y piezas sanitarias)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(10, 1, 16, 25, 39),-- Porta Equipajes
-(3, 1, 16, 26, 42);-- Piezas Sanitarias
+(10, 1, 16, 25, 7, 39),-- Porta Equipajes
+(3, 1, 16, 26, 7, 42);-- Piezas Sanitarias
 
 -- Solicitudes para el modelo AU-802E
 
 -- Maracay (Zona de alas)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(2, 1, 10, 1, 2);  -- Ala Trapezoidal
+(2, 1, 10, 1, 8, 2);  -- Ala Trapezoidal
 
 -- Maracay (Zona de estabilizadores)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(2, 1, 10, 2, 6);  -- Forma Estándar
+(2, 1, 10, 2, 8, 6);  -- Forma Estándar
 
 -- Maracay (Zona de alerones y flaps)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(4, 1, 10, 3, 12); -- Flaps
+(4, 1, 10, 3, 8, 12); -- Flaps
 
 -- Colón (Zona de trenes de aterrizaje)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(3, 1, 10, 9, 17);  -- Tren Fijo
+(3, 1, 10, 9, 8, 17);  -- Tren Fijo
 
 -- Colón (Zona de fuselajes)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(1, 1, 10, 10, 16);-- Fuselaje
+(1, 1, 10, 10, 8, 16);-- Fuselaje
 
 -- La Guaira (Zona de ensamblaje y calibración)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(2, 1, 10, 15, 19); -- Motor
+(2, 1, 10, 15, 8, 19); -- Motor
 
 -- Guatire (Zona de integración y soldadura)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(5, 1, 10, 19, 20);-- Anemómetro
+(5, 1, 10, 19, 8, 20);-- Anemómetro
 
 -- Valencia (Zona de porta equipajes y piezas sanitarias)
-INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_pie_id)
+INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (edz_cantidad_piezas, fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_pie_id)
 VALUES 
-(10, 1, 10, 25, 39),-- Porta Equipajes
-(3, 1, 10, 26, 42);-- Piezas Sanitarias
+(10, 1, 10, 25, 8, 39),-- Porta Equipajes
+(3, 1, 10, 26, 8, 42);-- Piezas Sanitarias
 
 -- ======================================
 

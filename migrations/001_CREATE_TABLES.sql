@@ -713,7 +713,7 @@ CREATE TABLE FASE_ENSAMBLE_AVION
     fk_zon_id        INT  NOT NULL,
     fk_sct_id        INT  NOT NULL,
     CONSTRAINT pk_fln
-        PRIMARY KEY (fk_eav_id, fk_mda_id, fk_zon_id),
+        PRIMARY KEY (fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id),
     CONSTRAINT fk_proceso_avion
         FOREIGN KEY (fk_eav_id)
             REFERENCES PROCESO_ENSAMBLE_AVION_EJEC (eav_id)
@@ -741,11 +741,12 @@ CREATE TABLE ESTATUS_FEA
     fk_mda_id        INT  NOT NULL,
     fk_zon_id        INT  NOT NULL,
     fk_est_id        INT  NOT NULL,
+    fk_sct_id        INT  NOT NULL,
     CONSTRAINT pk_estatus_fea
-        PRIMARY KEY (fk_eav_id, fk_mda_id, fk_zon_id, fk_est_id),
+        PRIMARY KEY (fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id, fk_est_id),
     CONSTRAINT fk_fase_ensamble_avion
-        FOREIGN KEY (fk_eav_id, fk_mda_id, fk_zon_id)
-            REFERENCES FASE_ENSAMBLE_AVION (fk_eav_id, fk_mda_id, fk_zon_id)
+        FOREIGN KEY (fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id)
+            REFERENCES FASE_ENSAMBLE_AVION (fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id)
             ON DELETE CASCADE,
     CONSTRAINT fk_estatus
         FOREIGN KEY (fk_est_id)
@@ -761,10 +762,11 @@ CREATE TABLE ENSAMBLE_SOLICITUD_PIEZA
     fk_eav_id           INT NOT NULL,
     fk_mda_id           INT NOT NULL,
     fk_zon_id           INT NOT NULL,
+    fk_sct_id           INT NOT NULL,
     fk_pie_id           INT NOT NULL,
     CONSTRAINT fk_fln
-        FOREIGN KEY (fk_eav_id, fk_mda_id, fk_zon_id)
-            REFERENCES FASE_ENSAMBLE_AVION (fk_eav_id, fk_mda_id, fk_zon_id)
+        FOREIGN KEY (fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id)
+            REFERENCES FASE_ENSAMBLE_AVION (fk_eav_id, fk_mda_id, fk_zon_id, fk_sct_id)
             ON DELETE CASCADE,
     CONSTRAINT fk_pie_id
         FOREIGN KEY (fk_pie_id)
