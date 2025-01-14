@@ -38,7 +38,7 @@ $$ LANGUAGE plpgsql;
 
 -- =================================================================
 -- Procedimiento almacenado para generar ENSAMBLE_SOLICITUD_PIEZA
--- =================================================================
+--=================================================================
 
 DROP FUNCTION IF EXISTS registrar_solicitud_ensamble_pieza(INT, INT, INT, INT, INT, INT);
 
@@ -56,39 +56,52 @@ RETURNS TABLE (
 ) AS $$
 DECLARE
     solicitud_pieza_id INT;
+    cantidad_pieza_disponible INT;
 BEGIN
-    -- Insertar en ENSAMBLE_SOLICITUD_PIEZA y obtener el edz_id generado
-    INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (
-        edz_cantidad_piezas, 
-        fk_eav_id, 
-        fk_mda_id, 
-        fk_zon_id, 
-        fk_sct_id, 
-        fk_pie_id
-    ) VALUES (
-        cantidad_pieza, 
-        proceso_id, 
-        modelo_id, 
-        zona_id, 
-        solicitud_id, 
-        pieza_id
-    ) RETURNING edz_id INTO solicitud_pieza_id;
 
-    -- Insertar en ESTATUS_ESP
-    INSERT INTO ESTATUS_ESP (
-        ets_fecha_inicio, 
-        ets_fecha_fin, 
-        fk_est_id, 
-        fk_edz_id
-    ) VALUES (
-        CURRENT_DATE, 
-        NULL, 
-        3,
-        solicitud_pieza_id
-    );
+    SELECT pie_cantidad_disponible
+    INTO cantidad_pieza_disponible
+    FROM PIEZA_STOCK
+    WHERE pie_id = pieza_id;
 
-    -- Establecer el mensaje de retorno
-    RETURN QUERY SELECT solicitud_pieza_id, 'Solicitud creada exitosamente'::VARCHAR AS mensaje;
+    IF cantidad_pieza > cantidad_pieza_disponible THEN
+        RETURN QUERY SELECT 0, 'Cantidad Solicitada Excede La Disponible'::VARCHAR AS mensaje;
+    END IF;
+
+    IF cantidad_pieza <= cantidad_pieza_disponible THEN
+        -- Insertar en ENSAMBLE_SOLICITUD_PIEZA y obtener el edz_id generado
+        INSERT INTO ENSAMBLE_SOLICITUD_PIEZA (
+            edz_cantidad_piezas, 
+            fk_eav_id, 
+            fk_mda_id, 
+            fk_zon_id, 
+            fk_sct_id, 
+            fk_pie_id
+        ) VALUES (
+            cantidad_pieza, 
+            proceso_id, 
+            modelo_id, 
+            zona_id, 
+            solicitud_id, 
+            pieza_id
+        ) RETURNING edz_id INTO solicitud_pieza_id;
+
+        -- Insertar en ESTATUS_ESP
+        INSERT INTO ESTATUS_ESP (
+            ets_fecha_inicio, 
+            ets_fecha_fin, 
+            fk_est_id, 
+            fk_edz_id
+        ) VALUES (
+            CURRENT_DATE, 
+            NULL, 
+            3,
+            solicitud_pieza_id
+        );
+
+        -- Establecer el mensaje de retorno
+        RETURN QUERY SELECT solicitud_pieza_id, 'Solicitud creada exitosamente'::VARCHAR AS mensaje;
+    END IF;
 END;
 $$ LANGUAGE plpgsql;
 
