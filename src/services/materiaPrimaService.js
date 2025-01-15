@@ -7,8 +7,7 @@ export const materiaPrimaService = {
                 mps.mtp_id as id,
                 mp.rpm_nombre,
                 mp.rpm_descripcion,
-                mps.mtp_unidad_medida,
-                mps.mtp_cantida_disponible as cantidad_disponible
+                mps.mtp_unidad_medida
             FROM proveedor_mp_stock mps
                      JOIN materia_prima mp ON mps.fk_rpm_id = mp.rpm_id
             ORDER BY mp.rpm_nombre
@@ -23,8 +22,7 @@ export const materiaPrimaService = {
                 mps.mtp_id as id,
                 mp.rpm_nombre,
                 mp.rpm_descripcion,
-                mps.mtp_unidad_medida,
-                mps.mtp_cantida_disponible as cantidad_disponible
+                mps.mtp_unidad_medida
             FROM proveedor_mp_stock mps
                      JOIN materia_prima mp ON mps.fk_rpm_id = mp.rpm_id
             WHERE mps.mtp_id = $1
@@ -37,8 +35,7 @@ export const materiaPrimaService = {
     const query = `
             INSERT INTO proveedor_mp_stock (
                 fk_rpm_id,
-                mtp_unidad_medida,
-                mtp_cantida_disponible
+                mtp_unidad_medida
             )
             VALUES ($1, $2, $3)
             RETURNING mtp_id as id
@@ -46,7 +43,6 @@ export const materiaPrimaService = {
     const result = await pool.query(query, [
       materiaPrima.fk_rpm_id,
       materiaPrima.mtp_unidad_medida,
-      materiaPrima.mtp_cantida_disponible,
     ]);
     return result.rows[0];
   },
@@ -56,15 +52,13 @@ export const materiaPrimaService = {
             UPDATE proveedor_mp_stock
             SET
                 fk_rpm_id = $1,
-                mtp_unidad_medida = $2,
-                mtp_cantida_disponible = $3
+                mtp_unidad_medida = $2
             WHERE mtp_id = $4
             RETURNING mtp_id as id
         `;
     const result = await pool.query(query, [
       materiaPrima.fk_rpm_id,
       materiaPrima.mtp_unidad_medida,
-      materiaPrima.mtp_cantida_disponible,
       id,
     ]);
     return result.rows[0];

@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import { useEmpleadosStats } from "@/hooks/useEmpleadosStats";
 import { useClientesStats } from "@/hooks/useClientesStats";
-import { usePiezasStats } from "@/hooks/usePiezasStats";
+import { useInventarioStats } from "@/hooks/useInventarioStats";
+import { useSolicitudesStats } from "@/hooks/useSolicitudesStats";
 import { useAvionesStats } from "@/hooks/useAvionesStats";
 import {
   UsersIcon,
@@ -26,8 +27,9 @@ export default function DashboardPage() {
   const [userRole, setUserRole] = useState(null);
   const empleadosStats = useEmpleadosStats();
   const clientesStats = useClientesStats();
-  const piezasStats = usePiezasStats();
   const avionesStats = useAvionesStats();
+  const { materiaPrima, isLoading: isInventarioLoading } = useInventarioStats();
+  const solicitudesStats = useSolicitudesStats();
 
   useEffect(() => {
     const userData = localStorage.getItem("user");
@@ -56,64 +58,48 @@ export default function DashboardPage() {
         color: "indigo",
         href: "/dashboard/clientes",
         loading: clientesStats.isLoading,
-        details: [
-          {
-            label: "Naturales",
-            value: clientesStats.clientesNaturales || 0,
-          },
-          {
-            label: "Jurídicos",
-            value: clientesStats.clientesJuridicos || 0,
-          },
-        ],
       },
       {
-        title: "Aviones",
-        total: avionesStats.total || 0,
-        nuevos: avionesStats.completados || 0,
-        icon: PaperAirplaneIcon,
-        color: "green",
-        href: "/dashboard/produccion/aviones",
-        loading: avionesStats.isLoading,
-        details: [
-          {
-            label: "En Proceso",
-            value: avionesStats.enProceso || 0,
-          },
-          {
-            label: "En Pruebas",
-            value: avionesStats.pruebas?.enProceso || 0,
-          },
-          {
-            label: "Pruebas Completadas",
-            value: avionesStats.pruebas?.completadas || 0,
-          },
-          {
-            label: "Pruebas Pendientes",
-            value: avionesStats.pruebas?.pendientes || 0,
-          },
-        ],
-        modelStats:
-          avionesStats.porModelo?.map((modelo) => ({
-            label: modelo.modelo,
-            value: modelo.cantidad,
-          })) || [],
-      },
-      {
-        title: "Piezas",
-        total: piezasStats?.total || 0,
+        title: "Inventario",
+        total: materiaPrima?.total || 0,
         icon: CubeIcon,
         color: "yellow",
-        href: "/dashboard/configuracion/piezas",
-        loading: piezasStats.isLoading,
+        href: "/dashboard/inventario",
+        loading: isInventarioLoading,
         details: [
           {
-            label: "Con Materiales",
-            value: piezasStats?.con_materiales || 0,
+            label: "Crítico",
+            value: materiaPrima?.stockCritico || 0,
+            color: "text-red-600",
           },
           {
-            label: "Con Procesos",
-            value: piezasStats?.con_procesos || 0,
+            label: "Bajo",
+            value: materiaPrima?.stockBajo || 0,
+            color: "text-yellow-600",
+          },
+          {
+            label: "Normal",
+            value: materiaPrima?.stockNormal || 0,
+            color: "text-green-600",
+          },
+        ],
+      },
+      {
+        title: "Solicitudes",
+        total: solicitudesStats.total || 0,
+        nuevos: solicitudesStats.nuevas || 0,
+        icon: ClipboardDocumentListIcon,
+        color: "green",
+        href: "/dashboard/produccion/solicitudes",
+        loading: solicitudesStats.isLoading,
+        details: [
+          {
+            label: "Clientes",
+            value: solicitudesStats.clientes?.total || 0,
+          },
+          {
+            label: "Proveedores",
+            value: solicitudesStats.proveedores?.total || 0,
           },
         ],
       },
@@ -202,48 +188,7 @@ export default function DashboardPage() {
         ],
       },
     ],
-    PROVEEDOR: [
-      {
-        title: "Solicitudes",
-        total: piezasStats?.solicitudes?.total || 0,
-        icon: TruckIcon,
-        color: "blue",
-        href: "/dashboard/solicitudes",
-        loading: piezasStats.isLoading,
-        details: [
-          {
-            label: "Pendientes",
-            value: piezasStats?.solicitudes?.pendientes || 0,
-          },
-          {
-            label: "En Proceso",
-            value: piezasStats?.solicitudes?.enProceso || 0,
-          },
-          {
-            label: "Completadas",
-            value: piezasStats?.solicitudes?.completadas || 0,
-          },
-        ],
-      },
-      {
-        title: "Entregas",
-        total: piezasStats?.entregas?.total || 0,
-        icon: DocumentCheckIcon,
-        color: "green",
-        href: "/dashboard/entregas",
-        loading: piezasStats.isLoading,
-        details: [
-          {
-            label: "Este Mes",
-            value: piezasStats?.entregas?.esteMes || 0,
-          },
-          {
-            label: "En Tránsito",
-            value: piezasStats?.entregas?.enTransito || 0,
-          },
-        ],
-      },
-    ],
+    PROVEEDOR: [],
   };
 
   const quickAccessConfig = {
@@ -352,8 +297,8 @@ export default function DashboardPage() {
     !userRole ||
     empleadosStats.isLoading ||
     clientesStats.isLoading ||
-    piezasStats.isLoading ||
-    avionesStats.isLoading
+    isInventarioLoading ||
+    solicitudesStats.isLoading
   ) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
@@ -371,7 +316,7 @@ export default function DashboardPage() {
         <h1 className="text-2xl font-semibold text-gray-900">Dashboard</h1>
         <p className="mt-2 text-sm text-gray-600">
           {userRole === "ADMINISTRADOR"
-            ? "Vista general del sistema de producción"
+            ? "Vista general del sistema"
             : userRole === "EMPLEADO"
               ? "Panel de control de producción"
               : userRole === "CLIENTE"
@@ -423,7 +368,9 @@ export default function DashboardPage() {
                       <span className="text-sm text-gray-500">
                         {detail.label}
                       </span>
-                      <span className="text-sm font-medium text-gray-900">
+                      <span
+                        className={`text-sm font-medium ${detail.color || "text-gray-900"}`}
+                      >
                         {detail.value}
                       </span>
                     </div>
@@ -485,34 +432,35 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {[empleadosStats, clientesStats, piezasStats, avionesStats].map(
-        (stats, index) => {
-          if (stats.error) {
-            return (
-              <div
-                key={index}
-                className="bg-red-50 border border-red-200 rounded-md p-4"
-              >
-                <div className="flex">
-                  <XCircleIcon
-                    className="h-5 w-5 text-red-400"
-                    aria-hidden="true"
-                  />
-                  <div className="ml-3">
-                    <h3 className="text-sm font-medium text-red-800">
-                      Error al cargar estadísticas
-                    </h3>
-                    <div className="mt-2 text-sm text-red-700">
-                      {stats.error}
-                    </div>
-                  </div>
+      {[
+        empleadosStats,
+        clientesStats,
+        isInventarioLoading,
+        solicitudesStats,
+      ].map((stats, index) => {
+        if (stats.error) {
+          return (
+            <div
+              key={index}
+              className="bg-red-50 border border-red-200 rounded-md p-4"
+            >
+              <div className="flex">
+                <XCircleIcon
+                  className="h-5 w-5 text-red-400"
+                  aria-hidden="true"
+                />
+                <div className="ml-3">
+                  <h3 className="text-sm font-medium text-red-800">
+                    Error al cargar estadísticas
+                  </h3>
+                  <div className="mt-2 text-sm text-red-700">{stats.error}</div>
                 </div>
               </div>
-            );
-          }
-          return null;
-        },
-      )}
+            </div>
+          );
+        }
+        return null;
+      })}
     </div>
   );
 }

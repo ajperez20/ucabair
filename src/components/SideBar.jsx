@@ -70,6 +70,12 @@ const navigationConfig = {
       name: "Proveedores",
       href: "/dashboard/proveedores",
       icon: TruckIcon,
+      submenu: [
+        {
+          name: "Solicitudes",
+          href: "/dashboard/proveedores/solicitudes",
+        },
+      ],
     },
     {
       name: "Usuarios",
@@ -147,14 +153,14 @@ const navigationConfig = {
   PROVEEDOR: [
     {
       name: "Mis Pedidos",
-      href: "/dashboard/pedidos",
+      href: "/dashboard/pedidos/proveedores",
       icon: ClipboardDocumentListIcon,
     },
   ],
   CLIENTE: [
     {
       name: "Pedidos",
-      href: "/dashboard/pedidos",
+      href: "/dashboard/pedidos/clientes",
       icon: ClipboardDocumentListIcon,
     },
   ],

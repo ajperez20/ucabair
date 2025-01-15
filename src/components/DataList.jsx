@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import {
   PencilIcon,
@@ -14,7 +13,7 @@ export default function DataList({
   onDelete,
   actions = [],
   title,
-  deleteAction,
+  hideActions = false, // Nueva prop, por defecto false para mantener comportamiento actual
 }) {
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -43,12 +42,14 @@ export default function DataList({
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
-            <button
-              onClick={() => onEdit(null)}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-150"
-            >
-              Agregar Nuevo
-            </button>
+            {onEdit && (
+              <button
+                onClick={() => onEdit(null)}
+                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-150"
+              >
+                Agregar Nuevo
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -66,7 +67,7 @@ export default function DataList({
                   {column.label}
                 </th>
               ))}
-              {!deleteAction && (
+              {!hideActions && (onEdit || onDelete || actions.length > 0) && (
                 <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Acciones
                 </th>
@@ -86,7 +87,7 @@ export default function DataList({
                       : item[column.key]}
                   </td>
                 ))}
-                {!deleteAction && (
+                {!hideActions && (onEdit || onDelete || actions.length > 0) && (
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <div className="flex justify-end space-x-2">
                       {/* Acciones personalizadas */}

@@ -13,9 +13,13 @@ const columns = [
   { key: "rpm_nombre", label: "Materia Prima" },
   { key: "mps_unidad_medida", label: "Unidad de Medida" },
   {
-    key: "mps_cantidad_disponible",
+    name: "mps_cantidad_disponible",
     label: "Cantidad Disponible",
-    format: (value) => value || 0,
+    type: "number",
+    required: true,
+    min: 150,
+    step: "0.01",
+    description: "Ingrese la cantidad disponible (mínimo 150)",
   },
   {
     key: "estado",
@@ -78,9 +82,9 @@ export default function StockPage() {
       label: "Cantidad Disponible",
       type: "number",
       required: true,
-      min: 0,
+      min: 150,
       step: "0.01",
-      description: "Ingrese la cantidad disponible",
+      description: "La cantidad mínima permitida es 150", // Aquí se agrega el mensaje
     },
   ]);
 
@@ -158,7 +162,7 @@ export default function StockPage() {
   };
 
   const determinarEstado = (cantidad) => {
-    if (cantidad <= 200) return "CRÍTICO";
+    if (cantidad <= 150) return "CRÍTICO";
     if (cantidad <= 500) return "BAJO";
     return "NORMAL";
   };
@@ -210,6 +214,11 @@ export default function StockPage() {
 
   const handleSave = async (formData) => {
     try {
+      // Validar cantidad mínima
+      if (parseFloat(formData.mps_cantidad_disponible) < 150) {
+        throw new Error("La cantidad mínima debe ser 150");
+      }
+
       const url = formData.id
         ? `/api/materia-prima/stock/${formData.id}`
         : "/api/materia-prima/stock";

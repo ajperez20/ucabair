@@ -65,4 +65,21 @@ export const caracteristicasAvionService = {
     const result = await pool.query(query, [id]);
     return result.rows[0];
   },
+
+  getByModeloId: async (modeloId) => {
+    const query = `
+      SELECT 
+        c.pvv_id as id,
+        c.pvv_nombre_caracteristica as nombre,
+        mac.mnc_unidad_medida as unidad_medida,
+        mac.mnc_valor as valor
+      FROM modelo_avion_caracteristica mac
+      JOIN caracteristica_anv_conf c ON mac.fk_pvv_id = c.pvv_id
+      WHERE mac.fk_mda_id = $1
+      ORDER BY c.pvv_nombre_caracteristica
+    `;
+
+    const result = await pool.query(query, [modeloId]);
+    return result.rows;
+  },
 };

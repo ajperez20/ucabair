@@ -1,7 +1,7 @@
 "use client";
 
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState, useEffect } from "react";
+import { Fragment, useState, useEffect, useCallback } from "react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
 export default function EditModal({
@@ -15,16 +15,40 @@ export default function EditModal({
   hideButtons = false,
   children,
   size = "md",
-  onFieldChange, // Agregar esta prop
+  onFieldChange,
 }) {
-  const [formData, setFormData] = useState(data || {});
+  const getInitialFormData = useCallback((data, fields) => {
+    const initialData = { ...(data || {}) };
+    fields.forEach((field) => {
+      if (
+        [
+          "caracteristicasArray",
+          "procesosArray",
+          "pruebasArray",
+          "piezasArray",
+          "caracteristicasPieza",
+          "materialesPieza",
+        ].includes(field.type) &&
+        !initialData[field.name]
+      ) {
+        initialData[field.name] = [];
+      }
+    });
+    return initialData;
+  }, []); // No tiene dependencias propias
+
+  const [formData, setFormData] = useState(() =>
+    getInitialFormData(data, fields),
+  );
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    setFormData(data || {});
-    setErrors({});
-  }, [data]);
+    if (data !== undefined) {
+      setFormData(getInitialFormData(data, fields));
+      setErrors({});
+    }
+  }, [data, fields, getInitialFormData]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -50,24 +74,38 @@ export default function EditModal({
       [name]: undefined,
     }));
 
+    // Si el valor es un array o un objeto, mantenerlo tal cual
+    const newValue =
+      type === "number"
+        ? value === ""
+          ? ""
+          : Number(value)
+        : Array.isArray(value) || typeof value === "object"
+          ? value
+          : value;
+
     setFormData((prev) => ({
       ...prev,
-      [name]: type === "number" ? (value === "" ? "" : Number(value)) : value,
+      [name]: newValue,
     }));
 
-    // Llamar a onFieldChange si existe
     if (onFieldChange) {
-      onFieldChange(name, value);
+      onFieldChange(name, newValue);
     }
   };
 
   const renderField = (field) => {
-    // Si hay una función de renderizado personalizado y el campo es de tipo personalizado
+    // Si hay una función de renderizado personalizado y es un campo de tipo personalizado
     if (
       renderCustomField &&
-      (field.type === "caracteristicasPieza" ||
-        field.type === "materialesPieza" ||
-        field.type === "caracteristicasArray")
+      [
+        "caracteristicasArray",
+        "procesosArray",
+        "pruebasArray",
+        "piezasArray",
+        "caracteristicasPieza",
+        "materialesPieza",
+      ].includes(field.type)
     ) {
       return renderCustomField(field, formData[field.name], (value) => {
         handleChange({ target: { name: field.name, value } });

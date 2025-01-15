@@ -6,7 +6,6 @@ import Link from "next/link";
 import {
   BuildingOfficeIcon,
   CubeIcon,
-  WrenchScrewdriverIcon,
   ChartBarIcon,
   MapPinIcon,
 } from "@heroicons/react/24/outline";
@@ -167,11 +166,11 @@ export default function ProduccionPage() {
         </Link>
 
         <Link
-          href="/dashboard/produccion/asignaciones"
+          href="/dashboard/produccion/solicitudes"
           className="flex items-center p-4 bg-white rounded-lg shadow hover:shadow-md transition-shadow"
         >
-          <WrenchScrewdriverIcon className="h-6 w-6 text-gray-400 mr-3" />
-          <span className="text-gray-700">Asignaciones</span>
+          <ChartBarIcon className="h-6 w-6 text-gray-400 mr-3" />
+          <span className="text-gray-700">Solicitudes</span>
         </Link>
       </div>
     </div>

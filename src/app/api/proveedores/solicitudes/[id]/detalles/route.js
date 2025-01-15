@@ -1,19 +1,18 @@
 import { NextResponse } from "next/server";
-import { caracteristicasAvionService } from "@/services/caracteristicasAvionService";
+import { solicitudProveedorService } from "@/services/solicitudProveedorService";
 
 export async function GET(request, { params }) {
   try {
-    const caracteristicas = await caracteristicasAvionService.getByModeloId(
+    const detalles = await solicitudProveedorService.getSolicitudDetalles(
       params.id,
     );
-    return NextResponse.json(caracteristicas);
+    return NextResponse.json(detalles);
   } catch (error) {
     console.error("Error:", error);
     return NextResponse.json(
       {
         error: {
-          status: 500,
-          message: "Error al obtener las características del modelo",
+          message: "Error al obtener los detalles de la solicitud",
           details: error.message,
         },
       },

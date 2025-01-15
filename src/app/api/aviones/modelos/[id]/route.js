@@ -10,12 +10,7 @@ export async function GET(request, { params }) {
         { status: 404 },
       );
     }
-
-    // Obtener características del modelo
-    const caracteristicas = await modeloAvionService.getCaracteristicas(
-      params.id,
-    );
-    return NextResponse.json({ ...modelo, caracteristicas });
+    return NextResponse.json(modelo);
   } catch (error) {
     return NextResponse.json(
       {

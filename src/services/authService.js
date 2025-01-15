@@ -11,15 +11,28 @@ export const authService = {
             r.rol_descripcion,
             array_agg(DISTINCT p.pri_accion) as privilegios,
             COALESCE(e.per_nombre, cj.cjd_nombre, cn.ctn_nombre, com.com_nombre) as nombre_completo,
-            -- Agregar IDs de cliente
+            -- Agregar IDs de cliente y proveedor
             cj.cjd_id as cliente_juridico_id,
             cn.ctn_id as cliente_natural_id,
+            com.com_id as proveedor_id,
             -- Determinar tipo de cliente
             CASE
                 WHEN cj.cjd_id IS NOT NULL THEN 'JURIDICO'
                 WHEN cn.ctn_id IS NOT NULL THEN 'NATURAL'
                 ELSE NULL
-                END as tipo_cliente
+                END as tipo_cliente,
+            -- Agregar datos adicionales del proveedor si es necesario
+            CASE
+                WHEN com.com_id IS NOT NULL THEN
+                    json_build_object(
+                            'id', com.com_id,
+                            'nombre', com.com_nombre,
+                            'direccion', com.com_direccion,
+                            'fecha_inicio', com.com_fechai_operaciones,
+                            'url_pagina', com.com_url_pagina
+                    )
+                ELSE NULL
+                END as proveedor_datos
         FROM usuario u
                  JOIN rol r ON u.fk_rol_id = r.rol_id
                  LEFT JOIN privilegio_rol pr ON r.rol_id = pr.fk_rol_id
@@ -41,7 +54,11 @@ export const authService = {
             cj.cjd_nombre,
             cn.ctn_id,
             cn.ctn_nombre,
-            com.com_nombre
+            com.com_id,
+            com.com_nombre,
+            com.com_direccion,
+            com.com_fechai_operaciones,
+            com.com_url_pagina
     `;
     const result = await pool.query(query, [email, password]);
     return result.rows[0];

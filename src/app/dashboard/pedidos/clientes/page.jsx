@@ -129,6 +129,11 @@ export default function PedidosPage() {
     }
   };
 
+  const handleEdit = () => {
+    setShowModal(true);
+    setSelectedSolicitud(null);
+  };
+
   const formFields = [
     {
       name: "modelo_id",
@@ -168,7 +173,8 @@ export default function PedidosPage() {
       <DataList
         data={pedidos}
         columns={columns}
-        deleteAction={true}
+        onEdit={handleEdit}
+        hideActions={true}
         title="Mis Pedidos"
       />
 
