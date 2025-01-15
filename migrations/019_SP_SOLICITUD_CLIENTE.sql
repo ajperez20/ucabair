@@ -67,6 +67,59 @@ BEGIN
     -- Retornar el ID de la solicitud y el mensaje de éxito
     RETURN QUERY SELECT solicitud_id, 'Solicitud creada exitosamente'::VARCHAR;
 END;
-$$ LANGUAGE plpgsql
+$$ LANGUAGE plpgsql;
+
+-- ================================================================
+-- Procedimiento almacenado para el pago de la solicitud del cliente
+-- ================================================================
+DROP FUNCTION IF EXISTS registrar_pago_cliente(INT, INT, INT, INT);
+
+CREATE OR REPLACE FUNCTION registrar_pago_cliente(
+    metodo_id INT,
+    moneda_id INT,
+    solicitud_cliente_id INT,
+    total_pagar INT
+)
+RETURNS TABLE (
+    pago INT,
+    mensaje VARCHAR(255)
+) AS $$
+DECLARE 
+    valor_moneda FLOAT;
+    moneda VARCHAR;
+    total_convertido NUMERIC(100, 2);
+    id_pago INT;
+BEGIN
+    -- Obtener la tasa de cambio y tipo de moneda
+    SELECT mon_valor_cambio, mon_tipo 
+    INTO valor_moneda, moneda
+    FROM MONEDA
+    WHERE mon_id = moneda_id;
+
+    -- Usar CASE para determinar la moneda y realizar el insert correspondiente
+    CASE 
+        WHEN moneda = '$' THEN
+            INSERT INTO PAGO (pago_monto, pago_fecha, fk_mon_id, fk_met_id, fk_sct_id)
+            VALUES (total_pagar, CURRENT_DATE, moneda_id, metodo_id, solicitud_cliente_id)
+            RETURNING pago_id INTO id_pago;
+
+        WHEN moneda = '€' THEN
+            total_convertido = total_pagar / valor_moneda;
+            INSERT INTO PAGO (pago_monto, pago_fecha, fk_mon_id, fk_met_id, fk_sct_id)
+            VALUES (total_convertido, CURRENT_DATE, moneda_id, metodo_id, solicitud_cliente_id)
+            RETURNING pago_id INTO id_pago;
+
+        WHEN moneda = 'BS' THEN
+            total_convertido = total_pagar * valor_moneda;
+            INSERT INTO PAGO (pago_monto, pago_fecha, fk_mon_id, fk_met_id, fk_sct_id)
+            VALUES (total_convertido, CURRENT_DATE, moneda_id, metodo_id, solicitud_cliente_id)
+            RETURNING pago_id INTO id_pago;
+    END CASE;
+    
+    -- Retornar el id del pago y un mensaje
+    RETURN QUERY SELECT id_pago, 'Pago creado exitosamente'::VARCHAR;
+END;
+$$ LANGUAGE plpgsql;
+
 
 

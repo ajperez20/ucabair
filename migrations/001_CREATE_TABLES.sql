@@ -1430,7 +1430,7 @@ CREATE TABLE MONEDA
 (
     mon_id           SERIAL PRIMARY KEY,
     mon_tipo         VARCHAR(20) NOT NULL,
-    mon_valor_cambio INT         NOT NULL,
+    mon_valor_cambio FLOAT       NOT NULL,
     mon_fecha_inicio DATE        NOT NULL DEFAULT CURRENT_DATE,
     mon_fecha_fin    DATE
 );
@@ -1439,7 +1439,7 @@ CREATE TABLE MONEDA
 CREATE TABLE PAGO
 (
     pago_id SERIAL,
-    pago_monto INT  NOT NULL,
+    pago_monto NUMERIC(100, 2)  NOT NULL,
     pago_fecha DATE NOT NULL DEFAULT CURRENT_DATE,
     fk_mon_id  INT  NOT NULL,
     fk_met_id  INT  NOT NULL,
