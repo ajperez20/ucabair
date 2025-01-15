@@ -499,16 +499,32 @@ CREATE TABLE PROCESO_ENSAMBLE_PIEZA_EJEC
     esp_descripcion     VARCHAR(255) NOT NULL
 );
 
--- 4.10 Fase Ensamble Pieza (Ejecución)
-CREATE TABLE FASE_ENSAMBLE_PIEZA
+-- 4.10 Pieza Stock
+CREATE TABLE PIEZA_STOCK
 (
-    eez_fecha_inicio DATE NOT NULL DEFAULT CURRENT_DATE,
+    pie_id                  SERIAL PRIMARY KEY,
+    pie_numero_serial       VARCHAR(255) NOT NULL,
+    pie_nombre              VARCHAR(80)  NOT NULL,
+    pie_fecha_fabricacion   DATE         NOT NULL DEFAULT CURRENT_DATE,
+    pie_cantidad_disponible INT          NOT NULL,
+    fk_sed_id               INT          NOT NULL,
+    CONSTRAINT fk_sed_id
+        FOREIGN KEY (fk_sed_id)
+            REFERENCES SEDE_PLANTA (sed_id)
+            ON DELETE CASCADE
+);
+
+-- 4.11 Fase Ensamble Pieza (Ejecución)
+CREATE TABLE FASE_ENSAMBLE_PIEZA
+(   
+    eez_id           SERIAL,
+    eez_fecha_inicio DATE   NOT NULL DEFAULT CURRENT_DATE,
     eez_fecha_fin    DATE,
-    fk_esp_id        INT  NOT NULL,
-    fk_zon_id        INT  NOT NULL,
-    fk_mec_id        INT  NOT NULL,
+    fk_esp_id        INT    NOT NULL,
+    fk_zon_id        INT    NOT NULL,
+    fk_pie_id        INT    NOT NULL,
     CONSTRAINT pk_eez
-        PRIMARY KEY (fk_esp_id, fk_zon_id),
+        PRIMARY KEY (fk_esp_id, fk_zon_id, eez_id),
     CONSTRAINT fk_esp_id
         FOREIGN KEY (fk_esp_id)
             REFERENCES PROCESO_ENSAMBLE_PIEZA_EJEC (esp_id)
@@ -517,25 +533,26 @@ CREATE TABLE FASE_ENSAMBLE_PIEZA
         FOREIGN KEY (fk_zon_id)
             REFERENCES ZONA (zon_id)
             ON DELETE CASCADE,
-    CONSTRAINT fk_mec_id
-        FOREIGN KEY (fk_mec_id)
-            REFERENCES MODELO_PIEZA_CONF (mec_id)
+    CONSTRAINT fk_pie_id
+        FOREIGN KEY (fk_pie_id)
+            REFERENCES PIEZA_STOCK(pie_id)
             ON DELETE CASCADE
 );
 
--- 4.11 Estatus FEP
+-- 4.12 Estatus FEP
 CREATE TABLE ESTATUS_FEP
 (
     sfe_fecha_inicio DATE NOT NULL DEFAULT CURRENT_DATE,
     sfe_fecha_fin    DATE,
     fk_esp_id        INT  NOT NULL,
     fk_zon_id        INT  NOT NULL,
+    fk_eez_id        INT  NOT NULL,
     fk_est_id        INT  NOT NULL,
     CONSTRAINT pk_est_id
-        PRIMARY KEY (fk_est_id, fk_esp_id, fk_zon_id),
+        PRIMARY KEY (fk_est_id, fk_esp_id, fk_zon_id, fk_eez_id),
     CONSTRAINT fk_eez
-        FOREIGN KEY (fk_esp_id, fk_zon_id)
-            REFERENCES FASE_ENSAMBLE_PIEZA (fk_esp_id, fk_zon_id)
+        FOREIGN KEY (fk_esp_id, fk_zon_id, fk_eez_id)
+            REFERENCES FASE_ENSAMBLE_PIEZA (fk_esp_id, fk_zon_id, eez_id)
             ON DELETE CASCADE,
     CONSTRAINT fk_est_id
         FOREIGN KEY (fk_est_id)
@@ -543,7 +560,7 @@ CREATE TABLE ESTATUS_FEP
             ON DELETE CASCADE
 );
 
--- 4.12 Ensamble Solicitud Materia
+-- 4.13 Ensamble Solicitud Materia
 CREATE TABLE ENSAMBLE_SOLICITUD_MATERIA
 (
     elm_id            SERIAL,
@@ -551,14 +568,15 @@ CREATE TABLE ENSAMBLE_SOLICITUD_MATERIA
     elm_unidad_medida VARCHAR(50) NOT NULL,
     fk_esp_id         INT         NOT NULL,
     fk_zon_id         INT         NOT NULL,
+    fk_eez_id         INT         NOT NULL,
     fk_sed_id         INT         NOT NULL,
     fk_rpm_id         INT         NOT NULL,
     fk_mps_id         INT         NOT NULL,
     CONSTRAINT pk_elm
-        PRIMARY KEY (elm_id, fk_esp_id, fk_zon_id),
+        PRIMARY KEY (elm_id, fk_esp_id, fk_zon_id, fk_eez_id),
     CONSTRAINT fk_eez
-        FOREIGN KEY (fk_esp_id, fk_zon_id)
-            REFERENCES FASE_ENSAMBLE_PIEZA (fk_esp_id, fk_zon_id)
+        FOREIGN KEY (fk_esp_id, fk_zon_id, fk_eez_id)
+            REFERENCES FASE_ENSAMBLE_PIEZA (fk_esp_id, fk_zon_id, eez_id)
             ON DELETE CASCADE,
     CONSTRAINT fk_mps
         FOREIGN KEY (fk_sed_id, fk_rpm_id, fk_mps_id)
@@ -566,7 +584,7 @@ CREATE TABLE ENSAMBLE_SOLICITUD_MATERIA
             ON DELETE CASCADE
 );
 
--- 4.13 Estatus SME
+-- 4.14 Estatus SME
 CREATE TABLE ESTATUS_SME
 (
     sme_fecha_inicio DATE NOT NULL DEFAULT CURRENT_DATE,
@@ -575,11 +593,13 @@ CREATE TABLE ESTATUS_SME
     fk_elm_id        INT  NOT NULL,
     fk_esp_id        INT  NOT NULL,
     fk_zon_id        INT  NOT NULL,
+    fk_eez_id        INT  NOT NULL,
+
     CONSTRAINT pk_sme
-        PRIMARY KEY (fk_est_id, fk_elm_id, fk_esp_id, fk_zon_id),
+        PRIMARY KEY (fk_est_id, fk_elm_id, fk_esp_id, fk_zon_id, fk_eez_id),
     CONSTRAINT fk_elm
-        FOREIGN KEY (fk_elm_id, fk_esp_id, fk_zon_id)
-            REFERENCES ENSAMBLE_SOLICITUD_MATERIA (elm_id, fk_esp_id, fk_zon_id)
+        FOREIGN KEY (fk_elm_id, fk_esp_id, fk_zon_id, fk_eez_id)
+            REFERENCES ENSAMBLE_SOLICITUD_MATERIA (elm_id, fk_esp_id, fk_zon_id, fk_eez_id)
             ON DELETE CASCADE,
     CONSTRAINT fk_est_id
         FOREIGN KEY (fk_est_id)
@@ -587,7 +607,7 @@ CREATE TABLE ESTATUS_SME
             ON DELETE CASCADE
 );
 
--- 4.14 Ensamble Material Prueba
+-- 4.15 Ensamble Material Prueba
 CREATE TABLE ENSAMBLE_MATERIAL_PRUEBA
 (
     epr_fecha_inicio     DATE         NOT NULL DEFAULT CURRENT_DATE,
@@ -598,6 +618,7 @@ CREATE TABLE ENSAMBLE_MATERIAL_PRUEBA
     fk_zon_id            INT          NOT NULL,
     fk_elm_id            INT          NOT NULL,
     fk_esp_id            INT          NOT NULL,
+    fk_eez_id            INT          NOT NULL,
     CONSTRAINT pk_epr
         PRIMARY KEY (fk_pru_id, fk_zon_id),
     CONSTRAINT fk_pru_id
@@ -609,12 +630,12 @@ CREATE TABLE ENSAMBLE_MATERIAL_PRUEBA
             REFERENCES ZONA (zon_id)
             ON DELETE CASCADE,
     CONSTRAINT fk_elm
-        FOREIGN KEY (fk_elm_id, fk_esp_id, fk_zon_elm)
-            REFERENCES ENSAMBLE_SOLICITUD_MATERIA (elm_id, fk_esp_id, fk_zon_id)
+        FOREIGN KEY (fk_elm_id, fk_esp_id, fk_zon_elm, fk_eez_id)
+            REFERENCES ENSAMBLE_SOLICITUD_MATERIA (elm_id, fk_esp_id, fk_zon_id, fk_eez_id)
             ON DELETE CASCADE
 );
 
--- 4.15 Estatus PPEM
+-- 4.16 Estatus PPEM
 CREATE TABLE ESTATUS_PPEM
 (
     ppm_fecha_inicio DATE NOT NULL DEFAULT CURRENT_DATE,
@@ -631,21 +652,6 @@ CREATE TABLE ESTATUS_PPEM
     CONSTRAINT fk_est_id
         FOREIGN KEY (fk_est_id)
             REFERENCES ESTATUS (est_id)
-);
-
--- 4.16 Pieza Stock
-CREATE TABLE PIEZA_STOCK
-(
-    pie_id                  SERIAL PRIMARY KEY,
-    pie_numero_serial       VARCHAR(255) NOT NULL,
-    pie_nombre              VARCHAR(80)  NOT NULL,
-    pie_fecha_fabricacion   DATE         NOT NULL DEFAULT CURRENT_DATE,
-    pie_cantidad_disponible INT          NOT NULL,
-    fk_sed_id               INT          NOT NULL,
-    CONSTRAINT fk_sed_id
-        FOREIGN KEY (fk_sed_id)
-            REFERENCES SEDE_PLANTA (sed_id)
-            ON DELETE CASCADE
 );
 
 -- 4.17 Prueba Pieza Sede
