@@ -191,6 +191,10 @@ VALUES ('Zona de Pruebas', 'Pruebas a piezas de interiores', 17);
 INSERT INTO ZONA (zon_nombre, zon_descripcion, fk_are_id)
 VALUES ('Zona de montaje final', 'Montaje y ensamblaje final del avión.', 16);
 
+-- Zona de ensamblaje
+INSERT INTO ZONA (zon_nombre, zon_descripcion, fk_are_id)
+VALUES ('Zona de ensamblaje ', 'Ensamblaje', 1);
+
 
 -- =========================================
 -- Inserción de datos: MATERIA_PRIMA_STOCK
