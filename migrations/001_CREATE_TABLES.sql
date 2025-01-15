@@ -610,6 +610,7 @@ CREATE TABLE ESTATUS_SME
 -- 4.15 Ensamble Material Prueba
 CREATE TABLE ENSAMBLE_MATERIAL_PRUEBA
 (
+    epr_id               SERIAL,
     epr_fecha_inicio     DATE         NOT NULL DEFAULT CURRENT_DATE,
     epr_fecha_fin        DATE,
     epr_resultado_prueba VARCHAR(255) NOT NULL,
@@ -620,7 +621,7 @@ CREATE TABLE ENSAMBLE_MATERIAL_PRUEBA
     fk_esp_id            INT          NOT NULL,
     fk_eez_id            INT          NOT NULL,
     CONSTRAINT pk_epr
-        PRIMARY KEY (fk_pru_id, fk_zon_id),
+        PRIMARY KEY (fk_pru_id, fk_zon_id, epr_id),
     CONSTRAINT fk_pru_id
         FOREIGN KEY (fk_pru_id)
             REFERENCES PRUEBA (pru_id)
@@ -643,11 +644,12 @@ CREATE TABLE ESTATUS_PPEM
     fk_pru_id        INT  NOT NULL,
     fk_zon_id        INT  NOT NULL,
     fk_est_id        INT  NOT NULL,
+    fk_epr_id        INT  NOT NULL,
     CONSTRAINT pk_ppm
-        PRIMARY KEY (fk_est_id, fk_pru_id, fk_zon_id),
+        PRIMARY KEY (fk_est_id, fk_pru_id, fk_zon_id, fk_epr_id),
     CONSTRAINT fk_epr
-        FOREIGN KEY (fk_pru_id, fk_zon_id)
-            REFERENCES ENSAMBLE_MATERIAL_PRUEBA (fk_pru_id, fk_zon_id)
+        FOREIGN KEY (fk_pru_id, fk_zon_id, fk_epr_id)
+            REFERENCES ENSAMBLE_MATERIAL_PRUEBA (fk_pru_id, fk_zon_id, epr_id)
             ON DELETE CASCADE,
     CONSTRAINT fk_est_id
         FOREIGN KEY (fk_est_id)

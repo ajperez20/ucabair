@@ -127,3 +127,70 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+-- =========================================================================
+-- procedimiento almacenado para generar ENSAMBLE_MATERIAL_PRUEBA 
+-- =========================================================================
+DROP FUNCTION IF EXISTS registrar_prueba_pieza;
+
+CREATE OR REPLACE FUNCTION registrar_prueba_pieza(
+    prueba_id INT,
+    zona_solicitud_id INT,
+    zona_id INT,
+    solicitud_id INT,
+    proceso_id INT,
+    fase_id INT
+)
+RETURNS TABLE (
+    prueba_ensamble_id INT,
+    mensaje VARCHAR
+) AS $$
+DECLARE
+    ensamble_prueba_id INT;
+BEGIN
+    -- Insertar en ENSAMBLE_MATERIAL_PRUEBA
+    INSERT INTO ENSAMBLE_MATERIAL_PRUEBA (
+        epr_fecha_inicio,
+        epr_fecha_fin,
+        epr_resultado_prueba,
+        fk_pru_id,
+        fk_zon_elm,
+        fk_zon_id,
+        fk_elm_id,
+        fk_esp_id,
+        fk_eez_id
+    ) VALUES (
+        CURRENT_DATE,
+        NULL,
+        'En proceso',
+        prueba_id,
+        zona_solicitud_id,
+        zona_id,
+        solicitud_id,
+        proceso_id,
+        fase_id
+    )
+    RETURNING epr_id INTO ensamble_prueba_id;
+    
+    -- Insertar en ESTATUS_PPEM
+    INSERT INTO ESTATUS_PPEM (
+        ppm_fecha_inicio,
+        ppm_fecha_fin,
+        fk_pru_id,
+        fk_zon_id,
+        fk_est_id,
+        fk_epr_id
+    ) VALUES (
+        CURRENT_DATE,
+        NULL,
+        prueba_id,
+        zona_id,
+        3,
+        ensamble_prueba_id
+    );
+
+    RETURN QUERY
+        SELECT
+            ensamble_prueba_id,
+            'Prueba creada exitosamente'::VARCHAR AS mensaje;
+END;
+$$ LANGUAGE plpgsql;
