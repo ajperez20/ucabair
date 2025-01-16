@@ -3,29 +3,27 @@ import pool from "../config/database";
 export const piezaService = {
   getAll: async () => {
     const query = `
-      SELECT 
-        mp.mec_id as id,
-        mp.mec_nombre_pieza as nombre,
-        mp.mec_descripcion as descripcion,
-        tp.tpc_id as tipo_id,
-        tp.tpc_nombre as tipo_nombre,
-        tp.tpc_descripcion as tipo_descripcion,
-        COUNT(DISTINCT mac.fk_pcc_id) as cantidad_caracteristicas,
-        COUNT(DISTINCT mf.fk_mac_id) as cantidad_materiales,
-        COUNT(DISTINCT fp.fk_epc_id) as cantidad_procesos
-      FROM modelo_pieza_conf mp
-      LEFT JOIN tipo_pieza_conf tp ON mp.fk_tpc_id = tp.tpc_id
-      LEFT JOIN modelo_pieza_caracteristica mac ON mp.mec_id = mac.fk_mec_id
-      LEFT JOIN material_fase mf ON mp.mec_id = mf.fk_mec_id
-      LEFT JOIN fase_ensamble_pieza_conf fp ON mp.mec_id = fp.fk_mec_id
-      GROUP BY 
-        mp.mec_id,
-        mp.mec_nombre_pieza,
-        mp.mec_descripcion,
-        tp.tpc_id,
-        tp.tpc_nombre,
-        tp.tpc_descripcion
-      ORDER BY mp.mec_nombre_pieza
+        SELECT mp.mec_id                     as id,
+               mp.mec_nombre_pieza           as nombre,
+               mp.mec_descripcion            as descripcion,
+               tp.tpc_id                     as tipo_id,
+               tp.tpc_nombre                 as tipo_nombre,
+               tp.tpc_descripcion            as tipo_descripcion,
+               COUNT(DISTINCT mac.fk_pcc_id) as cantidad_caracteristicas,
+               COUNT(DISTINCT mf.fk_mac_id)  as cantidad_materiales,
+               COUNT(DISTINCT fp.fk_epc_id)  as cantidad_procesos
+        FROM modelo_pieza_conf mp
+                 LEFT JOIN tipo_pieza_conf tp ON mp.fk_tpc_id = tp.tpc_id
+                 LEFT JOIN modelo_pieza_caracteristica mac ON mp.mec_id = mac.fk_mec_id
+                 LEFT JOIN material_fase mf ON mp.mec_id = mf.fk_mec_id
+                 LEFT JOIN fase_ensamble_pieza_conf fp ON mp.mec_id = fp.fk_mec_id
+        GROUP BY mp.mec_id,
+                 mp.mec_nombre_pieza,
+                 mp.mec_descripcion,
+                 tp.tpc_id,
+                 tp.tpc_nombre,
+                 tp.tpc_descripcion
+        ORDER BY mp.mec_nombre_pieza
     `;
 
     const result = await pool.query(query);
@@ -34,16 +32,15 @@ export const piezaService = {
 
   getById: async (id) => {
     const query = `
-      SELECT 
-        mp.mec_id as id,
-        mp.mec_nombre_pieza as nombre,
-        mp.mec_descripcion as descripcion,
-        mp.fk_tpc_id as tipo_id,
-        tp.tpc_nombre as tipo_nombre,
-        tp.tpc_descripcion as tipo_descripcion
-      FROM modelo_pieza_conf mp
-      LEFT JOIN tipo_pieza_conf tp ON mp.fk_tpc_id = tp.tpc_id
-      WHERE mp.mec_id = $1
+        SELECT mp.mec_id           as id,
+               mp.mec_nombre_pieza as nombre,
+               mp.mec_descripcion  as descripcion,
+               mp.fk_tpc_id        as tipo_id,
+               tp.tpc_nombre       as tipo_nombre,
+               tp.tpc_descripcion  as tipo_descripcion
+        FROM modelo_pieza_conf mp
+                 LEFT JOIN tipo_pieza_conf tp ON mp.fk_tpc_id = tp.tpc_id
+        WHERE mp.mec_id = $1
     `;
 
     const result = await pool.query(query, [id]);
@@ -52,14 +49,13 @@ export const piezaService = {
 
   getCaracteristicas: async (id) => {
     const query = `
-      SELECT 
-        c.pcc_id as id,
-        c.pcc_nombre_caracteristica as nombre,
-        mpc.pzi_unidad_medida as unidad_medida,
-        mpc.pzi_valor as valor
-      FROM modelo_pieza_caracteristica mpc
-      JOIN caracteristica_pieza_conf c ON mpc.fk_pcc_id = c.pcc_id
-      WHERE mpc.fk_mec_id = $1
+        SELECT c.pcc_id                    as id,
+               c.pcc_nombre_caracteristica as nombre,
+               mpc.pzi_unidad_medida       as unidad_medida,
+               mpc.pzi_valor               as valor
+        FROM modelo_pieza_caracteristica mpc
+                 JOIN caracteristica_pieza_conf c ON mpc.fk_pcc_id = c.pcc_id
+        WHERE mpc.fk_mec_id = $1
     `;
 
     const result = await pool.query(query, [id]);
@@ -68,17 +64,16 @@ export const piezaService = {
 
   getMateriales: async (id) => {
     const query = `
-      SELECT DISTINCT
-        m.mac_id as id,
-        m.mac_nombre_material as nombre,
-        m.mac_descripcion as descripcion,
-        mf.mtf_cantidad_material as cantidad,
-        mf.mtf_unidad_medida as unidad_medida,
-        p.epc_nombre_proceso as proceso
-      FROM material_fase mf
-      JOIN material_pieza_conf m ON mf.fk_mac_id = m.mac_id
-      JOIN proceso_ensamble_pieza_conf p ON mf.fk_epc_id = p.epc_id
-      WHERE mf.fk_mec_id = $1
+        SELECT DISTINCT m.mac_id                 as id,
+                        m.mac_nombre_material    as nombre,
+                        m.mac_descripcion        as descripcion,
+                        mf.mtf_cantidad_material as cantidad,
+                        mf.mtf_unidad_medida     as unidad_medida,
+                        p.epc_nombre_proceso     as proceso
+        FROM material_fase mf
+                 JOIN material_pieza_conf m ON mf.fk_mac_id = m.mac_id
+                 JOIN proceso_ensamble_pieza_conf p ON mf.fk_epc_id = p.epc_id
+        WHERE mf.fk_mec_id = $1
     `;
 
     const result = await pool.query(query, [id]);
@@ -91,36 +86,31 @@ export const piezaService = {
     try {
       await client.query("BEGIN");
 
-      // Insertar la pieza
+      // 1. Insertar la pieza
       const piezaQuery = `
-        INSERT INTO modelo_pieza_conf (
-          mec_nombre_pieza,
-          mec_descripcion,
-          fk_tpc_id
-        )
-        VALUES ($1, $2, $3)
-        RETURNING 
-          mec_id as id,
-          mec_nombre_pieza as nombre,
-          mec_descripcion as descripcion,
-          fk_tpc_id as tipo_id
+          INSERT INTO modelo_pieza_conf (mec_nombre_pieza,
+                                         mec_descripcion,
+                                         fk_tpc_id)
+          VALUES ($1, $2, $3)
+          RETURNING
+              mec_id as id,
+              mec_nombre_pieza as nombre,
+              mec_descripcion as descripcion,
+              fk_tpc_id as tipo_id
       `;
 
       const piezaValues = [pieza.nombre, pieza.descripcion, pieza.tipo_id];
-
       const piezaResult = await client.query(piezaQuery, piezaValues);
       const nuevaPieza = piezaResult.rows[0];
 
-      // Si hay características, insertarlas
+      // 2. Insertar características si existen
       if (pieza.caracteristicas?.length > 0) {
         const caracteristicasQuery = `
-          INSERT INTO modelo_pieza_caracteristica (
-            fk_mec_id,
-            fk_pcc_id,
-            pzi_unidad_medida,
-            pzi_valor
-          )
-          VALUES ($1, $2, $3, $4)
+            INSERT INTO modelo_pieza_caracteristica (fk_mec_id,
+                                                     fk_pcc_id,
+                                                     pzi_unidad_medida,
+                                                     pzi_valor)
+            VALUES ($1, $2, $3, $4)
         `;
 
         for (const caract of pieza.caracteristicas) {
@@ -133,17 +123,32 @@ export const piezaService = {
         }
       }
 
-      // Si hay materiales, insertarlos
+      // 3. Insertar procesos de ensamblaje primero
       if (pieza.materiales?.length > 0) {
+        // Obtener procesos únicos
+        const procesosUnicos = [
+          ...new Set(pieza.materiales.map((m) => m.proceso_id)),
+        ];
+
+        // Insertar en fase_ensamble_pieza_conf
+        const faseProcesosQuery = `
+            INSERT INTO fase_ensamble_pieza_conf (fk_mec_id,
+                                                  fk_epc_id)
+            VALUES ($1, $2)
+        `;
+
+        for (const procesoId of procesosUnicos) {
+          await client.query(faseProcesosQuery, [nuevaPieza.id, procesoId]);
+        }
+
+        // 4. Ahora sí, insertar los materiales
         const materialesQuery = `
-          INSERT INTO material_fase (
-            fk_mec_id,
-            fk_epc_id,
-            fk_mac_id,
-            mtf_cantidad_material,
-            mtf_unidad_medida
-          )
-          VALUES ($1, $2, $3, $4, $5)
+            INSERT INTO material_fase (fk_mec_id,
+                                       fk_epc_id,
+                                       fk_mac_id,
+                                       mtf_cantidad_material,
+                                       mtf_unidad_medida)
+            VALUES ($1, $2, $3, $4, $5)
         `;
 
         for (const material of pieza.materiales) {
@@ -173,78 +178,118 @@ export const piezaService = {
     try {
       await client.query("BEGIN");
 
-      // Actualizar la pieza
+      // 1. Actualizar la pieza básica
       const piezaQuery = `
-        UPDATE modelo_pieza_conf 
-        SET 
-          mec_nombre_pieza = $1,
-          mec_descripcion = $2,
-          fk_tpc_id = $3
-        WHERE mec_id = $4
-        RETURNING 
-          mec_id as id,
-          mec_nombre_pieza as nombre,
-          mec_descripcion as descripcion,
-          fk_tpc_id as tipo_id
+          UPDATE modelo_pieza_conf
+          SET
+              mec_nombre_pieza = $1,
+              mec_descripcion = $2,
+              fk_tpc_id = $3
+          WHERE mec_id = $4
+          RETURNING
+              mec_id as id,
+              mec_nombre_pieza as nombre,
+              mec_descripcion as descripcion,
+              fk_tpc_id as tipo_id
       `;
 
       const piezaValues = [pieza.nombre, pieza.descripcion, pieza.tipo_id, id];
-
       const piezaResult = await client.query(piezaQuery, piezaValues);
       const piezaActualizada = piezaResult.rows[0];
 
-      // Actualizar características
+      // 2. Actualizar características si existen
       if (pieza.caracteristicas) {
         await client.query(
           "DELETE FROM modelo_pieza_caracteristica WHERE fk_mec_id = $1",
           [id],
         );
 
-        const caracteristicasQuery = `
-          INSERT INTO modelo_pieza_caracteristica (
-            fk_mec_id,
-            fk_pcc_id,
-            pzi_unidad_medida,
-            pzi_valor
-          )
-          VALUES ($1, $2, $3, $4)
-        `;
+        if (pieza.caracteristicas.length > 0) {
+          const caracteristicasQuery = `
+              INSERT INTO modelo_pieza_caracteristica (
+                  fk_mec_id,
+                  fk_pcc_id,
+                  pzi_unidad_medida,
+                  pzi_valor
+              )
+              VALUES ($1, $2, $3, $4)
+          `;
 
-        for (const caract of pieza.caracteristicas) {
-          await client.query(caracteristicasQuery, [
-            id,
-            caract.caracteristica_id,
-            caract.unidad_medida,
-            caract.valor,
-          ]);
+          for (const caract of pieza.caracteristicas) {
+            await client.query(caracteristicasQuery, [
+              id,
+              caract.caracteristica_id,
+              caract.unidad_medida,
+              caract.valor,
+            ]);
+          }
         }
       }
 
-      // Actualizar materiales
+      // 3. Actualizar materiales y procesos si existen
       if (pieza.materiales) {
+        // Primero eliminar registros existentes
         await client.query("DELETE FROM material_fase WHERE fk_mec_id = $1", [
           id,
         ]);
+        await client.query(
+          "DELETE FROM fase_ensamble_pieza_conf WHERE fk_mec_id = $1",
+          [id],
+        );
 
-        const materialesQuery = `
-          INSERT INTO material_fase (
-            fk_mec_id,
-            fk_epc_id,
-            fk_mac_id,
-            mtf_cantidad_material,
-            mtf_unidad_medida
-          )
-          VALUES ($1, $2, $3, $4, $5)
-        `;
+        if (pieza.materiales.length > 0) {
+          // Obtener procesos únicos y válidos
+          const procesosUnicos = [
+            ...new Set(
+              pieza.materiales
+                .filter((m) => m.proceso_id) // Asegurarse de que proceso_id existe
+                .map((m) => m.proceso_id),
+            ),
+          ];
 
-        for (const material of pieza.materiales) {
-          await client.query(materialesQuery, [
-            id,
-            material.proceso_id,
-            material.material_id,
-            material.cantidad,
-            material.unidad_medida,
-          ]);
+          // Insertar procesos si hay alguno
+          if (procesosUnicos.length > 0) {
+            const faseProcesosQuery = `
+                INSERT INTO fase_ensamble_pieza_conf (
+                    fk_mec_id,
+                    fk_epc_id
+                )
+                VALUES ($1, $2)
+            `;
+
+            for (const procesoId of procesosUnicos) {
+              await client.query(faseProcesosQuery, [id, procesoId]);
+            }
+          }
+
+          // Insertar materiales
+          const materialesQuery = `
+              INSERT INTO material_fase (
+                  fk_mec_id,
+                  fk_epc_id,
+                  fk_mac_id,
+                  mtf_cantidad_material,
+                  mtf_unidad_medida
+              )
+              VALUES ($1, $2, $3, $4, $5)
+          `;
+
+          for (const material of pieza.materiales) {
+            // Verificar que todos los campos necesarios existen
+            if (!material.proceso_id || !material.material_id) {
+              throw new Error(
+                "Proceso y material son requeridos para cada material",
+              );
+            }
+
+            await client.query(materialesQuery, [
+              id,
+              material.proceso_id,
+              material.material_id,
+              material.cantidad || 1, // valor por defecto si no se proporciona
+              material.unidad_medida || "UN", // valor por defecto si no se proporciona
+            ]);
+          }
         }
       }
 
@@ -258,22 +303,14 @@ export const piezaService = {
     }
   },
 
-  delete: async (id) => {
-    const query =
-      "DELETE FROM modelo_pieza_conf WHERE mec_id = $1 RETURNING mec_id as id";
-    const result = await pool.query(query, [id]);
-    return result.rows[0];
-  },
-
   // Métodos auxiliares para obtener datos relacionados
   getTipos: async () => {
     const query = `
-      SELECT 
-        tpc_id as id,
-        tpc_nombre as nombre,
-        tpc_descripcion as descripcion
-      FROM tipo_pieza_conf
-      ORDER BY tpc_nombre
+        SELECT tpc_id          as id,
+               tpc_nombre      as nombre,
+               tpc_descripcion as descripcion
+        FROM tipo_pieza_conf
+        ORDER BY tpc_nombre
     `;
 
     const result = await pool.query(query);
@@ -282,11 +319,10 @@ export const piezaService = {
 
   getCaracteristicasDisponibles: async () => {
     const query = `
-      SELECT 
-        pcc_id as id,
-        pcc_nombre_caracteristica as nombre
-      FROM caracteristica_pieza_conf
-      ORDER BY pcc_nombre_caracteristica
+        SELECT pcc_id                    as id,
+               pcc_nombre_caracteristica as nombre
+        FROM caracteristica_pieza_conf
+        ORDER BY pcc_nombre_caracteristica
     `;
 
     const result = await pool.query(query);
@@ -295,12 +331,11 @@ export const piezaService = {
 
   getMaterialesDisponibles: async () => {
     const query = `
-      SELECT 
-        mac_id as id,
-        mac_nombre_material as nombre,
-        mac_descripcion as descripcion
-      FROM material_pieza_conf
-      ORDER BY mac_nombre_material
+        SELECT mac_id              as id,
+               mac_nombre_material as nombre,
+               mac_descripcion     as descripcion
+        FROM material_pieza_conf
+        ORDER BY mac_nombre_material
     `;
 
     const result = await pool.query(query);
@@ -309,13 +344,12 @@ export const piezaService = {
 
   getProcesosDisponibles: async () => {
     const query = `
-      SELECT 
-        epc_id as id,
-        epc_nombre_proceso as nombre,
-        epc_descripcion as descripcion,
-        epc_tiempo_estimado as tiempo_estimado
-      FROM proceso_ensamble_pieza_conf
-      ORDER BY epc_nombre_proceso
+        SELECT epc_id              as id,
+               epc_nombre_proceso  as nombre,
+               epc_descripcion     as descripcion,
+               epc_tiempo_estimado as tiempo_estimado
+        FROM proceso_ensamble_pieza_conf
+        ORDER BY epc_nombre_proceso
     `;
 
     const result = await pool.query(query);

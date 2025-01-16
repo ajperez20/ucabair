@@ -951,16 +951,16 @@ CREATE TABLE EQUIPO_ENCARGADO
     eqc_id          SERIAL,
     eqc_descripcion VARCHAR(255),
     fk_zon_id       INT,
-	fk_esp_id		INT,
-	fk_eez_id 		INT,
-	fk_pru_id 		INT,
-	fk_pie_id 		INT,
-	fk_sct_id 		INT,
-	fk_eav_id 		INT,
-	fk_mda_id 		INT,
-	fk_edz_id 		INT,
+    fk_esp_id		INT,
+    fk_eez_id 		INT,
+    fk_pru_id 		INT,
+    fk_pie_id 		INT,
+    fk_sct_id 		INT,
+    fk_eav_id 		INT,
+    fk_mda_id 		INT,
+    fk_edz_id 		INT,
     fk_per_id      	INT NOT NULL,
-	
+
     CONSTRAINT pk_equi_encargado
         PRIMARY KEY (fk_per_id, eqc_id),
     CONSTRAINT fk_per_id
@@ -1222,6 +1222,7 @@ CREATE TABLE ASISTENCIA
     asi_id          SERIAL PRIMARY KEY,
     asi_hora_inicio TIME WITHOUT TIME ZONE NOT NULL,
     asi_hora_fin    TIME WITHOUT TIME ZONE,
+    asi_pagada      BOOLEAN                NOT NULL DEFAULT FALSE,
     fk_per_id       INT                    NOT NULL,
     fk_car_id       INT                    NOT NULL,
     fk_emc_id       INT                    NOT NULL,
@@ -1246,10 +1247,10 @@ CREATE TABLE PAGO_NOMINA
     pnn_fecha_pago  DATE NOT NULL DEFAULT CURRENT_DATE,
     pnn_total_pago  INT  NOT NULL,
     pnn_descripcion VARCHAR(255),
-    fk_asi          INT  NOT NULL,
-    CONSTRAINT fk_asi
-        FOREIGN KEY (fk_asi)
-            REFERENCES ASISTENCIA (asi_id)
+    fk_per_id       INT NOT NULL,
+    CONSTRAINT fk_per_id
+        FOREIGN KEY (fk_per_id)
+            REFERENCES EMPLEADO (per_id)
             ON DELETE CASCADE
 );
 

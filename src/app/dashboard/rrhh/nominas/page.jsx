@@ -14,64 +14,34 @@ const columns = [
   {
     key: "total_pago",
     label: "Total",
-    format: (value) => `$${value.toLocaleString()}`,
+    format: (value) => `$${value?.toLocaleString() || "0"}`,
   },
   { key: "empleado_nombre", label: "Empleado" },
   { key: "cargo", label: "Cargo" },
   { key: "descripcion", label: "Descripción" },
 ];
 
-const formFields = [
-  {
-    name: "asistencia_id",
-    label: "Asistencia",
-    type: "select",
-    required: true,
-    options: [], // Se llena dinámicamente
-  },
-  {
-    name: "fecha_pago",
-    label: "Fecha de Pago",
-    type: "date",
-    required: true,
-  },
-  {
-    name: "total_pago",
-    label: "Total a Pagar",
-    type: "number",
-    required: true,
-  },
-  {
-    name: "descripcion",
-    label: "Descripción",
-    type: "text",
-    required: true,
-  },
-];
+const defaultNomina = {
+  empleado: "",
+  fecha_pago: new Date().toISOString().split("T")[0],
+  total_pago: "",
+  descripcion: "",
+};
 
 export default function NominasPage() {
   const [nominas, setNominas] = useState([]);
-  const [asistencias, setAsistencias] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const [selectedNomina, setSelectedNomina] = useState(null);
+  const [currentNomina, setCurrentNomina] = useState(null);
+  const [formFields, setFormFields] = useState([]);
+  const [selectedEmpleado, setSelectedEmpleado] = useState(null);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
+  const fetchNominas = async () => {
     try {
-      const [nominasRes, asistenciasRes] = await Promise.all([
-        fetch("/api/nominas"),
-        fetch("/api/nominas/asistencias"),
-      ]);
-
-      const nominasData = await nominasRes.json();
-      const asistenciasData = await asistenciasRes.json();
-
-      setNominas(nominasData);
-      setAsistencias(asistenciasData);
+      const response = await fetch("/api/nominas");
+      if (!response.ok) throw new Error("Error al cargar nóminas");
+      const data = await response.json();
+      setNominas(data);
     } catch (error) {
       console.error("Error:", error);
     } finally {
@@ -79,65 +49,214 @@ export default function NominasPage() {
     }
   };
 
-  const getFormFields = () => {
-    return formFields.map((field) => {
-      if (field.name === "asistencia_id") {
-        return {
-          ...field,
-          options: asistencias.map((a) => ({
-            value: a.asi_id,
-            label: `${a.empleado_nombre} - ${a.cargo} - ${new Date(a.asi_hora_inicio).toLocaleString()}`,
-          })),
-        };
-      }
-      return field;
-    });
-  };
+  useEffect(() => {
+    fetchNominas();
+  }, []);
 
-  const handleEdit = (nomina) => {
-    setSelectedNomina(nomina);
-    setShowModal(true);
-  };
-
-  const handleDelete = async (nomina) => {
-    if (!confirm("¿Está seguro de eliminar esta nómina?")) return;
-
+  const getFormFields = async (isEditing) => {
     try {
-      const response = await fetch(`/api/nominas/${nomina.id}`, {
-        method: "DELETE",
-      });
+      const empleadosRes = await fetch("/api/empleados");
+      if (!empleadosRes.ok) throw new Error("Error al cargar empleados");
+      const empleados = await empleadosRes.json();
 
-      if (response.ok) {
-        fetchData();
-      }
+      return [
+        {
+          name: "empleado",
+          label: "Empleado",
+          type: "select",
+          required: true,
+          disabled: isEditing,
+          options: empleados.map((emp) => ({
+            value: emp.per_id.toString(),
+            label: `${emp.per_nombre} ${emp.per_apellido} - ${emp.cargo_actual || "Sin cargo"}`,
+          })),
+        },
+        {
+          name: "fecha_pago",
+          label: "Fecha de Pago",
+          type: "date",
+          required: true,
+        },
+        {
+          name: "total_pago",
+          label: "Total a Pagar",
+          type: "number",
+          required: true,
+          disabled: true,
+        },
+        {
+          name: "descripcion",
+          label: "Descripción",
+          type: "text",
+          required: true,
+        },
+      ];
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error al cargar campos:", error);
+      return [];
+    }
+  };
+
+  const handleFieldChange = async (name, value) => {
+    setCurrentNomina((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    if (name === "empleado" && value) {
+      setSelectedEmpleado(value);
+
+      try {
+        const response = await fetch(`/api/nominas/calcular-pago/${value}`);
+        if (!response.ok) throw new Error("Error al calcular pago");
+        const { pago_total } = await response.json();
+
+        setFormFields((prevFields) =>
+          prevFields.map((field) => {
+            if (field.name === "total_pago") {
+              return {
+                ...field,
+                value: pago_total,
+              };
+            }
+            if (field.name === "empleado") {
+              return {
+                ...field,
+                value,
+              };
+            }
+            return field;
+          }),
+        );
+
+        setCurrentNomina((prev) => ({
+          ...prev,
+          empleado_id: value,
+          total_pago: pago_total,
+        }));
+      } catch (error) {
+        console.error("Error al calcular pago:", error);
+      }
+    }
+  };
+
+  const handleEdit = async (nomina) => {
+    try {
+      const fields = await getFormFields(!!nomina);
+
+      if (nomina) {
+        // Modo edición
+        const formattedNomina = {
+          ...nomina,
+          empleado: nomina.empleado_id?.toString(),
+          fecha_pago: new Date(nomina.fecha_pago).toISOString().split("T")[0],
+        };
+
+        setSelectedEmpleado(nomina.empleado_id?.toString());
+
+        // Actualizar los campos con los valores actuales
+        const updatedFields = fields.map((field) => {
+          if (field.name === "empleado") {
+            return {
+              ...field,
+              value: formattedNomina.empleado,
+              disabled: true,
+              // Encontrar la opción correcta para mostrar el nombre del empleado
+              options: field.options.map((opt) => ({
+                ...opt,
+                selected: opt.value === formattedNomina.empleado,
+              })),
+            };
+          }
+          if (field.name === "fecha_pago") {
+            return {
+              ...field,
+              value: formattedNomina.fecha_pago,
+            };
+          }
+          if (field.name === "total_pago") {
+            return {
+              ...field,
+              value: formattedNomina.total_pago,
+              disabled: true,
+            };
+          }
+          if (field.name === "descripcion") {
+            return {
+              ...field,
+              value: formattedNomina.descripcion,
+            };
+          }
+          return field;
+        });
+
+        setFormFields(updatedFields);
+        setCurrentNomina(formattedNomina);
+      } else {
+        // Modo creación
+        setSelectedEmpleado(null);
+        setFormFields(fields);
+        setCurrentNomina(defaultNomina);
+      }
+
+      setShowModal(true);
+    } catch (error) {
+      console.error("Error al preparar el formulario:", error);
     }
   };
 
   const handleSave = async (formData) => {
     try {
-      const url = formData.id ? `/api/nominas/${formData.id}` : "/api/nominas";
-      const method = formData.id ? "PUT" : "POST";
+      if (formData.id) {
+        // Modo edición: solo actualizar fecha y descripción
+        const response = await fetch(`/api/nominas/${formData.id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            fecha_pago: formData.fecha_pago,
+            descripcion: formData.descripcion,
+          }),
+        });
 
-      const response = await fetch(url, {
-        method,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        setShowModal(false);
-        fetchData();
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.error?.message || "Error al actualizar");
+        }
       } else {
-        const error = await response.json();
-        alert(error.error?.message || "Error al guardar la nómina");
+        // Validar que haya un monto a pagar
+        if (!formData.total_pago || parseFloat(formData.total_pago) <= 0) {
+          throw new Error("No hay monto a pagar para este empleado");
+        }
+
+        // Modo creación: registro nuevo
+        const response = await fetch("/api/nominas", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            empleado_id: formData.empleado,
+            fecha_pago: formData.fecha_pago,
+            total_pago: formData.total_pago,
+            descripcion: formData.descripcion,
+            metodo_id: 1,
+            moneda_id: 1,
+          }),
+        });
+
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.error?.message || "Error al guardar");
+        }
       }
+
+      setShowModal(false);
+      fetchNominas();
     } catch (error) {
       console.error("Error:", error);
-      alert("Error al guardar la nómina");
+      throw error;
     }
   };
 
@@ -155,7 +274,6 @@ export default function NominasPage() {
         data={nominas}
         columns={columns}
         onEdit={handleEdit}
-        onDelete={handleDelete}
         title="Gestión de Nóminas"
       />
 
@@ -163,11 +281,14 @@ export default function NominasPage() {
         isOpen={showModal}
         onClose={() => {
           setShowModal(false);
-          setSelectedNomina(null);
+          setCurrentNomina(null);
+          setSelectedEmpleado(null);
         }}
         onSave={handleSave}
-        data={selectedNomina}
-        fields={getFormFields()}
+        data={currentNomina}
+        fields={formFields}
+        title={currentNomina?.id ? "Editar Nómina" : "Nueva Nómina"}
+        onFieldChange={handleFieldChange}
       />
     </div>
   );

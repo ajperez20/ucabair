@@ -13,13 +13,9 @@ const columns = [
   { key: "rpm_nombre", label: "Materia Prima" },
   { key: "mps_unidad_medida", label: "Unidad de Medida" },
   {
-    name: "mps_cantidad_disponible",
+    key: "mps_cantidad_disponible",
     label: "Cantidad Disponible",
-    type: "number",
-    required: true,
-    min: 150,
-    step: "0.01",
-    description: "Ingrese la cantidad disponible (mínimo 150)",
+    format: (value) => value?.toLocaleString() || "0",
   },
   {
     key: "estado",
@@ -37,60 +33,101 @@ const columns = [
 ];
 
 const unidadesMedida = [
-  { value: "KG", label: "Kilogramos" },
+  { value: "Kg", label: "Kilogramos" },
   { value: "L", label: "Litros" },
   { value: "M", label: "Metros" },
   { value: "UN", label: "Unidades" },
+  { value: "m³", label: "Metros Cúbicos" },
+];
+
+const getFormFields = (isEditing) => [
+  {
+    name: "fk_rpm_id",
+    label: "Materia Prima",
+    type: "select",
+    required: true,
+    options: [],
+    description: "Seleccione la materia prima",
+  },
+  {
+    name: "fk_sed_id",
+    label: "Sede",
+    type: "select",
+    required: true,
+    options: [],
+    description: "Seleccione la sede",
+  },
+  {
+    name: "mps_unidad_medida",
+    label: "Unidad de Medida",
+    type: "select",
+    required: true,
+    options: unidadesMedida,
+    description: "Seleccione la unidad de medida",
+  },
+  {
+    name: "mps_cantidad_disponible",
+    label: "Cantidad Disponible",
+    type: "number",
+    required: true,
+    step: "0.01",
+    ...(isEditing
+      ? {}
+      : {
+          min: 150,
+          description: "La cantidad mínima permitida es 150",
+        }),
+  },
 ];
 
 export default function StockPage() {
   const [stock, setStock] = useState([]);
   const [sedes, setSedes] = useState([]);
-  const [materiasPrimas, setMateriasPrimas] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedSede, setSelectedSede] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [currentStock, setCurrentStock] = useState(null);
-
-  const [formFields, setFormFields] = useState([
-    {
-      name: "fk_rpm_id",
-      label: "Materia Prima",
-      type: "select",
-      required: true,
-      options: [],
-      description: "Seleccione la materia prima",
-    },
-    {
-      name: "fk_sed_id",
-      label: "Sede",
-      type: "select",
-      required: true,
-      options: [],
-      description: "Seleccione la sede",
-    },
-    {
-      name: "mps_unidad_medida",
-      label: "Unidad de Medida",
-      type: "select",
-      required: true,
-      options: unidadesMedida,
-      description: "Seleccione la unidad de medida",
-    },
-    {
-      name: "mps_cantidad_disponible",
-      label: "Cantidad Disponible",
-      type: "number",
-      required: true,
-      min: 150,
-      step: "0.01",
-      description: "La cantidad mínima permitida es 150", // Aquí se agrega el mensaje
-    },
-  ]);
+  const [formFields, setFormFields] = useState([]);
 
   useEffect(() => {
     fetchInitialData();
   }, []);
+
+  useEffect(() => {
+    const isEditing = !!currentStock?.id;
+    const fields = getFormFields(isEditing);
+
+    const updatedFields = fields.map((field) => {
+      if (field.name === "fk_sed_id") {
+        return {
+          ...field,
+          options: sedes.map((sede) => ({
+            value: sede.sed_id,
+            label: sede.sed_nombre,
+          })),
+        };
+      }
+      if (field.name === "fk_rpm_id") {
+        // Obtener opciones únicas de materia prima del stock
+        const materiaPrimaOptions = Array.from(
+          new Set(stock.map((item) => item.fk_rpm_id)),
+        ).map((rpm_id) => {
+          const item = stock.find((s) => s.fk_rpm_id === rpm_id);
+          return {
+            value: rpm_id,
+            label: item.rpm_nombre,
+          };
+        });
+        return {
+          ...field,
+          options: materiaPrimaOptions,
+        };
+      }
+      return field;
+    });
+
+    setFormFields(updatedFields);
+  }, [currentStock, sedes, stock]);
 
   const fetchInitialData = async () => {
     try {
@@ -107,15 +144,14 @@ export default function StockPage() {
         sedesRes.json(),
       ]);
 
-      // Formatear datos del stock con IDs únicos y estado
+      // Asegurarnos de que cada item tenga un id único
       const formattedStock = stockData.map((item) => ({
-        id: item.id, // Asegurarse de que este campo exista en la respuesta del API
+        id: item.id, // Ya viene como 'id' del servicio
         sed_nombre: item.sed_nombre,
         rpm_nombre: item.rpm_nombre,
         mps_unidad_medida: item.mps_unidad_medida,
-        mps_cantidad_disponible: item.mps_cantidad_disponible,
-        estado: determinarEstado(item.mps_cantidad_disponible),
-        // Mantener campos originales para el formulario
+        mps_cantidad_disponible: parseFloat(item.mps_cantidad_disponible) || 0,
+        estado: determinarEstado(parseFloat(item.mps_cantidad_disponible) || 0),
         fk_sed_id: item.fk_sed_id,
         fk_rpm_id: item.fk_rpm_id,
       }));
@@ -123,37 +159,36 @@ export default function StockPage() {
       setStock(formattedStock);
       setSedes(sedesData);
 
-      // Actualizar opciones de los selects
-      setFormFields((fields) =>
-        fields.map((field) => {
-          if (field.name === "fk_sed_id") {
+      // Actualizar las opciones de los selects con keys únicas
+      const updatedFields = getFormFields(!!currentStock?.id).map((field) => {
+        if (field.name === "fk_sed_id") {
+          return {
+            ...field,
+            options: sedesData.map((sede) => ({
+              value: sede.sed_id,
+              label: sede.sed_nombre,
+            })),
+          };
+        }
+        if (field.name === "fk_rpm_id") {
+          const materiaPrimaOptions = Array.from(
+            new Set(stockData.map((item) => item.fk_rpm_id)),
+          ).map((rpm_id) => {
+            const item = stockData.find((s) => s.fk_rpm_id === rpm_id);
             return {
-              ...field,
-              options: sedesData.map((sede) => ({
-                value: sede.sed_id,
-                label: sede.sed_nombre,
-              })),
+              value: rpm_id,
+              label: item.rpm_nombre,
             };
-          }
-          if (field.name === "fk_rpm_id") {
-            // Obtener opciones únicas de materia prima del stock
-            const materiaPrimaOptions = Array.from(
-              new Set(stockData.map((item) => item.fk_rpm_id)),
-            ).map((rpm_id) => {
-              const item = stockData.find((s) => s.fk_rpm_id === rpm_id);
-              return {
-                value: rpm_id,
-                label: item.rpm_nombre,
-              };
-            });
-            return {
-              ...field,
-              options: materiaPrimaOptions,
-            };
-          }
-          return field;
-        }),
-      );
+          });
+          return {
+            ...field,
+            options: materiaPrimaOptions,
+          };
+        }
+        return field;
+      });
+
+      setFormFields(updatedFields);
     } catch (error) {
       console.error("Error:", error);
     } finally {
@@ -214,8 +249,7 @@ export default function StockPage() {
 
   const handleSave = async (formData) => {
     try {
-      // Validar cantidad mínima
-      if (parseFloat(formData.mps_cantidad_disponible) < 150) {
+      if (!formData.id && parseFloat(formData.mps_cantidad_disponible) < 150) {
         throw new Error("La cantidad mínima debe ser 150");
       }
 
@@ -296,9 +330,11 @@ export default function StockPage() {
           onChange={(e) => setSelectedSede(e.target.value)}
           className="rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
-          <option value="">Todas las sedes</option>
+          <option key="all-sedes" value="">
+            Todas las sedes
+          </option>
           {sedes.map((sede) => (
-            <option key={sede.sed_id} value={sede.sed_id}>
+            <option key={`sede-${sede.sed_id}`} value={sede.sed_id}>
               {sede.sed_nombre}
             </option>
           ))}
@@ -311,6 +347,7 @@ export default function StockPage() {
         onEdit={handleEdit}
         onDelete={handleDelete}
         title="Control de Stock"
+        keyField="id"
       />
 
       <EditModal
@@ -322,7 +359,7 @@ export default function StockPage() {
         onSave={handleSave}
         data={currentStock}
         fields={formFields}
-        title="Stock"
+        title={currentStock?.id ? "Editar Stock" : "Nuevo Stock"}
       />
     </div>
   );

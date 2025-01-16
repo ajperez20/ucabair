@@ -41,75 +41,38 @@ const columns = [
       return value.substring(0, 5);
     },
   },
-  {
-    key: "estado",
-    label: "Estado",
-    format: (value, row) => {
-      // Si no hay datos, retornamos guión
-      if (!row || !row.dia || !row.asi_hora_inicio) return "-";
-
-      // Si tiene hora de fin, está completado
-      if (row.asi_hora_fin) return "Completado";
-
-      // Obtener el día actual en español y en mayúsculas
-      const diasSemana = {
-        SUNDAY: "DOMINGO",
-        MONDAY: "LUNES",
-        TUESDAY: "MARTES",
-        WEDNESDAY: "MIÉRCOLES",
-        THURSDAY: "JUEVES",
-        FRIDAY: "VIERNES",
-        SATURDAY: "SÁBADO",
-      };
-
-      const diaActual =
-        diasSemana[
-          new Date().toLocaleString("en-US", { weekday: "uppercase" })
-        ];
-
-      // Comparar con el día de la asistencia
-      return row.dia === diaActual ? "En curso" : "Incompleto";
-    },
-  },
 ];
 
 const defaultAsistencia = {
-  fk_per_id: "",
-  fk_car_id: "",
-  fk_emc_id: "",
-  fk_hor_id: "",
+  empleado: "",
+  horario: "",
   asi_hora_inicio: "",
   asi_hora_fin: "",
 };
 
-const getCreateFormFields = [
+const getCreateFormFields = (empleados = []) => [
   {
     name: "empleado",
     label: "Empleado",
     type: "select",
     required: true,
-    options: [],
+    options: empleados.map((emp) => ({
+      value: emp.per_id.toString(),
+      label: `${emp.per_nombre} ${emp.per_apellido} - ${emp.cargo_actual || "Sin cargo"}`,
+    })),
   },
   {
     name: "horario",
-    label: "Horario",
+    label: "Día y Horario",
     type: "select",
     required: true,
     options: [],
     depends_on: "empleado",
+    description: "Seleccione el día y horario de trabajo",
   },
   {
     name: "asi_hora_inicio",
     label: "Hora de Entrada",
-    type: "time",
-    required: true,
-  },
-];
-
-const getEditFormFields = [
-  {
-    name: "asi_hora_fin",
-    label: "Hora de Salida",
     type: "time",
     required: true,
   },
@@ -121,6 +84,7 @@ export default function AsistenciasPage() {
   const [showModal, setShowModal] = useState(false);
   const [currentAsistencia, setCurrentAsistencia] = useState(null);
   const [formFields, setFormFields] = useState([]);
+  const [empleadoHorarios, setEmpleadoHorarios] = useState(null);
 
   const fetchAsistencias = useCallback(async () => {
     try {
@@ -128,17 +92,10 @@ export default function AsistenciasPage() {
       if (!response.ok) throw new Error("Error al cargar asistencias");
       const data = await response.json();
 
-      // Agregar estado directamente en el mapeo de datos
       setAsistencias(
         data.map((asistencia) => ({
           ...asistencia,
           id: asistencia.asi_id,
-          estado: asistencia.asi_hora_fin
-            ? "Completado"
-            : asistencia.dia ===
-                new Date().toLocaleString("es-ES", { weekday: "uppercase" })
-              ? "En curso"
-              : "Incompleto",
         })),
       );
     } catch (error) {
@@ -149,28 +106,37 @@ export default function AsistenciasPage() {
   }, []);
 
   const handleFieldChange = async (name, value) => {
-    if (name === "empleado") {
+    setCurrentAsistencia((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    if (name === "empleado" && value) {
       try {
         const response = await fetch(
           `/api/empleados/${value}/horarios-disponibles`,
         );
         if (!response.ok) throw new Error("Error al cargar horarios");
-        const horarios = await response.json();
+
+        const data = await response.json();
+        setEmpleadoHorarios(data);
+
+        const horariosOptions = data.horarios.map((h) => ({
+          value: JSON.stringify({
+            fk_per_id: value,
+            fk_car_id: data.cargo_id,
+            fk_emc_id: data.emc_id,
+            fk_hor_id: h.id,
+          }),
+          label: `${h.dia} - ${h.hora_inicio.substring(0, 5)} a ${h.hora_fin.substring(0, 5)}`,
+        }));
 
         setFormFields((prevFields) =>
           prevFields.map((field) => {
             if (field.name === "horario") {
               return {
                 ...field,
-                options: horarios.map((h) => ({
-                  value: JSON.stringify({
-                    fk_per_id: h.fk_per_id,
-                    fk_car_id: h.fk_car_id,
-                    fk_emc_id: h.fk_emc_id,
-                    fk_hor_id: h.fk_hor_id,
-                  }),
-                  label: `${new Date(h.fecha).toLocaleDateString("es-ES")} - ${h.hor_hora_inicio.substring(0, 5)} a ${h.hor_hora_fin.substring(0, 5)} - ${h.car_nombre}`,
-                })),
+                options: horariosOptions,
               };
             }
             return field;
@@ -180,11 +146,43 @@ export default function AsistenciasPage() {
         console.error("Error al cargar horarios:", error);
       }
     }
+
+    if (name === "horario" && value) {
+      try {
+        const horarioData = JSON.parse(value);
+        const horarioSeleccionado = empleadoHorarios.horarios.find(
+          (h) => h.id === horarioData.fk_hor_id,
+        );
+
+        if (horarioSeleccionado) {
+          setFormFields((prevFields) =>
+            prevFields.map((field) => {
+              if (field.name === "asi_hora_inicio") {
+                return {
+                  ...field,
+                  defaultValue: horarioSeleccionado.hora_inicio.substring(0, 5),
+                };
+              }
+              return field;
+            }),
+          );
+        }
+      } catch (error) {
+        console.error("Error al procesar horario:", error);
+      }
+    }
   };
 
   const handleEdit = async (asistencia) => {
     if (asistencia) {
-      setFormFields(getEditFormFields);
+      setFormFields([
+        {
+          name: "asi_hora_fin",
+          label: "Hora de Salida",
+          type: "time",
+          required: true,
+        },
+      ]);
       setCurrentAsistencia(asistencia);
     } else {
       try {
@@ -192,20 +190,7 @@ export default function AsistenciasPage() {
         if (!response.ok) throw new Error("Error al cargar empleados");
         const empleados = await response.json();
 
-        const createFields = getCreateFormFields.map((field) => {
-          if (field.name === "empleado") {
-            return {
-              ...field,
-              options: empleados.map((emp) => ({
-                value: emp.per_id,
-                label: `${emp.per_nombre} ${emp.per_apellido}`,
-              })),
-            };
-          }
-          return field;
-        });
-
-        setFormFields(createFields);
+        setFormFields(getCreateFormFields(empleados));
         setCurrentAsistencia(defaultAsistencia);
       } catch (error) {
         console.error("Error al cargar empleados:", error);
@@ -215,38 +200,38 @@ export default function AsistenciasPage() {
   };
 
   const handleSave = async (formData) => {
-    if (formData.id) {
-      // Registrar salida
-      const response = await fetch(`/api/nominas/asistencias/${formData.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          asi_hora_fin: formData.asi_hora_fin,
-        }),
-      });
+    try {
+      if (formData.id) {
+        const response = await fetch(
+          `/api/nominas/asistencias/${formData.id}`,
+          {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ asi_hora_fin: formData.asi_hora_fin }),
+          },
+        );
 
-      if (!response.ok) throw new Error("Error al registrar salida");
-    } else {
-      // Nueva asistencia
-      const horarioData = JSON.parse(formData.horario);
-      const response = await fetch("/api/nominas/asistencias", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...horarioData,
-          asi_hora_inicio: formData.asi_hora_inicio,
-        }),
-      });
+        if (!response.ok) throw new Error("Error al registrar salida");
+      } else {
+        const horarioData = JSON.parse(formData.horario);
+        const response = await fetch("/api/nominas/asistencias", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            ...horarioData,
+            asi_hora_inicio: formData.asi_hora_inicio,
+          }),
+        });
 
-      if (!response.ok) throw new Error("Error al registrar asistencia");
+        if (!response.ok) throw new Error("Error al registrar asistencia");
+      }
+
+      setShowModal(false);
+      fetchAsistencias();
+    } catch (error) {
+      console.error("Error:", error);
+      throw error;
     }
-
-    setShowModal(false);
-    fetchAsistencias();
   };
 
   useEffect(() => {
@@ -275,6 +260,7 @@ export default function AsistenciasPage() {
         onClose={() => {
           setShowModal(false);
           setCurrentAsistencia(null);
+          setEmpleadoHorarios(null);
         }}
         onSave={handleSave}
         data={currentAsistencia}

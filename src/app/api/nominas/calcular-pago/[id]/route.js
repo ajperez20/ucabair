@@ -1,15 +1,16 @@
 import { NextResponse } from "next/server";
-import { employeeService } from "@/services/employeeService";
+import { nominaService } from "@/services/nominaService";
 
 export async function GET(request, { params }) {
   try {
-    const horarios = await employeeService.getCargoHorario(params.id);
-    return NextResponse.json(horarios);
+    const { id } = params;
+    const resultado = await nominaService.calcularPago(id);
+    return NextResponse.json(resultado);
   } catch (error) {
     return NextResponse.json(
       {
         error: {
-          message: "Error al obtener horarios disponibles",
+          message: "Error al calcular pago",
           details: error.message,
         },
       },

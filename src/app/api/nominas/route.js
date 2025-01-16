@@ -21,15 +21,14 @@ export async function GET() {
 
 export async function POST(request) {
   try {
-    const nomina = await request.json();
-    const newNomina = await nominaService.create(nomina);
-    return NextResponse.json(newNomina, { status: 201 });
+    const data = await request.json();
+    const nomina = await nominaService.registrarPago(data);
+    return NextResponse.json(nomina, { status: 201 });
   } catch (error) {
     return NextResponse.json(
       {
         error: {
-          status: 500,
-          message: "Error al crear la nómina",
+          message: "Error al crear nómina",
           details: error.message,
         },
       },

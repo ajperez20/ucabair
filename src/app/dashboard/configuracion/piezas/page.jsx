@@ -200,11 +200,6 @@ export default function PiezasPage() {
   };
 
   const handleDelete = async (pieza) => {
-    if (pieza.cantidad_procesos > 0) {
-      alert("No se puede eliminar una pieza que tiene procesos asociados");
-      return;
-    }
-
     if (!confirm("¿Está seguro de eliminar esta pieza?")) return;
 
     try {
