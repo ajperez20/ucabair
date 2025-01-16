@@ -53,6 +53,7 @@ BEGIN
     RETURN QUERY
         SELECT
             equipo_id,
-            'Se creó el equipo exitosamente' AS mensaje;
+            'Se creó el equipo exitosamente'::VARCHAR AS mensaje;
 END;
 $$ LANGUAGE plpgsql;
+
