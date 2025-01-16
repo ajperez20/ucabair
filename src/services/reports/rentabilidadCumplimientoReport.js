@@ -19,23 +19,23 @@ const columns = [
     align: "right",
   },
   {
-    key: "cumplimiento_tiempo",
-    label: "Cumplimiento %",
-    width: 100,
-    align: "right",
-    format: (value) => Number(value).toFixed(2),
-  },
-  {
-    key: "costo_estimado",
-    label: "Costo Est.",
+    key: "precio_base",
+    label: "Precio Base",
     width: 100,
     align: "right",
     format: (value) => `$${Number(value).toLocaleString()}`,
   },
   {
-    key: "costo_real",
-    label: "Costo Real",
+    key: "costos_materiales",
+    label: "Costos",
     width: 100,
+    align: "right",
+    format: (value) => `$${Number(value).toLocaleString()}`,
+  },
+  {
+    key: "ingreso_total",
+    label: "Ingreso Total",
+    width: 120,
     align: "right",
     format: (value) => `$${Number(value).toLocaleString()}`,
   },
@@ -44,14 +44,12 @@ const columns = [
     label: "Margen %",
     width: 90,
     align: "right",
-    format: (value) => Number(value).toFixed(2),
+    format: (value) => `${Number(value).toFixed(2)}%`,
   },
   {
-    key: "indice_eficiencia",
-    label: "Eficiencia",
-    width: 90,
-    align: "right",
-    format: (value) => Number(value).toFixed(2),
+    key: "estado_rentabilidad",
+    label: "Estado",
+    width: 100,
   },
 ];
 
@@ -68,16 +66,16 @@ export const rentabilidadCumplimientoReport = {
     const data = await rentabilidadCumplimientoReport.getData(anio);
 
     return generateReportPDF({
-      title: "Reporte de Rentabilidad por Cumplimiento",
+      title: "Reporte de Rentabilidad por Modelo",
       subtitle: `Año: ${anio}`,
       data,
       columns,
       showChart: data.length > 0,
       chartConfig: {
-        valueKey: "indice_eficiencia",
+        valueKey: "margen_rentabilidad",
         labelKey: "modelo_avion",
         type: "bar",
-        title: "Índice de eficiencia por modelo",
+        title: "Margen de rentabilidad por modelo",
       },
       emptyMessage: `No se encontraron datos de producción para el año ${anio}`,
     });

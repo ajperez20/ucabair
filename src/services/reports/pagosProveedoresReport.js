@@ -5,36 +5,36 @@ const columns = [
   {
     key: "mes",
     label: "Mes",
-    width: 90,
+    width: 100,
   },
   {
     key: "proveedor_nombre",
     label: "Proveedor",
-    width: 130,
+    width: 150,
   },
   {
     key: "solicitud_id",
     label: "Solicitud #",
-    width: 80,
+    width: 90,
     align: "right",
   },
   {
     key: "fecha_pago",
-    label: "Fecha Pago",
+    label: "Fecha",
     width: 100,
     format: (value) => new Date(value).toLocaleDateString(),
   },
   {
     key: "monto_pagado",
     label: "Monto",
-    width: 100,
+    width: 120,
     align: "right",
     format: (value) => `$${Number(value).toLocaleString()}`,
   },
   {
     key: "metodo_pago",
     label: "Método",
-    width: 100,
+    width: 120,
   },
   {
     key: "moneda",
@@ -42,15 +42,16 @@ const columns = [
     width: 80,
   },
   {
+    key: "tasa_cambio",
+    label: "Tasa",
+    width: 80,
+    align: "right",
+    format: (value) => Number(value).toFixed(2),
+  },
+  {
     key: "estado_pago",
     label: "Estado",
     width: 100,
-  },
-  {
-    key: "dias_proceso",
-    label: "Días",
-    width: 60,
-    align: "right",
   },
 ];
 

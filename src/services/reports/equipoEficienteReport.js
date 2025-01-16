@@ -5,17 +5,17 @@ const columns = [
   {
     key: "zona_nombre",
     label: "Zona",
-    width: 100,
+    width: 120,
   },
   {
     key: "area_nombre",
     label: "Área",
-    width: 100,
+    width: 120,
   },
   {
     key: "sede_nombre",
     label: "Sede",
-    width: 100,
+    width: 120,
   },
   {
     key: "supervisor_nombre",
@@ -23,43 +23,29 @@ const columns = [
     width: 150,
   },
   {
-    key: "total_procesos",
-    label: "Total Procesos",
-    width: 80,
+    key: "procesos_asignados",
+    label: "Asignados",
+    width: 90,
     align: "right",
   },
   {
-    key: "procesos_a_tiempo",
-    label: "A Tiempo",
-    width: 70,
+    key: "procesos_completados",
+    label: "Completados",
+    width: 90,
     align: "right",
   },
   {
-    key: "procesos_retrasados",
-    label: "Retrasados",
-    width: 70,
+    key: "procesos_pendientes",
+    label: "Pendientes",
+    width: 90,
     align: "right",
   },
   {
-    key: "promedio_retraso",
-    label: "Prom. Retraso (días)",
-    width: 80,
+    key: "porcentaje_completado",
+    label: "% Completado",
+    width: 100,
     align: "right",
-    format: (value) => Number(value).toFixed(1),
-  },
-  {
-    key: "porcentaje_eficiencia",
-    label: "Eficiencia",
-    width: 70,
-    align: "right",
-    format: (value) => `${Number(value).toFixed(1)}%`,
-  },
-  {
-    key: "ranking",
-    label: "Ranking",
-    width: 60,
-    align: "center",
-    format: (value) => `#${value}`,
+    format: (value) => `${Number(value).toFixed(2)}%`,
   },
 ];
 
@@ -76,43 +62,16 @@ export const equipoEficienteReport = {
     const data = await equipoEficienteReport.getData(anio);
 
     return generateReportPDF({
-      title: "Ranking de Equipos por Eficiencia",
-      subtitle: `Año ${anio}`,
+      title: "Reporte de Equipos más Eficientes",
+      subtitle: `Año: ${anio}`,
       data,
       columns,
       showChart: data.length > 0,
       chartConfig: {
+        valueKey: "porcentaje_completado",
+        labelKey: "zona_nombre",
         type: "bar",
-        data: data.map((row) => ({
-          label: `${row.zona_nombre} (${row.sede_nombre})`,
-          value: row.porcentaje_eficiencia,
-        })),
-        valueKey: "value",
-        labelKey: "label",
-        title: "Porcentaje de Eficiencia por Equipo",
-        yAxisLabel: "Eficiencia (%)",
-        xAxisLabel: "Equipos",
-      },
-      summary: {
-        title: "Resumen de Eficiencia",
-        items: [
-          {
-            label: "Equipos Evaluados",
-            value: data.length,
-          },
-          {
-            label: "Mejor Eficiencia",
-            value: `${Math.max(...data.map((d) => d.porcentaje_eficiencia))}%`,
-          },
-          {
-            label: "Promedio de Eficiencia",
-            value: `${(data.reduce((acc, curr) => acc + curr.porcentaje_eficiencia, 0) / data.length).toFixed(1)}%`,
-          },
-          {
-            label: "Total Procesos",
-            value: data.reduce((acc, curr) => acc + curr.total_procesos, 0),
-          },
-        ],
+        title: "Porcentaje de completitud por zona",
       },
       emptyMessage: `No se encontraron datos de equipos para el año ${anio}`,
     });

@@ -13,14 +13,9 @@ const columns = [
     width: 150,
   },
   {
-    key: "tiempo_estimado",
-    label: "T. Estimado",
-    width: 100,
-  },
-  {
-    key: "pruebas_realizadas",
-    label: "Total Pruebas",
-    width: 100,
+    key: "total_pruebas",
+    label: "Total",
+    width: 80,
     align: "right",
   },
   {
@@ -32,17 +27,17 @@ const columns = [
   {
     key: "porcentaje_exito",
     label: "% Éxito",
-    width: 80,
+    width: 90,
     align: "right",
     format: (value) => `${Number(value).toFixed(2)}%`,
   },
   {
-    key: "tiempo_promedio_real",
-    label: "T. Promedio",
-    width: 100,
+    key: "estado_general",
+    label: "Estado",
+    width: 120,
   },
   {
-    key: "observaciones_frecuentes",
+    key: "observaciones",
     label: "Observaciones",
     width: 200,
   },
@@ -60,7 +55,7 @@ export const modeloPruebasReport = {
 
     return generateReportPDF({
       title: "Reporte de Pruebas por Modelo",
-      subtitle: "Análisis de rendimiento y resultados",
+      subtitle: "Análisis de resultados y eficiencia",
       data,
       columns,
       showChart: data.length > 0,

@@ -69,13 +69,13 @@ const reports = [
     endpoint: "equipo-eficiente",
   },
   {
-    id: "rentabilidad-aviones",
+    id: "rentabilidad-cumplimiento",
     title: "Rentabilidad de Aviones",
     description: "Análisis de rentabilidad por cumplimiento de fechas",
     icon: ChartPieIcon,
     color: "red",
     requiresYear: true,
-    endpoint: "rentabilidad-aviones",
+    endpoint: "rentabilidad-cumplimiento",
   },
   {
     id: "tipos-alas",

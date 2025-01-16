@@ -3,7 +3,7 @@ import pool from "@/config/database";
 
 const columns = [
   {
-    key: "nombre_prueba",
+    key: "prueba_nombre",
     label: "Prueba",
     width: 150,
   },
@@ -29,23 +29,15 @@ const columns = [
     width: 120,
   },
   {
-    key: "tiempo_estimado",
-    label: "T. Estimado",
-    width: 100,
+    key: "dias_transcurridos",
+    label: "Días",
+    width: 80,
     align: "right",
   },
   {
-    key: "tiempo_real",
-    label: "T. Real",
-    width: 100,
-    align: "right",
-  },
-  {
-    key: "desviacion_tiempo",
-    label: "Desviación (h)",
-    width: 100,
-    align: "right",
-    format: (value) => Number(value).toFixed(2),
+    key: "observaciones",
+    label: "Observaciones",
+    width: 200,
   },
 ];
 
@@ -68,10 +60,10 @@ export const pruebasFallidasReport = {
       columns,
       showChart: data.length > 0,
       chartConfig: {
-        valueKey: "desviacion_tiempo",
-        labelKey: "nombre_prueba",
+        valueKey: "dias_transcurridos",
+        labelKey: "prueba_nombre",
         type: "bar",
-        title: "Desviación de tiempo por prueba",
+        title: "Días transcurridos por prueba fallida",
       },
       emptyMessage: `No se encontraron pruebas fallidas para el año ${anio}`,
     });

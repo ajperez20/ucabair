@@ -8,9 +8,9 @@ const columns = [
     width: 120,
   },
   {
-    key: "mes",
+    key: "mes_ingreso",
     label: "Mes",
-    width: 90,
+    width: 100,
   },
   {
     key: "material_nombre",
@@ -18,7 +18,7 @@ const columns = [
     width: 120,
   },
   {
-    key: "cantidad_recibida",
+    key: "cantidad",
     label: "Cantidad",
     width: 80,
     align: "right",
@@ -34,6 +34,13 @@ const columns = [
     width: 120,
   },
   {
+    key: "costo_unitario",
+    label: "Costo Unit.",
+    width: 100,
+    align: "right",
+    format: (value) => `$${Number(value).toLocaleString()}`,
+  },
+  {
     key: "costo_total",
     label: "Costo Total",
     width: 100,
@@ -41,14 +48,7 @@ const columns = [
     format: (value) => `$${Number(value).toLocaleString()}`,
   },
   {
-    key: "tiempo_entrega",
-    label: "T. Entrega",
-    width: 90,
-    align: "right",
-    format: (value) => `${value} días`,
-  },
-  {
-    key: "estado",
+    key: "estado_solicitud",
     label: "Estado",
     width: 100,
   },
@@ -74,7 +74,7 @@ export const ingresosInventarioReport = {
       showChart: data.length > 0,
       chartConfig: {
         valueKey: "costo_total",
-        labelKey: "mes",
+        labelKey: "mes_ingreso",
         type: "bar",
         groupBy: "sede_nombre",
         title: "Costos de inventario por sede y mes",

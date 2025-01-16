@@ -8,13 +8,18 @@ const columns = [
     width: 120,
   },
   {
-    key: "pieza_nombre",
+    key: "tipo_avion",
+    label: "Tipo",
+    width: 100,
+  },
+  {
+    key: "nombre_pieza",
     label: "Pieza",
     width: 120,
   },
   {
     key: "tipo_pieza",
-    label: "Tipo",
+    label: "Tipo Pieza",
     width: 100,
   },
   {
@@ -24,19 +29,15 @@ const columns = [
     align: "right",
   },
   {
-    key: "caracteristicas",
-    label: "Características",
-    width: 200,
-  },
-  {
-    key: "materiales_necesarios",
+    key: "materiales_requeridos",
     label: "Materiales",
     width: 200,
   },
   {
-    key: "tiempo_estimado_fabricacion",
-    label: "T. Estimado",
-    width: 100,
+    key: "cantidad_procesos",
+    label: "Procesos",
+    width: 80,
+    align: "right",
   },
   {
     key: "costo_estimado",
@@ -59,16 +60,16 @@ export const modeloPiezasReport = {
 
     return generateReportPDF({
       title: "Catálogo de Piezas por Modelo",
-      subtitle: "Especificaciones técnicas y requerimientos",
+      subtitle: "Especificaciones y requerimientos",
       data,
       columns,
       showChart: data.length > 0,
       chartConfig: {
         valueKey: "cantidad_requerida",
-        labelKey: "pieza_nombre",
+        labelKey: "nombre_pieza",
         type: "bar",
         groupBy: "modelo_avion",
-        title: "Cantidad de piezas por modelo",
+        title: "Cantidad de piezas requeridas por modelo",
       },
       emptyMessage: "No se encontraron piezas registradas",
     });

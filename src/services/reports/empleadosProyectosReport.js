@@ -40,6 +40,12 @@ const columns = [
     align: "right",
   },
   {
+    key: "piezas_procesadas",
+    label: "Piezas",
+    width: 80,
+    align: "right",
+  },
+  {
     key: "eficiencia_promedio",
     label: "Eficiencia %",
     width: 100,

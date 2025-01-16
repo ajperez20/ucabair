@@ -10,37 +10,23 @@ const columns = [
   {
     key: "modelos_avion",
     label: "Modelos",
-    width: 150,
+    width: 200,
   },
   {
-    key: "cantidad_total_usada",
+    key: "cantidad_usada",
     label: "Cantidad",
     width: 80,
     align: "right",
   },
   {
-    key: "caracteristicas_principales",
-    label: "Características",
-    width: 200,
-  },
-  {
     key: "material_principal",
     label: "Material",
-    width: 100,
+    width: 120,
   },
   {
-    key: "costo_promedio",
-    label: "Costo Prom.",
-    width: 100,
-    align: "right",
-    format: (value) => `$${Number(value).toLocaleString()}`,
-  },
-  {
-    key: "porcentaje_uso",
-    label: "Uso %",
-    width: 80,
-    align: "right",
-    format: (value) => Number(value).toFixed(2),
+    key: "descripcion_tipo",
+    label: "Descripción",
+    width: 200,
   },
 ];
 
@@ -55,16 +41,16 @@ export const tiposAlasReport = {
     const data = await tiposAlasReport.getData();
 
     return generateReportPDF({
-      title: "Reporte de Tipos de Alas más Usados",
-      subtitle: "Análisis de preferencias y características",
+      title: "Reporte de Tipos de Alas",
+      subtitle: "Análisis de uso en modelos de aviones",
       data,
       columns,
       showChart: data.length > 0,
       chartConfig: {
-        valueKey: "porcentaje_uso",
+        valueKey: "cantidad_usada",
         labelKey: "tipo_ala",
         type: "pie",
-        title: "Distribución de uso por tipo de ala",
+        title: "Distribución de tipos de alas",
       },
       emptyMessage: "No se encontraron datos de tipos de alas",
     });
