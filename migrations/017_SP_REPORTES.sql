@@ -1,5 +1,3 @@
--- migrations/018_SP_REPORTES.sql
-
 -- =========================================================
 -- Procedimiento almacenado para obtener los 10 clientes con más compras en un año
 -- =========================================================
@@ -50,4 +48,1101 @@ BEGIN
         ORDER BY total_compras DESC, cantidad_compras DESC
         LIMIT 10;
 END;
-$$ LANGUAGE plpgsql; 
+$$ LANGUAGE plpgsql;
+
+-- =========================================================
+-- Procedimiento almacenado para obtener el Calculo de Nominas
+-- =========================================================
+DROP FUNCTION IF EXISTS SP_REPORTE_NOMINA(INT);
+
+CREATE OR REPLACE FUNCTION SP_REPORTE_NOMINA(anio INT)
+    RETURNS TABLE (
+                      empleado_dni TEXT,
+                      empleado_nombre TEXT,
+                      cargo TEXT,
+                      total_horas_trabajadas NUMERIC,
+                      total_horas_extras NUMERIC,
+                      total_pagado NUMERIC,
+                      mes TEXT
+                  ) AS $$
+BEGIN
+    RETURN QUERY
+        SELECT
+            e.per_dni::TEXT,
+            (e.per_nombre || ' ' || e.per_apellido)::TEXT,
+            c.car_nombre::TEXT,
+            COALESCE(SUM(EXTRACT(EPOCH FROM (a.asi_hora_fin - a.asi_hora_inicio))/3600), 0)::NUMERIC,
+            COALESCE(GREATEST(SUM(EXTRACT(EPOCH FROM (a.asi_hora_fin - a.asi_hora_inicio))/3600) - 160, 0), 0)::NUMERIC,
+            COALESCE(pn.pnn_total_pago, 0)::NUMERIC,
+            TO_CHAR(pn.pnn_fecha_pago, 'TMMonth')::TEXT
+        FROM PAGO_NOMINA pn
+                 JOIN EMPLEADO e ON pn.fk_per_id = e.per_id
+                 JOIN EMPLEADO_CARGO ec ON e.per_id = ec.fk_per_id
+            AND (ec.emc_fecha_fin IS NULL OR ec.emc_fecha_fin > CURRENT_DATE)
+                 JOIN CARGO c ON ec.fk_car_id = c.car_id
+                 LEFT JOIN ASISTENCIA a ON e.per_id = a.fk_per_id
+            AND a.asi_pagada = true
+        WHERE EXTRACT(YEAR FROM pn.pnn_fecha_pago) = anio
+        GROUP BY
+            e.per_dni,
+            e.per_nombre,
+            e.per_apellido,
+            c.car_nombre,
+            pn.pnn_total_pago,
+            pn.pnn_fecha_pago
+        ORDER BY
+            EXTRACT(MONTH FROM pn.pnn_fecha_pago),
+            e.per_nombre || ' ' || e.per_apellido;
+END;
+$$ LANGUAGE plpgsql;
+
+-- =========================================================
+-- Procedimiento almacenado para obtener el control de Asistencias
+-- =========================================================
+DROP FUNCTION IF EXISTS SP_REPORTE_ASISTENCIAS(INT);
+
+CREATE OR REPLACE FUNCTION SP_REPORTE_ASISTENCIAS(anio INT)
+    RETURNS TABLE (
+                      empleado_dni TEXT,
+                      empleado_nombre TEXT,
+                      cargo TEXT,
+                      mes TEXT,
+                      dias_trabajados INT,
+                      horas_regulares NUMERIC,
+                      horas_extras NUMERIC,
+                      asistencias_completadas INT,
+                      asistencias_pendientes INT,
+                      porcentaje_asistencia NUMERIC
+                  ) AS $$
+BEGIN
+    RETURN QUERY
+        WITH asistencias_mes AS (
+            SELECT
+                e.per_id,
+                e.per_dni,
+                e.per_nombre || ' ' || e.per_apellido as nombre_completo,
+                c.car_nombre,
+                TO_CHAR(pn.pnn_fecha_pago, 'TMMonth') as mes_nombre,
+                EXTRACT(MONTH FROM pn.pnn_fecha_pago) as mes_numero,
+                COUNT(DISTINCT pn.pnn_fecha_pago) as dias_asistidos,
+                SUM(CASE
+                        WHEN a.asi_hora_fin IS NOT NULL
+                            THEN EXTRACT(EPOCH FROM (a.asi_hora_fin - a.asi_hora_inicio))/3600
+                        ELSE 0
+                    END) as total_horas,
+                COUNT(CASE WHEN a.asi_hora_fin IS NOT NULL THEN 1 END) as asistencias_completas,
+                COUNT(CASE WHEN a.asi_hora_fin IS NULL THEN 1 END) as asistencias_incompletas,
+                COUNT(*) as total_asistencias
+            FROM PAGO_NOMINA pn
+                     JOIN EMPLEADO e ON pn.fk_per_id = e.per_id
+                     JOIN EMPLEADO_CARGO ec ON e.per_id = ec.fk_per_id
+                AND (ec.emc_fecha_fin IS NULL OR ec.emc_fecha_fin > CURRENT_DATE)
+                     JOIN CARGO c ON ec.fk_car_id = c.car_id
+                     LEFT JOIN ASISTENCIA a ON e.per_id = a.fk_per_id
+                AND a.asi_pagada = true
+            WHERE EXTRACT(YEAR FROM pn.pnn_fecha_pago) = anio
+            GROUP BY
+                e.per_id,
+                e.per_dni,
+                nombre_completo,
+                c.car_nombre,
+                mes_nombre,
+                mes_numero
+        )
+        SELECT
+            per_dni::TEXT as empleado_dni,
+            nombre_completo::TEXT as empleado_nombre,
+            car_nombre::TEXT as cargo,
+            mes_nombre::TEXT as mes,
+            dias_asistidos::INT as dias_trabajados,
+            CASE
+                WHEN total_horas <= 160 THEN total_horas
+                ELSE 160
+                END::NUMERIC as horas_regulares,
+            CASE
+                WHEN total_horas > 160 THEN total_horas - 160
+                ELSE 0
+                END::NUMERIC as horas_extras,
+            asistencias_completas::INT as asistencias_completadas,
+            asistencias_incompletas::INT as asistencias_pendientes,
+            ROUND((asistencias_completas::NUMERIC / NULLIF(total_asistencias, 0) * 100), 2) as porcentaje_asistencia
+        FROM asistencias_mes
+        ORDER BY mes_numero, nombre_completo;
+END;
+$$ LANGUAGE plpgsql;
+
+-- =========================================================
+-- Procedimiento almacenado para obtener Fabricación de Aviones
+-- =========================================================
+DROP FUNCTION IF EXISTS SP_REPORTE_FABRICACION_AVION();
+
+CREATE OR REPLACE FUNCTION SP_REPORTE_FABRICACION_AVION()
+    RETURNS TABLE (
+                      solicitud_id INT,
+                      fecha_solicitud DATE,
+                      cliente_nombre TEXT,
+                      modelo_avion TEXT,
+                      proceso TEXT,
+                      estado TEXT,
+                      zona TEXT,
+                      area TEXT,
+                      sede TEXT,
+                      fecha_inicio DATE,
+                      fecha_fin DATE,
+                      tiempo_proceso NUMERIC,
+                      piezas_utilizadas INT,
+                      pruebas_realizadas INT,
+                      pruebas_exitosas INT
+                  ) AS $$
+BEGIN
+    RETURN QUERY
+        SELECT
+            sc.sct_id,
+            sc.sct_fecha,
+            CASE
+                WHEN cj.cjd_id IS NOT NULL THEN cj.cjd_nombre
+                WHEN cn.ctn_id IS NOT NULL THEN cn.ctn_nombre || ' ' || cn.ctn_apellido
+                ELSE 'Cliente no encontrado'
+                END::TEXT as cliente,
+            mac.mda_nombre::TEXT as modelo,
+            pea.eav_nombre_proceso::TEXT as proceso,
+            CASE
+                WHEN efa.fk_est_id IS NULL THEN 'No iniciado'
+                WHEN efa.efa_fecha_fin IS NULL THEN 'En proceso'
+                ELSE 'Completado'
+                END::TEXT as estado,
+            z.zon_nombre::TEXT as zona,
+            a.are_nombre::TEXT as area,
+            s.sed_nombre::TEXT as sede,
+            fea.fln_fecha_inicio::DATE,
+            fea.fln_fecha_fin::DATE,
+            CASE
+                WHEN fea.fln_fecha_fin IS NOT NULL
+                    THEN EXTRACT(EPOCH FROM (fea.fln_fecha_fin - fea.fln_fecha_inicio))/3600
+                ELSE NULL
+                END::NUMERIC as duracion_horas,
+            COUNT(DISTINCT esp.edz_id)::INT as cantidad_piezas,
+            COUNT(DISTINCT pps.fk_pru_id)::INT as total_pruebas,
+            COUNT(DISTINCT CASE
+                               WHEN pps.pzb_resultado_prueba = 'EXITOSA' THEN pps.fk_pru_id
+                END)::INT as pruebas_exitosas
+        FROM SOLICITUD_CLIENTE sc
+                 LEFT JOIN CLIENTE_JURIDICO cj ON sc.fk_cjd_id = cj.cjd_id
+                 LEFT JOIN CLIENTE_NATURAL cn ON sc.fk_ctn_id = cn.ctn_id
+                 JOIN FASE_ENSAMBLE_AVION fea ON sc.sct_id = fea.fk_sct_id
+                 JOIN MODELO_AVION_CONF mac ON fea.fk_mda_id = mac.mda_id
+                 JOIN PROCESO_ENSAMBLE_AVION_EJEC pea ON fea.fk_eav_id = pea.eav_id
+                 JOIN ZONA z ON fea.fk_zon_id = z.zon_id
+                 JOIN AREA a ON z.fk_are_id = a.are_id
+                 JOIN SEDE_PLANTA s ON a.fk_sed_id = s.sed_id
+                 LEFT JOIN ESTATUS_FEA efa ON
+            fea.fk_eav_id = efa.fk_eav_id AND
+            fea.fk_mda_id = efa.fk_mda_id AND
+            fea.fk_zon_id = efa.fk_zon_id AND
+            fea.fk_sct_id = efa.fk_sct_id
+                 LEFT JOIN ENSAMBLE_SOLICITUD_PIEZA esp ON
+            fea.fk_eav_id = esp.fk_eav_id AND
+            fea.fk_mda_id = esp.fk_mda_id AND
+            fea.fk_zon_id = esp.fk_zon_id AND
+            fea.fk_sct_id = esp.fk_sct_id
+                 LEFT JOIN PRUEBA_PIEZA_SOLICITUD pps ON esp.edz_id = pps.fk_edz_id
+        GROUP BY
+            sc.sct_id,
+            sc.sct_fecha,
+            cliente,
+            mac.mda_nombre,
+            pea.eav_nombre_proceso,
+            efa.fk_est_id,
+            efa.efa_fecha_fin,
+            z.zon_nombre,
+            a.are_nombre,
+            s.sed_nombre,
+            fea.fln_fecha_inicio,
+            fea.fln_fecha_fin
+        ORDER BY
+            sc.sct_fecha DESC,
+            mac.mda_nombre,
+            pea.eav_nombre_proceso;
+END;
+$$ LANGUAGE plpgsql;
+
+-- =========================================================
+-- Procedimiento almacenado para obtener el reporte de estatus piezas
+-- =========================================================
+DROP FUNCTION IF EXISTS SP_REPORTE_ESTATUS_PIEZAS();
+
+CREATE OR REPLACE FUNCTION SP_REPORTE_ESTATUS_PIEZAS()
+    RETURNS TABLE (
+                      pieza_id INT,
+                      pieza_nombre VARCHAR(255),
+                      numero_serial VARCHAR(255),
+                      tipo_pieza VARCHAR(255),
+                      estado VARCHAR(50),
+                      ubicacion_sede VARCHAR(255),
+                      cantidad_disponible INT,
+                      pruebas_realizadas INT,
+                      pruebas_aprobadas INT,
+                      proceso_actual VARCHAR(255),
+                      fecha_ultimo_movimiento DATE,
+                      estado_proceso VARCHAR(50)
+                  ) AS $$
+BEGIN
+    RETURN QUERY
+        WITH pruebas_stats AS (
+            SELECT
+                pps.fk_pie_id,
+                COUNT(pps.fk_pru_id) as total_pruebas,
+                COUNT(CASE WHEN pps.psz_resultado = 'EXITOSA' THEN 1 END) as pruebas_ok
+            FROM PRUEBA_PIEZA_SEDE pps
+            GROUP BY pps.fk_pie_id
+        ),
+             ultimo_proceso AS (
+                 SELECT DISTINCT ON (fep.fk_pie_id)
+                     fep.fk_pie_id,
+                     pep.epc_nombre_proceso as proceso,
+                     fep.eez_fecha_inicio,
+                     CASE
+                         WHEN fep.eez_fecha_fin IS NULL THEN 'En Proceso'::VARCHAR(50)
+                         ELSE 'Completado'::VARCHAR(50)
+                         END as estado_proc
+                 FROM FASE_ENSAMBLE_PIEZA fep
+                          JOIN PROCESO_ENSAMBLE_PIEZA_CONF pep ON fep.fk_esp_id = pep.epc_id
+                 ORDER BY fep.fk_pie_id, fep.eez_fecha_inicio DESC
+             )
+        SELECT
+            ps.pie_id::INT,
+            ps.pie_nombre::VARCHAR(255),
+            ps.pie_numero_serial::VARCHAR(255),
+            tpc.tpc_nombre::VARCHAR(255),
+            (CASE
+                 WHEN ps.pie_cantidad_disponible = 0 THEN 'Agotado'
+                 WHEN ps.pie_cantidad_disponible < 10 THEN 'Stock Crítico'
+                 ELSE 'Disponible'
+                END)::VARCHAR(50),
+            COALESCE(s.sed_nombre, 'Sin ubicación')::VARCHAR(255),
+            ps.pie_cantidad_disponible::INT,
+            COALESCE(p.total_pruebas, 0)::INT,
+            COALESCE(p.pruebas_ok, 0)::INT,
+            COALESCE(up.proceso, 'Sin proceso actual')::VARCHAR(255),
+            up.eez_fecha_inicio::DATE,
+            COALESCE(up.estado_proc, 'No iniciado')::VARCHAR(50)
+        FROM PIEZA_STOCK ps
+                 JOIN MODELO_PIEZA_CONF mpc ON ps.pie_id = mpc.mec_id
+                 JOIN TIPO_PIEZA_CONF tpc ON mpc.fk_tpc_id = tpc.tpc_id
+                 LEFT JOIN SEDE_PLANTA s ON ps.fk_sed_id = s.sed_id
+                 LEFT JOIN pruebas_stats p ON ps.pie_id = p.fk_pie_id
+                 LEFT JOIN ultimo_proceso up ON ps.pie_id = up.fk_pie_id
+        ORDER BY ps.pie_fecha_fabricacion DESC, ps.pie_nombre;
+END;
+$$ LANGUAGE plpgsql;
+
+-- =========================================================
+-- Procedimiento almacenado para obtener el Equipo mas Eficiente
+-- =========================================================
+DROP FUNCTION IF EXISTS SP_REPORTE_EQUIPO_EFICIENTE(INT);
+
+CREATE OR REPLACE FUNCTION SP_REPORTE_EQUIPO_EFICIENTE(anio INT)
+    RETURNS TABLE (
+                      zona_id INT,
+                      zona_nombre VARCHAR(100),
+                      area_nombre VARCHAR(100),
+                      sede_nombre VARCHAR(100),
+                      supervisor_nombre VARCHAR(255),
+                      total_procesos INT,
+                      procesos_a_tiempo INT,
+                      procesos_retrasados INT,
+                      promedio_retraso NUMERIC,
+                      porcentaje_eficiencia NUMERIC,
+                      ranking INT
+                  ) AS $$
+BEGIN
+    RETURN QUERY
+        WITH equipo_stats AS (
+            SELECT
+                z.zon_id,
+                z.zon_nombre,
+                a.are_nombre,
+                s.sed_nombre,
+                e.per_nombre || ' ' || e.per_apellido as supervisor,
+                COUNT(*) as total_proc,
+                COUNT(CASE
+                          WHEN EXTRACT(EPOCH FROM (fep.eez_fecha_fin - fep.eez_fecha_inicio))/86400 <=
+                               EXTRACT(EPOCH FROM pep.epc_tiempo_estimado)/86400
+                              THEN 1
+                    END) as proc_tiempo,
+                COUNT(CASE
+                          WHEN EXTRACT(EPOCH FROM (fep.eez_fecha_fin - fep.eez_fecha_inicio))/86400 >
+                               EXTRACT(EPOCH FROM pep.epc_tiempo_estimado)/86400
+                              THEN 1
+                    END) as proc_retrasados,
+                COALESCE(AVG(
+                                 CASE
+                                     WHEN EXTRACT(EPOCH FROM (fep.eez_fecha_fin - fep.eez_fecha_inicio))/86400 >
+                                          EXTRACT(EPOCH FROM pep.epc_tiempo_estimado)/86400
+                                         THEN (EXTRACT(EPOCH FROM (fep.eez_fecha_fin - fep.eez_fecha_inicio))/86400) -
+                                              (EXTRACT(EPOCH FROM pep.epc_tiempo_estimado)/86400)
+                                     ELSE 0
+                                     END
+                         ), 0) as promedio_dias_retraso
+            FROM ZONA z
+                     JOIN AREA a ON z.fk_are_id = a.are_id
+                     JOIN SEDE_PLANTA s ON a.fk_sed_id = s.sed_id
+                     JOIN EQUIPO_ENCARGADO ee ON z.zon_id = ee.fk_zon_id
+                     JOIN EMPLEADO e ON ee.fk_per_id = e.per_id
+                     LEFT JOIN FASE_ENSAMBLE_PIEZA fep ON z.zon_id = fep.fk_zon_id
+                     LEFT JOIN PROCESO_ENSAMBLE_PIEZA_CONF pep ON fep.fk_esp_id = pep.epc_id
+            WHERE EXTRACT(YEAR FROM fep.eez_fecha_inicio) = anio
+              AND fep.eez_fecha_fin IS NOT NULL
+            GROUP BY z.zon_id, z.zon_nombre, a.are_nombre, s.sed_nombre, supervisor
+        )
+        SELECT
+            zon_id,
+            zon_nombre,
+            are_nombre,
+            sed_nombre,
+            supervisor,
+            total_proc::INT as total_procesos,
+            proc_tiempo::INT as procesos_a_tiempo,
+            proc_retrasados::INT as procesos_retrasados,
+            ROUND(promedio_dias_retraso::NUMERIC, 2) as promedio_retraso,
+            ROUND((proc_tiempo::NUMERIC / NULLIF(total_proc, 0) * 100)::NUMERIC, 2) as porcentaje_eficiencia,
+            RANK() OVER (ORDER BY (proc_tiempo::NUMERIC / NULLIF(total_proc, 0)) DESC)::INT as ranking
+        FROM equipo_stats
+        WHERE total_proc > 0
+        ORDER BY porcentaje_eficiencia DESC;
+END;
+$$ LANGUAGE plpgsql;
+
+-- =========================================================
+-- Procedimiento almacenado para obtener Especificaciones de Modelos
+-- =========================================================
+DROP FUNCTION IF EXISTS SP_REPORTE_ESPECIFICACIONES_MODELOS;
+
+CREATE OR REPLACE FUNCTION SP_REPORTE_ESPECIFICACIONES_MODELOS()
+    RETURNS TABLE (
+                      modelo_id INT,
+                      modelo_nombre VARCHAR(50),
+                      tipo_avion VARCHAR(50),
+                      caracteristica VARCHAR(255),
+                      valor INT,
+                      unidad_medida VARCHAR(30),
+                      cantidad_piezas BIGINT,
+                      precio_base INT
+                  ) AS $$
+BEGIN
+    RETURN QUERY
+        SELECT
+            mac.mda_id,
+            mac.mda_nombre,
+            ta.tiv_nombre,
+            cac.pvv_nombre_caracteristica,
+            mac2.mnc_valor,
+            mac2.mnc_unidad_medida,
+            COUNT(DISTINCT ac.fk_mec_id),
+            mac.mda_precio
+        FROM MODELO_AVION_CONF mac
+                 JOIN TIPO_AVION ta ON mac.fk_tiv_id = ta.tiv_id
+                 JOIN MODELO_AVION_CARACTERISTICA mac2 ON mac.mda_id = mac2.fk_mda_id
+                 JOIN CARACTERISTICA_ANV_CONF cac ON mac2.fk_pvv_id = cac.pvv_id
+                 LEFT JOIN AVION_COMPONENTE ac ON mac.mda_id = ac.fk_mda_id
+        GROUP BY
+            mac.mda_id,
+            mac.mda_nombre,
+            ta.tiv_nombre,
+            cac.pvv_nombre_caracteristica,
+            mac2.mnc_valor,
+            mac2.mnc_unidad_medida
+        ORDER BY mac.mda_nombre, cac.pvv_nombre_caracteristica;
+END;
+$$ LANGUAGE plpgsql;
+
+-- =========================================================
+-- Procedimiento almacenado para obtener Pruebas Fallidas
+-- =========================================================
+DROP FUNCTION IF EXISTS SP_REPORTE_PRUEBAS_FALLIDAS(INT);
+
+CREATE OR REPLACE FUNCTION SP_REPORTE_PRUEBAS_FALLIDAS(anio INT)
+    RETURNS TABLE (
+                      prueba_id INT,
+                      nombre_prueba VARCHAR(255),
+                      pieza_nombre VARCHAR(80),
+                      fecha_prueba DATE,
+                      resultado VARCHAR(255),
+                      zona_nombre VARCHAR(100),
+                      area_nombre VARCHAR(100),
+                      sede_nombre VARCHAR(100),
+                      tiempo_estimado INTERVAL,
+                      tiempo_real INTERVAL,
+                      desviacion_tiempo NUMERIC
+                  ) AS $$
+BEGIN
+    RETURN QUERY
+        SELECT
+            pr.pru_id,
+            pr.pru_nombre,
+            ps.pie_nombre,
+            pps.psz_fecha_inicio::DATE,
+            pps.psz_resultado,
+            z.zon_nombre,
+            a.are_nombre,
+            s.sed_nombre,
+            pr.pru_tiempo_estimado,
+            (pps.psz_fecha_fin - pps.psz_fecha_inicio)::INTERVAL,
+            EXTRACT(EPOCH FROM ((pps.psz_fecha_fin - pps.psz_fecha_inicio) - pr.pru_tiempo_estimado))/3600
+        FROM PRUEBA pr
+                 JOIN PRUEBA_PIEZA_SEDE pps ON pr.pru_id = pps.fk_pru_id
+                 JOIN PIEZA_STOCK ps ON pps.fk_pie_id = ps.pie_id
+                 JOIN ZONA z ON pps.fk_zon_id = z.zon_id
+                 JOIN AREA a ON z.fk_are_id = a.are_id
+                 JOIN SEDE_PLANTA s ON a.fk_sed_id = s.sed_id
+        WHERE EXTRACT(YEAR FROM pps.psz_fecha_inicio) = anio
+          AND pps.psz_resultado = 'FALLIDA'
+        ORDER BY pps.psz_fecha_inicio DESC;
+END;
+$$ LANGUAGE plpgsql;
+
+-- =========================================================
+-- Procedimiento almacenado para obtener Inventario Mensual
+-- =========================================================
+DROP FUNCTION IF EXISTS SP_REPORTE_INVENTARIO_MENSUAL(INT);
+
+CREATE OR REPLACE FUNCTION SP_REPORTE_INVENTARIO_MENSUAL(anio INT)
+    RETURNS TABLE (
+                      sede_nombre VARCHAR(100),
+                      mes TEXT,
+                      pieza_nombre VARCHAR(80),
+                      stock_inicial INT,
+                      entradas INT,
+                      salidas INT,
+                      stock_final INT,
+                      valor_total NUMERIC
+                  ) AS $$
+BEGIN
+    RETURN QUERY
+        SELECT
+            s.sed_nombre,
+            TO_CHAR(DATE_TRUNC('month', MAKE_DATE(anio, EXTRACT(MONTH FROM ps.pie_fecha_fabricacion)::INT, 1)), 'TMMonth'),
+            ps.pie_nombre,
+            ps.pie_cantidad_disponible,
+            COALESCE(SUM(dss.dss_cantidad), 0)::INT as entradas,
+            COALESCE(SUM(esp.edz_cantidad_piezas), 0)::INT as salidas,
+            (ps.pie_cantidad_disponible + COALESCE(SUM(dss.dss_cantidad), 0) - COALESCE(SUM(esp.edz_cantidad_piezas), 0))::INT,
+            (ps.pie_cantidad_disponible * COALESCE((
+                                                       SELECT MAX(p.pago_monto)
+                                                       FROM PAGO p
+                                                                JOIN SOLICITUD_PROVEEDOR sp ON p.fk_spr_id = sp.spr_id
+                                                       WHERE EXTRACT(YEAR FROM p.pago_fecha) = anio
+                                                   ), 0))::NUMERIC
+        FROM PIEZA_STOCK ps
+                 JOIN SEDE_PLANTA s ON ps.fk_sed_id = s.sed_id
+                 LEFT JOIN DETALLE_SLD_SEDE dss ON ps.pie_id = dss.fk_pie_id
+                 LEFT JOIN ENSAMBLE_SOLICITUD_PIEZA esp ON ps.pie_id = esp.fk_pie_id
+        WHERE EXTRACT(YEAR FROM ps.pie_fecha_fabricacion) = anio
+        GROUP BY
+            s.sed_nombre,
+            EXTRACT(MONTH FROM ps.pie_fecha_fabricacion),
+            ps.pie_nombre,
+            ps.pie_cantidad_disponible
+        ORDER BY
+            s.sed_nombre,
+            EXTRACT(MONTH FROM ps.pie_fecha_fabricacion);
+END;
+$$ LANGUAGE plpgsql;
+
+-- =========================================================
+-- Procedimiento almacenado para obtener Producción por Sede
+-- =========================================================
+DROP FUNCTION IF EXISTS SP_REPORTE_PRODUCCION_SEDE(INT);
+
+CREATE OR REPLACE FUNCTION SP_REPORTE_PRODUCCION_SEDE(anio INT)
+    RETURNS TABLE (
+                      sede_nombre VARCHAR(100),
+                      mes TEXT,
+                      aviones_producidos BIGINT,
+                      piezas_fabricadas BIGINT,
+                      pruebas_realizadas BIGINT,
+                      procesos_completados BIGINT,
+                      tiempo_promedio_produccion NUMERIC,
+                      eficiencia_produccion NUMERIC,
+                      empleados_activos BIGINT
+                  ) AS $$
+BEGIN
+    RETURN QUERY
+        SELECT
+            s.sed_nombre,
+            TO_CHAR(DATE_TRUNC('month', fea.fln_fecha_inicio), 'TMMonth'),
+            COUNT(DISTINCT fea.fk_sct_id) as aviones,
+            COUNT(DISTINCT ps.pie_id) as piezas,
+            COUNT(DISTINCT pps.fk_pru_id) as pruebas,
+            COUNT(DISTINCT fea.fk_eav_id) as procesos,
+            AVG(EXTRACT(EPOCH FROM (fea.fln_fecha_fin - fea.fln_fecha_inicio))/86400)::NUMERIC as dias_produccion,
+            (COUNT(CASE WHEN fea.fln_fecha_fin IS NOT NULL THEN 1 END)::NUMERIC /
+             NULLIF(COUNT(fea.fln_fecha_inicio), 0) * 100)::NUMERIC as eficiencia,
+            COUNT(DISTINCT ec.fk_per_id) as empleados
+        FROM SEDE_PLANTA s
+                 LEFT JOIN AREA a ON s.sed_id = a.fk_sed_id
+                 LEFT JOIN ZONA z ON a.are_id = z.fk_are_id
+                 LEFT JOIN FASE_ENSAMBLE_AVION fea ON z.zon_id = fea.fk_zon_id
+                 LEFT JOIN PIEZA_STOCK ps ON s.sed_id = ps.fk_sed_id
+                 LEFT JOIN PRUEBA_PIEZA_SEDE pps ON ps.pie_id = pps.fk_pie_id
+                 LEFT JOIN EMPLEADO_CARGO ec ON ec.emc_fecha_fin IS NULL
+        WHERE EXTRACT(YEAR FROM fea.fln_fecha_inicio) = anio
+        GROUP BY
+            s.sed_nombre,
+            DATE_TRUNC('month', fea.fln_fecha_inicio)
+        ORDER BY
+            s.sed_nombre,
+            DATE_TRUNC('month', fea.fln_fecha_inicio);
+END;
+$$ LANGUAGE plpgsql;
+
+-- =========================================================
+-- Procedimiento almacenado para obtener Listado de Proveedores
+-- =========================================================
+DROP FUNCTION IF EXISTS SP_REPORTE_LISTADO_PROVEEDORES;
+
+CREATE OR REPLACE FUNCTION SP_REPORTE_LISTADO_PROVEEDORES()
+    RETURNS TABLE (
+                      proveedor_id INT,
+                      proveedor_nombre VARCHAR(30),
+                      ubicacion VARCHAR(90),
+                      materiales_suministrados BIGINT,
+                      precio_promedio NUMERIC,
+                      tiempo_operacion INT,
+                      solicitudes_atendidas BIGINT,
+                      total_ventas NUMERIC,
+                      calificacion_cumplimiento NUMERIC
+                  ) AS $$
+BEGIN
+    RETURN QUERY
+        SELECT
+            p.com_id,
+            p.com_nombre,
+            l.lug_nombre,
+            COUNT(DISTINCT pms.fk_rpm_id) as materiales,
+            AVG(pms.mtp_precio)::NUMERIC as precio_avg,
+            EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM p.com_fechaI_operaciones)::INT as años_operacion,
+            COUNT(DISTINCT sp.spr_id) as solicitudes,
+            COALESCE(SUM(sp.spr_total), 0)::NUMERIC as ventas_totales,
+            (COUNT(CASE WHEN esp.ups_fecha_fin IS NOT NULL THEN 1 END)::NUMERIC /
+             NULLIF(COUNT(sp.spr_id), 0) * 100)::NUMERIC as cumplimiento
+        FROM PROVEEDOR p
+                 JOIN LUGAR l ON p.fk_lug_id = l.lug_id
+                 LEFT JOIN PROVEEDOR_MP_STOCK pms ON p.fk_mtp_id = pms.mtp_id
+                 LEFT JOIN SOLICITUD_PROVEEDOR sp ON p.com_id = sp.fk_com_id
+                 LEFT JOIN ESTATUS_SSP esp ON sp.spr_id = esp.fk_spr_id
+        GROUP BY
+            p.com_id,
+            p.com_nombre,
+            l.lug_nombre,
+            p.com_fechaI_operaciones
+        ORDER BY ventas_totales DESC;
+END;
+$$ LANGUAGE plpgsql;
+
+-- =========================================================
+-- Procedimiento almacenado para obtener Ingresos a Inventario
+-- =========================================================
+DROP FUNCTION IF EXISTS SP_REPORTE_INGRESOS_INVENTARIO(INT);
+
+CREATE OR REPLACE FUNCTION SP_REPORTE_INGRESOS_INVENTARIO(anio INT)
+    RETURNS TABLE (
+                      sede_nombre VARCHAR(100),
+                      mes TEXT,
+                      material_nombre VARCHAR(50),
+                      cantidad_recibida INT,
+                      unidad_medida VARCHAR(30),
+                      proveedor_nombre VARCHAR(30),
+                      costo_unitario NUMERIC,
+                      costo_total NUMERIC,
+                      tiempo_entrega INT,
+                      estado VARCHAR(50)
+                  ) AS $$
+BEGIN
+    RETURN QUERY
+        SELECT
+            s.sed_nombre,
+            TO_CHAR(DATE_TRUNC('month', sp.spr_fecha), 'TMMonth'),
+            mp.rpm_nombre,
+            dsp.dsp_cantidad,
+            dsp.dsp_unidad_medida,
+            p.com_nombre,
+            pms.mtp_precio::NUMERIC,
+            (dsp.dsp_cantidad * pms.mtp_precio)::NUMERIC as total,
+            EXTRACT(DAY FROM (esp.ups_fecha_fin - esp.ups_fecha_inicio))::INT as dias_entrega,
+            e.est_tipo_estatus
+        FROM SOLICITUD_PROVEEDOR sp
+                 JOIN SEDE_PLANTA s ON sp.fk_sed_id = s.sed_id
+                 JOIN MATERIA_PRIMA mp ON sp.fk_rpm_id = mp.rpm_id
+                 JOIN DETALLE_SLD_PROVEEDOR dsp ON sp.spr_id = dsp.fk_spr_id
+                 JOIN PROVEEDOR p ON sp.fk_com_id = p.com_id
+                 JOIN PROVEEDOR_MP_STOCK pms ON p.fk_mtp_id = pms.mtp_id
+                 JOIN ESTATUS_SSP esp ON sp.spr_id = esp.fk_spr_id
+                 JOIN ESTATUS e ON esp.fk_est_id = e.est_id
+        WHERE EXTRACT(YEAR FROM sp.spr_fecha) = anio
+        ORDER BY
+            s.sed_nombre,
+            DATE_TRUNC('month', sp.spr_fecha),
+            mp.rpm_nombre;
+END;
+$$ LANGUAGE plpgsql;
+
+-- =========================================================
+-- Procedimiento almacenado para obtener Pagos a Proveedores
+-- =========================================================
+DROP FUNCTION IF EXISTS SP_REPORTE_PAGOS_PROVEEDORES(INT);
+
+CREATE OR REPLACE FUNCTION SP_REPORTE_PAGOS_PROVEEDORES(anio INT)
+    RETURNS TABLE (
+                      mes TEXT,
+                      proveedor_nombre VARCHAR(30),
+                      solicitud_id INT,
+                      fecha_solicitud DATE,
+                      fecha_pago DATE,
+                      monto_pagado NUMERIC,
+                      metodo_pago VARCHAR(60),
+                      moneda VARCHAR(20),
+                      tasa_cambio FLOAT,
+                      estado_pago VARCHAR(50),
+                      dias_proceso INT
+                  ) AS $$
+BEGIN
+    RETURN QUERY
+        SELECT
+            TO_CHAR(DATE_TRUNC('month', p.pago_fecha), 'TMMonth'),
+            pv.com_nombre,
+            sp.spr_id,
+            sp.spr_fecha,
+            p.pago_fecha,
+            p.pago_monto,
+            mp.tipo_metodo,
+            m.mon_tipo,
+            m.mon_valor_cambio,
+            e.est_tipo_estatus,
+            EXTRACT(DAY FROM (p.pago_fecha - sp.spr_fecha))::INT
+        FROM PAGO p
+                 JOIN SOLICITUD_PROVEEDOR sp ON p.fk_spr_id = sp.spr_id
+                 JOIN PROVEEDOR pv ON sp.fk_com_id = pv.com_id
+                 JOIN METODO_PAGO mp ON p.fk_met_id = mp.met_id
+                 JOIN MONEDA m ON p.fk_mon_id = m.mon_id
+                 JOIN ESTATUS_SSP esp ON sp.spr_id = esp.fk_spr_id
+                 JOIN ESTATUS e ON esp.fk_est_id = e.est_id
+        WHERE EXTRACT(YEAR FROM p.pago_fecha) = anio
+        ORDER BY
+            p.pago_fecha,
+            pv.com_nombre;
+END;
+$$ LANGUAGE plpgsql;
+
+-- =========================================================
+-- Procedimiento almacenado para obtener Modelo-Piezas
+-- =========================================================
+DROP FUNCTION IF EXISTS SP_REPORTE_MODELO_PIEZAS;
+
+CREATE OR REPLACE FUNCTION SP_REPORTE_MODELO_PIEZAS()
+    RETURNS TABLE (
+                      modelo_avion VARCHAR(50),
+                      tipo_avion VARCHAR(50),
+                      pieza_nombre VARCHAR(50),
+                      tipo_pieza VARCHAR(50),
+                      cantidad_requerida INT,
+                      caracteristicas TEXT,
+                      materiales_necesarios TEXT,
+                      procesos_fabricacion INT,
+                      tiempo_estimado_fabricacion INTERVAL,
+                      costo_estimado NUMERIC
+                  ) AS $$
+BEGIN
+    RETURN QUERY
+        WITH pieza_caracteristicas AS (
+            SELECT
+                mpc.mec_id,
+                STRING_AGG(
+                        pcc.pcc_nombre_caracteristica || ': ' || mpc2.pzi_valor || ' ' || mpc2.pzi_unidad_medida,
+                        '; '
+                ) as caracteristicas
+            FROM MODELO_PIEZA_CONF mpc
+                     JOIN MODELO_PIEZA_CARACTERISTICA mpc2 ON mpc.mec_id = mpc2.fk_mec_id
+                     JOIN CARACTERISTICA_PIEZA_CONF pcc ON mpc2.fk_pcc_id = pcc.pcc_id
+            GROUP BY mpc.mec_id
+        ),
+             pieza_materiales AS (
+                 SELECT
+                     mf.fk_mec_id,
+                     STRING_AGG(
+                             mpc.mac_nombre_material || ' (' || mf.mtf_cantidad_material || ' ' || mf.mtf_unidad_medida || ')',
+                             '; '
+                     ) as materiales
+                 FROM MATERIAL_FASE mf
+                          JOIN MATERIAL_PIEZA_CONF mpc ON mf.fk_mac_id = mpc.mac_id
+                 GROUP BY mf.fk_mec_id
+             )
+        SELECT
+            mac.mda_nombre,
+            ta.tiv_nombre,
+            mpc.mec_nombre_pieza,
+            tpc.tpc_nombre,
+            ac.ctm_cantidad_piezas,
+            COALESCE(pc.caracteristicas, 'Sin características'),
+            COALESCE(pm.materiales, 'Sin materiales'),
+            COUNT(DISTINCT pepc.epc_id),
+            SUM(pepc.epc_tiempo_estimado),
+            COALESCE(
+                    (SELECT AVG(p.pago_monto)
+                     FROM PAGO p
+                              JOIN SOLICITUD_PROVEEDOR sp ON p.fk_spr_id = sp.spr_id
+                     WHERE EXTRACT(YEAR FROM p.pago_fecha) = EXTRACT(YEAR FROM CURRENT_DATE)
+                    ), 0
+            )::NUMERIC
+        FROM MODELO_AVION_CONF mac
+                 JOIN TIPO_AVION ta ON mac.fk_tiv_id = ta.tiv_id
+                 JOIN AVION_COMPONENTE ac ON mac.mda_id = ac.fk_mda_id
+                 JOIN MODELO_PIEZA_CONF mpc ON ac.fk_mec_id = mpc.mec_id
+                 JOIN TIPO_PIEZA_CONF tpc ON mpc.fk_tpc_id = tpc.tpc_id
+                 LEFT JOIN pieza_caracteristicas pc ON mpc.mec_id = pc.mec_id
+                 LEFT JOIN pieza_materiales pm ON mpc.mec_id = pm.fk_mec_id
+                 LEFT JOIN FASE_ENSAMBLE_PIEZA_CONF fepc ON mpc.mec_id = fepc.fk_mec_id
+                 LEFT JOIN PROCESO_ENSAMBLE_PIEZA_CONF pepc ON fepc.fk_epc_id = pepc.epc_id
+        GROUP BY
+            mac.mda_nombre,
+            ta.tiv_nombre,
+            mpc.mec_nombre_pieza,
+            tpc.tpc_nombre,
+            ac.ctm_cantidad_piezas,
+            pc.caracteristicas,
+            pm.materiales
+        ORDER BY
+            mac.mda_nombre,
+            mpc.mec_nombre_pieza;
+END;
+$$ LANGUAGE plpgsql;
+
+-- =========================================================
+-- Procedimiento almacenado para obtener Modelo-Pruebas
+-- =========================================================
+DROP FUNCTION IF EXISTS SP_REPORTE_MODELO_PRUEBAS;
+
+CREATE OR REPLACE FUNCTION SP_REPORTE_MODELO_PRUEBAS()
+    RETURNS TABLE (
+                      modelo_avion VARCHAR(50),
+                      nombre_prueba VARCHAR(255),
+                      tiempo_estimado INTERVAL,
+                      pruebas_realizadas BIGINT,
+                      pruebas_exitosas BIGINT,
+                      porcentaje_exito NUMERIC,
+                      tiempo_promedio_real INTERVAL,
+                      desviacion_tiempo NUMERIC,
+                      observaciones_frecuentes TEXT
+                  ) AS $$
+BEGIN
+    RETURN QUERY
+        SELECT
+            mac.mda_nombre,
+            pc.prc_nombre_prueba,
+            pc.prc_tiempo_estimado,
+            COUNT(DISTINCT pps.fk_pru_id) as total_pruebas,
+            COUNT(DISTINCT CASE
+                               WHEN pps.psz_resultado = 'EXITOSA'
+                                   THEN pps.fk_pru_id
+                END) as pruebas_ok,
+            (COUNT(DISTINCT CASE
+                                WHEN pps.psz_resultado = 'EXITOSA'
+                                    THEN pps.fk_pru_id
+                END)::NUMERIC /
+             NULLIF(COUNT(DISTINCT pps.fk_pru_id), 0) * 100)::NUMERIC as porcentaje,
+            AVG(pps.psz_fecha_fin - pps.psz_fecha_inicio)::INTERVAL,
+            (EXTRACT(EPOCH FROM (AVG(pps.psz_fecha_fin - pps.psz_fecha_inicio) - pc.prc_tiempo_estimado))/3600)::NUMERIC,
+            STRING_AGG(DISTINCT CASE
+                                    WHEN pps.psz_resultado = 'FALLIDA'
+                                        THEN e.est_descripcion
+                END, '; ') as observaciones
+        FROM MODELO_AVION_CONF mac
+                 JOIN FASE_PRUEBA fp ON mac.mda_id = fp.fk_mda_id
+                 JOIN PRUEBA_CONF pc ON fp.fk_prc_id = pc.prc_id
+                 LEFT JOIN PRUEBA_PIEZA_SEDE pps ON pc.prc_id = pps.fk_pru_id
+                 LEFT JOIN ESTATUS_PPS eps ON pps.fk_pie_id = eps.fk_pie_id
+            AND pps.fk_zon_id = eps.fk_zon_id
+            AND pps.fk_pru_id = eps.fk_pru_id
+                 LEFT JOIN ESTATUS e ON eps.fk_est_id = e.est_id
+        GROUP BY
+            mac.mda_nombre,
+            pc.prc_nombre_prueba,
+            pc.prc_tiempo_estimado
+        ORDER BY
+            mac.mda_nombre,
+            pc.prc_nombre_prueba;
+END;
+$$ LANGUAGE plpgsql;
+
+-- =========================================================
+-- Procedimiento almacenado para obtener Horarios de Empleados
+-- =========================================================
+DROP FUNCTION IF EXISTS SP_REPORTE_EMPLEADOS_HORARIOS;
+
+CREATE OR REPLACE FUNCTION SP_REPORTE_EMPLEADOS_HORARIOS()
+    RETURNS TABLE (
+                      empleado_dni VARCHAR(50),
+                      empleado_nombre TEXT,
+                      cargo_actual VARCHAR(50),
+                      dia_semana VARCHAR(9),
+                      hora_inicio TIME,
+                      hora_fin TIME,
+                      horas_asignadas NUMERIC,
+                      asistencias_mes BIGINT,
+                      promedio_puntualidad NUMERIC,
+                      horas_extra_mes NUMERIC
+                  ) AS $$
+BEGIN
+    RETURN QUERY
+        SELECT
+            e.per_dni,
+            (e.per_nombre || ' ' || e.per_apellido)::TEXT,
+            c.car_nombre,
+            h.hor_dia,
+            h.hor_hora_inicio,
+            h.hor_hora_fin,
+            EXTRACT(EPOCH FROM (h.hor_hora_fin - h.hor_hora_inicio))/3600::NUMERIC,
+            COUNT(DISTINCT a.asi_id) as total_asistencias,
+            AVG(
+                    CASE
+                        WHEN a.asi_hora_inicio <= h.hor_hora_inicio THEN 100
+                        WHEN a.asi_hora_inicio > h.hor_hora_inicio THEN
+                            100 - (EXTRACT(EPOCH FROM (a.asi_hora_inicio - h.hor_hora_inicio))/60)
+                        END
+            )::NUMERIC as puntualidad,
+            COALESCE(
+                    SUM(
+                            CASE
+                                WHEN EXTRACT(EPOCH FROM (a.asi_hora_fin - a.asi_hora_inicio))/3600 >
+                                     EXTRACT(EPOCH FROM (h.hor_hora_fin - h.hor_hora_inicio))/3600
+                                    THEN EXTRACT(EPOCH FROM (a.asi_hora_fin - a.asi_hora_inicio))/3600 -
+                                         EXTRACT(EPOCH FROM (h.hor_hora_fin - h.hor_hora_inicio))/3600
+                                ELSE 0
+                                END
+                    ), 0
+            )::NUMERIC as horas_extra
+        FROM EMPLEADO e
+                 JOIN EMPLEADO_CARGO ec ON e.per_id = ec.fk_per_id
+                 JOIN CARGO c ON ec.fk_car_id = c.car_id
+                 JOIN EMP_CARGO_HORARIO ech ON ec.fk_per_id = ech.fk_per_id
+            AND ec.fk_car_id = ech.fk_car_id
+            AND ec.emc_id = ech.fk_emc_id
+                 JOIN HORARIO h ON ech.fk_hor_id = h.hor_id
+                 LEFT JOIN ASISTENCIA a ON e.per_id = a.fk_per_id
+            AND EXTRACT(MONTH FROM CURRENT_DATE) = EXTRACT(MONTH FROM CURRENT_DATE)
+        WHERE ec.emc_fecha_fin IS NULL
+        GROUP BY
+            e.per_dni,
+            e.per_nombre,
+            e.per_apellido,
+            c.car_nombre,
+            h.hor_dia,
+            h.hor_hora_inicio,
+            h.hor_hora_fin
+        ORDER BY
+            e.per_nombre,
+            e.per_apellido,
+            h.hor_dia;
+END;
+$$ LANGUAGE plpgsql;
+
+-- =========================================================
+-- Procedimiento almacenado para obtener Empleados en Proyectos
+-- =========================================================
+DROP FUNCTION IF EXISTS SP_REPORTE_EMPLEADOS_PROYECTOS;
+
+CREATE OR REPLACE FUNCTION SP_REPORTE_EMPLEADOS_PROYECTOS()
+    RETURNS TABLE (
+                      empleado_dni VARCHAR(50),
+                      empleado_nombre TEXT,
+                      cargo TEXT,
+                      zona_asignada VARCHAR(100),
+                      area_trabajo VARCHAR(100),
+                      sede_actual VARCHAR(100),
+                      proyectos_activos BIGINT,
+                      procesos_completados BIGINT,
+                      piezas_procesadas BIGINT,
+                      eficiencia_promedio NUMERIC
+                  ) AS $$
+BEGIN
+    RETURN QUERY
+        SELECT
+            e.per_dni,
+            (e.per_nombre || ' ' || e.per_apellido)::TEXT,
+            STRING_AGG(DISTINCT c.car_nombre, ', ')::TEXT,
+            STRING_AGG(DISTINCT z.zon_nombre, ', '),
+            STRING_AGG(DISTINCT a.are_nombre, ', '),
+            STRING_AGG(DISTINCT s.sed_nombre, ', '),
+            COUNT(DISTINCT ee.eqc_id) as proyectos,
+            COUNT(DISTINCT CASE
+                               WHEN fea.fln_fecha_fin IS NOT NULL THEN fea.fk_eav_id
+                END) as procesos_terminados,
+            COUNT(DISTINCT esp.edz_id) as piezas,
+            (
+                COUNT(DISTINCT CASE WHEN fea.fln_fecha_fin IS NOT NULL THEN fea.fk_eav_id END)::NUMERIC /
+                NULLIF(COUNT(DISTINCT ee.eqc_id), 0) * 100
+                )::NUMERIC as eficiencia
+        FROM EMPLEADO e
+                 JOIN EMPLEADO_CARGO ec ON e.per_id = ec.fk_per_id
+                 JOIN CARGO c ON ec.fk_car_id = c.car_id
+                 JOIN EQUIPO_ENCARGADO ee ON e.per_id = ee.fk_per_id
+                 LEFT JOIN ZONA z ON ee.fk_zon_id = z.zon_id
+                 LEFT JOIN AREA a ON z.fk_are_id = a.are_id
+                 LEFT JOIN SEDE_PLANTA s ON a.fk_sed_id = s.sed_id
+                 LEFT JOIN FASE_ENSAMBLE_AVION fea ON z.zon_id = fea.fk_zon_id
+                 LEFT JOIN ENSAMBLE_SOLICITUD_PIEZA esp ON ee.fk_edz_id = esp.edz_id
+        WHERE ec.emc_fecha_fin IS NULL
+        GROUP BY
+            e.per_dni,
+            e.per_nombre,
+            e.per_apellido
+        ORDER BY
+            proyectos_activos DESC,
+            eficiencia_promedio DESC;
+END;
+$$ LANGUAGE plpgsql;
+
+-- =========================================================
+-- Procedimiento almacenado para obtener Rentabilidad por Cumplimiento
+-- =========================================================
+DROP FUNCTION IF EXISTS SP_REPORTE_RENTABILIDAD_CUMPLIMIENTO(INT);
+
+CREATE OR REPLACE FUNCTION SP_REPORTE_RENTABILIDAD_CUMPLIMIENTO(anio INT)
+    RETURNS TABLE (
+                      modelo_avion VARCHAR(50),
+                      tipo_avion VARCHAR(50),
+                      cantidad_producida BIGINT,
+                      tiempo_estimado_total INTERVAL,
+                      tiempo_real_total INTERVAL,
+                      cumplimiento_tiempo NUMERIC,
+                      costo_estimado NUMERIC,
+                      costo_real NUMERIC,
+                      margen_rentabilidad NUMERIC,
+                      indice_eficiencia NUMERIC
+                  ) AS $$
+BEGIN
+    RETURN QUERY
+        WITH tiempos_produccion AS (
+            SELECT
+                mac.mda_id,
+                mac.mda_nombre,
+                ta.tiv_nombre,
+                COUNT(DISTINCT ac.avi_id) as cantidad,
+                SUM(peac.epv_tiempo_estimado) as tiempo_est,
+                SUM(fea.fln_fecha_fin - fea.fln_fecha_inicio) as tiempo_real,
+                mac.mda_precio as costo_est,
+                COALESCE(SUM(sp.spr_total), 0) as costo_materiales
+            FROM MODELO_AVION_CONF mac
+                     JOIN TIPO_AVION ta ON mac.fk_tiv_id = ta.tiv_id
+                     JOIN AVION_CREADO ac ON ac.fk_sct_id IN (
+                SELECT sct_id
+                FROM SOLICITUD_CLIENTE
+                WHERE EXTRACT(YEAR FROM sct_fecha) = anio
+            )
+                     JOIN FASE_ENSAMBLE_AVION fea ON ac.fk_sct_id = fea.fk_sct_id
+                     JOIN PROCESO_ENSAMBLE_AVION_CONF peac ON fea.fk_eav_id = peac.epv_id
+                     LEFT JOIN SOLICITUD_PROVEEDOR sp ON EXTRACT(YEAR FROM sp.spr_fecha) = anio
+            GROUP BY
+                mac.mda_id,
+                mac.mda_nombre,
+                ta.tiv_nombre,
+                mac.mda_precio
+        )
+        SELECT
+            tp.modelo_avion,
+            tp.tipo_avion,
+            tp.cantidad,
+            tp.tiempo_est,
+            tp.tiempo_real,
+            CASE
+                WHEN EXTRACT(EPOCH FROM tp.tiempo_est) = 0 THEN 0
+                ELSE (EXTRACT(EPOCH FROM tp.tiempo_est) /
+                      NULLIF(EXTRACT(EPOCH FROM tp.tiempo_real), 0) * 100)
+                END::NUMERIC as cumplimiento,
+            tp.costo_est::NUMERIC,
+            (tp.costo_est + tp.costo_materiales)::NUMERIC as costo_real,
+            CASE
+                WHEN (tp.costo_est + tp.costo_materiales) = 0 THEN 0
+                ELSE ((tp.costo_est - (tp.costo_est + tp.costo_materiales)) /
+                      NULLIF((tp.costo_est + tp.costo_materiales), 0) * 100)
+                END::NUMERIC as margen,
+            (CASE
+                 WHEN EXTRACT(EPOCH FROM tp.tiempo_est) = 0 THEN 0
+                 ELSE (EXTRACT(EPOCH FROM tp.tiempo_est) /
+                       NULLIF(EXTRACT(EPOCH FROM tp.tiempo_real), 0) * 100)
+                 END * tp.cantidad)::NUMERIC as eficiencia
+        FROM tiempos_produccion tp
+        ORDER BY eficiencia DESC;
+END;
+$$ LANGUAGE plpgsql;
+
+-- =========================================================
+-- Procedimiento almacenado para obtener Tipos de Alas más Usados
+-- =========================================================
+DROP FUNCTION IF EXISTS SP_REPORTE_TIPOS_ALAS_USADOS;
+
+CREATE OR REPLACE FUNCTION SP_REPORTE_TIPOS_ALAS_USADOS()
+    RETURNS TABLE (
+                      tipo_ala VARCHAR(50),
+                      modelos_avion TEXT,
+                      cantidad_total_usada BIGINT,
+                      caracteristicas_principales TEXT,
+                      material_principal VARCHAR(80),
+                      costo_promedio NUMERIC,
+                      tiempo_fabricacion_promedio INTERVAL,
+                      porcentaje_uso NUMERIC,
+                      indice_preferencia NUMERIC
+                  ) AS $$
+BEGIN
+    RETURN QUERY
+        WITH stats_alas AS (
+            SELECT
+                tpc.tpc_id,
+                tpc.tpc_nombre,
+                STRING_AGG(DISTINCT mac.mda_nombre, ', ') as modelos,
+                COUNT(DISTINCT esp.edz_id) as cantidad_uso,
+                STRING_AGG(DISTINCT
+                           pcc.pcc_nombre_caracteristica || ': ' ||
+                           mpc2.pzi_valor || ' ' || mpc2.pzi_unidad_medida,
+                           '; '
+                ) as caracteristicas,
+                mp.mac_nombre_material,
+                AVG(EXTRACT(EPOCH FROM (fep.eez_fecha_fin - fep.eez_fecha_inicio))/3600)::NUMERIC as tiempo_fab
+            FROM TIPO_PIEZA_CONF tpc
+                     JOIN MODELO_PIEZA_CONF mpc ON tpc.tpc_id = mpc.fk_tpc_id
+                     JOIN AVION_COMPONENTE ac ON mpc.mec_id = ac.fk_mec_id
+                     JOIN MODELO_AVION_CONF mac ON ac.fk_mda_id = mac.mda_id
+                     LEFT JOIN MODELO_PIEZA_CARACTERISTICA mpc2 ON mpc.mec_id = mpc2.fk_mec_id
+                     LEFT JOIN CARACTERISTICA_PIEZA_CONF pcc ON mpc2.fk_pcc_id = pcc.pcc_id
+                     LEFT JOIN MATERIAL_FASE mf ON mpc.mec_id = mf.fk_mec_id
+                     LEFT JOIN MATERIAL_PIEZA_CONF mp ON mf.fk_mac_id = mp.mac_id
+                     LEFT JOIN ENSAMBLE_SOLICITUD_PIEZA esp ON mpc.mec_id = esp.fk_pie_id
+                     LEFT JOIN FASE_ENSAMBLE_PIEZA fep ON esp.fk_pie_id = fep.fk_pie_id
+            WHERE LOWER(tpc.tpc_nombre) LIKE '%ala%'
+            GROUP BY
+                tpc.tpc_id,
+                tpc.tpc_nombre,
+                mp.mac_nombre_material
+        )
+        SELECT
+            sa.tpc_nombre,
+            sa.modelos,
+            sa.cantidad_uso,
+            sa.caracteristicas,
+            sa.mac_nombre_material,
+            COALESCE(
+                    (SELECT AVG(p.pago_monto)
+                     FROM PAGO p
+                              JOIN SOLICITUD_PROVEEDOR sp ON p.fk_spr_id = sp.spr_id
+                     WHERE EXTRACT(YEAR FROM p.pago_fecha) = EXTRACT(YEAR FROM CURRENT_DATE)
+                    ), 0
+            )::NUMERIC as costo_prom,
+            (sa.tiempo_fab * INTERVAL '1 hour') as tiempo_promedio,
+            (sa.cantidad_uso::NUMERIC /
+             NULLIF(SUM(sa.cantidad_uso) OVER(), 0) * 100)::NUMERIC as porcentaje,
+            (sa.cantidad_uso * 100.0 /
+             NULLIF(SUM(sa.cantidad_uso) OVER(), 0))::NUMERIC as preferencia
+        FROM stats_alas sa
+        ORDER BY preferencia DESC;
+END;
+$$ LANGUAGE plpgsql;
