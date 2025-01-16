@@ -88,7 +88,7 @@ export default function AsistenciasPage() {
 
   const fetchAsistencias = useCallback(async () => {
     try {
-      const response = await fetch("/api/nominas/asistencias");
+      const response = await fetch("/api/asistencias");
       if (!response.ok) throw new Error("Error al cargar asistencias");
       const data = await response.json();
 
@@ -202,19 +202,16 @@ export default function AsistenciasPage() {
   const handleSave = async (formData) => {
     try {
       if (formData.id) {
-        const response = await fetch(
-          `/api/nominas/asistencias/${formData.id}`,
-          {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ asi_hora_fin: formData.asi_hora_fin }),
-          },
-        );
+        const response = await fetch(`/api/asistencias/${formData.id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ asi_hora_fin: formData.asi_hora_fin }),
+        });
 
         if (!response.ok) throw new Error("Error al registrar salida");
       } else {
         const horarioData = JSON.parse(formData.horario);
-        const response = await fetch("/api/nominas/asistencias", {
+        const response = await fetch("/api/asistencias", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

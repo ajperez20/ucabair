@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
-import { nominaService } from "@/services/nominaService";
+import { asistenciaService } from "@/services/asistenciaService";
 
 export async function PUT(request, { params }) {
   try {
     const { id } = params;
     const data = await request.json();
 
-    const asistenciaActualizada = await nominaService.updateAsistencia(
+    const asistenciaActualizada = await asistenciaService.updateAsistencia(
       id,
       data,
     );
@@ -20,7 +20,7 @@ export async function PUT(request, { params }) {
 
     return NextResponse.json(asistenciaActualizada);
   } catch (error) {
-    console.error("Error en PUT /api/nominas/asistencias/[id]:", error);
+    console.error("Error en PUT /api/asistencias/[id]:", error);
     return NextResponse.json(
       {
         error: {

@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
-import { nominaService } from "@/services/nominaService";
+import { asistenciaService } from "@/services/asistenciaService";
 
 export async function GET() {
   try {
-    const asistencias = await nominaService.getAsistencias();
+    const asistencias = await asistenciaService.getAsistencias();
     return NextResponse.json(asistencias);
   } catch (error) {
     return NextResponse.json(
@@ -22,7 +22,7 @@ export async function GET() {
 export async function POST(request) {
   try {
     const data = await request.json();
-    const asistencia = await nominaService.createAsistencia(data);
+    const asistencia = await asistenciaService.createAsistencia(data);
     return NextResponse.json(asistencia, { status: 201 });
   } catch (error) {
     return NextResponse.json(
